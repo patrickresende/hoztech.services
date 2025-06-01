@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Política de Privacidade - Hoz Tech{% endblock %}
+
+{% block extra_css %}
+<style>
+    .privacy-section {
+        padding: var(--spacing-xl) 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .privacy-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 50% 50%, 
+            rgba(0, 247, 255, 0.1) 0%,
+            rgba(255, 7, 58, 0.1) 100%);
+        pointer-events: none;
+    }
+
+    .privacy-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .privacy-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-3xl);
+        font-weight: 700;
+        background: var(--gradient-tech);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: var(--spacing-md);
+        text-align: center;
+    }
+
+    .privacy-subtitle {
+        font-family: var(--font-tech);
+        font-size: var(--font-size-lg);
+        color: var(--tech-light);
+        opacity: 0.9;
+        margin-bottom: var(--spacing-xl);
+        text-align: center;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .privacy-card {
+        background: var(--gradient-card);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-lg);
+        transition: all var(--transition-normal);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .privacy-card:hover {
+        border-color: var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .privacy-section-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-xl);
+        color: var(--tech-light);
+        margin-bottom: var(--spacing-md);
+        padding-bottom: var(--spacing-sm);
+        border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+    }
+
+    .privacy-text {
+        color: var(--tech-light);
+        opacity: 0.9;
+        font-size: var(--font-size-base);
+        line-height: 1.8;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .privacy-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 var(--spacing-md) 0;
+    }
+
+    .privacy-list li {
+        color: var(--tech-light);
+        opacity: 0.9;
+        font-size: var(--font-size-base);
+        margin-bottom: var(--spacing-sm);
+        padding-left: var(--spacing-lg);
+        position: relative;
+        line-height: 1.8;
+    }
+
+    .privacy-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 12px;
+        width: 8px;
+        height: 8px;
+        background: var(--tech-blue);
+        border-radius: 50%;
+        box-shadow: var(--shadow-blue);
+    }
+
+    .privacy-link {
+        color: var(--tech-blue);
+        text-decoration: none;
+        transition: all var(--transition-normal);
+    }
+
+    .privacy-link:hover {
+        color: var(--tech-red);
+        text-shadow: var(--shadow-red);
+    }
+
+    .privacy-table {
+        width: 100%;
+        margin-bottom: var(--spacing-lg);
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .privacy-table th,
+    .privacy-table td {
+        padding: var(--spacing-sm);
+        color: var(--tech-light);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+    }
+
+    .privacy-table th {
+        font-family: var(--font-orbitron);
+        font-weight: 600;
+        background: rgba(0, 247, 255, 0.1);
+        text-align: left;
+    }
+
+    .privacy-table tr:hover td {
+        background: rgba(0, 247, 255, 0.05);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .privacy-section {
+            padding: var(--spacing-lg) 0;
+        }
+
+        .privacy-title {
+            font-size: var(--font-size-2xl);
+        }
+
+        .privacy-subtitle {
+            font-size: var(--font-size-base);
+        }
+
+        .privacy-card {
+            padding: var(--spacing-md);
+        }
+
+        .privacy-section-title {
+            font-size: var(--font-size-lg);
+        }
+
+        .privacy-text,
+        .privacy-list li {
+            font-size: var(--font-size-sm);
+        }
+
+        .privacy-table {
+            display: block;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .privacy-title {
+            font-size: var(--font-size-xl);
+        }
+
+        .privacy-subtitle {
+            font-size: var(--font-size-sm);
+        }
+
+        .privacy-section-title {
+            font-size: var(--font-size-base);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Privacy Section -->
+<section class="privacy-section">
+    <div class="container privacy-content">
+        <h1 class="privacy-title">Política de Privacidade</h1>
+        <p class="privacy-subtitle">
+            Sua privacidade é importante para nós. Esta política descreve como coletamos, usamos e protegemos suas informações pessoais.
+        </p>
+
+        <div class="privacy-card">
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">1. Informações que Coletamos</h2>
+                <p class="privacy-text">
+                    Coletamos informações que você nos fornece diretamente ao:
+                </p>
+                <ul class="privacy-list">
+                    <li>Preencher formulários em nosso site</li>
+                    <li>Criar uma conta</li>
+                    <li>Fazer um pedido</li>
+                    <li>Inscrever-se em nossa newsletter</li>
+                    <li>Entrar em contato conosco</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">2. Como Usamos suas Informações</h2>
+                <p class="privacy-text">
+                    Utilizamos as informações coletadas para:
+                </p>
+                <ul class="privacy-list">
+                    <li>Processar seus pedidos e transações</li>
+                    <li>Enviar informações sobre nossos produtos e serviços</li>
+                    <li>Melhorar nosso site e serviços</li>
+                    <li>Personalizar sua experiência</li>
+                    <li>Responder suas dúvidas e solicitações</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">3. Cookies e Tecnologias Similares</h2>
+                <p class="privacy-text">
+                    Utilizamos cookies e tecnologias similares para melhorar sua experiência em nosso site. Você pode controlar o uso
+                    de cookies através das configurações do seu navegador.
+                </p>
+                <table class="privacy-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo de Cookie</th>
+                            <th>Finalidade</th>
+                            <th>Duração</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Essenciais</td>
+                            <td>Necessários para o funcionamento do site</td>
+                            <td>Sessão</td>
+                        </tr>
+                        <tr>
+                            <td>Funcionais</td>
+                            <td>Melhoram a experiência do usuário</td>
+                            <td>1 ano</td>
+                        </tr>
+                        <tr>
+                            <td>Analíticos</td>
+                            <td>Análise de uso e performance</td>
+                            <td>2 anos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">4. Compartilhamento de Informações</h2>
+                <p class="privacy-text">
+                    Não vendemos, alugamos ou compartilhamos suas informações pessoais com terceiros, exceto quando:
+                </p>
+                <ul class="privacy-list">
+                    <li>Necessário para fornecer os serviços solicitados</li>
+                    <li>Exigido por lei</li>
+                    <li>Necessário para proteger nossos direitos</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">5. Segurança das Informações</h2>
+                <p class="privacy-text">
+                    Implementamos medidas de segurança técnicas e organizacionais para proteger suas informações pessoais contra acesso
+                    não autorizado, alteração, divulgação ou destruição.
+                </p>
+            </div>
+
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">6. Seus Direitos</h2>
+                <p class="privacy-text">
+                    Você tem o direito de:
+                </p>
+                <ul class="privacy-list">
+                    <li>Acessar suas informações pessoais</li>
+                    <li>Corrigir dados incorretos</li>
+                    <li>Solicitar a exclusão de seus dados</li>
+                    <li>Retirar seu consentimento</li>
+                    <li>Receber seus dados em formato estruturado</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">7. Contato</h2>
+                <p class="privacy-text">
+                    Se você tiver dúvidas sobre nossa Política de Privacidade, entre em contato através do e-mail
+                    <a href="mailto:privacidade@hoztech.com.br" class="privacy-link">privacidade@hoztech.com.br</a>.
+                </p>
+            </div>
+
+            <div class="privacy-section">
+                <h2 class="privacy-section-title">8. Atualizações da Política</h2>
+                <p class="privacy-text">
+                    Esta política pode ser atualizada periodicamente. A data da última atualização será sempre indicada no início do
+                    documento. Recomendamos que você revise esta política regularmente.
+                </p>
+                <p class="privacy-text">
+                    Última atualização: {% now "d/m/Y" %}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

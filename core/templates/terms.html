@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Termos de Uso - Hoz Tech{% endblock %}
+
+{% block extra_css %}
+<style>
+    .terms-section {
+        padding: var(--spacing-xl) 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .terms-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 50% 50%, 
+            rgba(0, 247, 255, 0.1) 0%,
+            rgba(255, 7, 58, 0.1) 100%);
+        pointer-events: none;
+    }
+
+    .terms-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .terms-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-3xl);
+        font-weight: 700;
+        background: var(--gradient-tech);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: var(--spacing-md);
+        text-align: center;
+    }
+
+    .terms-subtitle {
+        font-family: var(--font-tech);
+        font-size: var(--font-size-lg);
+        color: var(--tech-light);
+        opacity: 0.9;
+        margin-bottom: var(--spacing-xl);
+        text-align: center;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .terms-card {
+        background: var(--gradient-card);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-lg);
+        transition: all var(--transition-normal);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .terms-card:hover {
+        border-color: var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .terms-section-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-xl);
+        color: var(--tech-light);
+        margin-bottom: var(--spacing-md);
+        padding-bottom: var(--spacing-sm);
+        border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+    }
+
+    .terms-text {
+        color: var(--tech-light);
+        opacity: 0.9;
+        font-size: var(--font-size-base);
+        line-height: 1.8;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .terms-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 var(--spacing-md) 0;
+    }
+
+    .terms-list li {
+        color: var(--tech-light);
+        opacity: 0.9;
+        font-size: var(--font-size-base);
+        margin-bottom: var(--spacing-sm);
+        padding-left: var(--spacing-lg);
+        position: relative;
+        line-height: 1.8;
+    }
+
+    .terms-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 12px;
+        width: 8px;
+        height: 8px;
+        background: var(--tech-blue);
+        border-radius: 50%;
+        box-shadow: var(--shadow-blue);
+    }
+
+    .terms-link {
+        color: var(--tech-blue);
+        text-decoration: none;
+        transition: all var(--transition-normal);
+    }
+
+    .terms-link:hover {
+        color: var(--tech-red);
+        text-shadow: var(--shadow-red);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .terms-section {
+            padding: var(--spacing-lg) 0;
+        }
+
+        .terms-title {
+            font-size: var(--font-size-2xl);
+        }
+
+        .terms-subtitle {
+            font-size: var(--font-size-base);
+        }
+
+        .terms-card {
+            padding: var(--spacing-md);
+        }
+
+        .terms-section-title {
+            font-size: var(--font-size-lg);
+        }
+
+        .terms-text,
+        .terms-list li {
+            font-size: var(--font-size-sm);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .terms-title {
+            font-size: var(--font-size-xl);
+        }
+
+        .terms-subtitle {
+            font-size: var(--font-size-sm);
+        }
+
+        .terms-section-title {
+            font-size: var(--font-size-base);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Terms Section -->
+<section class="terms-section">
+    <div class="container terms-content">
+        <h1 class="terms-title">Termos de Uso</h1>
+        <p class="terms-subtitle">
+            Por favor, leia atentamente os termos e condições antes de utilizar nossos serviços.
+        </p>
+
+        <div class="terms-card">
+            <div class="terms-section">
+                <h2 class="terms-section-title">1. Aceitação dos Termos</h2>
+                <p class="terms-text">
+                    Ao acessar e utilizar este website, você aceita e concorda em cumprir estes termos e condições de uso.
+                    Se você não concordar com qualquer parte destes termos, não deverá usar nosso website.
+                </p>
+            </div>
+
+            <div class="terms-section">
+                <h2 class="terms-section-title">2. Uso do Site</h2>
+                <ul class="terms-list">
+                    <li>O conteúdo deste site é apenas para fins informativos.</li>
+                    <li>Você concorda em não usar este site para qualquer finalidade ilegal ou proibida por estes termos.</li>
+                    <li>Você é responsável por manter a confidencialidade de suas informações de conta.</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2 class="terms-section-title">3. Propriedade Intelectual</h2>
+                <p class="terms-text">
+                    Todo o conteúdo deste site, incluindo textos, gráficos, logos, ícones, imagens, clipes de áudio, downloads digitais
+                    e compilações de dados, é propriedade da Hoz Tech ou de seus fornecedores de conteúdo e está protegido por leis
+                    internacionais de direitos autorais.
+                </p>
+            </div>
+
+            <div class="terms-section">
+                <h2 class="terms-section-title">4. Limitação de Responsabilidade</h2>
+                <p class="terms-text">
+                    A Hoz Tech não será responsável por quaisquer danos diretos, indiretos, incidentais, consequenciais ou punitivos
+                    decorrentes do seu acesso ou uso deste site.
+                </p>
+            </div>
+
+            <div class="terms-section">
+                <h2 class="terms-section-title">5. Alterações nos Termos</h2>
+                <p class="terms-text">
+                    Reservamo-nos o direito de modificar estes termos a qualquer momento. As alterações entrarão em vigor imediatamente
+                    após sua publicação no site. O uso continuado do site após tais alterações constitui sua aceitação dos novos termos.
+                </p>
+            </div>
+
+            <div class="terms-section">
+                <h2 class="terms-section-title">6. Contato</h2>
+                <p class="terms-text">
+                    Se você tiver alguma dúvida sobre estes termos, entre em contato conosco através do e-mail
+                    <a href="mailto:hoztech.services@gmail.com" class="terms-link">hoztech.services@gmail.com</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

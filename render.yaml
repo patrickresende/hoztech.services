@@ -1,0 +1,29 @@
+services:
+  # Serviço Web (Django)
+  - type: web
+    name: hoz-tech
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn core.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.8.2
+      - key: DATABASE_URL
+        value: # Será preenchido pelo Render
+      - key: SECRET_KEY
+        value: # Será preenchido pelo Render
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+    autoDeploy: true
+
+  # Banco de Dados PostgreSQL
+  - type: postgres
+    name: hoztech-db
+    plan: free
+    ipAllowList: []
+    disk:
+      name: data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 1 

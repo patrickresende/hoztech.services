@@ -1,0 +1,180 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}Exportar Dados - Hoztech{% endblock %}
+
+{% block dashboard_content %}
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Menu</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{% url 'core_admin:admin_dashboard' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                    </a>
+                    <a href="{% url 'core_admin:cookie_list' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-cookie me-2"></i> Cookies
+                    </a>
+                    <a href="{% url 'core_admin:session_list' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-users me-2"></i> Sessões
+                    </a>
+                    <a href="{% url 'core_admin:seometrics_list' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-chart-line me-2"></i> SEO
+                    </a>
+                    <a href="{% url 'core_admin:analyticsexport_list' %}" class="list-group-item list-group-item-action active">
+                        <i class="fas fa-file-export me-2"></i> Exportar Dados
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9 col-lg-10">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Exportar Dados</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Exportar Cookies -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Exportar Cookies</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form method="post" action="{% url 'core_admin:export_cookies' %}">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label for="cookies_format" class="form-label">Formato</label>
+                                            <select class="form-select" id="cookies_format" name="format">
+                                                <option value="csv">CSV</option>
+                                                <option value="json">JSON</option>
+                                                <option value="xml">XML</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cookies_date_from" class="form-label">Data Inicial</label>
+                                            <input type="date" class="form-control" id="cookies_date_from" name="date_from">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="cookies_date_to" class="form-label">Data Final</label>
+                                            <input type="date" class="form-control" id="cookies_date_to" name="date_to">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-file-export me-2"></i> Exportar Cookies
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exportar Sessões -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Exportar Sessões</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form method="post" action="{% url 'core_admin:export_sessions' %}">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label for="sessions_format" class="form-label">Formato</label>
+                                            <select class="form-select" id="sessions_format" name="format">
+                                                <option value="csv">CSV</option>
+                                                <option value="json">JSON</option>
+                                                <option value="xml">XML</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="sessions_date_from" class="form-label">Data Inicial</label>
+                                            <input type="date" class="form-control" id="sessions_date_from" name="date_from">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="sessions_date_to" class="form-label">Data Final</label>
+                                            <input type="date" class="form-control" id="sessions_date_to" name="date_to">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-file-export me-2"></i> Exportar Sessões
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exportar SEO -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Exportar Métricas SEO</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form method="post" action="{% url 'core_admin:export_seo' %}">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label for="seo_format" class="form-label">Formato</label>
+                                            <select class="form-select" id="seo_format" name="format">
+                                                <option value="csv">CSV</option>
+                                                <option value="json">JSON</option>
+                                                <option value="xml">XML</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="seo_date_from" class="form-label">Data Inicial</label>
+                                            <input type="date" class="form-control" id="seo_date_from" name="date_from">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="seo_date_to" class="form-label">Data Final</label>
+                                            <input type="date" class="form-control" id="seo_date_to" name="date_to">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-file-export me-2"></i> Exportar SEO
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exportar Tudo -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Exportar Tudo</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form method="post" action="{% url 'core_admin:export_data' %}">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label for="all_format" class="form-label">Formato</label>
+                                            <select class="form-select" id="all_format" name="format">
+                                                <option value="csv">CSV</option>
+                                                <option value="json">JSON</option>
+                                                <option value="xml">XML</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="all_date_from" class="form-label">Data Inicial</label>
+                                            <input type="date" class="form-control" id="all_date_from" name="date_from">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="all_date_to" class="form-label">Data Final</label>
+                                            <input type="date" class="form-control" id="all_date_to" name="date_to">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-file-export me-2"></i> Exportar Tudo
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

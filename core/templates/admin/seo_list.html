@@ -1,0 +1,167 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block dashboard_content %}
+<div class="dashboard-card">
+    <h2>Filtros</h2>
+    <form method="get" class="filter-form">
+        <div class="form-row">
+            <div class="field">
+                <label for="url">URL:</label>
+                <input type="text" name="url" id="url" value="{{ request.GET.url }}">
+            </div>
+            <div class="field">
+                <label for="date_from">Data Inicial:</label>
+                <input type="date" name="date_from" id="date_from" value="{{ request.GET.date_from }}">
+            </div>
+            <div class="field">
+                <label for="date_to">Data Final:</label>
+                <input type="date" name="date_to" id="date_to" value="{{ request.GET.date_to }}">
+            </div>
+        </div>
+        <div class="submit-row">
+            <button type="submit" class="button">Filtrar</button>
+            <a href="{% url 'core:export_seo' %}?format=csv" class="export-button">
+                <i class="fas fa-file-csv"></i> Exportar CSV
+            </a>
+            <a href="{% url 'core:export_seo' %}?format=excel" class="export-button">
+                <i class="fas fa-file-excel"></i> Exportar Excel
+            </a>
+            <a href="{% url 'core:export_seo' %}?format=json" class="export-button">
+                <i class="fas fa-file-code"></i> Exportar JSON
+            </a>
+        </div>
+    </form>
+</div>
+
+<div class="dashboard-card">
+    <h2>Métricas SEO</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>Título</th>
+                    <th>H1</th>
+                    <th>H2</th>
+                    <th>H3</th>
+                    <th>Imagens</th>
+                    <th>Palavras</th>
+                    <th>Links Internos</th>
+                    <th>Links Externos</th>
+                    <th>Score</th>
+                    <th>Última Verificação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for metric in metrics %}
+                <tr>
+                    <td>{{ metric.url }}</td>
+                    <td>{{ metric.title }}</td>
+                    <td>{{ metric.h1_count }}</td>
+                    <td>{{ metric.h2_count }}</td>
+                    <td>{{ metric.h3_count }}</td>
+                    <td>{{ metric.image_count }}</td>
+                    <td>{{ metric.word_count }}</td>
+                    <td>{{ metric.internal_links }}</td>
+                    <td>{{ metric.external_links }}</td>
+                    <td>
+                        {% if metric.page_speed_score and metric.mobile_friendly_score %}
+                            {% widthratio metric.page_speed_score|add:metric.mobile_friendly_score 2 1 as avg_score %}
+                            {{ avg_score|floatformat:1 }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>{{ metric.last_checked }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="11" class="empty-message">Nenhuma métrica SEO encontrada.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    {% if is_paginated %}
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1{% if request.GET.url %}&url={{ request.GET.url }}{% endif %}{% if request.GET.date_from %}&date_from={{ request.GET.date_from }}{% endif %}{% if request.GET.date_to %}&date_to={{ request.GET.date_to }}{% endif %}" class="button">&laquo; Primeira</a>
+            <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.url %}&url={{ request.GET.url }}{% endif %}{% if request.GET.date_from %}&date_from={{ request.GET.date_from }}{% endif %}{% if request.GET.date_to %}&date_to={{ request.GET.date_to }}{% endif %}" class="button">Anterior</a>
+        {% endif %}
+        
+        <span class="current">
+            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+        </span>
+        
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.url %}&url={{ request.GET.url }}{% endif %}{% if request.GET.date_from %}&date_from={{ request.GET.date_from }}{% endif %}{% if request.GET.date_to %}&date_to={{ request.GET.date_to }}{% endif %}" class="button">Próxima</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.url %}&url={{ request.GET.url }}{% endif %}{% if request.GET.date_from %}&date_from={{ request.GET.date_from }}{% endif %}{% if request.GET.date_to %}&date_to={{ request.GET.date_to }}{% endif %}" class="button">Última &raquo;</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .filter-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .form-row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .field {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .field label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+    
+    .field input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+    }
+    
+    .submit-row {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .button {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .button:hover {
+        background: var(--secondary-color);
+    }
+    
+    .empty-message {
+        text-align: center;
+        padding: 2rem;
+        color: #6b7280;
+    }
+</style>
+{% endblock %} 

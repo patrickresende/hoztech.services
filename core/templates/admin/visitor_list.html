@@ -1,0 +1,283 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block dashboard_content %}
+<div class="dashboard-container">
+    <!-- Filtros -->
+    <div class="dashboard-card">
+        <h2>Filtros</h2>
+        <form method="get" class="filter-form">
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label for="ip">Endereço IP</label>
+                    <input type="text" name="ip" id="ip" value="{{ request.GET.ip }}" class="form-control">
+                </div>
+                <div class="filter-group">
+                    <label for="user_agent">Navegador</label>
+                    <input type="text" name="user_agent" id="user_agent" value="{{ request.GET.user_agent }}" class="form-control">
+                </div>
+                <div class="filter-group">
+                    <label for="date_from">Data Inicial</label>
+                    <input type="date" name="date_from" id="date_from" value="{{ request.GET.date_from }}" class="form-control">
+                </div>
+                <div class="filter-group">
+                    <label for="date_to">Data Final</label>
+                    <input type="date" name="date_to" id="date_to" value="{{ request.GET.date_to }}" class="form-control">
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button type="submit" class="export-button">
+                    <i class="fas fa-filter"></i> Filtrar
+                </button>
+                <a href="?export=csv" class="export-button">
+                    <i class="fas fa-file-csv"></i> Exportar CSV
+                </a>
+                <a href="?export=xlsx" class="export-button">
+                    <i class="fas fa-file-excel"></i> Exportar Excel
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Lista de Visitantes -->
+    <div class="table-container">
+        <h2>Visitantes ({{ total_visitors }})</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>IP</th>
+                    <th>Navegador</th>
+                    <th>Referência</th>
+                    <th>Início</th>
+                    <th>Última Atividade</th>
+                    <th>Duração</th>
+                    <th>Páginas</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in sessions %}
+                <tr>
+                    <td>{{ session.ip_address }}</td>
+                    <td>{{ session.user_agent|truncatechars:30 }}</td>
+                    <td>{{ session.referrer|truncatechars:30|default:"-" }}</td>
+                    <td>{{ session.created_at|date:"d/m/Y H:i" }}</td>
+                    <td>{{ session.last_activity|date:"d/m/Y H:i" }}</td>
+                    <td>{{ session.duration }}</td>
+                    <td>{{ session.page_count }}</td>
+                    <td>
+                        {% if session.is_active %}
+                        <span class="status-badge active">Ativo</span>
+                        {% else %}
+                        <span class="status-badge inactive">Inativo</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Paginação -->
+        {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+            <a href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&laquo; Primeira</a>
+            <a href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Próxima</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Última &raquo;</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="dashboard-card">
+        <h2>Estatísticas de Visitantes</h2>
+        <div class="stats-grid">
+            <div class="metric-card">
+                <div class="metric-icon" style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color);">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="metric-info">
+                    <div class="metric-value">{{ total_visitors }}</div>
+                    <div class="metric-label">Total de Visitantes</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success-color);">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="metric-info">
+                    <div class="metric-value">{{ active_visitors }}</div>
+                    <div class="metric-label">Visitantes Ativos</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning-color);">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="metric-info">
+                    <div class="metric-value">{{ avg_session_duration }}</div>
+                    <div class="metric-label">Tempo Médio de Sessão</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger-color);">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="metric-info">
+                    <div class="metric-value">{{ unique_ips }}</div>
+                    <div class="metric-label">IPs Únicos</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="chart-container">
+        <h2>Visitantes por Hora</h2>
+        <canvas id="visitorsChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h2>Navegadores Mais Usados</h2>
+        <canvas id="browsersChart"></canvas>
+    </div>
+</div>
+
+<style>
+    .filter-form {
+        margin-bottom: 1rem;
+    }
+
+    .filter-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .filter-group label {
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+
+    .filter-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .table th {
+        background-color: #f9fafb;
+        font-weight: 600;
+    }
+
+    .table tr:hover {
+        background-color: #f9fafb;
+    }
+
+    .status-badge {
+        padding: 0.25rem 0.5rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status-badge.active {
+        background-color: rgba(16, 185, 129, 0.1);
+        color: var(--success-color);
+    }
+
+    .status-badge.inactive {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: var(--danger-color);
+    }
+</style>
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Gráfico de Visitantes
+    const visitorsCtx = document.getElementById('visitorsChart').getContext('2d');
+    new Chart(visitorsCtx, {
+        type: 'line',
+        data: {
+            labels: {{ visitor_hours|safe }},
+            datasets: [{
+                label: 'Visitantes',
+                data: {{ visitor_counts|safe }},
+                borderColor: 'rgb(37, 99, 235)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+
+    // Gráfico de Navegadores
+    const browsersCtx = document.getElementById('browsersChart').getContext('2d');
+    new Chart(browsersCtx, {
+        type: 'doughnut',
+        data: {
+            labels: {{ browser_names|safe }},
+            datasets: [{
+                data: {{ browser_counts|safe }},
+                backgroundColor: [
+                    'rgba(37, 99, 235, 0.8)',
+                    'rgba(16, 185, 129, 0.8)',
+                    'rgba(245, 158, 11, 0.8)',
+                    'rgba(239, 68, 68, 0.8)',
+                    'rgba(139, 92, 246, 0.8)'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %} 

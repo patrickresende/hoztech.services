@@ -1,0 +1,1222 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block extra_css %}
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+    /* Variáveis do Tema */
+    :root {
+        /* Cores Principais */
+        --tech-blue: #00f7ff;
+        --tech-blue-dark: #0056b3;
+        --tech-red: #ff073a;
+        --tech-purple: #9d00ff;
+        --tech-dark: #0a0b1e;
+        --tech-light: #e0fbfc;
+        
+        /* Cores de Destaque */
+        --neon-blue: #00f7ff;
+        --neon-red: #ff0033;
+        --neon-purple: #9d00ff;
+        --neon-red-soft: rgba(255, 0, 51, 0.3);
+        --light-gray: #e0fbfc;
+        
+        /* Cores com Transparência */
+        --neon-blue-glow: rgba(0, 247, 255, 0.3);
+        --neon-red-glow: rgba(255, 0, 51, 0.3);
+        --neon-purple-glow: rgba(157, 0, 255, 0.3);
+        
+        /* Gradientes */
+        --gradient-tech: linear-gradient(135deg, var(--tech-blue), var(--tech-red));
+        --gradient-dark: linear-gradient(145deg, rgba(10, 11, 30, 0.98), rgba(10, 11, 30, 0.95));
+        --gradient-card: linear-gradient(165deg, rgba(0, 247, 255, 0.1), rgba(255, 7, 58, 0.1));
+        
+        /* Sombras e Glows */
+        --shadow-blue: 0 0 20px var(--neon-blue-glow);
+        --shadow-red: 0 0 20px var(--neon-red-glow);
+        --shadow-purple: 0 0 20px var(--neon-purple-glow);
+        --glow-primary: 0 0 15px var(--neon-blue-glow);
+        
+        /* Fontes */
+        --font-tech: 'Share Tech Mono', monospace;
+        --font-orbitron: 'Orbitron', sans-serif;
+
+        /* Espaçamento */
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 1.5rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 3rem;
+
+        /* Breakpoints */
+        --bp-sm: 640px;
+        --bp-md: 768px;
+        --bp-lg: 1024px;
+        --bp-xl: 1280px;
+
+        /* Container */
+        --container-padding: clamp(1rem, 5vw, 2.5rem);
+        --container-width: min(95vw, 1400px);
+
+        /* Cards */
+        --card-min-width: 280px;
+        --card-max-width: 350px;
+        --card-radius: 1rem;
+        --card-padding: clamp(1.5rem, 3vw, 2rem);
+
+        /* Animações */
+        --transition-fast: 0.2s ease;
+        --transition-normal: 0.3s ease;
+        --transition-slow: 0.5s ease;
+
+        /* Tipografia Responsiva Base */
+        --font-size-micro: clamp(0.625rem, 0.5vw + 0.5rem, 0.75rem);    /* 10-12px */
+        --font-size-tiny: clamp(0.75rem, 0.75vw + 0.5rem, 0.875rem);    /* 12-14px */
+        --font-size-small: clamp(0.875rem, 1vw + 0.5rem, 1rem);         /* 14-16px */
+        --font-size-base: clamp(1rem, 1.25vw + 0.5rem, 1.125rem);       /* 16-18px */
+        --font-size-medium: clamp(1.125rem, 1.5vw + 0.5rem, 1.25rem);   /* 18-20px */
+        --font-size-large: clamp(1.25rem, 2vw + 0.5rem, 1.5rem);        /* 20-24px */
+        --font-size-xlarge: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);        /* 24-32px */
+        --font-size-huge: clamp(2rem, 3vw + 0.5rem, 2.5rem);            /* 32-40px */
+        --font-size-giant: clamp(2.5rem, 4vw + 0.5rem, 3rem);           /* 40-48px */
+        
+        /* Line Heights */
+        --line-height-tight: 1.2;
+        --line-height-normal: 1.5;
+        --line-height-relaxed: 1.75;
+        
+        /* Letter Spacing */
+        --letter-spacing-tight: -0.025em;
+        --letter-spacing-normal: 0;
+        --letter-spacing-wide: 0.025em;
+        --letter-spacing-wider: 0.05em;
+    }
+
+    /* Reset e Base */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Estilos do Home incorporados */
+    .btn-neon {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-security {
+        background: linear-gradient(45deg, rgba(255, 0, 51, 0.1), rgba(255, 0, 51, 0.2));
+        border: 2px solid var(--neon-red);
+        box-shadow: 0 0 15px rgba(255, 0, 51, 0.2),
+                    inset 0 0 10px rgba(255, 0, 51, 0.1);
+        animation: pulseSecurity 2s infinite;
+    }
+
+    @keyframes pulseSecurity {
+        0% {
+            box-shadow: 0 0 15px rgba(255, 0, 51, 0.2),
+                        inset 0 0 10px rgba(255, 0, 51, 0.1);
+        }
+        50% {
+            box-shadow: 0 0 25px rgba(255, 0, 51, 0.3),
+                        inset 0 0 15px rgba(255, 0, 51, 0.2);
+        }
+        100% {
+            box-shadow: 0 0 15px rgba(255, 0, 51, 0.2),
+                        inset 0 0 10px rgba(255, 0, 51, 0.1);
+        }
+    }
+
+    .gold-icon {
+        color: #FFD700;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        font-size: 2.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .gold-icon:hover {
+        transform: scale(1.1);
+        text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    }
+
+    /* Layout Base */
+    .services-section {
+        background: var(--tech-dark);
+        background-image: 
+            linear-gradient(90deg, rgba(0, 247, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(0deg, rgba(0, 247, 255, 0.03) 1px, transparent 1px);
+        background-size: 20px 20px;
+        min-height: 100vh;
+        padding: var(--spacing-xl) 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .services-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 50% 50%, 
+            rgba(0, 247, 255, 0.1) 0%,
+            rgba(255, 7, 58, 0.1) 100%);
+        pointer-events: none;
+    }
+
+    /* Título e Subtítulo */
+    .section-header {
+        text-align: center;
+        margin-bottom: var(--spacing-xl);
+        position: relative;
+    }
+
+    .section-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-huge);
+        line-height: 1.2;
+        letter-spacing: var(--letter-spacing-wide);
+        font-weight: 700;
+        background: var(--gradient-tech);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-transform: uppercase;
+        margin-bottom: clamp(1rem, 3vw, 2rem);
+        text-shadow: 0 0 30px var(--neon-blue-glow);
+    }
+
+    .section-subtitle {
+        font-family: var(--font-tech);
+        font-size: var(--font-size-medium);
+        line-height: 1.5;
+        color: var(--tech-light);
+        opacity: 0.9;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .container {
+        width: var(--container-width);
+        margin: 0 auto;
+        padding: 0 var(--container-padding);
+    }
+
+    /* Swiper Base */
+    .swiper-container {
+        width: 100%;
+        position: relative;
+        padding: var(--spacing-md) 0;
+        overflow: visible !important;
+    }
+
+    .swiper {
+        width: 100%;
+        padding: var(--spacing-md);
+    }
+
+    .swiper-wrapper {
+        align-items: stretch;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Slides */
+    .swiper-slide {
+        height: auto;
+        opacity: 0.4;
+        transform: scale(0.85);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        justify-content: center;
+    }
+
+    .swiper-slide-active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .swiper-slide-prev,
+    .swiper-slide-next {
+        opacity: 0.6;
+        transform: scale(0.9);
+    }
+
+    /* Card Styles */
+    .service-card {
+        background: var(--gradient-card);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        border-radius: var(--card-radius);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: auto;
+        display: flex;
+        transform: translateY(0);
+        box-shadow: 0 4px 6px -1px rgba(0, 247, 255, 0.1),
+                    0 2px 4px -1px rgba(0, 247, 255, 0.06);
+    }
+
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--gradient-tech);
+        opacity: 0;
+        transition: opacity var(--transition-normal);
+        z-index: 0;
+    }
+
+    .service-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--tech-blue);
+        box-shadow: 0 10px 15px -3px rgba(0, 247, 255, 0.1),
+                    0 4px 6px -2px rgba(0, 247, 255, 0.05);
+    }
+
+    .service-card:hover::before {
+        opacity: 0.05;
+    }
+
+    .service-card-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: var(--card-padding);
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+
+    /* Card Elements */
+    .service-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        background: var(--gradient-tech);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--font-size-2xl);
+        color: var(--tech-dark);
+        box-shadow: var(--shadow-blue);
+        transition: all var(--transition-normal);
+    }
+
+    .service-card:hover .service-icon {
+        transform: scale(1.1);
+    }
+
+    .service-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-large);
+        line-height: 1.3;
+        letter-spacing: var(--letter-spacing-wide);
+        font-weight: 600;
+        text-align: center;
+        background: var(--gradient-tech);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin: var(--spacing-sm) 0;
+        width: 100%;
+    }
+
+    .service-description {
+        font-family: var(--font-tech);
+        font-size: var(--font-size-base);
+        line-height: 1.5;
+        color: var(--tech-light);
+        opacity: 0.9;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Features List */
+    .features-list {
+        background: rgba(0, 247, 255, 0.05);
+        border: 1px solid rgba(0, 247, 255, 0.1);
+        border-radius: 10px;
+        padding: var(--spacing-md);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-sm);
+        color: var(--tech-light);
+        font-family: var(--font-tech);
+        font-size: var(--font-size-small);
+        line-height: 1.4;
+        width: 100%;
+        text-align: center;
+    }
+
+    .feature-icon {
+        color: var(--tech-blue);
+        font-size: var(--font-size-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 24px;
+    }
+
+    .feature-item span:last-child {
+        flex: 1;
+        text-align: center;
+    }
+
+    /* Price Box */
+    .price-box {
+        background: rgba(0, 247, 255, 0.05);
+        border: 1px solid rgba(0, 247, 255, 0.1);
+        border-radius: 10px;
+        padding: var(--spacing-md);
+        text-align: center;
+        margin-top: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .price-original {
+        color: var(--tech-light);
+        opacity: 0.7;
+        text-decoration: line-through;
+        font-family: var(--font-tech);
+        font-size: var(--font-size-tiny);
+    }
+
+    .price-current {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-xlarge);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: var(--letter-spacing-tight);
+        background: var(--gradient-tech);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin: calc(var(--spacing-xs) * 1.5) 0;
+    }
+
+    .price-info {
+        color: var(--tech-light);
+        opacity: 0.8;
+        font-family: var(--font-tech);
+        font-size: var(--font-size-micro);
+        line-height: var(--line-height-normal);
+        margin-top: 0.25rem;
+    }
+
+    .price-bonus {
+        color: var(--tech-blue);
+        font-family: var(--font-tech);
+        font-size: var(--font-size-tiny);
+        margin-top: 0.5rem;
+    }
+
+    /* CTA Button */
+    .btn-cta {
+        background: var(--gradient-tech);
+        border: none;
+        border-radius: 10px;
+        padding: clamp(0.75rem, 2vw, 1.25rem) clamp(1.5rem, 3vw, 2.5rem);
+        color: var(--tech-dark);
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-small);
+        line-height: var(--line-height-normal);
+        letter-spacing: var(--letter-spacing-wider);
+        font-weight: 600;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        transition: all var(--transition-normal);
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .btn-cta::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+        transition: 0.5s;
+    }
+
+    .btn-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-blue);
+        color: var(--tech-dark);
+    }
+
+    .btn-cta:hover::before {
+        left: 100%;
+    }
+
+    .btn-cta i {
+        font-size: 1.2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-cta span {
+        flex: 1;
+        text-align: center;
+    }
+
+    /* Navigation */
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 48px;
+        height: 48px;
+        background: var(--tech-dark);
+        border: 1px solid rgba(0, 247, 255, 0.3);
+        border-radius: 50%;
+        color: var(--tech-blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition-normal);
+    }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+        font-size: var(--font-size-lg);
+    }
+
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+        background: rgba(0, 247, 255, 0.1);
+        border-color: var(--tech-blue);
+        transform: scale(1.1);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .swiper-pagination {
+        position: relative;
+        bottom: 0;
+        margin-top: var(--spacing-lg);
+    }
+
+    .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        background: rgba(224, 251, 252, 0.3);
+        opacity: 0.5;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .swiper-pagination-bullet-active {
+        background: var(--tech-blue);
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .service-card-inner {
+            padding: var(--spacing-md);
+            gap: var(--spacing-sm);
+        }
+
+        .features-list {
+            padding: var(--spacing-sm);
+        }
+
+        .feature-item {
+            font-size: var(--font-size-tiny);
+        }
+
+        .btn-cta {
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-size: var(--font-size-tiny);
+            max-width: 250px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .service-card-inner {
+            padding: var(--spacing-sm);
+            gap: var(--spacing-xs);
+        }
+
+        .features-list {
+            padding: var(--spacing-xs);
+        }
+
+        .feature-item {
+            font-size: var(--font-size-micro);
+        }
+
+        .btn-cta {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            font-size: var(--font-size-micro);
+            max-width: 200px;
+        }
+    }
+
+    /* Redução de Movimento */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+
+    /* Área clicável para navegação */
+    .swiper-navigation-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        cursor: pointer;
+    }
+
+    .swiper-navigation-area::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(0, 247, 255, 0.05) 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .swiper-navigation-area::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(to left, rgba(0, 247, 255, 0.05) 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .swiper-navigation-area:hover::before,
+    .swiper-navigation-area:hover::after {
+        opacity: 1;
+    }
+
+    /* Destaque para oferta especial */
+    .service-card.featured {
+        border: 2px solid var(--tech-blue);
+        position: relative;
+        overflow: hidden;
+        animation: neonPulse 2s infinite;
+    }
+
+    .featured-badge {
+        position: absolute;
+        top: 20px;
+        right: -35px;
+        background: var(--tech-blue);
+        color: var(--tech-dark);
+        padding: 0.5rem 2.5rem;
+        transform: rotate(45deg);
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-tiny);
+        font-weight: 600;
+        z-index: 2;
+        box-shadow: 0 0 15px var(--tech-blue);
+        animation: badgePulse 1.5s infinite;
+    }
+
+    .featured .price-current {
+        font-size: var(--font-size-huge);
+        background: linear-gradient(
+            45deg,
+            var(--tech-blue) 0%,
+            #fff 50%,
+            var(--tech-blue) 100%
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: shimmer 2s linear infinite;
+    }
+
+    /* Animações */
+    @keyframes neonPulse {
+        0% {
+            box-shadow: 0 0 5px var(--tech-blue),
+                       0 0 10px var(--tech-blue),
+                       0 0 15px var(--tech-blue);
+        }
+        50% {
+            box-shadow: 0 0 10px var(--tech-blue),
+                       0 0 20px var(--tech-blue),
+                       0 0 30px var(--tech-blue);
+        }
+        100% {
+            box-shadow: 0 0 5px var(--tech-blue),
+                       0 0 10px var(--tech-blue),
+                       0 0 15px var(--tech-blue);
+        }
+    }
+
+    @keyframes shimmer {
+        0% { background-position: 200% center; }
+        100% { background-position: -200% center; }
+    }
+
+    @keyframes badgePulse {
+        0% { opacity: 1; box-shadow: 0 0 10px var(--tech-blue); }
+        50% { opacity: 0.8; box-shadow: 0 0 20px var(--tech-blue); }
+        100% { opacity: 1; box-shadow: 0 0 10px var(--tech-blue); }
+    }
+
+    /* Melhorias na lista de features */
+    .features-list {
+        gap: 0.8rem;
+        padding: 1.2rem;
+    }
+
+    .feature-highlight {
+        color: var(--tech-blue);
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="services-section">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-title">Nossos Planos</h1>
+            <p class="section-subtitle">Escolha o plano ideal para sua presença digital</p>
+    </div>
+
+        <div class="swiper-container">
+            <div class="swiper">
+                <div class="swiper-navigation-area"></div>
+                <div class="swiper-wrapper">
+                    <!-- Landing Page -->
+                    <div class="swiper-slide">
+                    <div class="service-card">
+                            <div class="service-card-inner">
+                        <div class="service-icon">
+                                    <i class="bi bi-file-earmark-code"></i>
+                                </div>
+                                <h3 class="service-title">Landing Page</h3>
+                                <p class="service-description">Alta Conversão - Ideal para campanhas, produtos específicos ou captura de leads.</p>
+                                <ul class="features-list">
+                                    <li class="feature-item">
+                                        <span class="feature-icon">✨</span>
+                                        <span>Design moderno focado em conversão</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📱</span>
+                                        <span>Design 100% Responsivo</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📝</span>
+                                        <span>Formulário de Contato/Captura</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">💬</span>
+                                        <span>Integração WhatsApp</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🔍</span>
+                                        <span>Otimização SEO Básica</span>
+                                    </li>
+                                </ul>
+                                <div class="price-box">
+                                    <span class="price-original">R$ 497,90</span>
+                                    <div class="price-current">R$ 247,90</div>
+                                    <span class="price-info">Pagamento único</span>
+                                    <div class="price-bonus">
+                                        BÔNUS: Domínio + 1 Ano de Hospedagem
+                                    </div>
+                                </div>
+                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na Landing Page. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
+                                    <i class="bi bi-shield-check text-xl"></i>
+                                    <span>Solicitar Proposta</span>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+
+                    <!-- Site Institucional -->
+                    <div class="swiper-slide">
+                        <div class="service-card featured">
+                            <div class="featured-badge">DESTAQUE</div>
+                            <div class="service-card-inner">
+                                <div class="service-icon">
+                                    <i class="bi bi-building"></i>
+                                </div>
+                                <h3 class="service-title">Site Institucional</h3>
+                                <p class="service-description">A melhor porta de entrada para a presença digital completa da sua empresa.</p>
+                                <ul class="features-list">
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🎨</span>
+                                        <span>Design profissional personalizado</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📄</span>
+                                        <span>Até 5 páginas</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🔍</span>
+                                        <span>Otimização SEO on-page</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">⚡</span>
+                                        <span>Painel de gerenciamento básico</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">💬</span>
+                                        <span>Integração WhatsApp</span>
+                                    </li>
+                                </ul>
+                                <div class="price-box">
+                                    <span class="price-original">R$ 797,90</span>
+                                    <div class="price-current">R$ 397,90</div>
+                                    <span class="price-info">Melhor custo-benefício</span>
+                                </div>
+                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Institucional. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
+                                    <i class="bi bi-shield-check text-xl"></i>
+                                    <span>Solicitar Proposta</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Site Profissional -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="service-card-inner">
+                                <div class="service-icon">
+                                    <i class="bi bi-gear"></i>
+                                </div>
+                                <h3 class="service-title">Site Profissional</h3>
+                                <p class="service-description">Para negócios que precisam de mais conteúdo e funcionalidades.</p>
+                                <ul class="features-list">
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📄</span>
+                                        <span>Até 10 páginas</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📝</span>
+                                        <span>Blog completo</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📊</span>
+                                        <span>Google Analytics</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🖼️</span>
+                                        <span>Galeria de fotos</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">⚡</span>
+                                        <span>Funcionalidades adicionais</span>
+                                    </li>
+                        </ul>
+                                <div class="price-box">
+                                    <div class="price-current">R$ 697,90</div>
+                                    <span class="price-info">em até 12x no cartão</span>
+                                </div>
+                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Profissional. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
+                                    <i class="bi bi-shield-check text-xl"></i>
+                                    <span>Solicitar Proposta</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Site Empresarial -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="service-card-inner">
+                                <div class="service-icon">
+                                    <i class="bi bi-building-check"></i>
+                                </div>
+                                <h3 class="service-title">Site Empresarial</h3>
+                                <p class="service-description">Soluções robustas para empresas estabelecidas.</p>
+                                <ul class="features-list">
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📄</span>
+                                        <span>Até 15 páginas</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🔄</span>
+                                        <span>Integrações específicas</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">👥</span>
+                                        <span>Área de membros simples</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📊</span>
+                                        <span>CRM básico</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🚀</span>
+                                        <span>Otimizações avançadas</span>
+                                    </li>
+                                </ul>
+                                <div class="price-box">
+                                    <div class="price-current">R$ 1.197,90</div>
+                                    <span class="price-info">em até 12x no cartão</span>
+                                </div>
+                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Empresarial. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
+                                    <i class="bi bi-shield-check text-xl"></i>
+                                    <span>Solicitar Proposta</span>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+
+                    <!-- Loja Virtual -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="service-card-inner">
+                                <div class="service-icon">
+                                    <i class="bi bi-cart4"></i>
+                                </div>
+                                <h3 class="service-title">Loja Virtual</h3>
+                                <p class="service-description">Comece a vender online de forma profissional</p>
+                                <ul class="features-list">
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🛍️</span>
+                                        <span>Até 20 produtos iniciais</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">💳</span>
+                                        <span>PagSeguro e Mercado Pago</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🚚</span>
+                                        <span>Cálculo de frete</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">⚡</span>
+                                        <span>Painel administrativo</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📱</span>
+                                        <span>Design responsivo</span>
+                                    </li>
+                                </ul>
+                                <div class="price-box">
+                                    <div class="price-current">R$ 997,90</div>
+                                    <span class="price-info">Taxa de configuração e design</span>
+                                    <div class="price-bonus">
+                                        *Custos de plataforma não inclusos
+                                    </div>
+                                </div>
+                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na Loja Virtual. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
+                                    <i class="bi bi-shield-check text-xl"></i>
+                                    <span>Solicitar Proposta</span>
+                                </a>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!-- Premium -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="service-card-inner">
+                                <div class="service-icon">
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <h3 class="service-title">Premium</h3>
+                                <p class="service-description">Soluções personalizadas para projetos complexos</p>
+                                <ul class="features-list">
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🎯</span>
+                                        <span>Projetos sob medida</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🔄</span>
+                                        <span>Integrações avançadas</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">💻</span>
+                                        <span>Sistemas web</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📊</span>
+                                        <span>Consultoria especializada</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🚀</span>
+                                        <span>Soluções escaláveis</span>
+                                    </li>
+                                </ul>
+                                <div class="price-box">
+                                    <div class="price-current">Consulte</div>
+                                    <span class="price-info">Orçamento personalizado</span>
+                                </div>
+                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Gostaria de um orçamento para um projeto Premium personalizado." class="btn-cta" target="_blank" rel="noopener">
+                                    <i class="bi bi-shield-check text-xl"></i>
+                                    <span>Solicitar Proposta</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    // Inicialização do Swiper com configurações otimizadas
+    const swiper = new Swiper('.swiper', {
+        // Configuração Base
+        slidesPerView: 'auto',
+        initialSlide: 1,
+        centeredSlides: true,
+        loop: true,
+        speed: isReducedMotion ? 0 : 600,
+        grabCursor: true,
+        effect: 'coverflow',
+        coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 2,
+            slideShadows: false,
+        },
+        
+        // Configurações de loop otimizadas
+        loopedSlides: 6,
+        loopAdditionalSlides: 2,
+        loopFillGroupWithBlank: false,
+        loopPreventsSlide: true,
+        
+        // Breakpoints otimizados
+        breakpoints: {
+            320: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                centeredSlides: true
+            },
+            480: {
+                slidesPerView: 1,
+                spaceBetween: 15
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+            1024: {
+                slidesPerView: 2,
+                spaceBetween: 25
+            },
+            1280: {
+                slidesPerView: 3,
+                spaceBetween: 30
+            }
+        },
+        
+        // Navegação otimizada
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+            disabledClass: 'swiper-button-disabled',
+            hiddenClass: 'swiper-button-hidden',
+            lockClass: 'swiper-button-lock'
+        },
+        
+        // Paginação otimizada
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+            dynamicMainBullets: 3,
+            renderBullet: function (index, className) {
+                return '<span class="' + className + '"></span>';
+            }
+        },
+        
+        // Acessibilidade
+        a11y: {
+            enabled: true,
+            prevSlideMessage: 'Slide anterior',
+            nextSlideMessage: 'Próximo slide',
+            firstSlideMessage: 'Primeiro slide',
+            lastSlideMessage: 'Último slide',
+            paginationBulletMessage: 'Ir para slide {{index}}',
+            notificationClass: 'swiper-notification'
+        },
+        
+        // Otimizações de performance
+        observer: true,
+        observeParents: true,
+        watchSlidesProgress: true,
+        preventInteractionOnTransition: true,
+        touchRatio: 1,
+        touchAngle: 45,
+        simulateTouch: true,
+        resistance: true,
+        resistanceRatio: 0.85,
+        
+        on: {
+            init: function() {
+                updateSlideStyles(this);
+            },
+            slideChange: function() {
+                updateSlideStyles(this);
+            },
+            touchStart: function() {
+                document.querySelectorAll('.service-card').forEach(card => {
+                    card.style.transition = 'all 0.3s ease';
+                });
+            }
+        }
+    });
+
+    // Função para atualizar estilos dos slides
+    function updateSlideStyles(swiper) {
+        const slides = swiper.slides;
+        slides.forEach((slide, index) => {
+            const card = slide.querySelector('.service-card');
+            if (card) {
+                if (slide.classList.contains('swiper-slide-active')) {
+                    card.style.transform = 'scale(1)';
+                    card.style.opacity = '1';
+                } else {
+                    const offset = Math.abs(swiper.activeIndex - index);
+                    const scale = Math.max(0.85, 1 - (offset * 0.1));
+                    const opacity = Math.max(0.5, 1 - (offset * 0.3));
+                    card.style.transform = `scale(${scale})`;
+                    card.style.opacity = opacity;
+                }
+            }
+        });
+    }
+
+    // Implementação melhorada da navegação por clique na área
+    const navigationArea = document.querySelector('.swiper-navigation-area');
+    if (navigationArea) {
+        navigationArea.addEventListener('click', function(event) {
+            // Previne navegação se o clique for em elementos interativos
+            if (event.target.closest('a, button, .swiper-pagination, .swiper-button-next, .swiper-button-prev')) {
+                return;
+            }
+
+            const rect = this.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const isRightSide = clickX > rect.width / 2;
+
+            if (isRightSide) {
+                swiper.slideNext(400);
+            } else {
+                swiper.slidePrev(400);
+            }
+        });
+
+        // Adiciona feedback visual ao hover
+        navigationArea.addEventListener('mousemove', function(event) {
+            const rect = this.getBoundingClientRect();
+            const isRightSide = event.clientX - rect.left > rect.width / 2;
+            
+            this.style.cursor = 'pointer';
+            if (isRightSide) {
+                this.classList.add('hover-next');
+                this.classList.remove('hover-prev');
+            } else {
+                this.classList.add('hover-prev');
+                this.classList.remove('hover-next');
+            }
+        });
+
+        navigationArea.addEventListener('mouseleave', function() {
+            this.classList.remove('hover-next', 'hover-prev');
+        });
+    }
+
+    // Otimização para dispositivos touch
+    if ('ontouchstart' in window) {
+        if (navigationArea) navigationArea.style.display = 'none';
+    }
+
+    // Adiciona listeners para os botões CTA
+    document.querySelectorAll('.btn-cta').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); // Previne que o clique propague para a área de navegação
+        });
+    });
+
+    // Atualiza o Swiper quando a janela é redimensionada
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            swiper.update();
+            updateSlideStyles(swiper);
+        }, 250);
+    });
+});
+</script>
+{% endblock %}

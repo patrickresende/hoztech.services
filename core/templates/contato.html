@@ -1,0 +1,829 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contato - Hoz Tech{% endblock %}
+
+{% block extra_css %}
+<!-- Add Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    .contact-section {
+        padding: var(--spacing-xl) 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 50% 50%, 
+            rgba(0, 247, 255, 0.1) 0%,
+            rgba(255, 7, 58, 0.1) 100%);
+        pointer-events: none;
+    }
+
+    .contact-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .contact-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-3xl);
+        font-weight: 700;
+        background: var(--gradient-tech);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: var(--spacing-md);
+        text-align: center;
+    }
+
+    .contact-subtitle {
+        font-family: var(--font-tech);
+        font-size: var(--font-size-lg);
+        color: var(--tech-light);
+        opacity: 0.9;
+        margin-bottom: var(--spacing-xl);
+        text-align: center;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .contact-card {
+        background: var(--gradient-card);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-lg);
+        height: 100%;
+        transition: all var(--transition-normal);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .contact-card:hover {
+        border-color: var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .contact-info-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-xl);
+        color: var(--tech-light);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .contact-info-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .contact-info-item {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
+        color: var(--tech-light);
+        opacity: 0.9;
+        font-size: var(--font-size-base);
+    }
+
+    .contact-info-item i {
+        font-size: var(--font-size-xl);
+        color: var(--tech-blue);
+        transition: all var(--transition-normal);
+    }
+
+    .contact-info-item:hover i {
+        color: var(--tech-red);
+        transform: scale(1.1);
+    }
+
+    .contact-info-item a {
+        color: var(--tech-light);
+        text-decoration: none;
+        transition: all var(--transition-normal);
+    }
+
+    .contact-info-item a:hover {
+        color: var(--tech-blue);
+    }
+
+    .contact-form {
+        background: var(--gradient-card);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-lg);
+        transition: all var(--transition-normal);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .contact-form:hover {
+        border-color: var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .form-label {
+        font-family: var(--font-orbitron);
+        color: var(--tech-light);
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .form-control {
+        background: rgba(10, 11, 30, 0.8);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        border-radius: var(--border-radius-md);
+        color: var(--tech-light);
+        font-family: var(--font-tech);
+        font-size: var(--font-size-base);
+        padding: var(--spacing-sm);
+        transition: all var(--transition-normal);
+    }
+
+    .form-control:focus {
+        background: rgba(10, 11, 30, 0.9);
+        border-color: var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+        color: var(--tech-light);
+    }
+
+    .form-control::placeholder {
+        color: rgba(224, 251, 252, 0.5);
+    }
+
+    textarea.form-control {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .btn-contact {
+        background: var(--gradient-tech);
+        border: none;
+        border-radius: var(--border-radius-md);
+        color: var(--tech-dark);
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-base);
+        font-weight: 500;
+        padding: var(--spacing-sm) var(--spacing-lg);
+        transition: all var(--transition-normal);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-sm);
+    }
+
+    .btn-contact:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .btn-contact:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .alert {
+        background: var(--gradient-card);
+        border: 1px solid;
+        border-radius: var(--border-radius-md);
+        padding: var(--spacing-sm) var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+        font-family: var(--font-tech);
+        font-size: var(--font-size-base);
+    }
+
+    .alert-success {
+        border-color: var(--tech-blue);
+        color: var(--tech-light);
+    }
+
+    .alert-danger {
+        border-color: var(--tech-red);
+        color: var(--tech-light);
+    }
+
+    .alert i {
+        margin-right: var(--spacing-sm);
+    }
+
+    /* Map Section */
+    .map-section {
+        padding: var(--spacing-xl) 0;
+        position: relative;
+    }
+
+    .map-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-2xl);
+        font-weight: 700;
+        background: var(--gradient-tech);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: var(--spacing-lg);
+        text-align: center;
+    }
+
+    .map-container {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        transition: all var(--transition-normal);
+    }
+
+    .map-container:hover {
+        border-color: var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .map-container iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .contact-section {
+            padding: var(--spacing-lg) 0;
+        }
+
+        .contact-title {
+            font-size: var(--font-size-2xl);
+        }
+
+        .contact-subtitle {
+            font-size: var(--font-size-base);
+        }
+
+        .contact-card,
+        .contact-form {
+            padding: var(--spacing-md);
+        }
+
+        .map-container {
+            height: 300px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .contact-title {
+            font-size: var(--font-size-xl);
+        }
+
+        .contact-subtitle {
+            font-size: var(--font-size-sm);
+        }
+
+        .contact-info-title {
+            font-size: var(--font-size-lg);
+        }
+
+        .btn-contact {
+            padding: var(--spacing-sm);
+            font-size: var(--font-size-sm);
+        }
+    }
+
+    /* Country Select Styles */
+    .form-control option {
+        font-family: var(--font-tech);
+    }
+
+    #country {
+        background: rgba(10, 11, 30, 0.8);
+        color: var(--tech-light);
+    }
+
+    .input-group-text {
+        background: rgba(10, 11, 30, 0.9);
+        color: var(--tech-light);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        font-family: var(--font-tech);
+    }
+
+    /* Character Counter Styles */
+    .text-muted {
+        font-family: var(--font-tech);
+        font-size: var(--font-size-sm);
+        display: block;
+        text-align: right;
+        margin-top: 0.25rem;
+        color: rgba(224, 251, 252, 0.7) !important;
+    }
+
+    /* Form Validation Styles */
+    .form-control.is-invalid {
+        border-color: var(--tech-red);
+        background-image: none;
+    }
+
+    .form-control.is-invalid:focus {
+        border-color: var(--tech-red);
+        box-shadow: 0 0 0 0.25rem rgba(255, 7, 58, 0.25);
+    }
+
+    .form-control.is-valid {
+        border-color: var(--tech-blue);
+        background-image: none;
+    }
+
+    .form-control.is-valid:focus {
+        border-color: var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .invalid-feedback {
+        color: var(--tech-red);
+        font-size: var(--font-size-sm);
+        margin-top: 0.25rem;
+    }
+
+    .valid-feedback {
+        color: var(--tech-blue);
+        font-size: var(--font-size-sm);
+        margin-top: 0.25rem;
+    }
+
+    /* Loading State Styles */
+    .btn-loading {
+        position: relative;
+        pointer-events: none;
+        opacity: 0.8;
+    }
+
+    .btn-loading .spinner-border {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .btn-loading span:not(.spinner-border) {
+        visibility: hidden;
+    }
+
+    /* Alert Styles */
+    .alert {
+        position: relative;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: var(--border-radius-md);
+        font-family: var(--font-tech);
+    }
+
+    .alert-success {
+        background: rgba(0, 247, 255, 0.1);
+        border-color: var(--tech-blue);
+        color: var(--tech-light);
+    }
+
+    .alert-danger {
+        background: rgba(255, 7, 58, 0.1);
+        border-color: var(--tech-red);
+        color: var(--tech-light);
+    }
+
+    .alert i {
+        margin-right: 0.5rem;
+    }
+
+    .alert small {
+        display: block;
+        margin-top: 0.5rem;
+        opacity: 0.8;
+    }
+
+    /* Select2 Custom Styles */
+    .select2-container {
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        background: rgba(10, 11, 30, 0.8);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        border-radius: var(--border-radius-md);
+        height: 38px;
+        display: flex;
+        align-items: center;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: var(--tech-light);
+        font-family: var(--font-tech);
+        line-height: 38px;
+        padding-left: 12px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 36px;
+    }
+
+    .select2-container--default .select2-results__option {
+        background: rgba(10, 11, 30, 0.95);
+        color: var(--tech-light);
+        font-family: var(--font-tech);
+        padding: 8px 12px;
+    }
+
+    .select2-container--default .select2-results__option--highlighted[aria-selected] {
+        background: var(--tech-blue);
+        color: var(--tech-dark);
+    }
+
+    .select2-dropdown {
+        background: rgba(10, 11, 30, 0.95);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        border-radius: var(--border-radius-md);
+    }
+
+    .select2-search--dropdown .select2-search__field {
+        background: rgba(10, 11, 30, 0.8);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        color: var(--tech-light);
+        font-family: var(--font-tech);
+        border-radius: var(--border-radius-sm);
+        padding: 6px;
+    }
+
+    .select2-search--dropdown .select2-search__field:focus {
+        outline: none;
+        border-color: var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .select2-container--default .select2-search--dropdown .select2-search__field::placeholder {
+        color: rgba(224, 251, 252, 0.5);
+    }
+
+    .select2-results__option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .select2-results__option img {
+        width: 20px;
+        height: 15px;
+        object-fit: cover;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .select2-container--default .select2-selection--single {
+            height: 36px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 36px;
+            font-size: var(--font-size-sm);
+        }
+
+        .text-muted {
+            font-size: var(--font-size-xs);
+        }
+    }
+
+    /* Add styles for feedback messages */
+    .alert {
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: var(--border-radius-md);
+        font-family: var(--font-tech);
+        font-size: var(--font-size-sm);
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .alert-danger {
+        background: rgba(255, 7, 58, 0.1);
+        border-color: var(--tech-red);
+        color: var(--tech-light);
+    }
+
+    .alert-success {
+        background: rgba(0, 247, 255, 0.1);
+        border-color: var(--tech-blue);
+        color: var(--tech-light);
+    }
+
+    .form-control.is-invalid {
+        border-color: var(--tech-red);
+        background-image: none;
+        padding-right: calc(1.5em + 0.75rem);
+        background-repeat: no-repeat;
+        background-position: right calc(0.375em + 0.1875rem) center;
+        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    }
+
+    .form-control.is-valid {
+        border-color: var(--tech-blue);
+        background-image: none;
+        padding-right: calc(1.5em + 0.75rem);
+        background-repeat: no-repeat;
+        background-position: right calc(0.375em + 0.1875rem) center;
+        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    }
+
+    .invalid-feedback, .valid-feedback {
+        display: none;
+        margin-top: 0.25rem;
+        font-size: var(--font-size-sm);
+    }
+
+    .was-validated .form-control:invalid ~ .invalid-feedback,
+    .form-control.is-invalid ~ .invalid-feedback {
+        display: block;
+    }
+
+    .was-validated .form-control:valid ~ .valid-feedback,
+    .form-control.is-valid ~ .valid-feedback {
+        display: block;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center mb-8">Entre em Contato</h1>
+    
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
+        <form id="contactForm" method="POST" class="space-y-4" novalidate>
+            {% csrf_token %}
+            
+            <!-- Campo honeypot -->
+            {{ form.website }}
+            
+            <div class="form-group">
+                <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-700">Nome</label>
+                {{ form.name }}
+                <div class="error-message text-red-500 text-sm mt-1"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700">Email</label>
+                {{ form.email }}
+                <div class="error-message text-red-500 text-sm mt-1"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.phone.id_for_label }}" class="block text-sm font-medium text-gray-700">Telefone</label>
+                {{ form.phone }}
+                <div class="error-message text-red-500 text-sm mt-1"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.subject.id_for_label }}" class="block text-sm font-medium text-gray-700">Assunto</label>
+                {{ form.subject }}
+                <div class="error-message text-red-500 text-sm mt-1"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.message.id_for_label }}" class="block text-sm font-medium text-gray-700">Mensagem</label>
+                {{ form.message }}
+                <div class="error-message text-red-500 text-sm mt-1"></div>
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" id="submitButton">
+                    <span class="button-text">Enviar Mensagem</span>
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+            </div>
+        </form>
+        
+        <div id="formStatus" class="mt-4 text-center hidden">
+            <div class="success-message bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded hidden">
+                Mensagem enviada com sucesso! Entraremos em contato em breve.
+            </div>
+            <div class="error-message bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded hidden">
+                Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Função de debounce para evitar múltiplos envios
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Validação de email
+function isValidEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+// Validação de telefone
+function isValidPhone(phone) {
+    const re = /^[\d\s()-]+$/;
+    return re.test(String(phone));
+}
+
+// Cache de elementos DOM
+const form = document.getElementById('contactForm');
+const submitButton = document.getElementById('submitButton');
+const buttonText = submitButton.querySelector('.button-text');
+const spinner = submitButton.querySelector('.spinner-border');
+const statusDiv = document.getElementById('formStatus');
+const successMessage = statusDiv.querySelector('.success-message');
+const errorMessage = statusDiv.querySelector('.error-message');
+
+// Validação em tempo real dos campos
+const fields = ['name', 'email', 'phone', 'subject', 'message'];
+fields.forEach(field => {
+    const input = form.querySelector(`[name="${field}"]`);
+    if (input) {
+        input.addEventListener('input', debounce(function() {
+            validateField(field, input.value);
+        }, 300));
+    }
+});
+
+// Função de validação de campo
+function validateField(field, value) {
+    const input = form.querySelector(`[name="${field}"]`);
+    const errorDiv = input.closest('.form-group').querySelector('.error-message');
+    let isValid = true;
+    let errorMessage = '';
+
+    switch(field) {
+        case 'name':
+            if (!value.trim()) {
+                isValid = false;
+                errorMessage = 'Nome é obrigatório';
+            } else if (value.length < 2) {
+                isValid = false;
+                errorMessage = 'Nome deve ter pelo menos 2 caracteres';
+            }
+            break;
+        case 'email':
+            if (!value.trim()) {
+                isValid = false;
+                errorMessage = 'Email é obrigatório';
+            } else if (!isValidEmail(value)) {
+                isValid = false;
+                errorMessage = 'Email inválido';
+            }
+            break;
+        case 'phone':
+            if (value.trim() && !isValidPhone(value)) {
+                isValid = false;
+                errorMessage = 'Telefone inválido';
+            }
+            break;
+        case 'subject':
+            if (!value.trim()) {
+                isValid = false;
+                errorMessage = 'Assunto é obrigatório';
+            }
+            break;
+        case 'message':
+            if (!value.trim()) {
+                isValid = false;
+                errorMessage = 'Mensagem é obrigatória';
+            } else if (value.length < 10) {
+                isValid = false;
+                errorMessage = 'Mensagem deve ter pelo menos 10 caracteres';
+            }
+            break;
+    }
+
+    input.classList.toggle('is-invalid', !isValid);
+    input.classList.toggle('is-valid', isValid);
+    errorDiv.textContent = errorMessage;
+    return isValid;
+}
+
+// Função para validar todo o formulário
+function validateForm() {
+    let isValid = true;
+    fields.forEach(field => {
+        const input = form.querySelector(`[name="${field}"]`);
+        if (input) {
+            if (!validateField(field, input.value)) {
+                isValid = false;
+            }
+        }
+    });
+    return isValid;
+}
+
+// Cache do token CSRF
+const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+// Manipulador de envio do formulário otimizado
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+        return;
+    }
+
+    // Desabilita o botão e mostra o spinner
+    submitButton.disabled = true;
+    buttonText.textContent = 'Enviando...';
+    spinner.classList.remove('d-none');
+    
+    // Limpa mensagens anteriores
+    statusDiv.classList.remove('hidden');
+    successMessage.classList.add('hidden');
+    errorMessage.classList.add('hidden');
+    
+    try {
+        const formData = new FormData(form);
+        const response = await fetch('{% url "hoztech:contact" %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrfToken
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            form.reset();
+            fields.forEach(field => {
+                const input = form.querySelector(`[name="${field}"]`);
+                if (input) {
+                    input.classList.remove('is-valid', 'is-invalid');
+                }
+            });
+            successMessage.textContent = data.message;
+            successMessage.classList.remove('hidden');
+            
+            // Scroll suave até a mensagem de sucesso
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+            if (data.errors) {
+                Object.entries(data.errors).forEach(([field, errors]) => {
+                    const input = form.querySelector(`[name="${field}"]`);
+                    if (input) {
+                        const errorDiv = input.closest('.form-group').querySelector('.error-message');
+                        errorDiv.textContent = errors.join(', ');
+                        input.classList.add('is-invalid');
+                    }
+                });
+            } else {
+                errorMessage.textContent = data.message || 'Ocorreu um erro ao enviar sua mensagem.';
+                errorMessage.classList.remove('hidden');
+            }
+        }
+    } catch (error) {
+        console.error('Erro ao enviar formulário:', error);
+        errorMessage.textContent = 'Erro de conexão. Por favor, tente novamente.';
+        errorMessage.classList.remove('hidden');
+    } finally {
+        // Reabilita o botão e esconde o spinner
+        submitButton.disabled = false;
+        buttonText.textContent = 'Enviar Mensagem';
+        spinner.classList.add('d-none');
+    }
+});
+
+// Previne múltiplos envios acidentais
+let isSubmitting = false;
+form.addEventListener('submit', function(e) {
+    if (isSubmitting) {
+        e.preventDefault();
+        return;
+    }
+    isSubmitting = true;
+    setTimeout(() => {
+        isSubmitting = false;
+    }, 1000);
+});
+</script>
+{% endblock %} 

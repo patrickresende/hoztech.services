@@ -1,0 +1,374 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Hoz Tech - Contato{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Contact Section */
+    .contact-section {
+        padding: var(--spacing-xl) 0;
+        position: relative;
+        min-height: calc(100vh - 76px);
+        display: flex;
+        align-items: center;
+    }
+
+    .contact-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 50% 50%, 
+            rgba(0, 247, 255, 0.1) 0%,
+            rgba(255, 7, 58, 0.1) 100%);
+        pointer-events: none;
+    }
+
+    .contact-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .contact-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-3xl);
+        font-weight: 700;
+        background: var(--gradient-tech);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: var(--spacing-lg);
+        text-align: center;
+    }
+
+    .contact-subtitle {
+        font-family: var(--font-tech);
+        font-size: var(--font-size-lg);
+        color: var(--tech-light);
+        opacity: 0.9;
+        margin-bottom: var(--spacing-xl);
+        text-align: center;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .contact-card {
+        background: var(--gradient-card);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        border-radius: 12px;
+        padding: var(--spacing-lg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: all var(--transition-normal);
+    }
+
+    .contact-card:hover {
+        border-color: var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .form-group {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .form-label {
+        font-family: var(--font-orbitron);
+        color: var(--tech-light);
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-xs);
+        display: block;
+    }
+
+    .form-control {
+        background: rgba(10, 11, 30, 0.5);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        border-radius: var(--border-radius-md);
+        color: var(--tech-light);
+        font-family: var(--font-tech);
+        padding: var(--spacing-sm);
+        transition: all var(--transition-normal);
+    }
+
+    .form-control:focus {
+        background: rgba(10, 11, 30, 0.8);
+        border-color: var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+        color: var(--tech-light);
+    }
+
+    .form-control::placeholder {
+        color: rgba(224, 251, 252, 0.5);
+    }
+
+    .form-control.is-invalid {
+        border-color: var(--tech-red);
+        box-shadow: var(--shadow-red);
+    }
+
+    .error-message {
+        font-size: var(--font-size-xs);
+        margin-top: var(--spacing-xs);
+    }
+
+    .btn-submit {
+        background: var(--gradient-tech);
+        border: none;
+        border-radius: var(--border-radius-md);
+        color: var(--tech-dark);
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-base);
+        font-weight: 500;
+        padding: var(--spacing-sm) var(--spacing-lg);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all var(--transition-normal);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-sm);
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .btn-submit:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .contact-info {
+        margin-top: var(--spacing-xl);
+    }
+
+    .contact-info-item {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
+        color: var(--tech-light);
+    }
+
+    .contact-info-item i {
+        font-size: var(--font-size-xl);
+        color: var(--tech-blue);
+    }
+
+    .contact-info-item a {
+        color: var(--tech-light);
+        text-decoration: none;
+        transition: all var(--transition-normal);
+    }
+
+    .contact-info-item a:hover {
+        color: var(--tech-blue);
+    }
+
+    /* Test Status Styles */
+    .test-status {
+        margin-bottom: var(--spacing-md);
+        padding: var(--spacing-sm);
+        border-radius: var(--border-radius-md);
+        font-family: var(--font-tech);
+        font-size: var(--font-size-sm);
+    }
+
+    .test-status.success {
+        background-color: rgba(40, 167, 69, 0.1);
+        border: 1px solid rgba(40, 167, 69, 0.2);
+        color: #28a745;
+    }
+
+    .test-status.error {
+        background-color: rgba(220, 53, 69, 0.1);
+        border: 1px solid rgba(220, 53, 69, 0.2);
+        color: #dc3545;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .contact-title {
+            font-size: var(--font-size-2xl);
+        }
+
+        .contact-subtitle {
+            font-size: var(--font-size-base);
+        }
+
+        .contact-card {
+            padding: var(--spacing-md);
+        }
+    }
+
+    /* Alert Styles */
+    .alert {
+        padding: var(--spacing-sm) var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+        border-radius: var(--border-radius-md);
+        font-family: var(--font-tech);
+        font-size: var(--font-size-sm);
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+
+    .alert-success {
+        background-color: rgba(40, 167, 69, 0.1);
+        border: 1px solid rgba(40, 167, 69, 0.2);
+        color: #28a745;
+    }
+
+    .alert-danger {
+        background-color: rgba(220, 53, 69, 0.1);
+        border: 1px solid rgba(220, 53, 69, 0.2);
+        color: #dc3545;
+    }
+
+    .alert.hidden {
+        display: none;
+    }
+
+    .alert i {
+        font-size: var(--font-size-lg);
+    }
+
+    /* Spinner Styles */
+    .spinner-border {
+        width: 1rem;
+        height: 1rem;
+        border-width: 0.15em;
+    }
+
+    .spinner-border.hidden {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="contact-section">
+    <div class="container contact-content">
+        <h1 class="contact-title">Entre em Contato</h1>
+        <p class="contact-subtitle">
+            Estamos prontos para ajudar você a transformar sua presença digital. 
+            Preencha o formulário abaixo e entraremos em contato o mais breve possível.
+        </p>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="contact-card">
+                    {% if not email_connection_ok %}
+                    <div class="alert alert-warning" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        O sistema de envio de emails está temporariamente indisponível. 
+                        Por favor, tente novamente mais tarde ou entre em contato diretamente pelo WhatsApp.
+                    </div>
+                    {% endif %}
+
+                    {% if test_message %}
+                    <div class="test-status {% if test_success %}success{% else %}error{% endif %}">
+                        <i class="bi {% if test_success %}bi-check-circle-fill{% else %}bi-exclamation-circle-fill{% endif %} me-2"></i>
+                        {{ test_message }}
+                    </div>
+                    {% endif %}
+                    
+                    <form id="contactForm" method="post" action="{% url 'core:contact' %}" novalidate>
+                        {% csrf_token %}
+                        
+                        <!-- Mensagens de feedback -->
+                        <div id="successMessage" class="alert alert-success hidden" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            <span></span>
+                        </div>
+                        
+                        <div id="errorMessage" class="alert alert-danger hidden" role="alert">
+                            <i class="bi bi-exclamation-circle-fill me-2"></i>
+                            <span></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="name" name="name" 
+                                   placeholder="Seu nome completo" required
+                                   minlength="3" maxlength="50"
+                                   pattern="[A-Za-zÀ-ÿ\s]{3,50}"
+                                   title="O nome deve conter apenas letras e espaços (3-50 caracteres)">
+                            <div class="invalid-feedback">Por favor, insira seu nome completo.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email" name="email" 
+                                   placeholder="seu@email.com" required
+                                   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                   title="Por favor, insira um email válido">
+                            <div class="invalid-feedback">Por favor, insira um email válido.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" 
+                                   placeholder="(99) 99999-9999" required
+                                   pattern="\(\d{2}\) \d{5}-\d{4}"
+                                   title="O telefone deve estar no formato (99) 99999-9999">
+                            <div class="invalid-feedback">Por favor, insira um telefone válido no formato (99) 99999-9999.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Assunto</label>
+                            <input type="text" class="form-control" id="subject" name="subject" 
+                                   placeholder="Assunto da mensagem" required
+                                   maxlength="20"
+                                   title="O assunto deve ter no máximo 20 caracteres">
+                            <div class="invalid-feedback">Por favor, insira um assunto válido.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Mensagem</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" 
+                                      placeholder="Digite sua mensagem aqui..." required
+                                      maxlength="5000"
+                                      title="A mensagem deve ter no máximo 5000 caracteres"></textarea>
+                            <div class="invalid-feedback">Por favor, insira sua mensagem.</div>
+                        </div>
+
+                        <!-- Campo honeypot -->
+                        <div style="display: none !important;">
+                            <input type="text" name="website" id="website" autocomplete="off" tabindex="-1">
+                        </div>
+
+                        <button type="submit" class="btn-submit" {% if not email_connection_ok %}disabled{% endif %}>
+                            <span id="loadingSpinner" class="spinner-border spinner-border-sm hidden" role="status" aria-hidden="true"></span>
+                            Enviar Mensagem
+                        </button>
+                    </form>
+
+                    <div id="formStatus"></div>
+
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <i class="bi bi-envelope"></i>
+                            <a href="mailto:hoztech.services@gmail.com">hoztech.services@gmail.com</a>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="bi bi-telephone"></i>
+                            <a href="tel:+5521973007575">(21) 97300-7575</a>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="bi bi-whatsapp"></i>
+                            <a href="https://wa.me/5511999999999" target="_blank" rel="noopener">WhatsApp</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

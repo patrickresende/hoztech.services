@@ -1,0 +1,162 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block dashboard_content %}
+<div class="dashboard-grid">
+    <!-- Métricas Principais -->
+    <div class="metric-card">
+        <div class="metric-icon" style="background: rgba(37, 99, 235, 0.1); color: var(--primary-color);">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="metric-info">
+            <div class="metric-value">{{ total_visitors }}</div>
+            <div class="metric-label">Visitantes Hoje</div>
+        </div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success-color);">
+            <i class="fas fa-cookie"></i>
+        </div>
+        <div class="metric-info">
+            <div class="metric-value">{{ total_cookies }}</div>
+            <div class="metric-label">Cookies Ativos</div>
+        </div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning-color);">
+            <i class="fas fa-clock"></i>
+        </div>
+        <div class="metric-info">
+            <div class="metric-value">{{ avg_session_duration }}</div>
+            <div class="metric-label">Tempo Médio de Sessão</div>
+        </div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger-color);">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="metric-info">
+            <div class="metric-value">{{ seo_score }}%</div>
+            <div class="metric-label">Score SEO Médio</div>
+        </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="chart-container">
+        <h2>Visitantes por Hora</h2>
+        <canvas id="visitorsChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h2>Páginas Mais Visitadas</h2>
+        <canvas id="pagesChart"></canvas>
+    </div>
+
+    <!-- Últimas Sessões -->
+    <div class="table-container">
+        <h2>Últimas Sessões</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>IP</th>
+                    <th>Navegador</th>
+                    <th>Início</th>
+                    <th>Duração</th>
+                    <th>Páginas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in recent_sessions %}
+                <tr>
+                    <td>{{ session.ip_address }}</td>
+                    <td>{{ session.user_agent|truncatechars:30 }}</td>
+                    <td>{{ session.created_at|date:"d/m/Y H:i" }}</td>
+                    <td>{{ session.duration }}</td>
+                    <td>{{ session.page_count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Métricas SEO -->
+    <div class="table-container">
+        <h2>Métricas SEO</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>Score</th>
+                    <th>Links</th>
+                    <th>Imagens</th>
+                    <th>Última Verificação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for metric in seo_metrics %}
+                <tr>
+                    <td>{{ metric.url|truncatechars:30 }}</td>
+                    <td>{{ metric.page_speed_score }}%</td>
+                    <td>{{ metric.internal_links }} / {{ metric.external_links }}</td>
+                    <td>{{ metric.image_count }}</td>
+                    <td>{{ metric.last_checked|date:"d/m/Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Gráfico de Visitantes
+    const visitorsCtx = document.getElementById('visitorsChart').getContext('2d');
+    new Chart(visitorsCtx, {
+        type: 'line',
+        data: {
+            labels: {{ visitor_hours|safe }},
+            datasets: [{
+                label: 'Visitantes',
+                data: {{ visitor_counts|safe }},
+                borderColor: 'rgb(37, 99, 235)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+
+    // Gráfico de Páginas
+    const pagesCtx = document.getElementById('pagesChart').getContext('2d');
+    new Chart(pagesCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ page_urls|safe }},
+            datasets: [{
+                label: 'Visitas',
+                data: {{ page_counts|safe }},
+                backgroundColor: 'rgba(37, 99, 235, 0.5)'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %} 
