@@ -17,6 +17,7 @@ services:
       echo "=== Instalando dependências ==="
       python -m pip install --upgrade pip
       pip install -r requirements.txt
+      pip install XlsxWriter==3.1.9
       echo "=== Verificando PYTHONPATH ==="
       echo $PYTHONPATH
       echo "=== Coletando arquivos estáticos ==="
