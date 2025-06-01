@@ -1,29 +1,56 @@
 services:
   # Serviço Web (Django)
   - type: web
-    name: hoz-tech
+    name: hoztech.services
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn core.wsgi:application
+    region: sao
+    plan: free
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate
+    startCommand: gunicorn core.wsgi:application --workers 2 --threads 2 --timeout 60
     envVars:
       - key: PYTHON_VERSION
         value: 3.8.2
       - key: DATABASE_URL
-        value: # Será preenchido pelo Render
-      - key: SECRET_KEY
-        value: # Será preenchido pelo Render
+        fromDatabase:
+          name: hoztech-db
+          property: connectionString
       - key: DEBUG
         value: False
       - key: ALLOWED_HOSTS
-        value: ".onrender.com"
+        value: .onrender.com
+      - key: DJANGO_LOG_LEVEL
+        value: INFO
+      - key: SECURE_SSL_REDIRECT
+        value: True
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://*.onrender.com
+      - key: STATIC_URL
+        value: /static/
+      - key: STATIC_ROOT
+        value: staticfiles
+      - key: MEDIA_URL
+        value: /media/
+      - key: MEDIA_ROOT
+        value: mediafiles
+    healthCheckPath: /admin/login/
     autoDeploy: true
 
   # Banco de Dados PostgreSQL
-  - type: postgres
+  - type: pserv
     name: hoztech-db
+    env: postgresql
+    region: sao
     plan: free
-    ipAllowList: []
+    maxmemoryPolicy: noeviction
+    ipAllowList: [] # Permitir todas as IPs
     disk:
       name: data
       mountPath: /var/lib/postgresql/data
-      sizeGB: 1 
+      sizeGB: 1
+
+# Configurações Globais
+preInstallCommand: |
+  apt-get update && apt-get install -y build-essential python3-dev 
