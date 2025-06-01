@@ -8,8 +8,6 @@ services:
       echo "=== Verificando estrutura do projeto ==="
       pwd
       ls -la
-      echo "=== Conteúdo do diretório core ==="
-      ls -la core/
       echo "=== Python Version ==="
       python --version
       echo "=== Pip Version ==="
@@ -17,34 +15,25 @@ services:
       echo "=== Instalando dependências ==="
       python -m pip install --upgrade pip
       pip install -r requirements.txt
-      echo "=== Criando diretório staticfiles ==="
+      echo "=== Preparando diretório staticfiles ==="
+      rm -rf staticfiles
       mkdir -p staticfiles
-      echo "=== Verificando conteúdo do diretório static ==="
-      ls -la static/
-      ls -la static/images/
-      echo "=== Copiando arquivos estáticos ==="
-      cp -r static/* staticfiles/
-      echo "=== Verificando permissões ==="
-      chmod -R 755 staticfiles/
       echo "=== Coletando arquivos estáticos ==="
-      DJANGO_SETTINGS_MODULE=hoztechsite.settings python manage.py collectstatic --noinput --clear
-      echo "=== Verificando conteúdo do diretório staticfiles ==="
+      python manage.py collectstatic --noinput
+      echo "=== Verificando arquivos coletados ==="
       ls -la staticfiles/
+      echo "=== Verificando imagens ==="
+      ls -la staticfiles/images/
       echo "=== Aplicando migrações ==="
       python manage.py migrate
     startCommand: |
       echo "=== Iniciando Gunicorn ==="
-      echo "Diretório atual: $(pwd)"
-      echo "Conteúdo do diretório: $(ls -la)"
-      echo "PYTHONPATH: $PYTHONPATH"
-      cd /opt/render/project/src && PYTHONPATH=/opt/render/project/src gunicorn --chdir /opt/render/project/src hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60 --log-level debug --error-logfile - --access-logfile - --capture-output
+      gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60 --log-level debug --error-logfile - --access-logfile - --capture-output
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: WEB_CONCURRENCY
         value: 2
-      - key: PYTHONPATH
-        value: /opt/render/project/src
       - key: PYTHONUNBUFFERED
         value: "1"
       - key: DATABASE_URL
@@ -52,25 +41,25 @@ services:
           name: hoztech-db
           property: connectionString
       - key: DEBUG
-        value: False
+        value: "False"
       - key: ALLOWED_HOSTS
-        value: .onrender.com
+        value: ".onrender.com"
       - key: DJANGO_LOG_LEVEL
-        value: DEBUG
+        value: "DEBUG"
       - key: SECURE_SSL_REDIRECT
-        value: False
+        value: "False"
       - key: CSRF_TRUSTED_ORIGINS
-        value: https://*.onrender.com
+        value: "https://*.onrender.com"
       - key: STATIC_URL
-        value: /static/
+        value: "/static/"
       - key: STATIC_ROOT
-        value: staticfiles
+        value: "staticfiles"
       - key: MEDIA_URL
-        value: /media/
+        value: "/media/"
       - key: MEDIA_ROOT
-        value: mediafiles
+        value: "mediafiles"
       - key: DJANGO_SETTINGS_MODULE
-        value: hoztechsite.settings
+        value: "hoztechsite.settings"
     healthCheckPath: /
     autoDeploy: true
 
