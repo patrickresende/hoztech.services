@@ -8,16 +8,15 @@ services:
       echo "=== Instalando dependências ==="
       python -m pip install --upgrade pip
       pip install -r requirements.txt
+      pip install whitenoise
       echo "=== Preparando diretório staticfiles ==="
       rm -rf staticfiles
       mkdir -p staticfiles/images
       echo "=== Copiando arquivos estáticos ==="
-      cp static/images/logo.png staticfiles/images/
-      cp static/images/favicon.ico staticfiles/images/
-      chmod 644 staticfiles/images/logo.png
-      chmod 644 staticfiles/images/favicon.ico
+      cp -r static/images/* staticfiles/images/
+      chmod -R 644 staticfiles/images/
       echo "=== Coletando arquivos estáticos ==="
-      DJANGO_SETTINGS_MODULE=hoztechsite.settings python manage.py collectstatic --noinput
+      DJANGO_SETTINGS_MODULE=hoztechsite.settings python manage.py collectstatic --noinput --clear
     startCommand: |
       echo "=== Iniciando Gunicorn ==="
       PYTHONPATH=/opt/render/project/src gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000 --workers=2 --threads=2 --timeout=60 --log-level=debug --access-logfile=- --error-logfile=- --capture-output
@@ -45,13 +44,19 @@ services:
       - key: STATIC_URL
         value: "/static/"
       - key: STATIC_ROOT
-        value: "staticfiles"
+        value: "/opt/render/project/src/staticfiles"
       - key: MEDIA_URL
         value: "/media/"
       - key: MEDIA_ROOT
-        value: "mediafiles"
+        value: "/opt/render/project/src/mediafiles"
       - key: DJANGO_SETTINGS_MODULE
         value: "hoztechsite.settings"
+      - key: WHITENOISE_USE_FINDERS
+        value: "True"
+      - key: WHITENOISE_MANIFEST_STRICT
+        value: "False"
+      - key: WHITENOISE_ALLOW_ALL_ORIGINS
+        value: "True"
     healthCheckPath: /
     autoDeploy: true
 
