@@ -17,6 +17,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '.onrender.com',
     'hoz-tech.onrender.com',
+    'hoztech.com',
+    'www.hoztech.com',
 ]
 
 # Application definition

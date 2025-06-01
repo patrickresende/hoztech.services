@@ -31,8 +31,13 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-n*7e7636j$t5chrwg9u-p3ol#d
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
-    '.onrender.com'
-    ]
+    'hoztech.com',
+    'www.hoztech.com',
+    'localhost',
+    '127.0.0.1',
+    '.onrender.com',
+    'hoz-tech.onrender.com',
+]
 
 
 # Application definition
