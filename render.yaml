@@ -5,38 +5,17 @@ services:
     env: python
     plan: free
     buildCommand: |
-      echo "=== Verificando estrutura do projeto ==="
-      pwd
-      ls -la
-      echo "=== Python Version ==="
-      python --version
-      echo "=== Pip Version ==="
-      pip --version
       echo "=== Instalando dependências ==="
       python -m pip install --upgrade pip
       pip install -r requirements.txt
       echo "=== Preparando diretório staticfiles ==="
       rm -rf staticfiles
       mkdir -p staticfiles
-      echo "=== Verificando arquivos estáticos ==="
-      ls -la static/
-      ls -la static/css/
-      ls -la static/images/
-      echo "=== Copiando arquivos estáticos ==="
-      cp -r static/* staticfiles/
-      echo "=== Definindo permissões ==="
-      chmod -R 755 staticfiles/
       echo "=== Coletando arquivos estáticos ==="
-      DJANGO_SETTINGS_MODULE=hoztechsite.settings python manage.py collectstatic --noinput --clear
-      echo "=== Verificando arquivos coletados ==="
-      ls -la staticfiles/
-      ls -la staticfiles/css/
-      ls -la staticfiles/images/
-      echo "=== Aplicando migrações ==="
-      python manage.py migrate
+      python manage.py collectstatic --noinput
     startCommand: |
       echo "=== Iniciando Gunicorn ==="
-      gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60 --log-level debug --error-logfile - --access-logfile - --capture-output
+      gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000 --workers=2 --threads=2 --timeout=60 --log-level=debug --access-logfile=- --error-logfile=- --capture-output
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
