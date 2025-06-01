@@ -18,11 +18,19 @@ services:
       echo "=== Preparando diretório staticfiles ==="
       rm -rf staticfiles
       mkdir -p staticfiles
+      echo "=== Verificando arquivos estáticos ==="
+      ls -la static/
+      ls -la static/css/
+      ls -la static/images/
+      echo "=== Copiando arquivos estáticos ==="
+      cp -r static/* staticfiles/
+      echo "=== Definindo permissões ==="
+      chmod -R 755 staticfiles/
       echo "=== Coletando arquivos estáticos ==="
-      python manage.py collectstatic --noinput
+      DJANGO_SETTINGS_MODULE=hoztechsite.settings python manage.py collectstatic --noinput --clear
       echo "=== Verificando arquivos coletados ==="
       ls -la staticfiles/
-      echo "=== Verificando imagens ==="
+      ls -la staticfiles/css/
       ls -la staticfiles/images/
       echo "=== Aplicando migrações ==="
       python manage.py migrate
