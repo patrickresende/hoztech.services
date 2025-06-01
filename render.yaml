@@ -24,8 +24,10 @@ services:
       ls -la static/images/
       echo "=== Copiando arquivos estáticos ==="
       cp -r static/* staticfiles/
+      echo "=== Verificando permissões ==="
+      chmod -R 755 staticfiles/
       echo "=== Coletando arquivos estáticos ==="
-      DJANGO_SETTINGS_MODULE=core.settings python manage.py collectstatic --noinput --clear
+      DJANGO_SETTINGS_MODULE=hoztechsite.settings python manage.py collectstatic --noinput --clear
       echo "=== Verificando conteúdo do diretório staticfiles ==="
       ls -la staticfiles/
       echo "=== Aplicando migrações ==="
@@ -35,7 +37,7 @@ services:
       echo "Diretório atual: $(pwd)"
       echo "Conteúdo do diretório: $(ls -la)"
       echo "PYTHONPATH: $PYTHONPATH"
-      cd /opt/render/project/src && PYTHONPATH=/opt/render/project/src gunicorn --chdir /opt/render/project/src core.wsgi:application --workers 2 --threads 2 --timeout 60 --log-level debug --error-logfile - --access-logfile - --capture-output
+      cd /opt/render/project/src && PYTHONPATH=/opt/render/project/src gunicorn --chdir /opt/render/project/src hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60 --log-level debug --error-logfile - --access-logfile - --capture-output
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -68,7 +70,7 @@ services:
       - key: MEDIA_ROOT
         value: mediafiles
       - key: DJANGO_SETTINGS_MODULE
-        value: core.settings
+        value: hoztechsite.settings
     healthCheckPath: /
     autoDeploy: true
 
