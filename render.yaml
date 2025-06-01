@@ -10,12 +10,17 @@ services:
       pip install -r requirements.txt
       echo "=== Preparando diretório staticfiles ==="
       rm -rf staticfiles
-      mkdir -p staticfiles
+      mkdir -p staticfiles/images
+      echo "=== Copiando arquivos estáticos ==="
+      cp static/images/logo.png staticfiles/images/
+      cp static/images/favicon.ico staticfiles/images/
+      chmod 644 staticfiles/images/logo.png
+      chmod 644 staticfiles/images/favicon.ico
       echo "=== Coletando arquivos estáticos ==="
-      python manage.py collectstatic --noinput
+      DJANGO_SETTINGS_MODULE=hoztechsite.settings python manage.py collectstatic --noinput
     startCommand: |
       echo "=== Iniciando Gunicorn ==="
-      gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000 --workers=2 --threads=2 --timeout=60 --log-level=debug --access-logfile=- --error-logfile=- --capture-output
+      PYTHONPATH=/opt/render/project/src gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000 --workers=2 --threads=2 --timeout=60 --log-level=debug --access-logfile=- --error-logfile=- --capture-output
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
