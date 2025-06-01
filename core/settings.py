@@ -122,11 +122,26 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# WhiteNoise Configuration
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 WHITENOISE_ALLOW_ALL_ORIGINS = True
+
+# Ensure WhiteNoise can find files
+WHITENOISE_MAX_AGE = 31536000  # 1 year in seconds
+WHITENOISE_MIMETYPES = {
+    '.ico': 'image/x-icon',
+    '.html': 'text/html',
+    '.js': 'application/javascript',
+    '.css': 'text/css',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.svg': 'image/svg+xml',
+    '.txt': 'text/plain',
+    '.json': 'application/json',
+}
 
 # Media files
 MEDIA_URL = config('MEDIA_URL', default='/media/')

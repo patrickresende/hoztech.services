@@ -19,14 +19,17 @@ services:
       pip install -r requirements.txt
       echo "=== Criando diretório staticfiles ==="
       mkdir -p staticfiles
+      echo "=== Verificando conteúdo do diretório static ==="
+      ls -la static/
+      ls -la static/images/
       echo "=== Copiando arquivos estáticos ==="
       cp -r static/* staticfiles/
       echo "=== Coletando arquivos estáticos ==="
-      python manage.py collectstatic --noinput --clear
-      echo "=== Aplicando migrações ==="
-      python manage.py migrate
+      DJANGO_SETTINGS_MODULE=core.settings python manage.py collectstatic --noinput --clear
       echo "=== Verificando conteúdo do diretório staticfiles ==="
       ls -la staticfiles/
+      echo "=== Aplicando migrações ==="
+      python manage.py migrate
     startCommand: |
       echo "=== Iniciando Gunicorn ==="
       echo "Diretório atual: $(pwd)"
@@ -64,6 +67,8 @@ services:
         value: /media/
       - key: MEDIA_ROOT
         value: mediafiles
+      - key: DJANGO_SETTINGS_MODULE
+        value: core.settings
     healthCheckPath: /
     autoDeploy: true
 
