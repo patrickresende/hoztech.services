@@ -20,44 +20,131 @@ Website institucional da Hoz Tech, uma empresa de tecnologia com foco em desenvo
 - Repositório do projeto no GitHub
 - PostgreSQL database
 
-### Passos para Deploy
+### Passo a Passo Detalhado
 
-1. **Preparação do Repositório**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/seu-usuario/seu-repositorio.git
-   git push -u origin main
+1. **Criar Database no Render**
+   - Acesse o [Dashboard do Render](https://dashboard.render.com)
+   - Clique em "New +" > "PostgreSQL"
+   - Configure:
+     - Nome: `hoztech-db`
+     - Database: `hoztech`
+     - User: `hoztech_admin`
+     - Region: `São Paulo (Brazil)`
+   - Anote a URL de conexão fornecida
+
+2. **Configurar Web Service**
+   - No Dashboard, clique em "New +" > "Web Service"
+   - Conecte com seu repositório GitHub
+   - Configure:
+     - Nome: `hoz-tech`
+     - Region: `São Paulo (Brazil)`
+     - Branch: `main`
+     - Root Directory: `./`
+     - Runtime: `Python 3`
+     - Build Command: `pip install -r requirements.txt`
+     - Start Command: `gunicorn core.wsgi:application`
+
+3. **Configurar Environment Variables**
+   ```
+   DATABASE_URL=postgres://... (URL fornecida ao criar o database)
+   SECRET_KEY=sua-chave-secreta-muito-segura
+   DEBUG=False
+   ALLOWED_HOSTS=.onrender.com
+   PYTHON_VERSION=3.8.2
    ```
 
-2. **Configuração no Render**
-   - Acesse [dashboard.render.com](https://dashboard.render.com)
-   - Clique em "New +"
-   - Selecione "Web Service"
-   - Conecte com seu repositório GitHub
-   - Configure as variáveis de ambiente:
-     - `DATABASE_URL`: URL do seu banco PostgreSQL
-     - `SECRET_KEY`: Sua chave secreta Django
-     - `DEBUG`: False
-     - `ALLOWED_HOSTS`: seu-app.onrender.com
+4. **Configurar Domínio Personalizado (Opcional)**
+   - Em "Settings" > "Custom Domain"
+   - Adicione seu domínio
+   - Siga as instruções para configurar os registros DNS
 
-3. **Banco de Dados**
-   - No Render, crie um novo PostgreSQL database
-   - Copie a URL de conexão
-   - Adicione como `DATABASE_URL` nas variáveis de ambiente
+5. **Monitoramento**
+   - Monitore os logs durante o deploy
+   - Verifique se as migrações foram executadas
+   - Confirme se os arquivos estáticos foram coletados
 
-4. **Deploy**
-   - O Render vai detectar o arquivo `render.yaml`
-   - Build e deploy automático será iniciado
-   - Acompanhe os logs para verificar o progresso
+### Verificações Pós-Deploy
 
-### Arquivos de Configuração
-- `render.yaml`: Configuração do serviço
-- `requirements.txt`: Dependências Python
-- `Procfile`: Comando para iniciar a aplicação
-- `.gitignore`: Arquivos ignorados no Git
+1. **Banco de Dados**
+   ```bash
+   # Verifique se as migrações foram aplicadas
+   python manage.py showmigrations
+
+   # Se necessário, aplique manualmente
+   python manage.py migrate
+   ```
+
+2. **Arquivos Estáticos**
+   ```bash
+   # Colete os arquivos estáticos
+   python manage.py collectstatic --noinput
+   ```
+
+3. **Testes de Funcionalidade**
+   - [ ] Acesso à página inicial
+   - [ ] Formulários funcionando
+   - [ ] Emails sendo enviados
+   - [ ] Banco de dados conectado
+   - [ ] Arquivos estáticos carregando
+   - [ ] Cookie manager funcionando
+
+### Manutenção
+
+1. **Monitoramento**
+   - Configure alertas de uptime
+   - Monitore o uso do banco de dados
+   - Verifique os logs regularmente
+
+2. **Backups**
+   - Backup automático do banco de dados
+   - Backup do código no GitHub
+   - Documentação atualizada
+
+3. **Atualizações**
+   ```bash
+   # Atualize dependências localmente primeiro
+   pip install -r requirements.txt --upgrade
+   
+   # Teste localmente
+   python manage.py runserver
+   
+   # Se tudo ok, commit e push
+   git add .
+   git commit -m "chore: atualização de dependências"
+   git push origin main
+   ```
+
+### Troubleshooting
+
+1. **Problemas Comuns**
+   - Erro 500: Verifique os logs do Render
+   - Erro 503: Verifique se o serviço está rodando
+   - Estáticos não carregam: Verifique STATIC_ROOT e collectstatic
+   - Banco de dados não conecta: Verifique DATABASE_URL
+
+2. **Logs**
+   - Acesse os logs no dashboard do Render
+   - Use `print()` ou `logger` para debug
+   - Verifique os logs do Gunicorn
+
+3. **Rollback**
+   - O Render mantém versões anteriores
+   - Use git para reverter commits se necessário
+   - Mantenha backups do banco de dados
+
+### Links Úteis
+- [Documentação do Render](https://render.com/docs)
+- [Django no Render](https://render.com/docs/deploy-django)
+- [Configuração do PostgreSQL](https://render.com/docs/databases)
+- [Custom Domains](https://render.com/docs/custom-domains)
+
+### Contatos de Suporte
+- Suporte Render: support@render.com
+- Nosso Email: suporte@hoztech.com.br
+- WhatsApp: (21) 97300-7575
+
+---
+⚠️ **Importante**: Nunca compartilhe ou comite variáveis de ambiente (.env) ou credenciais!
 
 ## 🛠️ Tecnologias Utilizadas
 
