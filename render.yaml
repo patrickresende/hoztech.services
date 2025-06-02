@@ -5,28 +5,18 @@ services:
     env: python
     plan: free
     buildCommand: |
-      echo "=== Instalando dependências ==="
       python -m pip install --upgrade pip
       pip install -r requirements.txt
       pip install whitenoise
-      echo "=== Preparando diretório staticfiles ==="
-      rm -rf staticfiles
-      mkdir -p staticfiles/images
-      echo "=== Copiando arquivos estáticos ==="
+      mkdir -p staticfiles/images staticfiles/css
       cp -r static/images/* staticfiles/images/
-      chmod -R 644 staticfiles/images/
-      echo "=== Coletando arquivos estáticos ==="
+      cp -r static/css/* staticfiles/css/
+      chmod -R 644 staticfiles/
       DJANGO_SETTINGS_MODULE=hoztechsite.settings python manage.py collectstatic --noinput --clear
-    startCommand: |
-      echo "=== Iniciando Gunicorn ==="
-      PYTHONPATH=/opt/render/project/src gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000 --workers=2 --threads=2 --timeout=60 --log-level=debug --access-logfile=- --error-logfile=- --capture-output
+    startCommand: gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
-      - key: WEB_CONCURRENCY
-        value: 2
-      - key: PYTHONUNBUFFERED
-        value: "1"
       - key: DATABASE_URL
         fromDatabase:
           name: hoztech-db
@@ -35,39 +25,21 @@ services:
         value: "False"
       - key: ALLOWED_HOSTS
         value: ".onrender.com"
-      - key: DJANGO_LOG_LEVEL
-        value: "DEBUG"
-      - key: SECURE_SSL_REDIRECT
-        value: "False"
-      - key: CSRF_TRUSTED_ORIGINS
-        value: "https://*.onrender.com"
       - key: STATIC_URL
         value: "/static/"
       - key: STATIC_ROOT
         value: "/opt/render/project/src/staticfiles"
-      - key: MEDIA_URL
-        value: "/media/"
-      - key: MEDIA_ROOT
-        value: "/opt/render/project/src/mediafiles"
       - key: DJANGO_SETTINGS_MODULE
         value: "hoztechsite.settings"
       - key: WHITENOISE_USE_FINDERS
         value: "True"
-      - key: WHITENOISE_MANIFEST_STRICT
-        value: "False"
-      - key: WHITENOISE_ALLOW_ALL_ORIGINS
-        value: "True"
-    healthCheckPath: /
-    autoDeploy: true
 
   # Banco de Dados PostgreSQL
   - type: pserv
     name: hoztech-db
     env: postgresql
-    region: sao
     plan: free
-    maxmemoryPolicy: noeviction
-    ipAllowList: [] # Permitir todas as IPs
+    region: sao
     disk:
       name: data
       mountPath: /var/lib/postgresql/data
