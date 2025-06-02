@@ -143,7 +143,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 WHITENOISE_ALLOW_ALL_ORIGINS = True
-WHITENOISE_ROOT = STATIC_ROOT
 
 # Media files
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')

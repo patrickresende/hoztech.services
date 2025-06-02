@@ -412,33 +412,33 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{% url 'core:home' %}">
-                <img src="{% static 'images/logo.png' %}" alt="Hoz Tech Logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" 
-                           href="{% url 'core:home' %}">Início</a>
-                </li>
-                <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'servicos' %}active{% endif %}" 
-                           href="{% url 'core:servicos' %}">Serviços</a>
-                </li>
-                <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'sobre' %}active{% endif %}" 
-                           href="{% url 'core:sobre' %}">Sobre Nós</a>
-                </li>
-                <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" 
-                           href="{% url 'core:contact' %}">Contato</a>
-                </li>
-            </ul>
+                <img src="{% static 'images/logo.png' %}" alt="Hoz Tech Logo" class="hero-logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" 
+                               href="{% url 'core:home' %}">Início</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'servicos' %}active{% endif %}" 
+                               href="{% url 'core:servicos' %}">Serviços</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'sobre' %}active{% endif %}" 
+                               href="{% url 'core:sobre' %}">Sobre Nós</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" 
+                               href="{% url 'core:contact' %}">Contato</a>
+                    </li>
+                </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
     <!-- Main Content -->
     <main style="margin-top: 76px;">
@@ -467,7 +467,7 @@
                         <a href="#" class="social-link" target="_blank" rel="noopener">
                             <i class="bi bi-github"></i>
                         </a>
-                </div>
+            </div>
                 </div>
                 <div class="col-lg-2 col-md-4 mb-4">
                     <h3 class="footer-title">Links</h3>
@@ -555,11 +555,11 @@
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                         &copy; {% now "Y" %} Hoz Tech. Todos os direitos reservados.
-            </div>
+                </div>
                     <div class="col-md-6 text-center text-md-end">
                         <a href="{% url 'core:privacy' %}" class="me-3">Política de Privacidade</a>
                         <a href="{% url 'core:terms' %}">Termos de Uso</a>
-        </div>
+    </div>
                 </div>
                 </div>
             </div>

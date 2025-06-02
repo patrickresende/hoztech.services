@@ -8,8 +8,11 @@ services:
       python -m pip install --upgrade pip
       pip install -r requirements.txt
       pip install whitenoise
-      rm -rf staticfiles
-      DJANGO_SETTINGS_MODULE=hoztechsite.settings python manage.py collectstatic --noinput
+      echo "Limpando e preparando diretório staticfiles..."
+      rm -rf /opt/render/project/src/staticfiles
+      python manage.py collectstatic --noinput --clear
+      echo "Verificando arquivos coletados..."
+      ls -la /opt/render/project/src/staticfiles/images/
     startCommand: gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000
     envVars:
       - key: PYTHON_VERSION
@@ -32,6 +35,8 @@ services:
         value: "True"
       - key: WHITENOISE_MANIFEST_STRICT
         value: "False"
+      - key: WHITENOISE_ALLOW_ALL_ORIGINS
+        value: "True"
 
   # Banco de Dados PostgreSQL
   - type: pserv
