@@ -1,108 +1,49 @@
-services:
-  # Serviço Web (Django)
-  - type: web
-    name: hoztech.services
-    env: python
-    plan: free
-    buildCommand: |
-      # Instalação de dependências
-      python -m pip install --upgrade pip
-      pip install -r requirements.txt
-      
-      # Configuração de ambiente
-      export DJANGO_SETTINGS_MODULE=hoztechsite.settings
-      export PYTHONPATH=/opt/render/project/src
-      
-      echo "\n=== Iniciando configuração de arquivos estáticos ==="
-      echo "Verificando diretório atual e ambiente:"
-      pwd
-      echo "DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE"
-      echo "PYTHONPATH=$PYTHONPATH"
-      echo "STATIC_ROOT=$STATIC_ROOT"
-      
-      echo "\nVerificando estrutura de diretórios:"
-      ls -la
-      echo "\nConteúdo do diretório static/images/:"
-      ls -la static/images/
-      
-      echo "\nLimpando diretório staticfiles..."
-      rm -rf staticfiles/
-      rm -rf /opt/render/project/src/staticfiles/
-      
-      echo "\nExecutando collectstatic..."
-      python manage.py collectstatic --noinput --clear
-      
-      echo "\nVerificando conteúdo após collectstatic:"
-      ls -la staticfiles/images/
-      ls -la /opt/render/project/src/staticfiles/images/
-      
-      echo "\nComparando arquivos originais vs coletados:"
-      echo "Logo original:"
-      sha256sum static/images/logo.png || echo "Arquivo original não encontrado"
-      echo "Logo coletado (local):"
-      sha256sum staticfiles/images/logo.png || echo "Arquivo coletado não encontrado (local)"
-      echo "Logo coletado (Render):"
-      sha256sum /opt/render/project/src/staticfiles/images/logo.png || echo "Arquivo coletado não encontrado (Render)"
-      
-      echo "\nVerificando permissões:"
-      ls -la staticfiles/images/logo.png
-      ls -la /opt/render/project/src/staticfiles/images/logo.png
-      
-      echo "=== Fim da configuração de arquivos estáticos ==="
-    startCommand: |
-      echo "=== Iniciando servidor ==="
-      echo "Verificando variáveis de ambiente críticas:"
-      echo "DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE"
-      echo "PYTHONPATH=$PYTHONPATH"
-      echo "STATIC_ROOT=$STATIC_ROOT"
-      echo "STATIC_URL=$STATIC_URL"
-      echo "WHITENOISE_USE_FINDERS=$WHITENOISE_USE_FINDERS"
-      echo "WHITENOISE_MANIFEST_STRICT=$WHITENOISE_MANIFEST_STRICT"
-      echo "WHITENOISE_ALLOW_ALL_ORIGINS=$WHITENOISE_ALLOW_ALL_ORIGINS"
-      echo "DEBUG=$DEBUG"
-      
-      echo "\nVerificando arquivos estáticos antes de iniciar:"
-      ls -la /opt/render/project/src/staticfiles/images/
-      
-      echo "\nIniciando Gunicorn com log level debug..."
-      gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000 --log-level=debug --timeout 120
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
-      - key: DATABASE_URL
-        fromDatabase:
-          name: hoztech-db
-          property: connectionString
-      - key: DEBUG
-        value: "False"
-      - key: ALLOWED_HOSTS
-        value: ".onrender.com"
-      - key: STATIC_URL
-        value: "/static/"
-      - key: STATIC_ROOT
-        value: "/opt/render/project/src/staticfiles"
-      - key: DJANGO_SETTINGS_MODULE
-        value: "hoztechsite.settings"
-      - key: PYTHONPATH
-        value: "/opt/render/project/src"
-      - key: WHITENOISE_USE_FINDERS
-        value: "True"
-      - key: WHITENOISE_MANIFEST_STRICT
-        value: "False"
-      - key: WHITENOISE_ALLOW_ALL_ORIGINS
-        value: "True"
-
-  # Banco de Dados PostgreSQL
-  - type: pserv
-    name: hoztech-db
-    env: postgresql
+databases:
+  - name: postgres
+    databaseName: hoztech_db
+    user: hoztech_user
     plan: free
     region: sao
-    disk:
-      name: data
-      mountPath: /var/lib/postgresql/data
-      sizeGB: 1
+    ipAllowList: []  # Only allow internal connections
+
+services:
+  - type: redis
+    name: redis
+    plan: free
+    maxmemoryPolicy: noeviction
+    ipAllowList: []  # Only allow internal connections
+
+  # Serviço Web (Django)
+  - type: web
+    name: django
+    runtime: python
+    plan: free
+    region: sao
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn mysite.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: postgres
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: redis
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DEBUG
+        value: false
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: DJANGO_SETTINGS_MODULE
+        value: "mysite.settings"
 
 # Configurações Globais
 preInstallCommand: |
-  apt-get update && apt-get install -y build-essential python3-dev tree 
+  apt-get update && apt-get install -y build-essential python3-dev 
