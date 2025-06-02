@@ -8,10 +8,13 @@ services:
       python -m pip install --upgrade pip
       pip install -r requirements.txt
       pip install whitenoise
+      rm -rf staticfiles/*
       mkdir -p staticfiles/images staticfiles/css
-      cp -r static/images/* staticfiles/images/
-      cp -r static/css/* staticfiles/css/
-      chmod -R 644 staticfiles/
+      cp -rv static/images/logo.png staticfiles/images/
+      cp -rv static/images/favicon.ico staticfiles/images/
+      cp -rv static/css/* staticfiles/css/
+      find staticfiles -type f -exec chmod 644 {} \;
+      find staticfiles -type d -exec chmod 755 {} \;
       DJANGO_SETTINGS_MODULE=hoztechsite.settings python manage.py collectstatic --noinput --clear
     startCommand: gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000
     envVars:
@@ -33,6 +36,8 @@ services:
         value: "hoztechsite.settings"
       - key: WHITENOISE_USE_FINDERS
         value: "True"
+      - key: WHITENOISE_MANIFEST_STRICT
+        value: "False"
 
   # Banco de Dados PostgreSQL
   - type: pserv
