@@ -5,32 +5,67 @@ services:
     env: python
     plan: free
     buildCommand: |
+      # Instalação de dependências
       python -m pip install --upgrade pip
       pip install -r requirements.txt
-      pip install whitenoise
-      echo "=== Iniciando processo de arquivos estáticos ==="
-      echo "Verificando diretório static original:"
+      
+      # Configuração de ambiente
+      export DJANGO_SETTINGS_MODULE=hoztechsite.settings
+      export PYTHONPATH=/opt/render/project/src
+      
+      echo "\n=== Iniciando configuração de arquivos estáticos ==="
+      echo "Verificando diretório atual e ambiente:"
+      pwd
+      echo "DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE"
+      echo "PYTHONPATH=$PYTHONPATH"
+      echo "STATIC_ROOT=$STATIC_ROOT"
+      
+      echo "\nVerificando estrutura de diretórios:"
+      ls -la
+      echo "\nConteúdo do diretório static/images/:"
       ls -la static/images/
+      
       echo "\nLimpando diretório staticfiles..."
-      rm -rf /opt/render/project/src/staticfiles
+      rm -rf staticfiles/
+      rm -rf /opt/render/project/src/staticfiles/
+      
       echo "\nExecutando collectstatic..."
       python manage.py collectstatic --noinput --clear
-      echo "\nVerificando conteúdo do diretório staticfiles após coleta:"
+      
+      echo "\nVerificando conteúdo após collectstatic:"
+      ls -la staticfiles/images/
       ls -la /opt/render/project/src/staticfiles/images/
-      echo "\nVerificando permissões dos arquivos:"
-      stat /opt/render/project/src/staticfiles/images/logo.png
-      echo "\nVerificando hash do arquivo original vs coletado:"
-      md5sum static/images/logo.png
-      md5sum /opt/render/project/src/staticfiles/images/logo.png
-      echo "=== Fim do processo de arquivos estáticos ==="
+      
+      echo "\nComparando arquivos originais vs coletados:"
+      echo "Logo original:"
+      sha256sum static/images/logo.png || echo "Arquivo original não encontrado"
+      echo "Logo coletado (local):"
+      sha256sum staticfiles/images/logo.png || echo "Arquivo coletado não encontrado (local)"
+      echo "Logo coletado (Render):"
+      sha256sum /opt/render/project/src/staticfiles/images/logo.png || echo "Arquivo coletado não encontrado (Render)"
+      
+      echo "\nVerificando permissões:"
+      ls -la staticfiles/images/logo.png
+      ls -la /opt/render/project/src/staticfiles/images/logo.png
+      
+      echo "=== Fim da configuração de arquivos estáticos ==="
     startCommand: |
-      echo "Verificando ambiente antes de iniciar:"
+      echo "=== Iniciando servidor ==="
+      echo "Verificando variáveis de ambiente críticas:"
+      echo "DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE"
+      echo "PYTHONPATH=$PYTHONPATH"
       echo "STATIC_ROOT=$STATIC_ROOT"
       echo "STATIC_URL=$STATIC_URL"
       echo "WHITENOISE_USE_FINDERS=$WHITENOISE_USE_FINDERS"
       echo "WHITENOISE_MANIFEST_STRICT=$WHITENOISE_MANIFEST_STRICT"
       echo "WHITENOISE_ALLOW_ALL_ORIGINS=$WHITENOISE_ALLOW_ALL_ORIGINS"
-      gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000
+      echo "DEBUG=$DEBUG"
+      
+      echo "\nVerificando arquivos estáticos antes de iniciar:"
+      ls -la /opt/render/project/src/staticfiles/images/
+      
+      echo "\nIniciando Gunicorn com log level debug..."
+      gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000 --log-level=debug --timeout 120
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -48,6 +83,8 @@ services:
         value: "/opt/render/project/src/staticfiles"
       - key: DJANGO_SETTINGS_MODULE
         value: "hoztechsite.settings"
+      - key: PYTHONPATH
+        value: "/opt/render/project/src"
       - key: WHITENOISE_USE_FINDERS
         value: "True"
       - key: WHITENOISE_MANIFEST_STRICT

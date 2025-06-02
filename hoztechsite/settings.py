@@ -132,32 +132,102 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+# Static files configuration with detailed comments
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
 STATIC_ROOT = os.path.join(BASE_DIR, os.getenv('STATIC_ROOT', 'staticfiles'))
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-print(f"[STATIC_FILES] Configuration loaded:")
-print(f"[STATIC_FILES] STATIC_URL: {STATIC_URL}")
-print(f"[STATIC_FILES] STATIC_ROOT: {STATIC_ROOT}")
-print(f"[STATIC_FILES] STATICFILES_DIRS: {STATICFILES_DIRS}")
-
 # WhiteNoise Configuration with detailed logging
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 WHITENOISE_ALLOW_ALL_ORIGINS = True
-WHITENOISE_ROOT = None  # Adiciona log para verificar se há configuração personalizada
+WHITENOISE_ROOT = None
 WHITENOISE_MAX_AGE = 60 * 60 * 24 * 365  # 1 ano em segundos
+WHITENOISE_AUTOREFRESH = True  # Recarrega arquivos modificados
+WHITENOISE_MIMETYPES = {
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.ico': 'image/x-icon',
+}
 
-print(f"[WHITENOISE] Configuration loaded:")
-print(f"[WHITENOISE] STATICFILES_STORAGE: {STATICFILES_STORAGE}")
-print(f"[WHITENOISE] WHITENOISE_USE_FINDERS: {WHITENOISE_USE_FINDERS}")
-print(f"[WHITENOISE] WHITENOISE_MANIFEST_STRICT: {WHITENOISE_MANIFEST_STRICT}")
-print(f"[WHITENOISE] WHITENOISE_ALLOW_ALL_ORIGINS: {WHITENOISE_ALLOW_ALL_ORIGINS}")
-print(f"[WHITENOISE] WHITENOISE_ROOT: {WHITENOISE_ROOT}")
-print(f"[WHITENOISE] WHITENOISE_MAX_AGE: {WHITENOISE_MAX_AGE}")
+# Logging Configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{levelname}] {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '[{levelname}] {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+            'level': 'DEBUG',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+            'formatter': 'verbose',
+            'level': 'DEBUG',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.server': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'whitenoise': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.contrib.staticfiles': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'core': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'INFO',
+    },
+}
+
+# Print configuration for debugging
+print("\n=== Configuração de Arquivos Estáticos ===")
+print(f"BASE_DIR: {BASE_DIR}")
+print(f"STATIC_URL: {STATIC_URL}")
+print(f"STATIC_ROOT: {STATIC_ROOT}")
+print(f"STATICFILES_DIRS: {STATICFILES_DIRS}")
+print(f"STATICFILES_STORAGE: {STATICFILES_STORAGE}")
+print(f"WHITENOISE_USE_FINDERS: {WHITENOISE_USE_FINDERS}")
+print(f"WHITENOISE_MANIFEST_STRICT: {WHITENOISE_MANIFEST_STRICT}")
+print(f"WHITENOISE_ALLOW_ALL_ORIGINS: {WHITENOISE_ALLOW_ALL_ORIGINS}")
+print(f"WHITENOISE_ROOT: {WHITENOISE_ROOT}")
+print(f"WHITENOISE_MAX_AGE: {WHITENOISE_MAX_AGE}")
+print(f"WHITENOISE_AUTOREFRESH: {WHITENOISE_AUTOREFRESH}")
+print(f"WHITENOISE_MIMETYPES: {WHITENOISE_MIMETYPES}")
+print("=====================================\n")
 
 # Media files
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
@@ -184,56 +254,3 @@ SERVER_EMAIL = os.getenv('SERVER_EMAIL', 'hoztech.services@gmail.com')
 EMAIL_TIMEOUT = 30  # seconds
 EMAIL_SSL_KEYFILE = None
 EMAIL_SSL_CERTFILE = None
-
-# Logging Configuration
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '[{levelname}] {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '[{levelname}] {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': 'debug.log',
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'django.server': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'whitenoise': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'core': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-    'root': {
-        'handlers': ['console', 'file'],
-        'level': 'INFO',
-    },
-}
