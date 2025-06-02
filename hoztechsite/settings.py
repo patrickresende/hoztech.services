@@ -138,11 +138,26 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# WhiteNoise Configuration
+print(f"[STATIC_FILES] Configuration loaded:")
+print(f"[STATIC_FILES] STATIC_URL: {STATIC_URL}")
+print(f"[STATIC_FILES] STATIC_ROOT: {STATIC_ROOT}")
+print(f"[STATIC_FILES] STATICFILES_DIRS: {STATICFILES_DIRS}")
+
+# WhiteNoise Configuration with detailed logging
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 WHITENOISE_ALLOW_ALL_ORIGINS = True
+WHITENOISE_ROOT = None  # Adiciona log para verificar se há configuração personalizada
+WHITENOISE_MAX_AGE = 60 * 60 * 24 * 365  # 1 ano em segundos
+
+print(f"[WHITENOISE] Configuration loaded:")
+print(f"[WHITENOISE] STATICFILES_STORAGE: {STATICFILES_STORAGE}")
+print(f"[WHITENOISE] WHITENOISE_USE_FINDERS: {WHITENOISE_USE_FINDERS}")
+print(f"[WHITENOISE] WHITENOISE_MANIFEST_STRICT: {WHITENOISE_MANIFEST_STRICT}")
+print(f"[WHITENOISE] WHITENOISE_ALLOW_ALL_ORIGINS: {WHITENOISE_ALLOW_ALL_ORIGINS}")
+print(f"[WHITENOISE] WHITENOISE_ROOT: {WHITENOISE_ROOT}")
+print(f"[WHITENOISE] WHITENOISE_MAX_AGE: {WHITENOISE_MAX_AGE}")
 
 # Media files
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
@@ -176,7 +191,11 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'format': '[{levelname}] {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '[{levelname}] {message}',
             'style': '{',
         },
     },
@@ -197,10 +216,24 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
         },
+        'django.server': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'whitenoise': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
         'core': {
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': True,
         },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'INFO',
     },
 }

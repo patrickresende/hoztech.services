@@ -8,12 +8,29 @@ services:
       python -m pip install --upgrade pip
       pip install -r requirements.txt
       pip install whitenoise
-      echo "Limpando e preparando diretório staticfiles..."
+      echo "=== Iniciando processo de arquivos estáticos ==="
+      echo "Verificando diretório static original:"
+      ls -la static/images/
+      echo "\nLimpando diretório staticfiles..."
       rm -rf /opt/render/project/src/staticfiles
+      echo "\nExecutando collectstatic..."
       python manage.py collectstatic --noinput --clear
-      echo "Verificando arquivos coletados..."
+      echo "\nVerificando conteúdo do diretório staticfiles após coleta:"
       ls -la /opt/render/project/src/staticfiles/images/
-    startCommand: gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000
+      echo "\nVerificando permissões dos arquivos:"
+      stat /opt/render/project/src/staticfiles/images/logo.png
+      echo "\nVerificando hash do arquivo original vs coletado:"
+      md5sum static/images/logo.png
+      md5sum /opt/render/project/src/staticfiles/images/logo.png
+      echo "=== Fim do processo de arquivos estáticos ==="
+    startCommand: |
+      echo "Verificando ambiente antes de iniciar:"
+      echo "STATIC_ROOT=$STATIC_ROOT"
+      echo "STATIC_URL=$STATIC_URL"
+      echo "WHITENOISE_USE_FINDERS=$WHITENOISE_USE_FINDERS"
+      echo "WHITENOISE_MANIFEST_STRICT=$WHITENOISE_MANIFEST_STRICT"
+      echo "WHITENOISE_ALLOW_ALL_ORIGINS=$WHITENOISE_ALLOW_ALL_ORIGINS"
+      gunicorn hoztechsite.wsgi:application --bind=0.0.0.0:10000
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
