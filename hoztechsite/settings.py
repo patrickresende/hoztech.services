@@ -134,7 +134,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # WhiteNoise Configuration with detailed logging
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 WHITENOISE_ALLOW_ALL_ORIGINS = True
@@ -152,6 +152,13 @@ WHITENOISE_MIMETYPES = {
     '.ttf': 'application/font-sfnt',
     '.eot': 'application/vnd.ms-fontobject',
     '.svg': 'image/svg+xml',
+}
+
+# Adicionar cabeçalhos de cache para imagens
+WHITENOISE_HEADERS = {
+    '/static/images/*': {
+        'Cache-Control': 'public, max-age=31536000',
+    }
 }
 
 # Logging Configuration

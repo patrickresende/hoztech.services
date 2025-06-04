@@ -404,6 +404,7 @@
     </style>
     <!-- Base CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/images.css' %}">
     <link rel="stylesheet" href="{% static 'css/cookie_manager.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
@@ -412,7 +413,7 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{% url 'core:home' %}">
-                <img src="{% static 'images/logo.png' %}" alt="Hoz Tech Logo" class="hero-logo">
+                <img src="{% static 'images/logo.png' %}" alt="Hoz Tech Logo" class="hero-logo" loading="eager" decoding="async">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -450,7 +451,7 @@
         <div class="container footer-content">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <img src="{% static 'images/logo.png' %}" alt="Hoz Tech Logo" class="footer-logo">
+                    <img src="{% static 'images/logo.png' %}" alt="Hoz Tech Logo" class="footer-logo" loading="lazy" decoding="async">
                     <p class="footer-text">
                         Soluções tecnológicas inovadoras para impulsionar seu negócio ao próximo nível.
                     </p>
