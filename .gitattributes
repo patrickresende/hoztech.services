@@ -1,68 +1,80 @@
-# Auto detect text files and perform LF normalization
+# Configuração padrão: normalize line endings para LF no commit e checkout
 * text=auto
 
 # Python files
-*.py text diff=python eol=lf
-*.pyw text diff=python eol=lf
-*.pyx text diff=python eol=lf
-*.pxd text diff=python eol=lf
-requirements.txt text eol=lf
-Pipfile text eol=lf
-Pipfile.lock text eol=lf
+*.py text diff=python
+*.pyw text diff=python
+*.pyx text diff=python
+*.pxd text diff=python
 
-# Django templates
-*.html text eol=lf
-*.htm text eol=lf
-*.css text eol=lf
-*.js text eol=lf
-*.json text eol=lf
-*.yml text eol=lf
-*.yaml text eol=lf
-*.xml text eol=lf
-
-# Shell scripts
-*.sh text eol=lf
-*.bash text eol=lf
-*.zsh text eol=lf
+# Django template files
+*.html text diff=html
+*.htm text diff=html
+*.css text
+*.js text
+*.json text
+*.yml text
+*.yaml text
+*.xml text
 
 # Documentation
-*.md text diff=markdown eol=lf
-*.rst text eol=lf
-*.txt text eol=lf
+*.md text diff=markdown
+*.txt text
+*.rst text
+*.pdf binary
 
-# Docker
-Dockerfile text eol=lf
-docker-compose*.yml text eol=lf
-*.dockerfile text eol=lf
+# Django specific
+*.po text
+*.mo binary
+manage.py text
 
-# Config files
-*.conf text eol=lf
-*.cfg text eol=lf
-*.ini text eol=lf
-*.properties text eol=lf
-*.toml text eol=lf
-.env* text eol=lf
-.gitignore text eol=lf
-.gitattributes text eol=lf
+# Scripts
+*.sh text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
 
-# Binary files
+# Database files
 *.db binary
-*.p binary
-*.pkl binary
-*.pickle binary
-*.pyc binary
-*.pyd binary
-*.pyo binary
+*.sqlite3 binary
+
+# Image files
 *.png binary
 *.jpg binary
 *.jpeg binary
 *.gif binary
 *.ico binary
-*.pdf binary
-*.zip binary
-*.gz binary
-*.tar binary
+*.svg text
+
+# Font files
+*.ttf binary
+*.eot binary
 *.woff binary
 *.woff2 binary
-*.ttf binary
-*.eot binary 
+
+# Configuration files
+*.env text
+*.ini text
+*.cfg text
+*.conf text
+requirements.txt text
+Procfile text
+
+# Git files
+.gitattributes text
+.gitignore text
+.gitconfig text
+
+# Docker
+Dockerfile text
+docker-compose.yml text
+*.dockerignore text
+
+# Render specific
+render.yaml text
+
+# Certificates and keys
+*.pem text
+*.key text
+*.crt text
+*.cer text 
