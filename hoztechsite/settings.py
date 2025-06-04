@@ -31,11 +31,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-secret-key-here')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '[::1]',
-]
+# ALLOWED_HOSTS configuration
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,[::1],.onrender.com,hoz-tech.onrender.com').split(',')
 
 
 # Application definition

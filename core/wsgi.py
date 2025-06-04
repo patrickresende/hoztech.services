@@ -12,7 +12,7 @@ project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if project_dir not in sys.path:
     sys.path.append(project_dir)
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hoztechsite.settings')
 
 try:
     application = get_wsgi_application()

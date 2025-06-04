@@ -9,13 +9,14 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
 
 import os
 import sys
+from pathlib import Path
 
 from django.core.wsgi import get_wsgi_application
 
 # Adiciona o diretório do projeto ao Python path
-project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if project_dir not in sys.path:
-    sys.path.append(project_dir)
+project_dir = Path(__file__).resolve().parent.parent
+if str(project_dir) not in sys.path:
+    sys.path.append(str(project_dir))
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hoztechsite.settings')
 
