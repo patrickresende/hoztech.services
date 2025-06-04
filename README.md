@@ -1,382 +1,237 @@
-# HOZ TECH - Website Institucional
+# HOZ TECH Website
 
-## 📋 Sobre o Projeto
-Website institucional da Hoz Tech, uma empresa de tecnologia com foco em desenvolvimento web e propósito social. O projeto foi desenvolvido com Django e tecnologias modernas de frontend, oferecendo uma experiência de usuário fluida e responsiva.
+Site institucional da HOZ TECH, desenvolvido com Django.
 
-## 🚀 Características Principais
-- Design moderno e responsivo
-- Carrossel de serviços interativo
-- Sistema de contato integrado com Gmail SMTP
-- Integração com WhatsApp
-- Otimização SEO
-- Acessibilidade
-- Animações e efeitos visuais
-- Tema tech com cores neon
-
-## 🚀 Deploy no Render
+## 🚀 Configuração do Ambiente de Desenvolvimento
 
 ### Pré-requisitos
-- Conta no [Render](https://render.com)
-- Repositório do projeto no GitHub
-- PostgreSQL database
 
-### Passo a Passo Detalhado
-
-1. **Criar Database no Render**
-   - Acesse o [Dashboard do Render](https://dashboard.render.com)
-   - Clique em "New +" > "PostgreSQL"
-   - Configure:
-     - Nome: `hoztech-db`
-     - Database: `hoztech`
-     - User: `hoztech_admin`
-     - Region: `São Paulo (Brazil)`
-   - Anote a URL de conexão fornecida
-
-2. **Configurar Web Service**
-   - No Dashboard, clique em "New +" > "Web Service"
-   - Conecte com seu repositório GitHub
-   - Configure:
-     - Nome: `hoz-tech`
-     - Region: `São Paulo (Brazil)`
-     - Branch: `main`
-     - Root Directory: `./`
-     - Runtime: `Python 3`
-     - Build Command: `pip install -r requirements.txt`
-     - Start Command: `gunicorn core.wsgi:application`
-
-3. **Configurar Environment Variables**
-   ```
-   DATABASE_URL=postgres://... (URL fornecida ao criar o database)
-   SECRET_KEY=sua-chave-secreta-muito-segura
-   DEBUG=False
-   ALLOWED_HOSTS=.onrender.com
-   PYTHON_VERSION=3.8.2
-   ```
-
-4. **Configurar Domínio Personalizado (Opcional)**
-   - Em "Settings" > "Custom Domain"
-   - Adicione seu domínio
-   - Siga as instruções para configurar os registros DNS
-
-5. **Monitoramento**
-   - Monitore os logs durante o deploy
-   - Verifique se as migrações foram executadas
-   - Confirme se os arquivos estáticos foram coletados
-
-### Verificações Pós-Deploy
-
-1. **Banco de Dados**
-   ```bash
-   # Verifique se as migrações foram aplicadas
-   python manage.py showmigrations
-
-   # Se necessário, aplique manualmente
-   python manage.py migrate
-   ```
-
-2. **Arquivos Estáticos**
-   ```bash
-   # Colete os arquivos estáticos
-   python manage.py collectstatic --noinput
-   ```
-
-3. **Testes de Funcionalidade**
-   - [ ] Acesso à página inicial
-   - [ ] Formulários funcionando
-   - [ ] Emails sendo enviados
-   - [ ] Banco de dados conectado
-   - [ ] Arquivos estáticos carregando
-   - [ ] Cookie manager funcionando
-
-### Manutenção
-
-1. **Monitoramento**
-   - Configure alertas de uptime
-   - Monitore o uso do banco de dados
-   - Verifique os logs regularmente
-
-2. **Backups**
-   - Backup automático do banco de dados
-   - Backup do código no GitHub
-   - Documentação atualizada
-
-3. **Atualizações**
-   ```bash
-   # Atualize dependências localmente primeiro
-   pip install -r requirements.txt --upgrade
-   
-   # Teste localmente
-   python manage.py runserver
-   
-   # Se tudo ok, commit e push
-   git add .
-   git commit -m "chore: atualização de dependências"
-   git push origin main
-   ```
-
-### Troubleshooting
-
-1. **Problemas Comuns**
-   - Erro 500: Verifique os logs do Render
-   - Erro 503: Verifique se o serviço está rodando
-   - Estáticos não carregam: Verifique STATIC_ROOT e collectstatic
-   - Banco de dados não conecta: Verifique DATABASE_URL
-
-2. **Logs**
-   - Acesse os logs no dashboard do Render
-   - Use `print()` ou `logger` para debug
-   - Verifique os logs do Gunicorn
-
-3. **Rollback**
-   - O Render mantém versões anteriores
-   - Use git para reverter commits se necessário
-   - Mantenha backups do banco de dados
-
-### Links Úteis
-- [Documentação do Render](https://render.com/docs)
-- [Django no Render](https://render.com/docs/deploy-django)
-- [Configuração do PostgreSQL](https://render.com/docs/databases)
-- [Custom Domains](https://render.com/docs/custom-domains)
-
-### Contatos de Suporte
-- Suporte Render: support@render.com
-- Nosso Email: suporte@hoztech.com.br
-- WhatsApp: (21) 97300-7575
-
----
-⚠️ **Importante**: Nunca compartilhe ou comite variáveis de ambiente (.env) ou credenciais!
-
-## 🛠️ Tecnologias Utilizadas
-
-### Backend
 - Python 3.8+
-- Django 4.2.7
-- Django REST Framework
-- SQLite (desenvolvimento)
-- PostgreSQL (produção)
-
-### Frontend
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- Bootstrap 5
-- Swiper.js 11
-- Bootstrap Icons
-
-### Bibliotecas e Dependências
-```txt
-asgiref==3.7.2
-Django==4.2.7
-django-environ==0.11.2
-gunicorn==21.2.0
-packaging==23.2
-psycopg2-binary==2.9.9
-sqlparse==0.4.4
-tzdata==2023.3
-whitenoise==6.6.0
-```
-
-## 🔧 Instalação e Configuração
-
-### Pré-requisitos
-- Python 3.8 ou superior
 - pip (gerenciador de pacotes Python)
 - virtualenv ou venv
-- Conta Gmail para envio de emails (opcional)
 
-### Passo a Passo
+### Instalação
 
-1. Clone o repositório
+1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/hoz-tech.git
-cd hoz-tech
+git clone https://github.com/seu-usuario/hoztechsite.git
+cd hoztechsite
 ```
 
-2. Crie e ative o ambiente virtual
+2. Crie e ative um ambiente virtual:
 ```bash
-# Windows
 python -m venv venv
+# Windows
 venv\Scripts\activate
-
 # Linux/Mac
-python3 -m venv venv
 source venv/bin/activate
 ```
 
-3. Instale as dependências
+3. Instale as dependências:
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Configure as variáveis de ambiente
+4. Configure as variáveis de ambiente:
 ```bash
-# Crie um arquivo .env na raiz do projeto
-SECRET_KEY=sua-chave-secreta
-DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
-DATABASE_URL=sqlite:///db.sqlite3
-
-# Configurações de Email (opcional)
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER=seu-email@gmail.com
-EMAIL_HOST_PASSWORD=sua-senha-de-app
-DEFAULT_FROM_EMAIL=seu-email@gmail.com
-CONTACT_EMAIL=seu-email@gmail.com
+# Copie o arquivo de exemplo
+cp .env.example .env
+# Edite o arquivo .env com suas configurações
 ```
 
-5. Execute as migrações
+5. Execute as migrações:
 ```bash
 python manage.py migrate
 ```
 
-6. Crie um superusuário (opcional)
+6. Crie um superusuário:
 ```bash
 python manage.py createsuperuser
 ```
 
-7. Crie os arquivos JavaScript necessários
+### Rodando o Servidor de Desenvolvimento
+
+Você tem duas opções para rodar o servidor de desenvolvimento:
+
+#### Usando o script de conveniência
+
+O script `scripts/dev.py` oferece várias opções:
+
+1. HTTP básico (padrão):
 ```bash
-# Crie o arquivo cookie_manager.js em static/js/
-touch static/js/cookie_manager.js
+python scripts/dev.py
 ```
 
-8. Inicie o servidor de desenvolvimento
+2. Com HTTPS:
+```bash
+python scripts/dev.py --ssl
+```
+
+3. Em uma porta específica:
+```bash
+python scripts/dev.py --ssl --port 8443
+```
+
+4. Permitindo acesso externo:
+```bash
+python scripts/dev.py --ssl --host 0.0.0.0
+```
+
+#### Usando os comandos tradicionais
+
+1. Servidor HTTP padrão:
 ```bash
 python manage.py runserver
 ```
 
-## 📱 Estrutura do Projeto
-
-```
-hoz-tech/
-├── core/                   # Aplicação principal
-│   ├── static/            # Arquivos estáticos
-│   │   ├── css/
-│   │   ├── js/
-│   │   └── images/
-│   ├── templates/         # Templates HTML
-│   ├── models.py         
-│   ├── views.py
-│   └── urls.py
-├── hoztech/              # Configurações do projeto
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── static/              # Arquivos estáticos coletados
-├── media/              # Uploads de usuários
-├── manage.py
-├── requirements.txt
-├── render.yaml        # Configuração Render
-├── Procfile          # Configuração do servidor
-└── README.md
-```
-
-## 🎨 Funcionalidades Principais
-
-### Home Page
-- Hero section com animações
-- Seção de features
-- Preview de serviços
-- Call-to-action
-
-### Página de Serviços
-- Carrossel interativo
-- 6 planos diferentes
-- Preços e features
-- Integração WhatsApp
-
-### Sobre Nós
-- História da empresa
-- Missão, Visão e Valores
-- Timeline interativa
-- Estatísticas
-
-### Contato
-- Formulário de contato
-- Validação em tempo real
-- Feedback visual
-- Proteção contra spam
-
-## 🔒 Segurança
-- CSRF Protection
-- XSS Prevention
-- Secure Headers
-- Rate Limiting
-- Form Validation
-
-## 📱 Responsividade
-- Mobile First Design
-- Breakpoints:
-  - 320px (smartphones pequenos)
-  - 480px (smartphones)
-  - 768px (tablets)
-  - 1024px (desktops)
-  - 1280px (telas grandes)
-
-## ⚡ Performance
-- Lazy Loading de imagens
-- Minificação de CSS/JS
-- Otimização de fontes
-- Cache de templates
-- Compressão Gzip
-
-## 🌐 SEO
-- Meta tags otimizadas
-- Sitemap XML
-- robots.txt
-- URLs amigáveis
-- Schema Markup
-
-## 🔍 Testes
+2. Servidor HTTPS para desenvolvimento:
 ```bash
-# Executar testes
-python manage.py test
-
-# Cobertura de testes
-coverage run manage.py test
-coverage report
-
-# Testar configuração de email
-python manage.py test_email
+python scripts/runserver_ssl.py
 ```
 
-## 📦 Deploy
-1. Configure as variáveis de ambiente de produção
-2. Colete arquivos estáticos
+### Certificados SSL para Desenvolvimento
+
+Para usar HTTPS em desenvolvimento:
+
+1. Gere os certificados:
 ```bash
-python manage.py collectstatic
+python scripts/setup_ssl.py
 ```
-3. Configure o servidor web (Nginx/Apache)
-4. Configure o banco de dados PostgreSQL
-5. Use Gunicorn como servidor WSGI
+
+2. Aceite o certificado auto-assinado no navegador:
+- Chrome: Digite 'thisisunsafe' na página de aviso
+- Firefox/Edge: Clique em "Avançado" > "Aceitar o Risco"
+
+## 🌐 Configuração de Produção
+
+### Requisitos de Produção
+
+- Servidor Linux (recomendado Ubuntu 20.04+)
+- Nginx ou Apache
+- Gunicorn ou uWSGI
+- Certificado SSL válido (Let's Encrypt recomendado)
+- PostgreSQL (recomendado) ou MySQL
+
+### Configuração do Servidor de Produção
+
+1. Instale as dependências do sistema:
+```bash
+sudo apt update
+sudo apt install python3-pip python3-venv nginx postgresql
+```
+
+2. Configure o banco de dados PostgreSQL:
+```bash
+sudo -u postgres createdb hoztechdb
+sudo -u postgres createuser hoztech
+```
+
+3. Configure o Gunicorn:
+```bash
+# Instale o Gunicorn
+pip install gunicorn
+
+# Teste o Gunicorn
+gunicorn hoztechsite.wsgi:application
+```
+
+4. Configure o Nginx:
+```nginx
+server {
+    listen 80;
+    server_name seudominio.com;
+    
+    location = /favicon.ico { access_log off; log_not_found off; }
+    
+    location /static/ {
+        root /caminho/para/seu/projeto;
+    }
+    
+    location /media/ {
+        root /caminho/para/seu/projeto;
+    }
+    
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
+```
+
+5. Configure SSL com Let's Encrypt:
+```bash
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d seudominio.com
+```
+
+### Variáveis de Ambiente para Produção
+
+Configure as seguintes variáveis em produção:
+```
+DJANGO_DEBUG=False
+DJANGO_SECRET_KEY=sua-chave-secreta-muito-segura
+ALLOWED_HOSTS=seudominio.com
+DATABASE_URL=postgres://usuario:senha@localhost:5432/hoztechdb
+SECURE_SSL_REDIRECT=True
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True
+```
+
+### Checklist de Segurança para Produção
+
+- [ ] DEBUG está desativado
+- [ ] SECRET_KEY foi alterada
+- [ ] ALLOWED_HOSTS está configurado corretamente
+- [ ] Certificado SSL válido instalado
+- [ ] Configurações de segurança do Django ativadas
+- [ ] Banco de dados seguro e com backup
+- [ ] Arquivos estáticos sendo servidos pelo Nginx
+- [ ] Logs configurados e monitorados
+
+## 📝 Manutenção
+
+### Backup do Banco de Dados
+
+```bash
+# PostgreSQL
+pg_dump hoztechdb > backup.sql
+
+# Restauração
+psql hoztechdb < backup.sql
+```
+
+### Atualizando o Site
+
+```bash
+# Ative o ambiente virtual
+source venv/bin/activate
+
+# Puxe as alterações
+git pull
+
+# Atualize dependências
+pip install -r requirements.txt
+
+# Aplique migrações
+python manage.py migrate
+
+# Colete arquivos estáticos
+python manage.py collectstatic --noinput
+
+# Reinicie o Gunicorn
+sudo systemctl restart gunicorn
+```
 
 ## 🤝 Contribuindo
-1. Fork o projeto
-2. Crie sua Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a Branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+
+1. Crie um branch para sua feature
+2. Faça commit das alterações
+3. Envie um Pull Request
 
 ## 📄 Licença
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes.
 
 ## 📞 Suporte
-- Email: contato@hoztech.com.br
-- WhatsApp: (21) 97300-7575
-- Site: www.hoztech.com.br
 
-## ✨ Agradecimentos
-- Bootstrap Team
-- Django Community
-- Swiper.js Team
-- Todos os contribuidores
-
-## ⚠️ Problemas Conhecidos
-- O arquivo `cookie_manager.js` precisa ser criado manualmente em `static/js/`
-- Algumas imagens da equipe podem estar faltando em `static/images/team/`
-- Certifique-se de configurar corretamente as variáveis de ambiente do email antes de usar o formulário de contato
-
----
-Desenvolvido com 💙 por Hoz Tech 
+Para suporte, envie um email para suporte@hoztech.com 

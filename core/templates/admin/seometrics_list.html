@@ -1,0 +1,52 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block dashboard_content %}
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="mb-0">Métricas SEO</h6>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th>URL</th>
+                            <th>Título</th>
+                            <th>H1</th>
+                            <th>H2</th>
+                            <th>H3</th>
+                            <th>Imagens</th>
+                            <th>Palavras</th>
+                            <th>Links Int.</th>
+                            <th>Links Ext.</th>
+                            <th>Page Speed</th>
+                            <th>Mobile</th>
+                            <th>Última Verificação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for metric in metrics %}
+                        <tr>
+                            <td>{{ metric.url|truncatechars:30 }}</td>
+                            <td>{{ metric.title|truncatechars:30 }}</td>
+                            <td>{{ metric.h1_count }}</td>
+                            <td>{{ metric.h2_count }}</td>
+                            <td>{{ metric.h3_count }}</td>
+                            <td>{{ metric.image_count }}</td>
+                            <td>{{ metric.word_count }}</td>
+                            <td>{{ metric.internal_links }}</td>
+                            <td>{{ metric.external_links }}</td>
+                            <td>{{ metric.page_speed_score|floatformat:1 }}</td>
+                            <td>{{ metric.mobile_friendly_score|floatformat:1 }}</td>
+                            <td>{{ metric.last_checked|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

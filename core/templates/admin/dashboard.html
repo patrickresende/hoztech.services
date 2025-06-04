@@ -1,27 +1,23 @@
-{% extends "admin/base_site.html" %}
+{% extends "admin/base.html" %}
 {% load static %}
 
-{% block content %}
-<div class="container-fluid py-4">
-    <!-- Statistics Cards -->
-    <div class="row g-4 mb-4">
-        <!-- Cookies Card -->
-        <div class="col-xl-3 col-sm-6">
-            <div class="card">
+{% block dashboard_content %}
+<div class="container-fluid">
+    <!-- Cards de Estatísticas -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-primary">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Cookies</p>
-                                <h5 class="font-weight-bolder">{{ cookie_count }}</h5>
-                                <p class="mb-0 text-sm">
-                                    <span class="text-muted">últimos 30 dias</span>
-                                </p>
+                                <h5 class="font-weight-bolder mb-0">{{ total_sessions }}</h5>
+                                <p class="mb-0 text-sm text-muted">Total de Sessões</p>
                             </div>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                <i class="bi bi-cookie text-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-gradient-primary text-white rounded-circle">
+                                <i class="bi bi-people"></i>
                             </div>
                         </div>
                     </div>
@@ -29,23 +25,19 @@
             </div>
         </div>
 
-        <!-- Sessions Card -->
-        <div class="col-xl-3 col-sm-6">
-            <div class="card">
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-success">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Sessões</p>
-                                <h5 class="font-weight-bolder">{{ session_count }}</h5>
-                                <p class="mb-0 text-sm">
-                                    <span class="text-muted">últimos 30 dias</span>
-                                </p>
+                                <h5 class="font-weight-bolder mb-0">{{ total_pageviews }}</h5>
+                                <p class="mb-0 text-sm text-muted">Total de Visualizações</p>
                             </div>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                <i class="bi bi-people text-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-gradient-success text-white rounded-circle">
+                                <i class="bi bi-eye"></i>
                             </div>
                         </div>
                     </div>
@@ -53,23 +45,19 @@
             </div>
         </div>
 
-        <!-- Page Views Card -->
-        <div class="col-xl-3 col-sm-6">
-            <div class="card">
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-warning">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Visualizações</p>
-                                <h5 class="font-weight-bolder">{{ pageview_count }}</h5>
-                                <p class="mb-0 text-sm">
-                                    <span class="text-muted">últimos 30 dias</span>
-                                </p>
+                                <h5 class="font-weight-bolder mb-0">{{ total_cookies }}</h5>
+                                <p class="mb-0 text-sm text-muted">Total de Cookies</p>
                             </div>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                <i class="bi bi-eye text-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-gradient-warning text-white rounded-circle">
+                                <i class="bi bi-cookie"></i>
                             </div>
                         </div>
                     </div>
@@ -77,23 +65,19 @@
             </div>
         </div>
 
-        <!-- SEO Metrics Card -->
-        <div class="col-xl-3 col-sm-6">
-            <div class="card">
+        <div class="col-xl-3 col-md-6">
+            <div class="card shadow-info">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
+                    <div class="row align-items-center">
+                        <div class="col mr-2">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Métricas SEO</p>
-                                <h5 class="font-weight-bolder">{{ seo_metrics_count }}</h5>
-                                <p class="mb-0 text-sm">
-                                    <span class="text-muted">últimos 30 dias</span>
-                                </p>
+                                <h5 class="font-weight-bolder mb-0">{{ active_sessions }}</h5>
+                                <p class="mb-0 text-sm text-muted">Sessões Ativas (24h)</p>
                             </div>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-info shadow-info text-center rounded-circle">
-                                <i class="bi bi-graph-up text-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-auto">
+                            <div class="icon-shape bg-gradient-info text-white rounded-circle">
+                                <i class="bi bi-activity"></i>
                             </div>
                         </div>
                     </div>
@@ -102,40 +86,29 @@
         </div>
     </div>
 
-    <!-- Recent Items -->
-    <div class="row g-4">
-        <!-- Recent Cookies -->
+    <!-- Tabelas -->
+    <div class="row">
         <div class="col-lg-6">
             <div class="card">
-                <div class="card-header pb-0">
-                    <h6>Cookies Recentes</h6>
+                <div class="card-header">
+                    <h6 class="mb-0">Top Páginas Visitadas</h6>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Domínio</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Data</th>
+                                    <th>URL</th>
+                                    <th>Título</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for cookie in recent_cookies %}
+                                {% for page in top_pages %}
                                 <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ cookie.name }}</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ cookie.domain }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs text-secondary mb-0">{{ cookie.created_at|date:"d/m/Y H:i" }}</p>
-                                    </td>
+                                    <td>{{ page.url|truncatechars:50 }}</td>
+                                    <td>{{ page.title|truncatechars:30 }}</td>
+                                    <td>{{ page.total }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -145,120 +118,27 @@
             </div>
         </div>
 
-        <!-- Recent Sessions -->
         <div class="col-lg-6">
             <div class="card">
-                <div class="card-header pb-0">
-                    <h6>Sessões Recentes</h6>
+                <div class="card-header">
+                    <h6 class="mb-0">Top Métricas SEO</h6>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">IP</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Navegador</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Data</th>
+                                    <th>URL</th>
+                                    <th>Score</th>
+                                    <th>Mobile</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for session in recent_sessions %}
+                                {% for metric in seo_metrics %}
                                 <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ session.ip_address }}</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ session.user_agent|truncatechars:30 }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs text-secondary mb-0">{{ session.created_at|date:"d/m/Y H:i" }}</p>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Recent Page Views -->
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <h6>Visualizações Recentes</h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">URL</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Título</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Data</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for pageview in recent_pageviews %}
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ pageview.url|truncatechars:30 }}</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ pageview.title|truncatechars:30 }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs text-secondary mb-0">{{ pageview.created_at|date:"d/m/Y H:i" }}</p>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Recent SEO Metrics -->
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <h6>Métricas SEO Recentes</h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">URL</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Score</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Data</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for metric in recent_seo_metrics %}
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ metric.url|truncatechars:30 }}</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ metric.page_speed_score|floatformat:1 }}</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs text-secondary mb-0">{{ metric.last_checked|date:"d/m/Y H:i" }}</p>
-                                    </td>
+                                    <td>{{ metric.url|truncatechars:50 }}</td>
+                                    <td>{{ metric.page_speed_score|floatformat:1 }}</td>
+                                    <td>{{ metric.mobile_friendly_score|floatformat:1 }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

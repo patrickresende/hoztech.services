@@ -25,50 +25,194 @@ wheels/
 .installed.cfg
 *.egg
 
+# Pip installation logs
+[0-9].[0-9].[0-9]
+[0-9].[0-9]
+[0-9][0-9].[0-9].[0-9]
+[0-9].[0-9][0-9].[0-9]
+
 # Django
 *.log
+*.pot
+*.pyc
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+media/
+staticfiles/
 
-# media/
-# staticfiles/
+# Development SSL
+ssl/
+*.pem
+*.key
+*.cert
+*.crt
+*.cer
+*.p12
+*.pfx
+*.csr
+
+# Backups
+backups/
+*.backup
+*.bak
+*.dump
+*.sql
 
 # Environment
 .env
+.env.*
 .venv
 env/
 venv/
 ENV/
+env.bak/
+venv.bak/
 
-# IDE
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IDE - PyCharm
 .idea/
-.vscode/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Coverage
-htmlcov/
-.coverage
-.coverage.*
-coverage.xml
-*.cover
+*.iml
+*.iws
+.idea_modules/
 
 # Node
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnp/
+.pnp.js
+
+# Coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Logs and databases
+logs/
+*.log
+*.sqlite3
+*.sqlite3-journal
+*.db
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Exports
+exports/
+*.csv
+*.xls
+*.xlsx
+*.json
 
 # Cache
 .cache/
-.pytest_cache/
-.mypy_cache/
+.sass-cache/
+.eslintcache
+.npm
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Redis
+*.rdb
+dump.rdb
+
+# System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Project specific
+core/static/admin/
+core/static/rest_framework/
+core/static/debug_toolbar/
+
+# Temporary files
+*.swp
+*.swo
+*~
+*.tmp
+*.bak
+*.swn
+*.orig
+
+# Static and media
+/static/
+/media/
+/staticfiles/
+/mediafiles/
+
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Render specific
+.render-buildpacks/
+.render-build/
+
+# Debug files
+debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Local development
-*.local
-local.py
+local_settings.py
+docker-compose.override.yml
+
+# Python virtual environment
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Database backups
+*.backup
+*.bak
+*.dump
+*.sql

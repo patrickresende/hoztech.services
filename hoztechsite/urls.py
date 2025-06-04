@@ -20,9 +20,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/dashboard/', include('core.admin_urls', namespace='core_admin')),  # Custom admin URLs
-    path('admin/', admin.site.urls),  # Django default admin
-    path('', include('core.urls', namespace='core')),  # Main site URLs
+    path('django-admin/', admin.site.urls),  # Django admin padrão
+    path('', include('core.urls', namespace='core')),  # URLs principais do site
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

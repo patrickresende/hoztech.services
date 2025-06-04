@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block dashboard_content %}
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="mb-0">Lista de Sessões</h6>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th>IP</th>
+                            <th>User Agent</th>
+                            <th>Referrer</th>
+                            <th>Criado em</th>
+                            <th>Última Atividade</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for session in sessions %}
+                        <tr>
+                            <td>{{ session.ip_address }}</td>
+                            <td>{{ session.user_agent|truncatechars:50 }}</td>
+                            <td>{{ session.referrer|default:"-"|truncatechars:30 }}</td>
+                            <td>{{ session.created_at|date:"d/m/Y H:i" }}</td>
+                            <td>{{ session.last_activity|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                <span class="badge {% if session.is_active %}bg-success{% else %}bg-danger{% endif %}">
+                                    {{ session.is_active|yesno:"Ativa,Inativa" }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

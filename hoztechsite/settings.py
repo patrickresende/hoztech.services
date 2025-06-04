@@ -26,24 +26,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-n*7e7636j$t5chrwg9u-p3ol#d3kcca0)tnr98@3=uoz&^l^l%')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-secret-key-here')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
-    'hoztech.com',
-    'www.hoztech.com',
     'localhost',
     '127.0.0.1',
-    '.onrender.com',
-    'hoz-tech.onrender.com',
+    '[::1]',
 ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'core.apps.CoreConfig',  # Nossa aplicação principal
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'core',
 ]
 
 MIDDLEWARE = [
@@ -71,8 +68,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'core' / 'templates',
-            BASE_DIR / 'templates',
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'core', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -94,7 +91,7 @@ WSGI_APPLICATION = 'hoztechsite.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        default='sqlite:///db.sqlite3',
         conn_max_age=600
     )
 }
@@ -122,9 +119,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -135,11 +132,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 # Static files configuration with detailed comments
-STATIC_URL = os.getenv('STATIC_URL', '/static/')
-STATIC_ROOT = os.path.join(BASE_DIR, os.getenv('STATIC_ROOT', 'staticfiles'))
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # WhiteNoise Configuration with detailed logging
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -147,8 +142,8 @@ WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 WHITENOISE_ALLOW_ALL_ORIGINS = True
 WHITENOISE_ROOT = None
-WHITENOISE_MAX_AGE = 60 * 60 * 24 * 365  # 1 ano em segundos
-WHITENOISE_AUTOREFRESH = True  # Recarrega arquivos modificados
+WHITENOISE_MAX_AGE = 31536000
+WHITENOISE_AUTOREFRESH = True
 WHITENOISE_MIMETYPES = {
     '.png': 'image/png',
     '.jpg': 'image/jpeg',
@@ -239,8 +234,8 @@ print(f"WHITENOISE_MIMETYPES: {WHITENOISE_MIMETYPES}")
 print("=====================================\n")
 
 # Media files
-MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
-MEDIA_ROOT = os.path.join(BASE_DIR, os.getenv('MEDIA_ROOT', 'mediafiles'))
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -263,3 +258,26 @@ SERVER_EMAIL = os.getenv('SERVER_EMAIL', 'hoztech.services@gmail.com')
 EMAIL_TIMEOUT = 30  # seconds
 EMAIL_SSL_KEYFILE = None
 EMAIL_SSL_CERTFILE = None
+
+# Security Settings
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+# HTTPS settings for development
+SECURE_SSL_REDIRECT = False  # Disable SSL redirect in development
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Admin Site Configuration
+ADMIN_SITE_HEADER = "HOZ TECH - Painel Administrativo"
+ADMIN_SITE_TITLE = "HOZ TECH Admin"
+ADMIN_INDEX_TITLE = "Administração do Site"

@@ -1,10 +1,8 @@
 databases:
-  - name: postgres
-    databaseName: hoztech_db
-    user: hoztech_user
+  - name: hoztechsite-db
+    databaseName: hoztechsite
+    user: hoztechsite
     plan: free
-    region: sao
-    ipAllowList: []  # Only allow internal connections
 
 services:
   - type: redis
@@ -15,46 +13,49 @@ services:
 
   # Serviço Web (Django)
   - type: web
-    name: django
-    runtime: python
-    plan: free
-    region: sao
-    buildCommand: |
-      # Install node.js dependencies
-      npm install
-      # Build Tailwind CSS
-      npm run build
-      # Run Django build script
-      ./build.sh
-    startCommand: "gunicorn hoztechsite.wsgi:application"
+    name: hoztechsite
+    env: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60
     envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: false
       - key: DATABASE_URL
         fromDatabase:
-          name: postgres
+          name: hoztechsite-db
           property: connectionString
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: redis
-          property: connectionString
-      - key: SECRET_KEY
-        generateValue: true
-      - key: WEB_CONCURRENCY
-        value: 4
       - key: PYTHON_VERSION
         value: 3.11.0
-      - key: NODE_VERSION
-        value: 18.x
-      - key: DEBUG
-        value: false
-      - key: ALLOWED_HOSTS
-        value: ".onrender.com"
-      - key: DJANGO_SETTINGS_MODULE
-        value: "hoztechsite.settings"
-      - key: STATIC_ROOT
-        value: "/opt/render/project/src/staticfiles"
-      - key: STATIC_URL
-        value: "/static/"
+      - key: DJANGO_ALLOWED_HOSTS
+        sync: false
+      - key: SECURE_SSL_REDIRECT
+        value: true
+      - key: SESSION_COOKIE_SECURE
+        value: true
+      - key: CSRF_COOKIE_SECURE
+        value: true
+      - key: SECURE_HSTS_SECONDS
+        value: 31536000
+      - key: SECURE_HSTS_INCLUDE_SUBDOMAINS
+        value: true
+      - key: SECURE_HSTS_PRELOAD
+        value: true
+    healthCheckPath: /health/
+    autoDeploy: true
+    domains:
+      - hoztech.com
+      - www.hoztech.com
+    envVars:
+      - key: WEB_CONCURRENCY
+        value: 2
+    scaling:
+      minInstances: 1
+      maxInstances: 1
+      targetMemoryPercent: 80
+      targetCPUPercent: 80
 
 # Configurações Globais
 preInstallCommand: |

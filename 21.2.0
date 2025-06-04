@@ -1,2 +1,0 @@
-Requirement already satisfied: gunicorn in c:\users\txx\desktop\hoz_tech\.hoztech\lib\site-packages (23.0.0)
-Requirement already satisfied: packaging in c:\users\txx\desktop\hoz_tech\.hoztech\lib\site-packages (from gunicorn) (25.0)

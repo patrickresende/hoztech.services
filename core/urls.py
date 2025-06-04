@@ -1,11 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
-from typing import List, Tuple
+from typing import List
 
 app_name = 'core'
 
 # URL patterns organized by feature
-urlpatterns: List[Tuple[str, str, str]] = [
+urlpatterns: List[path] = [
     # Main pages
     path('', views.home, name='home'),
     path('sobre/', views.sobre_nos, name='sobre'),
@@ -21,4 +21,7 @@ urlpatterns: List[Tuple[str, str, str]] = [
     
     # Resources
     path('download-pdf/', views.download_pdf, name='download_pdf'),
+    
+    # Admin URLs (incluídas do admin_urls.py)
+    path('admin/', include('core.admin_urls', namespace='core_admin')),
 ] 

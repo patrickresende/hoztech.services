@@ -1,0 +1,48 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block dashboard_content %}
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="mb-0">Exportações de Analytics</h6>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Formato</th>
+                            <th>Data Inicial</th>
+                            <th>Data Final</th>
+                            <th>Criado em</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for export in exports %}
+                        <tr>
+                            <td>{{ export.name }}</td>
+                            <td>{{ export.format }}</td>
+                            <td>{{ export.date_range_start|date:"d/m/Y" }}</td>
+                            <td>{{ export.date_range_end|date:"d/m/Y" }}</td>
+                            <td>{{ export.created_at|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                {% if export.file_path %}
+                                <a href="{{ export.file_path.url }}" class="btn btn-sm btn-primary">
+                                    <i class="bi bi-download"></i> Download
+                                </a>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
