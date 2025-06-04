@@ -3,21 +3,26 @@ databases:
     databaseName: hoztechsite
     user: hoztechsite
     plan: free
+    ipAllowList: []  # Apenas conexões internas
 
 services:
   - type: redis
-    name: redis
+    name: hoztechsite-redis
     plan: free
     maxmemoryPolicy: noeviction
-    ipAllowList: []  # Only allow internal connections
+    ipAllowList: []
 
   # Serviço Web (Django)
   - type: web
     name: hoztechsite
     env: python
     plan: starter
-    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
-    startCommand: gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate
+    startCommand: |
+      newrelic-admin run-program gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true
@@ -27,10 +32,17 @@ services:
         fromDatabase:
           name: hoztechsite-db
           property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: hoztechsite-redis
+          type: redis
+          property: connectionString
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: WEB_CONCURRENCY
+        value: 2
       - key: DJANGO_ALLOWED_HOSTS
-        sync: false
+        value: ".onrender.com,hoztech.com,www.hoztech.com"
       - key: SECURE_SSL_REDIRECT
         value: true
       - key: SESSION_COOKIE_SECURE
@@ -43,19 +55,44 @@ services:
         value: true
       - key: SECURE_HSTS_PRELOAD
         value: true
+      - key: NEW_RELIC_LICENSE_KEY
+        sync: false
+      - key: NEW_RELIC_APP_NAME
+        value: "HOZ TECH"
+      - key: NEW_RELIC_MONITOR_MODE
+        value: true
+      - key: SENTRY_DSN
+        sync: false
     healthCheckPath: /health/
-    autoDeploy: true
+    autoDeploy: false  # Desabilitar deploy automático
     domains:
       - hoztech.com
       - www.hoztech.com
-    envVars:
-      - key: WEB_CONCURRENCY
-        value: 2
     scaling:
       minInstances: 1
-      maxInstances: 1
+      maxInstances: 3
       targetMemoryPercent: 80
       targetCPUPercent: 80
+
+workers:
+  - name: hoztechsite-worker
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python manage.py rqworker default
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hoztechsite-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: hoztechsite-redis
+          type: redis
+          property: connectionString
 
 # Configurações Globais
 preInstallCommand: |

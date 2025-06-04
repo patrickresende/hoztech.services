@@ -1,16 +1,26 @@
-# HOZ TECH Website
+# HOZ TECH - Website
 
-Site institucional da HOZ TECH, desenvolvido com Django.
+Site institucional da HOZ TECH, desenvolvido com Django 5.2 e otimizado para performance e segurança.
 
-## 🚀 Configuração do Ambiente de Desenvolvimento
+## 🚀 Características
 
-### Pré-requisitos
+- Design responsivo e moderno
+- Otimização SEO
+- SSL/HTTPS automático
+- Cache com Redis
+- Monitoramento em tempo real
+- Backup automático
+- API REST
+- Painel administrativo personalizado
 
-- Python 3.8+
-- pip (gerenciador de pacotes Python)
-- virtualenv ou venv
+## 📋 Pré-requisitos
 
-### Instalação
+- Python 3.11+
+- Redis
+- PostgreSQL
+- Git
+
+## 🔧 Instalação
 
 1. Clone o repositório:
 ```bash
@@ -21,10 +31,8 @@ cd hoztechsite
 2. Crie e ative um ambiente virtual:
 ```bash
 python -m venv venv
-# Windows
-venv\Scripts\activate
-# Linux/Mac
-source venv/bin/activate
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
 ```
 
 3. Instale as dependências:
@@ -34,7 +42,6 @@ pip install -r requirements.txt
 
 4. Configure as variáveis de ambiente:
 ```bash
-# Copie o arquivo de exemplo
 cp .env.example .env
 # Edite o arquivo .env com suas configurações
 ```
@@ -49,189 +56,133 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-### Rodando o Servidor de Desenvolvimento
-
-Você tem duas opções para rodar o servidor de desenvolvimento:
-
-#### Usando o script de conveniência
-
-O script `scripts/dev.py` oferece várias opções:
-
-1. HTTP básico (padrão):
+7. Colete os arquivos estáticos:
 ```bash
-python scripts/dev.py
+python manage.py collectstatic
 ```
 
-2. Com HTTPS:
-```bash
-python scripts/dev.py --ssl
-```
+## 🏃‍♂️ Desenvolvimento
 
-3. Em uma porta específica:
-```bash
-python scripts/dev.py --ssl --port 8443
-```
-
-4. Permitindo acesso externo:
-```bash
-python scripts/dev.py --ssl --host 0.0.0.0
-```
-
-#### Usando os comandos tradicionais
-
-1. Servidor HTTP padrão:
+1. Inicie o servidor de desenvolvimento:
 ```bash
 python manage.py runserver
 ```
 
-2. Servidor HTTPS para desenvolvimento:
+2. Para desenvolvimento com SSL:
 ```bash
 python scripts/runserver_ssl.py
 ```
 
-### Certificados SSL para Desenvolvimento
+## 🚀 Deploy
 
-Para usar HTTPS em desenvolvimento:
+### Render
 
-1. Gere os certificados:
+1. Configure as variáveis de ambiente:
 ```bash
-python scripts/setup_ssl.py
+export RENDER_API_KEY=seu_api_key
+export RENDER_SERVICE_ID=seu_service_id
 ```
 
-2. Aceite o certificado auto-assinado no navegador:
-- Chrome: Digite 'thisisunsafe' na página de aviso
-- Firefox/Edge: Clique em "Avançado" > "Aceitar o Risco"
-
-## 🌐 Configuração de Produção
-
-### Requisitos de Produção
-
-- Servidor Linux (recomendado Ubuntu 20.04+)
-- Nginx ou Apache
-- Gunicorn ou uWSGI
-- Certificado SSL válido (Let's Encrypt recomendado)
-- PostgreSQL (recomendado) ou MySQL
-
-### Configuração do Servidor de Produção
-
-1. Instale as dependências do sistema:
+2. Execute o script de deploy:
 ```bash
-sudo apt update
-sudo apt install python3-pip python3-venv nginx postgresql
+# Windows
+scripts\deployment\deploy.bat .
+
+# Linux/Mac
+./scripts/deployment/deploy.sh .
+
+# Ou diretamente com Python
+python scripts/deployment/deploy.py .
 ```
 
-2. Configure o banco de dados PostgreSQL:
-```bash
-sudo -u postgres createdb hoztechdb
-sudo -u postgres createuser hoztech
-```
-
-3. Configure o Gunicorn:
-```bash
-# Instale o Gunicorn
-pip install gunicorn
-
-# Teste o Gunicorn
-gunicorn hoztechsite.wsgi:application
-```
-
-4. Configure o Nginx:
-```nginx
-server {
-    listen 80;
-    server_name seudominio.com;
-    
-    location = /favicon.ico { access_log off; log_not_found off; }
-    
-    location /static/ {
-        root /caminho/para/seu/projeto;
-    }
-    
-    location /media/ {
-        root /caminho/para/seu/projeto;
-    }
-    
-    location / {
-        include proxy_params;
-        proxy_pass http://unix:/run/gunicorn.sock;
-    }
-}
-```
-
-5. Configure SSL com Let's Encrypt:
-```bash
-sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx -d seudominio.com
-```
-
-### Variáveis de Ambiente para Produção
-
-Configure as seguintes variáveis em produção:
-```
-DJANGO_DEBUG=False
-DJANGO_SECRET_KEY=sua-chave-secreta-muito-segura
-ALLOWED_HOSTS=seudominio.com
-DATABASE_URL=postgres://usuario:senha@localhost:5432/hoztechdb
-SECURE_SSL_REDIRECT=True
-SESSION_COOKIE_SECURE=True
-CSRF_COOKIE_SECURE=True
-```
-
-### Checklist de Segurança para Produção
-
-- [ ] DEBUG está desativado
-- [ ] SECRET_KEY foi alterada
-- [ ] ALLOWED_HOSTS está configurado corretamente
-- [ ] Certificado SSL válido instalado
-- [ ] Configurações de segurança do Django ativadas
-- [ ] Banco de dados seguro e com backup
-- [ ] Arquivos estáticos sendo servidos pelo Nginx
-- [ ] Logs configurados e monitorados
-
-## 📝 Manutenção
-
-### Backup do Banco de Dados
+### Testes de Deploy
 
 ```bash
-# PostgreSQL
-pg_dump hoztechdb > backup.sql
+# Windows
+scripts\test_render_deployment.bat myapp.onrender.com
 
-# Restauração
-psql hoztechdb < backup.sql
+# Linux/Mac
+./scripts/test_render_deployment.sh myapp.onrender.com
+
+# Ou diretamente com Python
+python scripts/test_render_deployment.py myapp.onrender.com
 ```
 
-### Atualizando o Site
+## 📊 Monitoramento
 
 ```bash
-# Ative o ambiente virtual
-source venv/bin/activate
-
-# Puxe as alterações
-git pull
-
-# Atualize dependências
-pip install -r requirements.txt
-
-# Aplique migrações
-python manage.py migrate
-
-# Colete arquivos estáticos
-python manage.py collectstatic --noinput
-
-# Reinicie o Gunicorn
-sudo systemctl restart gunicorn
+python scripts/monitoring/monitor.py myapp.onrender.com
 ```
 
-## 🤝 Contribuindo
+## 💾 Backup
 
-1. Crie um branch para sua feature
-2. Faça commit das alterações
-3. Envie um Pull Request
+```bash
+python scripts/backup/backup.py /caminho/do/projeto [s3_bucket]
+```
+
+## 🔄 Restauração
+
+```bash
+python scripts/backup/restore.py /caminho/do/projeto nome_do_backup [s3_bucket]
+```
+
+## 🛠️ Desenvolvimento
+
+### Estrutura do Projeto
+
+```
+hoztechsite/
+├── core/               # Aplicação principal
+├── scripts/           # Scripts de utilidade
+│   ├── backup/        # Scripts de backup
+│   ├── deployment/    # Scripts de deploy
+│   └── monitoring/    # Scripts de monitoramento
+├── static/            # Arquivos estáticos
+├── media/            # Uploads de usuários
+├── templates/        # Templates HTML
+└── docs/            # Documentação
+```
+
+### Comandos Úteis
+
+```bash
+# Testes
+python manage.py test
+pytest
+
+# Lint
+flake8
+black .
+
+# Coverage
+pytest --cov=.
+```
+
+## 📝 Documentação
+
+A documentação completa está disponível em `docs/` e inclui:
+- Guia de Desenvolvimento
+- Guia de Deploy
+- Referência da API
+- Guia de Segurança
+
+## 🔐 Segurança
+
+- SSL/TLS configurado
+- Headers de segurança
+- CSRF protection
+- Rate limiting
+- Backup automático
+- Monitoramento
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes.
+Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes.
 
-## 📞 Suporte
+## ✨ Contribuindo
 
-Para suporte, envie um email para suporte@hoztech.com 
+1. Fork o projeto
+2. Crie sua branch (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request 

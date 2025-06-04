@@ -7,8 +7,77 @@ from django.core.servers.basehttp import WSGIServer
 import ssl
 import logging
 import socket
+import threading
+import http.server
+import socketserver
+import urllib.parse
+import urllib.request
+import urllib.error
 
 logger = logging.getLogger(__name__)
+
+class HTTPRedirectHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        self.handle_request()
+
+    def do_POST(self):
+        self.handle_request()
+
+    def handle_request(self):
+        try:
+            # Construir URL HTTPS
+            https_port = self.server.https_port
+            https_url = f'https://127.0.0.1:{https_port}{self.path}'
+            
+            # Enviar redirecionamento 301
+            self.send_response(301)
+            self.send_header('Location', https_url)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.end_headers()
+            
+            # Página de redirecionamento amigável
+            redirect_page = f"""
+            <html>
+            <head>
+                <title>Redirecionando para HTTPS</title>
+                <meta http-equiv="refresh" content="0;url={https_url}">
+                <style>
+                    body {{ font-family: Arial, sans-serif; text-align: center; padding: 50px; }}
+                    h1 {{ color: #333; }}
+                    p {{ color: #666; }}
+                    .link {{ color: #007bff; text-decoration: none; }}
+                    .link:hover {{ text-decoration: underline; }}
+                </style>
+            </head>
+            <body>
+                <h1>Redirecionando para HTTPS...</h1>
+                <p>Por favor, aguarde ou clique no link abaixo:</p>
+                <p><a class="link" href="{https_url}">Continuar para o site seguro</a></p>
+                <script>window.location.href = "{https_url}";</script>
+            </body>
+            </html>
+            """.encode('utf-8')
+            self.wfile.write(redirect_page)
+            
+        except Exception as e:
+            logger.error(f"Erro no redirecionamento HTTP: {e}")
+            self.send_error(500, f"Erro interno do servidor: {str(e)}")
+
+class HTTPRedirectServer(socketserver.TCPServer):
+    def __init__(self, server_address, RequestHandlerClass, https_port):
+        self.https_port = https_port
+        # Permitir reutilização da porta
+        self.allow_reuse_address = True
+        super().__init__(server_address, RequestHandlerClass)
+
+def run_http_redirect_server(https_port):
+    """Roda um servidor HTTP que redireciona para HTTPS."""
+    try:
+        server = HTTPRedirectServer(('127.0.0.1', 8080), HTTPRedirectHandler, https_port)
+        logger.info(f"Servidor de redirecionamento HTTP iniciado na porta 8080")
+        server.serve_forever()
+    except Exception as e:
+        logger.error(f"Erro ao iniciar servidor de redirecionamento: {e}")
 
 def run_ssl_server():
     """Roda o servidor de desenvolvimento com SSL."""
@@ -30,9 +99,19 @@ def run_ssl_server():
     
     # Forçar algumas configurações importantes
     os.environ['DJANGO_DEBUG'] = 'True'  # Garantir que debug está ativo para desenvolvimento
-    os.environ['SECURE_SSL_REDIRECT'] = 'True'  # Habilitar redirecionamento para HTTPS
+    os.environ['WSGI_ENV'] = 'development'  # Indicar ambiente de desenvolvimento
+    os.environ['HTTPS'] = 'on'  # Forçar HTTPS
+    os.environ['wsgi.url_scheme'] = 'https'  # Esquema HTTPS para WSGI
     
     django.setup()
+    
+    # Iniciar servidor de redirecionamento HTTP em uma thread separada
+    redirect_thread = threading.Thread(
+        target=run_http_redirect_server,
+        args=(8000,),  # Porta HTTPS
+        daemon=True
+    )
+    redirect_thread.start()
     
     # Monkey patch WSGIServer
     original_init = WSGIServer.__init__
@@ -65,37 +144,18 @@ def run_ssl_server():
             print(f"\nErro ao configurar SSL: {str(e)}")
             print("Verifique se os certificados são válidos e têm as permissões corretas.")
             sys.exit(1)
-            
+    
     # Monkey patch handle_error para melhor tratamento de erros SSL
-    original_handle_error = WSGIServer.handle_error
     def handle_error(self, request, client_address):
         try:
             raise
         except ssl.SSLError as e:
             if "HTTP_REQUEST" in str(e):
                 logger.warning(f"Tentativa de acesso HTTP em porta HTTPS de {client_address}")
-                try:
-                    # Enviar redirecionamento 301 para HTTPS
-                    host = request.getsockname()[0]
-                    port = request.getsockname()[1]
-                    location = f"https://{host}:{port}"
-                    msg = (
-                        "HTTP/1.1 301 Moved Permanently\r\n"
-                        f"Location: {location}\r\n"
-                        "Content-Type: text/plain\r\n"
-                        "Connection: close\r\n\r\n"
-                        "Redirecionando para HTTPS...\n"
-                        "Redirecting to HTTPS...\n"
-                    )
-                    request.send(msg.encode('utf-8'))
-                except (socket.error, OSError):
-                    pass  # Cliente já fechou a conexão
             else:
                 logger.error(f"Erro SSL com {client_address}: {e}")
-                original_handle_error(request, client_address)
         except Exception as e:
             logger.error(f"Erro não-SSL com {client_address}: {e}")
-            original_handle_error(request, client_address)
     
     WSGIServer.__init__ = __init__
     WSGIServer.handle_error = handle_error
@@ -113,6 +173,8 @@ def run_ssl_server():
     # Rodar servidor
     print("\n=== Iniciando servidor HTTPS de desenvolvimento ===")
     print("Acesse: https://127.0.0.1:8000/")
+    print("\nRedirecionamento HTTP automático configurado:")
+    print("http://127.0.0.1:8080 -> https://127.0.0.1:8000")
     print("\nIMPORTANTE:")
     print("1. Use https:// no início da URL (não http://)")
     print("2. Este é um certificado auto-assinado para desenvolvimento.")

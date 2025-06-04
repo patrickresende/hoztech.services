@@ -27,6 +27,7 @@ import csv
 import xlsxwriter
 from io import BytesIO
 import zipfile
+import redis
 
 logger = logging.getLogger(__name__)
 
@@ -920,3 +921,52 @@ class AdminDashboardView(TemplateView):
         })
         
         return context 
+
+def health_check(request):
+    """
+    Endpoint para verificar a saúde do sistema.
+    Verifica banco de dados, cache Redis e workers.
+    """
+    health_status = {
+        'status': 'healthy',
+        'database': check_database(),
+        'redis': check_redis(),
+        'workers': check_workers(),
+    }
+    
+    # Se algum componente estiver unhealthy, marca o status geral como unhealthy
+    if not all(component['status'] == 'healthy' for component in health_status.values() if isinstance(component, dict)):
+        health_status['status'] = 'unhealthy'
+    
+    return JsonResponse(health_status)
+
+def check_database():
+    """Verifica a conexão com o banco de dados."""
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT 1')
+            cursor.fetchone()
+        return {'status': 'healthy', 'message': 'Database connection is working'}
+    except Exception as e:
+        return {'status': 'unhealthy', 'message': str(e)}
+
+def check_redis():
+    """Verifica a conexão com o Redis."""
+    try:
+        redis_url = settings.CACHES['default']['LOCATION']
+        redis_client = redis.from_url(redis_url)
+        redis_client.ping()
+        return {'status': 'healthy', 'message': 'Redis connection is working'}
+    except Exception as e:
+        return {'status': 'unhealthy', 'message': str(e)}
+
+def check_workers():
+    """Verifica o status dos workers."""
+    try:
+        # Tenta acessar uma chave no Redis que os workers atualizam periodicamente
+        worker_heartbeat = cache.get('worker_heartbeat')
+        if worker_heartbeat:
+            return {'status': 'healthy', 'message': 'Workers are running'}
+        return {'status': 'unhealthy', 'message': 'No worker heartbeat detected'}
+    except Exception as e:
+        return {'status': 'unhealthy', 'message': str(e)} 
