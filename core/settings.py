@@ -209,4 +209,9 @@ LOGGING = {
             'propagate': False,
         },
     },
-} 
+}
+
+# Admin Site Configuration
+ADMIN_SITE_HEADER = config('ADMIN_SITE_HEADER', default='HOZ TECH - Painel Administrativo')
+ADMIN_SITE_TITLE = config('ADMIN_SITE_TITLE', default='HOZ TECH Admin')
+ADMIN_INDEX_TITLE = config('ADMIN_INDEX_TITLE', default='Administração do Site') 

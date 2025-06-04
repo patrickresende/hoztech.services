@@ -21,7 +21,4 @@ urlpatterns: List[path] = [
     
     # Resources
     path('download-pdf/', views.download_pdf, name='download_pdf'),
-    
-    # Admin URLs (incluídas do admin_urls.py)
-    path('admin/', include('core.admin_urls', namespace='core_admin')),
 ] 

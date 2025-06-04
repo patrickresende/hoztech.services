@@ -28,6 +28,7 @@ admin.site.index_title = settings.ADMIN_INDEX_TITLE
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+    path('core_admin/', include('core.admin_urls', namespace='core_admin')),
     path('health/', health_check, name='health_check'),
 ]
 
