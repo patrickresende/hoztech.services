@@ -19,8 +19,14 @@ services:
     runtime: python
     plan: free
     region: sao
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn mysite.wsgi:application"
+    buildCommand: |
+      # Install node.js dependencies
+      npm install
+      # Build Tailwind CSS
+      npm run build
+      # Run Django build script
+      ./build.sh
+    startCommand: "gunicorn hoztechsite.wsgi:application"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -37,13 +43,23 @@ services:
         value: 4
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: NODE_VERSION
+        value: 18.x
       - key: DEBUG
         value: false
       - key: ALLOWED_HOSTS
         value: ".onrender.com"
       - key: DJANGO_SETTINGS_MODULE
-        value: "mysite.settings"
+        value: "hoztechsite.settings"
+      - key: STATIC_ROOT
+        value: "/opt/render/project/src/staticfiles"
+      - key: STATIC_URL
+        value: "/static/"
 
 # Configurações Globais
 preInstallCommand: |
-  apt-get update && apt-get install -y build-essential python3-dev 
+  apt-get update && apt-get install -y \
+    build-essential \
+    python3-dev \
+    nodejs \
+    npm 

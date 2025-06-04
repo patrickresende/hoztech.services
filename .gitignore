@@ -28,6 +28,7 @@ wheels/
 # Django
 *.log
 local_settings.py
+db.sqlite3
 db.sqlite3-journal
 
 # media/
@@ -70,4 +71,4 @@ yarn-error.log*
 
 # Local development
 *.local
-local.py 
+local.py
