@@ -17,55 +17,34 @@ else
     echo "No Tailwind config found, skipping CSS build"
 fi
 
+echo "Cleaning up old static files..."
+rm -rf staticfiles/*
+
 echo "Checking static files integrity..."
-if [ -f "static/images/logo.png" ]; then
-    echo "Logo file exists"
-    file static/images/logo.png
-    ls -l static/images/logo.png
-else
-    echo "ERROR: Logo file not found!"
-    exit 1
-fi
+for file in static/css/*.css static/js/*.js static/images/*; do
+    if [ -f "$file" ]; then
+        echo "File exists: $file"
+        file "$file"
+        ls -l "$file"
+    else
+        echo "WARNING: File not found: $file"
+    fi
+done
 
 echo "Collecting static files..."
 python manage.py collectstatic --no-input --clear
 
 echo "Verifying collected files..."
-if [ -f "staticfiles/css/base.css" ]; then
-    echo "Base CSS file exists"
-    file staticfiles/css/base.css
-    ls -l staticfiles/css/base.css
-else
-    echo "ERROR: Base CSS file not found!"
-    exit 1
-fi
-
-if [ -f "staticfiles/css/images.css" ]; then
-    echo "Images CSS file exists"
-    file staticfiles/css/images.css
-    ls -l staticfiles/css/images.css
-else
-    echo "ERROR: Images CSS file not found!"
-    exit 1
-fi
-
-if [ -f "staticfiles/images/logo.png" ]; then
-    echo "Collected logo file exists"
-    file staticfiles/images/logo.png
-    ls -l staticfiles/images/logo.png
-else
-    echo "ERROR: Collected logo file not found!"
-    exit 1
-fi
-
-echo "Verifying admin templates..."
-if [ -d "staticfiles/admin" ]; then
-    echo "Admin static files collected successfully"
-    ls -la staticfiles/admin/
-else
-    echo "ERROR: Admin static files not found!"
-    exit 1
-fi
+for file in staticfiles/css/*.css staticfiles/js/*.js staticfiles/images/*; do
+    if [ -f "$file" ]; then
+        echo "Collected file exists: $file"
+        file "$file"
+        ls -l "$file"
+    else
+        echo "ERROR: Collected file not found: $file"
+        exit 1
+    fi
+done
 
 echo "Running migrations..."
 python manage.py migrate

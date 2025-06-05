@@ -162,74 +162,31 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 WHITENOISE_ALLOW_ALL_ORIGINS = True
-WHITENOISE_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 WHITENOISE_MAX_AGE = 31536000
 WHITENOISE_AUTOREFRESH = True
 
-# Configuração detalhada de MIME types
+# Configuração de MIME types
 WHITENOISE_MIMETYPES = {
+    '.css': 'text/css; charset=utf-8',
+    '.js': 'application/javascript; charset=utf-8',
     '.png': 'image/png',
     '.jpg': 'image/jpeg',
     '.jpeg': 'image/jpeg',
     '.gif': 'image/gif',
     '.ico': 'image/x-icon',
-    '.css': 'text/css',
-    '.js': 'application/javascript',
-    '.woff': 'application/font-woff',
-    '.woff2': 'application/font-woff2',
-    '.ttf': 'application/font-sfnt',
-    '.eot': 'application/vnd.ms-fontobject',
     '.svg': 'image/svg+xml',
-    '.html': 'text/html',
-    '.txt': 'text/plain',
-    '.json': 'application/json',
-    '.xml': 'application/xml',
-    '.pdf': 'application/pdf',
-    '.zip': 'application/zip',
-    '.doc': 'application/msword',
-    '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    '.xls': 'application/vnd.ms-excel',
-    '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    '.ppt': 'application/vnd.ms-powerpoint',
-    '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-    '.webp': 'image/webp',
-    '.avif': 'image/avif',
-    '.webm': 'video/webm',
-    '.mp4': 'video/mp4',
-    '.m4v': 'video/x-m4v',
-    '.m4a': 'audio/mp4',
-    '.mp3': 'audio/mpeg',
-    '.ogg': 'audio/ogg',
-    '.wav': 'audio/wav',
+    '.woff': 'font/woff',
+    '.woff2': 'font/woff2',
+    '.ttf': 'font/ttf',
+    '.eot': 'application/vnd.ms-fontobject',
 }
 
 # Headers de cache e segurança
 WHITENOISE_HEADERS = {
-    '/static/css/*': {
-        'Cache-Control': 'public, max-age=31536000, immutable',
+    '*': {
+        'Cache-Control': 'public, max-age=31536000',
+        'Access-Control-Allow-Origin': '*',
         'X-Content-Type-Options': 'nosniff',
-        'Content-Type': 'text/css',
-        'Cross-Origin-Resource-Policy': 'same-site',
-        'Cross-Origin-Embedder-Policy': 'require-corp',
-    },
-    '/static/js/*': {
-        'Cache-Control': 'public, max-age=31536000, immutable',
-        'X-Content-Type-Options': 'nosniff',
-        'Content-Type': 'application/javascript',
-        'Cross-Origin-Resource-Policy': 'same-site',
-        'Cross-Origin-Embedder-Policy': 'require-corp',
-    },
-    '/static/images/*': {
-        'Cache-Control': 'public, max-age=31536000, immutable',
-        'X-Content-Type-Options': 'nosniff',
-        'Cross-Origin-Resource-Policy': 'same-site',
-        'Cross-Origin-Embedder-Policy': 'require-corp',
-    },
-    '/static/fonts/*': {
-        'Cache-Control': 'public, max-age=31536000, immutable',
-        'X-Content-Type-Options': 'nosniff',
-        'Cross-Origin-Resource-Policy': 'same-site',
-        'Cross-Origin-Embedder-Policy': 'require-corp',
     },
 }
 
@@ -315,7 +272,6 @@ print(f"STATICFILES_STORAGE: {STATICFILES_STORAGE}")
 print(f"WHITENOISE_USE_FINDERS: {WHITENOISE_USE_FINDERS}")
 print(f"WHITENOISE_MANIFEST_STRICT: {WHITENOISE_MANIFEST_STRICT}")
 print(f"WHITENOISE_ALLOW_ALL_ORIGINS: {WHITENOISE_ALLOW_ALL_ORIGINS}")
-print(f"WHITENOISE_ROOT: {WHITENOISE_ROOT}")
 print(f"WHITENOISE_MAX_AGE: {WHITENOISE_MAX_AGE}")
 print(f"WHITENOISE_AUTOREFRESH: {WHITENOISE_AUTOREFRESH}")
 print(f"WHITENOISE_MIMETYPES: {WHITENOISE_MIMETYPES}")
