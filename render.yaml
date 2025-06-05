@@ -73,6 +73,12 @@ services:
         value: 31536000
       - key: WHITENOISE_AUTOREFRESH
         value: true
+      - key: SECURE_CONTENT_TYPE_NOSNIFF
+        value: true
+      - key: SECURE_BROWSER_XSS_FILTER
+        value: true
+      - key: X_FRAME_OPTIONS
+        value: DENY
     healthCheckPath: /health/
     autoDeploy: false  # Desabilitar deploy automático
     domains:

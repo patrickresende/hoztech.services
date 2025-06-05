@@ -143,9 +143,13 @@ WHITENOISE_ALLOW_ALL_ORIGINS = True
 WHITENOISE_ROOT = None
 WHITENOISE_MAX_AGE = 31536000
 WHITENOISE_AUTOREFRESH = True
+
+# Configuração detalhada de MIME types
 WHITENOISE_MIMETYPES = {
     '.png': 'image/png',
     '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.gif': 'image/gif',
     '.ico': 'image/x-icon',
     '.css': 'text/css',
     '.js': 'application/javascript',
@@ -154,20 +158,44 @@ WHITENOISE_MIMETYPES = {
     '.ttf': 'application/font-sfnt',
     '.eot': 'application/vnd.ms-fontobject',
     '.svg': 'image/svg+xml',
+    '.html': 'text/html',
+    '.txt': 'text/plain',
+    '.json': 'application/json',
+    '.xml': 'application/xml',
+    '.pdf': 'application/pdf',
+    '.zip': 'application/zip',
+    '.doc': 'application/msword',
+    '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    '.xls': 'application/vnd.ms-excel',
+    '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    '.ppt': 'application/vnd.ms-powerpoint',
+    '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
 }
 
-# Adicionar cabeçalhos de cache para arquivos estáticos
+# Headers de cache e segurança
 WHITENOISE_HEADERS = {
     '/static/css/*': {
         'Cache-Control': 'public, max-age=31536000',
-    },
-    '/static/images/*': {
-        'Cache-Control': 'public, max-age=31536000',
+        'X-Content-Type-Options': 'nosniff',
     },
     '/static/js/*': {
         'Cache-Control': 'public, max-age=31536000',
-    }
+        'X-Content-Type-Options': 'nosniff',
+    },
+    '/static/images/*': {
+        'Cache-Control': 'public, max-age=31536000',
+        'X-Content-Type-Options': 'nosniff',
+    },
+    '/static/fonts/*': {
+        'Cache-Control': 'public, max-age=31536000',
+        'X-Content-Type-Options': 'nosniff',
+    },
 }
+
+# Configurações de segurança adicionais
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
 
 # Logging Configuration
 LOGGING = {
