@@ -12,7 +12,7 @@ services:
     maxmemoryPolicy: noeviction
     ipAllowList: []
 
-  # Serviço Web (Django)
+  # Serviço Web (Django + Nginx)
   - type: web
     name: hoztechsite
     env: python
@@ -23,8 +23,15 @@ services:
       npm run build
       python manage.py collectstatic --noinput
       python manage.py migrate
+      # Instalar e configurar Nginx
+      apt-get update && apt-get install -y nginx
+      cp nginx.conf /etc/nginx/sites-available/default
+      ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+      nginx -t && service nginx restart
     startCommand: |
-      newrelic-admin run-program gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60
+      # Iniciar Gunicorn e Nginx
+      service nginx start
+      newrelic-admin run-program gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60 --bind 127.0.0.1:8000
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true
@@ -113,6 +120,15 @@ services:
         value: true
       - key: SENTRY_DSN
         sync: false
+      # Novas variáveis para Nginx
+      - key: NGINX_WORKER_PROCESSES
+        value: auto
+      - key: NGINX_WORKER_CONNECTIONS
+        value: 1024
+      - key: NGINX_KEEPALIVE_TIMEOUT
+        value: 65
+      - key: NGINX_CLIENT_MAX_BODY_SIZE
+        value: 4M
     healthCheckPath: /health/
     autoDeploy: false  # Desabilitar deploy automático
     domains:
@@ -150,4 +166,5 @@ preInstallCommand: |
     build-essential \
     python3-dev \
     nodejs \
-    npm 
+    npm \
+    nginx 

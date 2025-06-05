@@ -31,6 +31,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-secret-key-here')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
+WHITENOISE_USE_FINDERS = DEBUG
+
 # ALLOWED_HOSTS configuration
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,[::1],.onrender.com,hoz-tech.onrender.com').split(',')
 
@@ -44,20 +46,29 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'whitenoise.runserver_nostatic',  # WhiteNoise
     'core',  # Aplicação principal
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise
+]
+
+if not DEBUG:
+    # WhiteNoise apenas em produção
+    INSTALLED_APPS.append('whitenoise.runserver_nostatic')
+    MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+MIDDLEWARE.extend([
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+])
 
 # Debug Toolbar - Adicionar apenas se DEBUG estiver ativo
 if DEBUG:
@@ -141,15 +152,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# Configurações simplificadas do WhiteNoise
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
-# Configurações do WhiteNoise
-WHITENOISE_AUTOREFRESH = True
-WHITENOISE_USE_FINDERS = True
+# Configurações de MIME types para o WhiteNoise
 WHITENOISE_MIMETYPES = {
     '.css': 'text/css',
     '.js': 'application/javascript',
+    '.mjs': 'application/javascript',
     '.json': 'application/json',
     '.html': 'text/html',
     '.txt': 'text/plain',
@@ -165,67 +172,45 @@ WHITENOISE_MIMETYPES = {
     '.eot': 'application/vnd.ms-fontobject',
     '.otf': 'font/otf',
     '.webp': 'image/webp',
+    '.map': 'application/json',
+    '.xml': 'application/xml',
+    '.pdf': 'application/pdf',
+    '.zip': 'application/zip',
+    '.gz': 'application/gzip',
 }
 
-# Headers de segurança
-SECURE_CONTENT_TYPE_NOSNIFF = True
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-    X_FRAME_OPTIONS = 'DENY'
-
-# Configurações de logging
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': 'django.log',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'django.template': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'django.db.backends': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    },
-}
-
-# Configurações do Admin
-ADMIN_SITE_HEADER = "HOZ TECH"
-ADMIN_SITE_TITLE = "HOZ TECH Admin"
-ADMIN_INDEX_TITLE = "Administração do Site"
-
-# Configurações de compressão
+# Configurações adicionais para servir arquivos estáticos
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+
+# Headers de segurança para arquivos estáticos
+STATIC_FILE_HEADERS = {
+    '/*': {
+        'Cache-Control': 'public, max-age=31536000',
+        'Access-Control-Allow-Origin': '*',
+        'X-Content-Type-Options': 'nosniff',
+    },
+    '*.css': {
+        'Content-Type': 'text/css; charset=utf-8',
+    },
+    '*.js': {
+        'Content-Type': 'application/javascript; charset=utf-8',
+    },
+}
+
+# Configuração de compressão para arquivos estáticos
+WHITENOISE_COMPRESSION_ENABLED = True
+WHITENOISE_BROTLI_ENABLED = True  # Habilita compressão Brotli se disponível
+WHITENOISE_MAX_AGE = 31536000  # 1 ano em segundos
+
+# Configurações de cache para arquivos estáticos
+if not DEBUG:
+    WHITENOISE_STATIC_PREFIX = '/static/'
+    WHITENOISE_ALLOW_ALL_ORIGINS = True
+    WHITENOISE_SKIP_COMPRESS_EXTENSIONS = []
+    WHITENOISE_ADD_HEADERS_FUNCTION = None
 
 # Imprime informações de configuração
 print("\n=== Configuração de Arquivos Estáticos ===")

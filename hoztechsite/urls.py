@@ -18,12 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from core.views import health_check
 
-# Configurar o título do admin
-admin.site.site_header = settings.ADMIN_SITE_HEADER
-admin.site.site_title = settings.ADMIN_SITE_TITLE
-admin.site.index_title = settings.ADMIN_INDEX_TITLE
+# Configurações básicas do admin
+admin.site.site_header = "HOZ TECH Admin"
+admin.site.site_title = "HOZ TECH Admin Portal"
+admin.site.index_title = "Bem-vindo ao Portal Admin da HOZ TECH"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +35,5 @@ urlpatterns = [
 
 # Servir arquivos estáticos e de mídia em desenvolvimento
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += [path('__debug__/', include('debug_toolbar.urls'))]
