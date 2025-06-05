@@ -6,21 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Hoz Tech - Soluções tecnológicas inovadoras para seu negócio">
     <meta name="keywords" content="tecnologia, desenvolvimento, software, soluções digitais">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#0a0b1e">
     <title>{% block title %}Hoz Tech{% endblock %}</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
     <link rel="apple-touch-icon" href="{% static 'images/logo.png' %}">
     
-    <!-- Google Fonts -->
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="{% static 'css/variables.css' %}" as="style" type="text/css">
+    <link rel="preload" href="{% static 'css/base.css' %}" as="style" type="text/css">
+    <link rel="preload" href="{% static 'js/cookie_manager.js' %}" as="script" type="application/javascript">
+    <link rel="preload" href="{% static 'js/contact_form.js' %}" as="script" type="application/javascript">
+    
+    <!-- Google Fonts com preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <!-- Variables CSS -->
-    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+    
+    <!-- CSS Próprio -->
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/images.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/cookie_manager.css' %}" type="text/css">
+    
+    <!-- JavaScript Próprio -->
+    <script defer src="{% static 'js/cookie_manager.js' %}" type="application/javascript"></script>
+    <script defer src="{% static 'js/contact_form.js' %}" type="application/javascript"></script>
+    
+    <!-- Estilos Críticos Inline -->
     <style>
         :root {
             /* Cores Principais */
@@ -402,11 +423,20 @@
             transform: scale(1.05);
         }
     </style>
-    <!-- Base CSS -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/images.css' %}">
-    <link rel="stylesheet" href="{% static 'css/cookie_manager.css' %}">
     {% block extra_css %}{% endblock %}
+    
+    <!-- Verificação de Carregamento -->
+    <script type="application/javascript">
+        window.addEventListener('load', function() {
+            console.log('Verificando carregamento de recursos:');
+            document.querySelectorAll('link[rel="stylesheet"]').forEach(function(link) {
+                console.log('CSS:', link.href, link.sheet ? 'carregado' : 'não carregado');
+            });
+            document.querySelectorAll('script[src]').forEach(function(script) {
+                console.log('JS:', script.src, script.loaded ? 'carregado' : 'não carregado');
+            });
+        });
+    </script>
 </head>
 <body>
     <!-- Navbar -->
@@ -573,10 +603,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="{% static 'js/contact_form.js' %}"></script>
-    <script src="{% static 'js/cookie_manager.js' %}"></script>
     
     <script>
         // Back to Top Button

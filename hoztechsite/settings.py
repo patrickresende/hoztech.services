@@ -38,19 +38,19 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,[::1],.onre
 # Application definition
 
 INSTALLED_APPS = [
-    'core.apps.CoreConfig',  # Nossa aplicação principal
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',  # WhiteNoise
+    'core',  # Aplicação principal
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -58,6 +58,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Debug Toolbar - Adicionar apenas se DEBUG estiver ativo
+if DEBUG:
+    INSTALLED_APPS.append('debug_toolbar')
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    INTERNAL_IPS = ['127.0.0.1']
 
 ROOT_URLCONF = 'hoztechsite.urls'
 
@@ -135,40 +141,18 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# Configurações de Segurança
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_HSTS_SECONDS = 31536000  # 1 ano
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
-SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
-SECURE_CROSS_ORIGIN_EMBEDDER_POLICY = 'require-corp'
-SECURE_CROSS_ORIGIN_RESOURCE_POLICY = 'same-site'
-
-# Headers de segurança adicionais
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
-SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
-SECURE_CROSS_ORIGIN_EMBEDDER_POLICY = 'require-corp'
-SECURE_CROSS_ORIGIN_RESOURCE_POLICY = 'same-site'
-
-# WhiteNoise Configuration
+# Configurações simplificadas do WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-WHITENOISE_USE_FINDERS = True
-WHITENOISE_MANIFEST_STRICT = False
-WHITENOISE_ALLOW_ALL_ORIGINS = True
-WHITENOISE_MAX_AGE = 31536000
-WHITENOISE_AUTOREFRESH = True
 
-# Configuração de MIME types
+# Configurações do WhiteNoise
+WHITENOISE_AUTOREFRESH = True
+WHITENOISE_USE_FINDERS = True
 WHITENOISE_MIMETYPES = {
-    '.css': 'text/css; charset=utf-8',
-    '.js': 'application/javascript; charset=utf-8',
+    '.css': 'text/css',
+    '.js': 'application/javascript',
+    '.json': 'application/json',
+    '.html': 'text/html',
+    '.txt': 'text/plain',
     '.png': 'image/png',
     '.jpg': 'image/jpeg',
     '.jpeg': 'image/jpeg',
@@ -179,58 +163,33 @@ WHITENOISE_MIMETYPES = {
     '.woff2': 'font/woff2',
     '.ttf': 'font/ttf',
     '.eot': 'application/vnd.ms-fontobject',
+    '.otf': 'font/otf',
+    '.webp': 'image/webp',
 }
 
-# Headers de cache e segurança
-WHITENOISE_HEADERS = {
-    '*': {
-        'Cache-Control': 'public, max-age=31536000',
-        'Access-Control-Allow-Origin': '*',
-        'X-Content-Type-Options': 'nosniff',
-    },
-}
-
-# Configurações de CSP (Content Security Policy)
-CSP_DEFAULT_SRC = ("'self'",)
-CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
-CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "'unsafe-eval'")
-CSP_IMG_SRC = ("'self'", "data:", "https:")
-CSP_FONT_SRC = ("'self'", "data:", "https:")
-CSP_CONNECT_SRC = ("'self'", "https:")
-CSP_MEDIA_SRC = ("'self'", "https:")
-CSP_OBJECT_SRC = ("'none'",)
-CSP_FRAME_SRC = ("'none'",)
-CSP_BASE_URI = ("'self'",)
-CSP_FORM_ACTION = ("'self'",)
-CSP_FRAME_ANCESTORS = ("'none'",)
-CSP_BLOCK_ALL_MIXED_CONTENT = True
-CSP_UPGRADE_INSECURE_REQUESTS = True
+# Headers de segurança
+SECURE_CONTENT_TYPE_NOSNIFF = True
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = 'DENY'
 
 # Configurações de logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '[{levelname}] {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '[{levelname}] {message}',
-            'style': '{',
-        },
-    },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-            'level': 'DEBUG',
         },
         'file': {
             'class': 'logging.FileHandler',
-            'filename': 'debug.log',
-            'formatter': 'verbose',
-            'level': 'DEBUG',
+            'filename': 'django.log',
         },
     },
     'loggers': {
@@ -239,30 +198,36 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
         },
-        'django.server': {
+        'django.request': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.template': {
             'handlers': ['console', 'file'],
             'level': 'INFO',
-            'propagate': False,
-        },
-        'whitenoise': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
             'propagate': True,
         },
-        'django.contrib.staticfiles': {
+        'django.db.backends': {
             'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'core': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True,
         },
     },
 }
 
-# Print configuration for debugging
+# Configurações do Admin
+ADMIN_SITE_HEADER = "HOZ TECH"
+ADMIN_SITE_TITLE = "HOZ TECH Admin"
+ADMIN_INDEX_TITLE = "Administração do Site"
+
+# Configurações de compressão
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+# Imprime informações de configuração
 print("\n=== Configuração de Arquivos Estáticos ===")
 print(f"BASE_DIR: {BASE_DIR}")
 print(f"STATIC_URL: {STATIC_URL}")
@@ -270,10 +235,6 @@ print(f"STATIC_ROOT: {STATIC_ROOT}")
 print(f"STATICFILES_DIRS: {STATICFILES_DIRS}")
 print(f"STATICFILES_STORAGE: {STATICFILES_STORAGE}")
 print(f"WHITENOISE_USE_FINDERS: {WHITENOISE_USE_FINDERS}")
-print(f"WHITENOISE_MANIFEST_STRICT: {WHITENOISE_MANIFEST_STRICT}")
-print(f"WHITENOISE_ALLOW_ALL_ORIGINS: {WHITENOISE_ALLOW_ALL_ORIGINS}")
-print(f"WHITENOISE_MAX_AGE: {WHITENOISE_MAX_AGE}")
-print(f"WHITENOISE_AUTOREFRESH: {WHITENOISE_AUTOREFRESH}")
 print(f"WHITENOISE_MIMETYPES: {WHITENOISE_MIMETYPES}")
 print("=====================================\n")
 
@@ -317,6 +278,7 @@ if DEBUG:
     USE_X_FORWARDED_HOST = True
     USE_X_FORWARDED_PORT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    INTERNAL_IPS = ['127.0.0.1']
 else:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -324,8 +286,3 @@ else:
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
     X_FRAME_OPTIONS = 'DENY'
-
-# Admin Site Configuration
-ADMIN_SITE_HEADER = "HOZ TECH - Painel Administrativo"
-ADMIN_SITE_TITLE = "HOZ TECH Admin"
-ADMIN_INDEX_TITLE = "Administração do Site"

@@ -12,6 +12,7 @@ import sys
 from pathlib import Path
 
 from django.core.wsgi import get_wsgi_application
+from whitenoise import WhiteNoise
 
 # Adiciona o diretório do projeto ao Python path
 project_dir = Path(__file__).resolve().parent.parent
@@ -22,6 +23,12 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hoztechsite.settings')
 
 try:
     application = get_wsgi_application()
+    application = WhiteNoise(
+        application,
+        root=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'staticfiles'),
+        prefix='static/',
+        max_age=31536000
+    )
     print("=== WSGI Application iniciada com sucesso ===")
 except Exception as e:
     print(f"=== Erro ao iniciar WSGI Application: {e} ===")
