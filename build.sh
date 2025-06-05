@@ -25,9 +25,27 @@ else
 fi
 
 echo "Collecting static files..."
-python manage.py collectstatic --no-input
+python manage.py collectstatic --no-input --clear
 
 echo "Verifying collected files..."
+if [ -f "staticfiles/css/base.css" ]; then
+    echo "Base CSS file exists"
+    file staticfiles/css/base.css
+    ls -l staticfiles/css/base.css
+else
+    echo "ERROR: Base CSS file not found!"
+    exit 1
+fi
+
+if [ -f "staticfiles/css/images.css" ]; then
+    echo "Images CSS file exists"
+    file staticfiles/css/images.css
+    ls -l staticfiles/css/images.css
+else
+    echo "ERROR: Images CSS file not found!"
+    exit 1
+fi
+
 if [ -f "staticfiles/images/logo.png" ]; then
     echo "Collected logo file exists"
     file staticfiles/images/logo.png

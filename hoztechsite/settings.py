@@ -131,10 +131,12 @@ USE_TZ = True
 # Static files configuration with detailed comments
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
-# WhiteNoise Configuration with detailed logging
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# WhiteNoise Configuration
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 WHITENOISE_ALLOW_ALL_ORIGINS = True
@@ -154,9 +156,15 @@ WHITENOISE_MIMETYPES = {
     '.svg': 'image/svg+xml',
 }
 
-# Adicionar cabeçalhos de cache para imagens
+# Adicionar cabeçalhos de cache para arquivos estáticos
 WHITENOISE_HEADERS = {
+    '/static/css/*': {
+        'Cache-Control': 'public, max-age=31536000',
+    },
     '/static/images/*': {
+        'Cache-Control': 'public, max-age=31536000',
+    },
+    '/static/js/*': {
         'Cache-Control': 'public, max-age=31536000',
     }
 }

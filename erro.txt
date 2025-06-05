@@ -1,1204 +1,484 @@
-2025-06-04T20:28:19.736526256Z ==> Cloning from https://github.com/patrickresende/hoztech.services
-2025-06-04T20:28:20.328273022Z ==> Checking out commit 5b861c221f938cbdc25e5518ba8137e66ae5a0fa in branch main
-2025-06-04T20:28:21.429485669Z ==> Downloading cache...
-2025-06-04T20:28:35.174142136Z ==> Transferred 128MB in 8s. Extraction took 3s.
-2025-06-04T20:29:14.376593579Z ==> Using Python version 3.11.11 (default)
-2025-06-04T20:29:14.403019505Z ==> Docs on specifying a Python version: https://render.com/docs/python-version
-2025-06-04T20:29:19.71088932Z ==> Using Poetry version 1.7.1 (default)
-2025-06-04T20:29:19.762543777Z ==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
-2025-06-04T20:29:19.871483827Z ==> Running build command 'pip install -r requirements.txt'...
-2025-06-04T20:29:21.169635055Z Collecting Django<5.3.0,>=5.2.1 (from -r requirements.txt (line 2))
-2025-06-04T20:29:21.171534252Z   Using cached django-5.2.2-py3-none-any.whl.metadata (4.1 kB)
-2025-06-04T20:29:21.284103108Z Collecting python-dotenv>=1.0.0 (from -r requirements.txt (line 3))
-2025-06-04T20:29:21.286213754Z   Using cached python_dotenv-1.1.0-py3-none-any.whl.metadata (24 kB)
-2025-06-04T20:29:21.45992598Z Collecting dj-database-url>=2.1.0 (from -r requirements.txt (line 4))
-2025-06-04T20:29:21.461820756Z   Using cached dj_database_url-3.0.0-py3-none-any.whl.metadata (13 kB)
-2025-06-04T20:29:21.653399037Z Collecting whitenoise>=6.6.0 (from -r requirements.txt (line 5))
-2025-06-04T20:29:21.655355026Z   Using cached whitenoise-6.9.0-py3-none-any.whl.metadata (3.6 kB)
-2025-06-04T20:29:21.81172004Z Collecting gunicorn>=21.2.0 (from -r requirements.txt (line 6))
-2025-06-04T20:29:21.814008925Z   Using cached gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)
-2025-06-04T20:29:22.013314968Z Collecting psycopg2-binary>=2.9.9 (from -r requirements.txt (line 9))
-2025-06-04T20:29:22.023084644Z   Using cached psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
-2025-06-04T20:29:22.437386806Z Collecting pyOpenSSL>=24.0.0 (from -r requirements.txt (line 12))
-2025-06-04T20:29:22.524115493Z   Downloading pyopenssl-25.1.0-py3-none-any.whl.metadata (17 kB)
-2025-06-04T20:29:23.054255751Z Collecting cryptography>=42.0.0 (from -r requirements.txt (line 13))
-2025-06-04T20:29:23.064474527Z   Downloading cryptography-45.0.3-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
-2025-06-04T20:29:23.229118958Z Collecting django-debug-toolbar>=4.2.0 (from -r requirements.txt (line 16))
-2025-06-04T20:29:23.260003688Z   Downloading django_debug_toolbar-5.2.0-py3-none-any.whl.metadata (4.5 kB)
-2025-06-04T20:29:23.481667751Z Collecting pytest>=8.0.0 (from -r requirements.txt (line 17))
-2025-06-04T20:29:23.491645816Z   Downloading pytest-8.4.0-py3-none-any.whl.metadata (7.7 kB)
-2025-06-04T20:29:23.797606695Z Collecting pytest-django>=4.7.0 (from -r requirements.txt (line 18))
-2025-06-04T20:29:23.808312894Z   Downloading pytest_django-4.11.1-py3-none-any.whl.metadata (8.3 kB)
-2025-06-04T20:29:24.170146162Z Collecting pytest-cov>=4.1.0 (from -r requirements.txt (line 19))
-2025-06-04T20:29:24.23059022Z   Downloading pytest_cov-6.1.1-py3-none-any.whl.metadata (28 kB)
-2025-06-04T20:29:25.051716943Z Collecting black>=24.1.0 (from -r requirements.txt (line 20))
-2025-06-04T20:29:25.080860613Z   Downloading black-25.1.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl.metadata (81 kB)
-2025-06-04T20:29:25.208762148Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 81.3/81.3 kB 567.5 kB/s eta 0:00:00
-2025-06-04T20:29:25.3105009Z Collecting flake8>=7.0.0 (from -r requirements.txt (line 21))
-2025-06-04T20:29:25.335102962Z   Downloading flake8-7.2.0-py2.py3-none-any.whl.metadata (3.8 kB)
-2025-06-04T20:29:25.773096276Z Collecting isort>=5.13.0 (from -r requirements.txt (line 22))
-2025-06-04T20:29:25.811490167Z   Downloading isort-6.0.1-py3-none-any.whl.metadata (11 kB)
-2025-06-04T20:29:26.046185205Z Collecting sentry-sdk>=1.40.0 (from -r requirements.txt (line 25))
-2025-06-04T20:29:26.057295272Z   Downloading sentry_sdk-2.29.1-py2.py3-none-any.whl.metadata (10 kB)
-2025-06-04T20:29:26.114616707Z Collecting django-redis>=5.4.0 (from -r requirements.txt (line 26))
-2025-06-04T20:29:26.127360168Z   Downloading django_redis-5.4.0-py3-none-any.whl.metadata (32 kB)
-2025-06-04T20:29:26.329110603Z Collecting hiredis>=2.3.0 (from -r requirements.txt (line 27))
-2025-06-04T20:29:26.339823072Z   Downloading hiredis-3.2.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.2 kB)
-2025-06-04T20:29:26.380274217Z Collecting django-compressor>=4.4 (from -r requirements.txt (line 30))
-2025-06-04T20:29:26.382279429Z   Using cached django_compressor-4.5.1-py2.py3-none-any.whl.metadata (5.0 kB)
-2025-06-04T20:29:26.489593855Z Collecting django-libsass>=0.9 (from -r requirements.txt (line 31))
-2025-06-04T20:29:26.50066503Z   Downloading django_libsass-0.9-py3-none-any.whl.metadata (6.4 kB)
-2025-06-04T20:29:26.667286252Z Collecting newrelic>=9.3.0 (from -r requirements.txt (line 34))
-2025-06-04T20:29:26.678165308Z   Downloading newrelic-10.12.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.7 kB)
-2025-06-04T20:29:26.772787015Z Collecting Sphinx>=7.2.0 (from -r requirements.txt (line 37))
-2025-06-04T20:29:26.78472361Z   Downloading sphinx-8.2.3-py3-none-any.whl.metadata (7.0 kB)
-2025-06-04T20:29:26.831719194Z Collecting sphinx-rtd-theme>=2.0.0 (from -r requirements.txt (line 38))
-2025-06-04T20:29:26.841791923Z   Downloading sphinx_rtd_theme-3.0.2-py2.py3-none-any.whl.metadata (4.4 kB)
-2025-06-04T20:29:26.883525287Z Collecting django-browser-reload>=1.12.1 (from -r requirements.txt (line 41))
-2025-06-04T20:29:26.885492017Z   Using cached django_browser_reload-1.18.0-py3-none-any.whl.metadata (9.7 kB)
-2025-06-04T20:29:26.920866651Z Collecting django-bootstrap5==25.1 (from -r requirements.txt (line 42))
-2025-06-04T20:29:26.922859462Z   Using cached django_bootstrap5-25.1-py3-none-any.whl.metadata (5.8 kB)
-2025-06-04T20:29:26.958203675Z Collecting django-environ==0.11.2 (from -r requirements.txt (line 43))
-2025-06-04T20:29:26.960586703Z   Using cached django_environ-0.11.2-py2.py3-none-any.whl.metadata (11 kB)
-2025-06-04T20:29:27.008463608Z Collecting rcssmin>=1.1.1 (from -r requirements.txt (line 44))
-2025-06-04T20:29:27.0104806Z   Using cached rcssmin-1.2.1-cp311-cp311-manylinux1_x86_64.whl.metadata (4.7 kB)
-2025-06-04T20:29:27.053068633Z Collecting rjsmin>=1.2.1 (from -r requirements.txt (line 45))
-2025-06-04T20:29:27.055397449Z   Using cached rjsmin-1.2.4-cp311-cp311-manylinux1_x86_64.whl.metadata (4.5 kB)
-2025-06-04T20:29:27.32479325Z Collecting Pillow>=10.1.0 (from -r requirements.txt (line 46))
-2025-06-04T20:29:27.327031982Z   Using cached pillow-11.2.1-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (8.9 kB)
-2025-06-04T20:29:27.368360507Z Collecting django-crispy-forms==2.1 (from -r requirements.txt (line 49))
-2025-06-04T20:29:27.370209522Z   Using cached django_crispy_forms-2.1-py3-none-any.whl.metadata (5.0 kB)
-2025-06-04T20:29:27.402130468Z Collecting crispy-bootstrap5==2023.10 (from -r requirements.txt (line 50))
-2025-06-04T20:29:27.404128639Z   Using cached crispy_bootstrap5-2023.10-py3-none-any.whl.metadata (3.5 kB)
-2025-06-04T20:29:27.461430504Z Collecting django-cleanup==9.0.0 (from -r requirements.txt (line 51))
-2025-06-04T20:29:27.464161038Z   Using cached django_cleanup-9.0.0-py3-none-any.whl.metadata (10 kB)
-2025-06-04T20:29:27.550981929Z Collecting redis==6.1.0 (from -r requirements.txt (line 54))
-2025-06-04T20:29:27.553745696Z   Using cached redis-6.1.0-py3-none-any.whl.metadata (10 kB)
-2025-06-04T20:29:27.721878856Z Collecting djangorestframework==3.16.0 (from -r requirements.txt (line 57))
-2025-06-04T20:29:27.734930012Z   Using cached djangorestframework-3.16.0-py3-none-any.whl.metadata (11 kB)
-2025-06-04T20:29:27.984810592Z Collecting django-filter==25.1 (from -r requirements.txt (line 58))
-2025-06-04T20:29:27.987771727Z   Using cached django_filter-25.1-py3-none-any.whl.metadata (5.1 kB)
-2025-06-04T20:29:28.3172749Z Collecting django-user-agents==0.4.0 (from -r requirements.txt (line 61))
-2025-06-04T20:29:28.319714062Z   Using cached django_user_agents-0.4.0-py3-none-any.whl.metadata (6.2 kB)
-2025-06-04T20:29:28.59542336Z Collecting python-dateutil==2.9.0.post0 (from -r requirements.txt (line 62))
-2025-06-04T20:29:28.59738702Z   Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
-2025-06-04T20:29:28.808151586Z Collecting PyYAML==6.0.2 (from -r requirements.txt (line 63))
-2025-06-04T20:29:28.833807986Z   Using cached PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
-2025-06-04T20:29:29.105201188Z Collecting requests==2.31.0 (from -r requirements.txt (line 64))
-2025-06-04T20:29:29.110128853Z   Using cached requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)
-2025-06-04T20:29:29.284413454Z Collecting urllib3==2.4.0 (from -r requirements.txt (line 65))
-2025-06-04T20:29:29.287126448Z   Using cached urllib3-2.4.0-py3-none-any.whl.metadata (6.5 kB)
-2025-06-04T20:29:29.342499744Z Collecting django-cors-headers==4.3.1 (from -r requirements.txt (line 68))
-2025-06-04T20:29:29.34371306Z   Using cached django_cors_headers-4.3.1-py3-none-any.whl.metadata (16 kB)
-2025-06-04T20:29:29.376755197Z Collecting python-decouple==3.8 (from -r requirements.txt (line 69))
-2025-06-04T20:29:29.381035202Z   Using cached python_decouple-3.8-py3-none-any.whl.metadata (14 kB)
-2025-06-04T20:29:29.458407822Z Collecting XlsxWriter==3.1.9 (from -r requirements.txt (line 72))
-2025-06-04T20:29:29.46340088Z   Using cached XlsxWriter-3.1.9-py3-none-any.whl.metadata (2.6 kB)
-2025-06-04T20:29:29.548779945Z Collecting user-agents (from django-user-agents==0.4.0->-r requirements.txt (line 61))
-2025-06-04T20:29:29.550739985Z   Using cached user_agents-2.2.0-py3-none-any.whl.metadata (7.9 kB)
-2025-06-04T20:29:29.600778708Z Collecting six>=1.5 (from python-dateutil==2.9.0.post0->-r requirements.txt (line 62))
-2025-06-04T20:29:29.603791485Z   Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
-2025-06-04T20:29:29.824191101Z Collecting charset-normalizer<4,>=2 (from requests==2.31.0->-r requirements.txt (line 64))
-2025-06-04T20:29:29.826727606Z   Using cached charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (35 kB)
-2025-06-04T20:29:29.873399226Z Collecting idna<4,>=2.5 (from requests==2.31.0->-r requirements.txt (line 64))
-2025-06-04T20:29:29.876223374Z   Using cached idna-3.10-py3-none-any.whl.metadata (10 kB)
-2025-06-04T20:29:29.935160783Z Collecting certifi>=2017.4.17 (from requests==2.31.0->-r requirements.txt (line 64))
-2025-06-04T20:29:29.937378365Z   Using cached certifi-2025.4.26-py3-none-any.whl.metadata (2.5 kB)
-2025-06-04T20:29:30.001383414Z Collecting asgiref>=3.6 (from django-cors-headers==4.3.1->-r requirements.txt (line 68))
-2025-06-04T20:29:30.003752703Z   Using cached asgiref-3.8.1-py3-none-any.whl.metadata (9.3 kB)
-2025-06-04T20:29:30.084122079Z Collecting sqlparse>=0.3.1 (from Django<5.3.0,>=5.2.1->-r requirements.txt (line 2))
-2025-06-04T20:29:30.086617243Z   Using cached sqlparse-0.5.3-py3-none-any.whl.metadata (3.9 kB)
-2025-06-04T20:29:30.160159729Z Collecting typing_extensions>=4.0.0 (from dj-database-url>=2.1.0->-r requirements.txt (line 4))
-2025-06-04T20:29:30.161824954Z   Using cached typing_extensions-4.14.0-py3-none-any.whl.metadata (3.0 kB)
-2025-06-04T20:29:30.312738879Z Collecting packaging (from gunicorn>=21.2.0->-r requirements.txt (line 6))
-2025-06-04T20:29:30.315473594Z   Using cached packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
-2025-06-04T20:29:30.786730735Z Collecting cffi>=1.14 (from cryptography>=42.0.0->-r requirements.txt (line 13))
-2025-06-04T20:29:30.825498583Z   Downloading cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)
-2025-06-04T20:29:31.418101779Z Collecting iniconfig>=1 (from pytest>=8.0.0->-r requirements.txt (line 17))
-2025-06-04T20:29:31.468260968Z   Downloading iniconfig-2.1.0-py3-none-any.whl.metadata (2.7 kB)
-2025-06-04T20:29:31.893236616Z Collecting pluggy<2,>=1.5 (from pytest>=8.0.0->-r requirements.txt (line 17))
-2025-06-04T20:29:31.933146367Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
-2025-06-04T20:29:32.600945214Z Collecting pygments>=2.7.2 (from pytest>=8.0.0->-r requirements.txt (line 17))
-2025-06-04T20:29:32.639987495Z   Downloading pygments-2.19.1-py3-none-any.whl.metadata (2.5 kB)
-2025-06-04T20:29:33.64750496Z Collecting coverage>=7.5 (from coverage[toml]>=7.5->pytest-cov>=4.1.0->-r requirements.txt (line 19))
-2025-06-04T20:29:33.711870207Z   Downloading coverage-7.8.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (8.9 kB)
-2025-06-04T20:29:34.395729126Z Collecting click>=8.0.0 (from black>=24.1.0->-r requirements.txt (line 20))
-2025-06-04T20:29:34.51176518Z   Downloading click-8.2.1-py3-none-any.whl.metadata (2.5 kB)
-2025-06-04T20:29:35.067715233Z Collecting mypy-extensions>=0.4.3 (from black>=24.1.0->-r requirements.txt (line 20))
-2025-06-04T20:29:35.138361726Z   Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
-2025-06-04T20:29:35.561964312Z Collecting pathspec>=0.9.0 (from black>=24.1.0->-r requirements.txt (line 20))
-2025-06-04T20:29:35.572292543Z   Downloading pathspec-0.12.1-py3-none-any.whl.metadata (21 kB)
-2025-06-04T20:29:36.401129576Z Collecting platformdirs>=2 (from black>=24.1.0->-r requirements.txt (line 20))
-2025-06-04T20:29:36.428412721Z   Downloading platformdirs-4.3.8-py3-none-any.whl.metadata (12 kB)
-2025-06-04T20:29:36.862539856Z Collecting mccabe<0.8.0,>=0.7.0 (from flake8>=7.0.0->-r requirements.txt (line 21))
-2025-06-04T20:29:36.872911809Z   Downloading mccabe-0.7.0-py2.py3-none-any.whl.metadata (5.0 kB)
-2025-06-04T20:29:37.067269866Z Collecting pycodestyle<2.14.0,>=2.13.0 (from flake8>=7.0.0->-r requirements.txt (line 21))
-2025-06-04T20:29:37.077109325Z   Downloading pycodestyle-2.13.0-py2.py3-none-any.whl.metadata (4.5 kB)
-2025-06-04T20:29:37.588847522Z Collecting pyflakes<3.4.0,>=3.3.0 (from flake8>=7.0.0->-r requirements.txt (line 21))
-2025-06-04T20:29:37.599532289Z   Downloading pyflakes-3.3.2-py2.py3-none-any.whl.metadata (3.5 kB)
-2025-06-04T20:29:37.965420821Z Collecting django-appconf>=1.0.3 (from django-compressor>=4.4->-r requirements.txt (line 30))
-2025-06-04T20:29:37.9671511Z   Using cached django_appconf-1.1.0-py3-none-any.whl.metadata (5.2 kB)
-2025-06-04T20:29:37.973962981Z Collecting rcssmin>=1.1.1 (from -r requirements.txt (line 44))
-2025-06-04T20:29:37.975593315Z   Using cached rcssmin-1.1.2-cp311-cp311-manylinux1_x86_64.whl.metadata (4.5 kB)
-2025-06-04T20:29:37.983225924Z Collecting rjsmin>=1.2.1 (from -r requirements.txt (line 45))
-2025-06-04T20:29:37.984970733Z   Using cached rjsmin-1.2.2-cp311-cp311-manylinux1_x86_64.whl.metadata (4.4 kB)
-2025-06-04T20:29:38.227586032Z Collecting libsass<1,>=0.7.0 (from django-libsass>=0.9->-r requirements.txt (line 31))
-2025-06-04T20:29:38.264090827Z   Downloading libsass-0.23.0-cp38-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.whl.metadata (4.2 kB)
-2025-06-04T20:29:38.578435428Z Collecting sphinxcontrib-applehelp>=1.0.7 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:38.609457383Z   Downloading sphinxcontrib_applehelp-2.0.0-py3-none-any.whl.metadata (2.3 kB)
-2025-06-04T20:29:38.944653495Z Collecting sphinxcontrib-devhelp>=1.0.6 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:38.96010451Z   Downloading sphinxcontrib_devhelp-2.0.0-py3-none-any.whl.metadata (2.3 kB)
-2025-06-04T20:29:39.498913031Z Collecting sphinxcontrib-htmlhelp>=2.0.6 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:39.510349653Z   Downloading sphinxcontrib_htmlhelp-2.1.0-py3-none-any.whl.metadata (2.3 kB)
-2025-06-04T20:29:39.717480202Z Collecting sphinxcontrib-jsmath>=1.0.1 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:39.727310181Z   Downloading sphinxcontrib_jsmath-1.0.1-py2.py3-none-any.whl.metadata (1.4 kB)
-2025-06-04T20:29:40.217012122Z Collecting sphinxcontrib-qthelp>=1.0.6 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:40.226850811Z   Downloading sphinxcontrib_qthelp-2.0.0-py3-none-any.whl.metadata (2.3 kB)
-2025-06-04T20:29:40.91030251Z Collecting sphinxcontrib-serializinghtml>=1.1.9 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:41.031163154Z   Downloading sphinxcontrib_serializinghtml-2.0.0-py3-none-any.whl.metadata (2.4 kB)
-2025-06-04T20:29:41.213166427Z Collecting Jinja2>=3.1 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:41.223768231Z   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
-2025-06-04T20:29:41.445201493Z Collecting docutils<0.22,>=0.20 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:41.455132436Z   Downloading docutils-0.21.2-py3-none-any.whl.metadata (2.8 kB)
-2025-06-04T20:29:41.86162607Z Collecting snowballstemmer>=2.2 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:41.871206657Z   Downloading snowballstemmer-3.0.1-py3-none-any.whl.metadata (7.9 kB)
-2025-06-04T20:29:42.44249346Z Collecting babel>=2.13 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:42.452556449Z   Downloading babel-2.17.0-py3-none-any.whl.metadata (2.0 kB)
-2025-06-04T20:29:43.162470796Z Collecting alabaster>=0.7.14 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:43.210029915Z   Downloading alabaster-1.0.0-py3-none-any.whl.metadata (2.8 kB)
-2025-06-04T20:29:43.592995417Z Collecting imagesize>=1.3 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:43.602570053Z   Downloading imagesize-1.4.1-py2.py3-none-any.whl.metadata (1.5 kB)
-2025-06-04T20:29:44.174028733Z Collecting roman-numerals-py>=1.0.0 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:44.186063893Z   Downloading roman_numerals_py-3.1.0-py3-none-any.whl.metadata (3.6 kB)
-2025-06-04T20:29:44.824880735Z Collecting sphinxcontrib-jquery<5,>=4 (from sphinx-rtd-theme>=2.0.0->-r requirements.txt (line 38))
-2025-06-04T20:29:44.835252998Z   Downloading sphinxcontrib_jquery-4.1-py2.py3-none-any.whl.metadata (2.6 kB)
-2025-06-04T20:29:45.237973461Z Collecting pycparser (from cffi>=1.14->cryptography>=42.0.0->-r requirements.txt (line 13))
-2025-06-04T20:29:45.247785718Z   Downloading pycparser-2.22-py3-none-any.whl.metadata (943 bytes)
-2025-06-04T20:29:45.718340005Z Collecting MarkupSafe>=2.0 (from Jinja2>=3.1->Sphinx>=7.2.0->-r requirements.txt (line 37))
-2025-06-04T20:29:45.744605233Z   Downloading MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
-2025-06-04T20:29:46.138766225Z Collecting ua-parser>=0.10.0 (from user-agents->django-user-agents==0.4.0->-r requirements.txt (line 61))
-2025-06-04T20:29:46.180541941Z   Using cached ua_parser-1.0.1-py3-none-any.whl.metadata (5.6 kB)
-2025-06-04T20:29:46.304643622Z Collecting ua-parser-builtins (from ua-parser>=0.10.0->user-agents->django-user-agents==0.4.0->-r requirements.txt (line 61))
-2025-06-04T20:29:46.307375987Z   Using cached ua_parser_builtins-0.18.0.post1-py3-none-any.whl.metadata (1.4 kB)
-2025-06-04T20:29:46.351679428Z Using cached django_bootstrap5-25.1-py3-none-any.whl (26 kB)
-2025-06-04T20:29:46.353422348Z Using cached django_environ-0.11.2-py2.py3-none-any.whl (19 kB)
-2025-06-04T20:29:46.355071733Z Using cached django_crispy_forms-2.1-py3-none-any.whl (31 kB)
-2025-06-04T20:29:46.356655125Z Using cached crispy_bootstrap5-2023.10-py3-none-any.whl (22 kB)
-2025-06-04T20:29:46.358350492Z Using cached django_cleanup-9.0.0-py3-none-any.whl (10 kB)
-2025-06-04T20:29:46.359866902Z Using cached redis-6.1.0-py3-none-any.whl (273 kB)
-2025-06-04T20:29:46.361935606Z Using cached djangorestframework-3.16.0-py3-none-any.whl (1.1 MB)
-2025-06-04T20:29:46.365112351Z Using cached django_filter-25.1-py3-none-any.whl (94 kB)
-2025-06-04T20:29:46.366772217Z Using cached django_user_agents-0.4.0-py3-none-any.whl (8.6 kB)
-2025-06-04T20:29:46.368326788Z Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
-2025-06-04T20:29:46.370228454Z Using cached PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (762 kB)
-2025-06-04T20:29:46.372923337Z Using cached requests-2.31.0-py3-none-any.whl (62 kB)
-2025-06-04T20:29:46.37452832Z Using cached urllib3-2.4.0-py3-none-any.whl (128 kB)
-2025-06-04T20:29:46.376220968Z Using cached django_cors_headers-4.3.1-py3-none-any.whl (12 kB)
-2025-06-04T20:29:46.377708035Z Using cached python_decouple-3.8-py3-none-any.whl (9.9 kB)
-2025-06-04T20:29:46.379199493Z Using cached XlsxWriter-3.1.9-py3-none-any.whl (154 kB)
-2025-06-04T20:29:46.38087451Z Using cached django-5.2.2-py3-none-any.whl (8.3 MB)
-2025-06-04T20:29:46.394406837Z Using cached python_dotenv-1.1.0-py3-none-any.whl (20 kB)
-2025-06-04T20:29:46.429298859Z Using cached dj_database_url-3.0.0-py3-none-any.whl (8.8 kB)
-2025-06-04T20:29:46.430820528Z Using cached whitenoise-6.9.0-py3-none-any.whl (20 kB)
-2025-06-04T20:29:46.432356729Z Using cached gunicorn-23.0.0-py3-none-any.whl (85 kB)
-2025-06-04T20:29:46.434076787Z Using cached psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
-2025-06-04T20:29:46.450481885Z Downloading pyopenssl-25.1.0-py3-none-any.whl (56 kB)
-2025-06-04T20:29:46.527381553Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.8/56.8 kB 625.2 kB/s eta 0:00:00
-2025-06-04T20:29:46.537335178Z Downloading cryptography-45.0.3-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
-2025-06-04T20:29:46.747650842Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 21.4 MB/s eta 0:00:00
-2025-06-04T20:29:46.759897681Z Downloading django_debug_toolbar-5.2.0-py3-none-any.whl (262 kB)
-2025-06-04T20:29:46.846642078Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 262.8/262.8 kB 3.0 MB/s eta 0:00:00
-2025-06-04T20:29:46.857111466Z Downloading pytest-8.4.0-py3-none-any.whl (363 kB)
-2025-06-04T20:29:47.218589846Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 363.8/363.8 kB 986.1 kB/s eta 0:00:00
-2025-06-04T20:29:47.229213681Z Downloading pytest_django-4.11.1-py3-none-any.whl (25 kB)
-2025-06-04T20:29:47.534386753Z Downloading pytest_cov-6.1.1-py3-none-any.whl (23 kB)
-2025-06-04T20:29:47.782997374Z Downloading black-25.1.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl (1.7 MB)
-2025-06-04T20:29:47.932086395Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 11.9 MB/s eta 0:00:00
-2025-06-04T20:29:47.942766233Z Downloading flake8-7.2.0-py2.py3-none-any.whl (57 kB)
-2025-06-04T20:29:48.024230759Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.8/57.8 kB 601.5 kB/s eta 0:00:00
-2025-06-04T20:29:48.034710107Z Downloading isort-6.0.1-py3-none-any.whl (94 kB)
-2025-06-04T20:29:48.097857728Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 94.2/94.2 kB 1.4 MB/s eta 0:00:00
-2025-06-04T20:29:48.108974855Z Downloading sentry_sdk-2.29.1-py2.py3-none-any.whl (341 kB)
-2025-06-04T20:29:48.345333778Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 341.6/341.6 kB 1.4 MB/s eta 0:00:00
-2025-06-04T20:29:48.386737876Z Downloading django_redis-5.4.0-py3-none-any.whl (31 kB)
-2025-06-04T20:29:48.812947269Z Downloading hiredis-3.2.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (170 kB)
-2025-06-04T20:29:49.169264614Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 170.1/170.1 kB 451.5 kB/s eta 0:00:00
-2025-06-04T20:29:49.171014444Z Using cached django_compressor-4.5.1-py2.py3-none-any.whl (145 kB)
-2025-06-04T20:29:49.172921741Z Using cached rcssmin-1.1.2-cp311-cp311-manylinux1_x86_64.whl (48 kB)
-2025-06-04T20:29:49.174542105Z Using cached rjsmin-1.2.2-cp311-cp311-manylinux1_x86_64.whl (31 kB)
-2025-06-04T20:29:49.185511835Z Downloading django_libsass-0.9-py3-none-any.whl (6.6 kB)
-2025-06-04T20:29:49.746145921Z Downloading newrelic-10.12.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (842 kB)
-2025-06-04T20:29:50.00522898Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 843.0/843.0 kB 3.2 MB/s eta 0:00:00
-2025-06-04T20:29:50.016231172Z Downloading sphinx-8.2.3-py3-none-any.whl (3.6 MB)
-2025-06-04T20:29:50.48376009Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.6/3.6 MB 7.7 MB/s eta 0:00:00
-2025-06-04T20:29:50.498076533Z Downloading sphinx_rtd_theme-3.0.2-py2.py3-none-any.whl (7.7 MB)
-2025-06-04T20:29:51.685078523Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.7/7.7 MB 6.5 MB/s eta 0:00:00
-2025-06-04T20:29:51.687790367Z Using cached django_browser_reload-1.18.0-py3-none-any.whl (12 kB)
-2025-06-04T20:29:51.690506091Z Using cached pillow-11.2.1-cp311-cp311-manylinux_2_28_x86_64.whl (4.6 MB)
-2025-06-04T20:29:51.712931554Z Downloading alabaster-1.0.0-py3-none-any.whl (13 kB)
-2025-06-04T20:29:52.176456649Z Using cached asgiref-3.8.1-py3-none-any.whl (23 kB)
-2025-06-04T20:29:52.188457786Z Downloading babel-2.17.0-py3-none-any.whl (10.2 MB)
-2025-06-04T20:29:53.245579761Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.2/10.2 MB 9.6 MB/s eta 0:00:00
-2025-06-04T20:29:53.247468737Z Using cached certifi-2025.4.26-py3-none-any.whl (159 kB)
-2025-06-04T20:29:53.257805219Z Downloading cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (467 kB)
-2025-06-04T20:29:53.526602961Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 467.2/467.2 kB 1.7 MB/s eta 0:00:00
-2025-06-04T20:29:53.528354031Z Using cached charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (147 kB)
-2025-06-04T20:29:53.538079774Z Downloading click-8.2.1-py3-none-any.whl (102 kB)
-2025-06-04T20:29:53.959993512Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 102.2/102.2 kB 219.1 kB/s eta 0:00:00
-2025-06-04T20:29:53.980313879Z Downloading coverage-7.8.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (244 kB)
-2025-06-04T20:29:54.052174807Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 244.2/244.2 kB 3.4 MB/s eta 0:00:00
-2025-06-04T20:29:54.054410629Z Using cached django_appconf-1.1.0-py3-none-any.whl (6.4 kB)
-2025-06-04T20:29:54.064173844Z Downloading docutils-0.21.2-py3-none-any.whl (587 kB)
-2025-06-04T20:29:54.50930462Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 587.4/587.4 kB 1.3 MB/s eta 0:00:00
-2025-06-04T20:29:54.511034889Z Using cached idna-3.10-py3-none-any.whl (70 kB)
-2025-06-04T20:29:54.521333939Z Downloading imagesize-1.4.1-py2.py3-none-any.whl (8.8 kB)
-2025-06-04T20:29:55.000122721Z Downloading iniconfig-2.1.0-py3-none-any.whl (6.0 kB)
-2025-06-04T20:29:55.463797272Z Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
-2025-06-04T20:29:55.828166163Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 344.4 kB/s eta 0:00:00
-2025-06-04T20:29:55.83863134Z Downloading libsass-0.23.0-cp38-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.whl (9.4 MB)
-2025-06-04T20:29:56.179881967Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.4/9.4 MB 27.8 MB/s eta 0:00:00
-2025-06-04T20:29:56.190533083Z Downloading mccabe-0.7.0-py2.py3-none-any.whl (7.3 kB)
-2025-06-04T20:29:56.319174681Z Downloading mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
-2025-06-04T20:29:56.395738734Z Using cached packaging-25.0-py3-none-any.whl (66 kB)
-2025-06-04T20:29:56.405976341Z Downloading pathspec-0.12.1-py3-none-any.whl (31 kB)
-2025-06-04T20:29:56.515273597Z Downloading platformdirs-4.3.8-py3-none-any.whl (18 kB)
-2025-06-04T20:29:56.583689568Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
-2025-06-04T20:29:56.667291192Z Downloading pycodestyle-2.13.0-py2.py3-none-any.whl (31 kB)
-2025-06-04T20:29:56.766593892Z Downloading pyflakes-3.3.2-py2.py3-none-any.whl (63 kB)
-2025-06-04T20:29:56.796429273Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.2/63.2 kB 1.9 MB/s eta 0:00:00
-2025-06-04T20:29:56.810756866Z Downloading pygments-2.19.1-py3-none-any.whl (1.2 MB)
-2025-06-04T20:29:56.8730926Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 20.3 MB/s eta 0:00:00
-2025-06-04T20:29:56.88338321Z Downloading roman_numerals_py-3.1.0-py3-none-any.whl (7.7 kB)
-2025-06-04T20:29:56.908842631Z Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
-2025-06-04T20:29:56.921278878Z Downloading snowballstemmer-3.0.1-py3-none-any.whl (103 kB)
-2025-06-04T20:29:57.047622492Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 103.3/103.3 kB 749.4 kB/s eta 0:00:00
-2025-06-04T20:29:57.057358576Z Downloading sphinxcontrib_applehelp-2.0.0-py3-none-any.whl (119 kB)
-2025-06-04T20:29:57.161493356Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 119.3/119.3 kB 1.1 MB/s eta 0:00:00
-2025-06-04T20:29:57.172146262Z Downloading sphinxcontrib_devhelp-2.0.0-py3-none-any.whl (82 kB)
-2025-06-04T20:29:57.401427971Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.5/82.5 kB 318.1 kB/s eta 0:00:00
-2025-06-04T20:29:57.414498008Z Downloading sphinxcontrib_htmlhelp-2.1.0-py3-none-any.whl (98 kB)
-2025-06-04T20:29:57.486596997Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 98.7/98.7 kB 1.3 MB/s eta 0:00:00
-2025-06-04T20:29:57.496842494Z Downloading sphinxcontrib_jquery-4.1-py2.py3-none-any.whl (121 kB)
-2025-06-04T20:29:57.546237268Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 121.1/121.1 kB 2.3 MB/s eta 0:00:00
-2025-06-04T20:29:57.56054961Z Downloading sphinxcontrib_jsmath-1.0.1-py2.py3-none-any.whl (5.1 kB)
-2025-06-04T20:29:57.598180137Z Downloading sphinxcontrib_qthelp-2.0.0-py3-none-any.whl (88 kB)
-2025-06-04T20:29:57.632681141Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 88.7/88.7 kB 2.5 MB/s eta 0:00:00
-2025-06-04T20:29:57.643891822Z Downloading sphinxcontrib_serializinghtml-2.0.0-py3-none-any.whl (92 kB)
-2025-06-04T20:29:57.693367899Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 92.1/92.1 kB 1.7 MB/s eta 0:00:00
-2025-06-04T20:29:57.69514183Z Using cached sqlparse-0.5.3-py3-none-any.whl (44 kB)
-2025-06-04T20:29:57.696738403Z Using cached typing_extensions-4.14.0-py3-none-any.whl (43 kB)
-2025-06-04T20:29:57.698392238Z Using cached user_agents-2.2.0-py3-none-any.whl (9.6 kB)
-2025-06-04T20:29:57.708597654Z Downloading MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
-2025-06-04T20:29:57.749137483Z Using cached ua_parser-1.0.1-py3-none-any.whl (31 kB)
-2025-06-04T20:29:57.759055556Z Downloading pycparser-2.22-py3-none-any.whl (117 kB)
-2025-06-04T20:29:57.798360599Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.6/117.6 kB 2.9 MB/s eta 0:00:00
-2025-06-04T20:29:57.800172531Z Using cached ua_parser_builtins-0.18.0.post1-py3-none-any.whl (86 kB)
-2025-06-04T20:29:58.296366526Z Installing collected packages: rjsmin, rcssmin, python-decouple, XlsxWriter, whitenoise, urllib3, ua-parser-builtins, typing_extensions, sqlparse, sphinxcontrib-serializinghtml, sphinxcontrib-qthelp, sphinxcontrib-jsmath, sphinxcontrib-htmlhelp, sphinxcontrib-devhelp, sphinxcontrib-applehelp, snowballstemmer, six, roman-numerals-py, redis, PyYAML, python-dotenv, pygments, pyflakes, pycparser, pycodestyle, psycopg2-binary, pluggy, platformdirs, Pillow, pathspec, packaging, newrelic, mypy-extensions, mccabe, MarkupSafe, libsass, isort, iniconfig, imagesize, idna, hiredis, docutils, django-environ, django-cleanup, coverage, click, charset-normalizer, certifi, babel, asgiref, alabaster, ua-parser, sentry-sdk, requests, python-dateutil, pytest, Jinja2, gunicorn, flake8, Django, cffi, black, user-agents, Sphinx, pytest-django, pytest-cov, djangorestframework, django-redis, django-filter, django-debug-toolbar, django-crispy-forms, django-cors-headers, django-browser-reload, django-bootstrap5, django-appconf, dj-database-url, cryptography, sphinxcontrib-jquery, pyOpenSSL, django-user-agents, django-compressor, crispy-bootstrap5, sphinx-rtd-theme, django-libsass
-2025-06-04T20:30:14.884609402Z Successfully installed Django-5.2.2 Jinja2-3.1.6 MarkupSafe-3.0.2 Pillow-11.2.1 PyYAML-6.0.2 Sphinx-8.2.3 XlsxWriter-3.1.9 alabaster-1.0.0 asgiref-3.8.1 babel-2.17.0 black-25.1.0 certifi-2025.4.26 cffi-1.17.1 charset-normalizer-3.4.2 click-8.2.1 coverage-7.8.2 crispy-bootstrap5-2023.10 cryptography-45.0.3 dj-database-url-3.0.0 django-appconf-1.1.0 django-bootstrap5-25.1 django-browser-reload-1.18.0 django-cleanup-9.0.0 django-compressor-4.5.1 django-cors-headers-4.3.1 django-crispy-forms-2.1 django-debug-toolbar-5.2.0 django-environ-0.11.2 django-filter-25.1 django-libsass-0.9 django-redis-5.4.0 django-user-agents-0.4.0 djangorestframework-3.16.0 docutils-0.21.2 flake8-7.2.0 gunicorn-23.0.0 hiredis-3.2.1 idna-3.10 imagesize-1.4.1 iniconfig-2.1.0 isort-6.0.1 libsass-0.23.0 mccabe-0.7.0 mypy-extensions-1.1.0 newrelic-10.12.0 packaging-25.0 pathspec-0.12.1 platformdirs-4.3.8 pluggy-1.6.0 psycopg2-binary-2.9.10 pyOpenSSL-25.1.0 pycodestyle-2.13.0 pycparser-2.22 pyflakes-3.3.2 pygments-2.19.1 pytest-8.4.0 pytest-cov-6.1.1 pytest-django-4.11.1 python-dateutil-2.9.0.post0 python-decouple-3.8 python-dotenv-1.1.0 rcssmin-1.1.2 redis-6.1.0 requests-2.31.0 rjsmin-1.2.2 roman-numerals-py-3.1.0 sentry-sdk-2.29.1 six-1.17.0 snowballstemmer-3.0.1 sphinx-rtd-theme-3.0.2 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jquery-4.1 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 sqlparse-0.5.3 typing_extensions-4.14.0 ua-parser-1.0.1 ua-parser-builtins-0.18.0.post1 urllib3-2.4.0 user-agents-2.2.0 whitenoise-6.9.0
-2025-06-04T20:30:14.980380355Z 
-2025-06-04T20:30:14.995972117Z [notice] A new release of pip is available: 24.0 -> 25.1.1
-2025-06-04T20:30:14.995982337Z [notice] To update, run: pip install --upgrade pip
-2025-06-04T20:30:22.63959571Z ==> Uploading build...
-2025-06-04T20:30:31.628020829Z ==> Uploaded in 6.4s. Compression took 2.5s
-2025-06-04T20:30:31.663744174Z ==> Build successful 🎉
-2025-06-04T20:30:40.195810683Z ==> Deploying...
-2025-06-04T20:31:44.428800091Z ==> No open ports detected, continuing to scan...
-2025-06-04T20:31:44.505872324Z ==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
-2025-06-04T20:32:10.852358904Z ==> Running 'gunicorn core.wsgi:application'
-2025-06-04T20:32:14.258370691Z /opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/base.py:61: UserWarning: No directory at: /opt/render/project/src/staticfiles/
-2025-06-04T20:32:14.258397852Z   mw_instance = middleware(adapted_handler)
-2025-06-04T20:32:14.35371207Z [2025-06-04 17:32:14 -0300] [104] [INFO] Starting gunicorn 23.0.0
-2025-06-04T20:32:14.354080001Z [2025-06-04 17:32:14 -0300] [104] [INFO] Listening at: http://0.0.0.0:10000 (104)
-2025-06-04T20:32:14.354105572Z [2025-06-04 17:32:14 -0300] [104] [INFO] Using worker: sync
-2025-06-04T20:32:14.358474756Z [2025-06-04 17:32:14 -0300] [106] [INFO] Booting worker with pid: 106
-2025-06-04T20:32:15.20599152Z === WSGI Application iniciada com sucesso ===
-2025-06-04T20:32:15.206037271Z 127.0.0.1 - - [04/Jun/2025:17:32:15 -0300] "HEAD / HTTP/1.1" 301 0 "-" "Go-http-client/1.1"
-2025-06-04T20:32:20.929573581Z ==> Your service is live 🎉
-2025-06-04T20:32:24.069521751Z [2025-06-04 17:32:24 -0300] [106] [ERROR] Error handling request /
-2025-06-04T20:32:24.069553822Z Traceback (most recent call last):
-2025-06-04T20:32:24.069559952Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:24.069563542Z     response = get_response(request)
-2025-06-04T20:32:24.069565712Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069568082Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 181, in _get_response
-2025-06-04T20:32:24.069570332Z     callback, callback_args, callback_kwargs = self.resolve_request(request)
-2025-06-04T20:32:24.069572462Z                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069574532Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 313, in resolve_request
-2025-06-04T20:32:24.069577212Z     resolver_match = resolver.resolve(request.path_info)
-2025-06-04T20:32:24.069579622Z                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069581753Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 666, in resolve
-2025-06-04T20:32:24.069583873Z     for pattern in self.url_patterns:
-2025-06-04T20:32:24.069586103Z                    ^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069588193Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:24.069590533Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:24.069592563Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069594603Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
-2025-06-04T20:32:24.069596703Z     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
-2025-06-04T20:32:24.069598743Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069600793Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:24.069619864Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:24.069622194Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069624254Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:24.069626304Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:24.069627944Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069630584Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:24.069632254Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:24.069633894Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069635634Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:24.069637294Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:24.069638934Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:24.069640574Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:24.069642214Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:24.069644194Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:24.069646864Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:24.069649764Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:24.069652735Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069655425Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:24.069657875Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:24.069660535Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069663095Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:24.069665755Z 
-2025-06-04T20:32:24.069668635Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:24.069670895Z 
-2025-06-04T20:32:24.069673255Z Traceback (most recent call last):
-2025-06-04T20:32:24.069675945Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:24.069678525Z     response = get_response(request)
-2025-06-04T20:32:24.069681005Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069683516Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:24.069686316Z     response = response or self.get_response(request)
-2025-06-04T20:32:24.069689146Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069692046Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:24.069694516Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:24.069696596Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069700546Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:24.069702316Z     response = handle_uncaught_exception(
-2025-06-04T20:32:24.069703966Z 127.0.0.1 - - [04/Jun/2025:17:32:24 -0300] "GET / HTTP/1.1" 500 0 "-" "-"
-2025-06-04T20:32:24.069703976Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069709226Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:24.069717747Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:24.069719607Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069721387Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:24.069723057Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:24.069724827Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069726557Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:24.069728357Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:24.069729987Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069731627Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:24.069733317Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:24.069735057Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069736827Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:24.069738487Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:24.069740117Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069741797Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:24.069743507Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:24.069745167Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:24.069746858Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:24.069748507Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:24.069750138Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:24.069797519Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:24.069800739Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:24.069803499Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069806289Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:24.06980876Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:24.069811069Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.0698135Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:24.06981578Z 
-2025-06-04T20:32:24.06981806Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:24.06982021Z 
-2025-06-04T20:32:24.06982243Z Traceback (most recent call last):
-2025-06-04T20:32:24.06982485Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:24.06982702Z     response = get_response(request)
-2025-06-04T20:32:24.06982938Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.0698317Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:24.06983427Z     response = response or self.get_response(request)
-2025-06-04T20:32:24.06983701Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.06983982Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:24.069848311Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:24.069850901Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069853371Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:24.069855831Z     response = handle_uncaught_exception(
-2025-06-04T20:32:24.069857981Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069860371Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:24.069862411Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:24.069864691Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069867371Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:24.069869701Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:24.069871981Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069874222Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:24.069876291Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:24.069878662Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069881272Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:24.069883962Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:24.069886422Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069889252Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:24.069891892Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:24.069902802Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069905722Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:24.069908263Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:24.069910883Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:24.069913093Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:24.069915313Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:24.069917583Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:24.069919823Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:24.069922743Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:24.069925553Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069927873Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:24.069930123Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:24.069932333Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069934723Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:24.069937103Z 
-2025-06-04T20:32:24.069940024Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:24.069942324Z 
-2025-06-04T20:32:24.069944713Z Traceback (most recent call last):
-2025-06-04T20:32:24.069947184Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:24.069954584Z     response = get_response(request)
-2025-06-04T20:32:24.069957064Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069959424Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:24.069961744Z     response = response or self.get_response(request)
-2025-06-04T20:32:24.069964004Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069966734Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:24.069969204Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:24.069971685Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069974694Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:24.069977214Z     response = handle_uncaught_exception(
-2025-06-04T20:32:24.069979985Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069982465Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:24.069985085Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:24.069987535Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069989955Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:24.069992355Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:24.069994815Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.069997115Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:24.069999435Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:24.070001845Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070004166Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:24.070006475Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:24.070009146Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070011866Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:24.070014216Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:24.070016946Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070019406Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:24.070021856Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:24.070024126Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:24.070026616Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:24.070029186Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:24.070031496Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:24.070033806Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:24.070036326Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:24.070038907Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070041367Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:24.070050117Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:24.070053047Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070055307Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:24.070056847Z 
-2025-06-04T20:32:24.070058497Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:24.070060057Z 
-2025-06-04T20:32:24.070061747Z Traceback (most recent call last):
-2025-06-04T20:32:24.070072037Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:24.070073877Z     response = get_response(request)
-2025-06-04T20:32:24.070075508Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070077488Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:24.070079278Z     response = response or self.get_response(request)
-2025-06-04T20:32:24.070081098Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070082848Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:24.070084688Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:24.070086458Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070088218Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:24.070089948Z     response = handle_uncaught_exception(
-2025-06-04T20:32:24.070092178Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070094068Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:24.070095718Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:24.070097348Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070098998Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:24.070101218Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:24.070104149Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070107098Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:24.070110059Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:24.070112419Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070114849Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:24.070117409Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:24.070120249Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070122989Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:24.070125729Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:24.070128219Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070130539Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:24.070132979Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:24.07013535Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:24.07013755Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:24.07013955Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:24.07014652Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:24.07014898Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:24.07015121Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:24.07015354Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.0701557Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:24.07015812Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:24.07016057Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.07016297Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:24.07016506Z 
-2025-06-04T20:32:24.070167591Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:24.070169871Z 
-2025-06-04T20:32:24.070172651Z Traceback (most recent call last):
-2025-06-04T20:32:24.070175341Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:24.070177891Z     response = get_response(request)
-2025-06-04T20:32:24.070180481Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070183471Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:24.070186491Z     response = response or self.get_response(request)
-2025-06-04T20:32:24.070188241Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070189951Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:24.070191691Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:24.070193401Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070195151Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:24.070196861Z     response = handle_uncaught_exception(
-2025-06-04T20:32:24.070198491Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070200181Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:24.070201821Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:24.070210152Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070212002Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:24.070213742Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:24.070215532Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070217252Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:24.070218922Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:24.070220612Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070222302Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:24.070223982Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:24.070225682Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070227532Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:24.070232473Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:24.070234213Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070235882Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:24.070237562Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:24.070239273Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:24.070240983Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:24.070242653Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:24.070244293Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:24.070246033Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:24.070247663Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:24.070249363Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070251063Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:24.070252703Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:24.070254543Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070256203Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:24.070257733Z 
-2025-06-04T20:32:24.070259333Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:24.070260893Z 
-2025-06-04T20:32:24.070262503Z Traceback (most recent call last):
-2025-06-04T20:32:24.070264213Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:24.070266034Z     response = get_response(request)
-2025-06-04T20:32:24.070267683Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070269374Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:24.070271014Z     response = response or self.get_response(request)
-2025-06-04T20:32:24.070272654Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070274284Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:24.070275934Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:24.070277584Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070279224Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:24.070292804Z     response = handle_uncaught_exception(
-2025-06-04T20:32:24.070295864Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070298315Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:24.070301055Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:24.070303564Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070305915Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:24.070307955Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:24.070310025Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070312085Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:24.070318395Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:24.070320725Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070322865Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:24.070324995Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:24.070327355Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070329705Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:24.070332105Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:24.070334216Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070336896Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:24.070347656Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:24.070350266Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:24.070352856Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:24.070355266Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:24.070357586Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:24.070360086Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:24.070362406Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:24.070364926Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070367426Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:24.070369747Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:24.070372217Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070378087Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:24.070380457Z 
-2025-06-04T20:32:24.070382897Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:24.070385087Z 
-2025-06-04T20:32:24.070387417Z Traceback (most recent call last):
-2025-06-04T20:32:24.070389907Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:24.070392497Z     response = get_response(request)
-2025-06-04T20:32:24.070395067Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070397607Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/whitenoise/middleware.py", line 123, in __call__
-2025-06-04T20:32:24.070400067Z     return self.get_response(request)
-2025-06-04T20:32:24.070402518Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070405088Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:24.070407488Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:24.070409968Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070412628Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:24.070415188Z     response = handle_uncaught_exception(
-2025-06-04T20:32:24.070417628Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070420108Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:24.070422618Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:24.070429799Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070432688Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:24.070435429Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:24.070437909Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070440429Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:24.070442839Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:24.070445319Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070447799Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:24.070450289Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:24.070452639Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070455179Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:24.070457659Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:24.070460269Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070464389Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:24.07046692Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:24.07046934Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:24.0704718Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:24.07047427Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:24.07047665Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:24.07047916Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:24.07048159Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:24.07048407Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.07048654Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:24.07048895Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:24.0704916Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.07049393Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:24.070496101Z 
-2025-06-04T20:32:24.07049855Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:24.070500731Z 
-2025-06-04T20:32:24.070503061Z Traceback (most recent call last):
-2025-06-04T20:32:24.070505711Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:24.070508181Z     response = get_response(request)
-2025-06-04T20:32:24.070510651Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070538072Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:24.070548472Z     response = response or self.get_response(request)
-2025-06-04T20:32:24.070551452Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070562632Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:24.070565133Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:24.070567213Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070580943Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:24.070584093Z     response = handle_uncaught_exception(
-2025-06-04T20:32:24.070586133Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070588343Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:24.070590443Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:24.070592513Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070594633Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:24.070597954Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:24.070600014Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070602084Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:24.070604094Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:24.070606124Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070608194Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:24.070610194Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:24.070612204Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070615104Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:24.070617164Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:24.070619054Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070621424Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:24.070623594Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:24.070625634Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:24.070627645Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:24.070629574Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:24.070631515Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:24.070633455Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:24.070635475Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:24.070637475Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070639595Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:24.070641525Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:24.070643795Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070645785Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:24.070647665Z 
-2025-06-04T20:32:24.070649685Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:24.070651595Z 
-2025-06-04T20:32:24.070653495Z Traceback (most recent call last):
-2025-06-04T20:32:24.070655845Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 134, in handle
-2025-06-04T20:32:24.070657875Z     self.handle_request(listener, req, client, addr)
-2025-06-04T20:32:24.070659955Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 177, in handle_request
-2025-06-04T20:32:24.070666596Z     respiter = self.wsgi(environ, resp.start_response)
-2025-06-04T20:32:24.070668886Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070670886Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/wsgi.py", line 124, in __call__
-2025-06-04T20:32:24.070672846Z     response = self.get_response(request)
-2025-06-04T20:32:24.070677586Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070679896Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 140, in get_response
-2025-06-04T20:32:24.070681926Z     response = self._middleware_chain(request)
-2025-06-04T20:32:24.070683956Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070685946Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:24.070687986Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:24.070689956Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070692076Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:24.070694036Z     response = handle_uncaught_exception(
-2025-06-04T20:32:24.070696077Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070698117Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:24.070702407Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:24.070704677Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070726297Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:24.070733298Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:24.070737258Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070740208Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:24.070743438Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:24.070746568Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070749478Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:24.070775629Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:24.070778249Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070781149Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:24.070783379Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:24.070785829Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.07078833Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:24.070790959Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:24.07079369Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:24.07079898Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:24.0708022Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:24.07080516Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:24.07081661Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:24.07081855Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:24.07082026Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.07082202Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:24.07082376Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:24.070825781Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:24.070827661Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:25.775196805Z [2025-06-04 17:32:25 -0300] [106] [ERROR] Error handling request /
-2025-06-04T20:32:25.775223596Z Traceback (most recent call last):
-2025-06-04T20:32:25.775227456Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:25.775229606Z     response = get_response(request)
-2025-06-04T20:32:25.775231726Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775233846Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 181, in _get_response
-2025-06-04T20:32:25.775235916Z     callback, callback_args, callback_kwargs = self.resolve_request(request)
-2025-06-04T20:32:25.775238016Z                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775240087Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 313, in resolve_request
-2025-06-04T20:32:25.775242617Z     resolver_match = resolver.resolve(request.path_info)
-2025-06-04T20:32:25.775244617Z                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775246637Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 666, in resolve
-2025-06-04T20:32:25.775248587Z     for pattern in self.url_patterns:
-2025-06-04T20:32:25.775250627Z                    ^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775252727Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:25.775255167Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:25.775257137Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775259237Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
-2025-06-04T20:32:25.775261217Z     patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
-2025-06-04T20:32:25.775263127Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775265127Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:25.775267097Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:25.775269268Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775271228Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:25.775273197Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:25.775275238Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775277948Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:25.775280048Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:25.775281948Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775283838Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:25.775299078Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:25.775301669Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:25.775303769Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:25.775305818Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:25.775307789Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:25.775309719Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:25.775311659Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:25.775313939Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775315879Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:25.775317879Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:25.775319989Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775321949Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:25.775323709Z 
-2025-06-04T20:32:25.775325659Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:25.775327469Z 
-2025-06-04T20:32:25.775329549Z Traceback (most recent call last):
-2025-06-04T20:32:25.775332169Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:25.775334359Z     response = get_response(request)
-2025-06-04T20:32:25.775336479Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775338739Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:25.77534085Z     response = response or self.get_response(request)
-2025-06-04T20:32:25.77534319Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.7753454Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:25.77534758Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:25.77535015Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77535318Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:25.77535553Z     response = handle_uncaught_exception(
-2025-06-04T20:32:25.77535808Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775371331Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:25.775372711Z 127.0.0.1 - - [04/Jun/2025:17:32:25 -0300] "GET / HTTP/1.1" 500 0 "-" "-"
-2025-06-04T20:32:25.775374661Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:25.775387011Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775390601Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:25.775398032Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:25.775401761Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775404702Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:25.775407342Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:25.775410172Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775436442Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:25.775439743Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:25.775442293Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775445563Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:25.775448203Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:25.775450723Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775453303Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:25.775455993Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:25.775458613Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:25.775461103Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:25.775463414Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:25.775465794Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:25.775468943Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:25.775471534Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:25.775474164Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775476714Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:25.775479734Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:25.775482254Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775484964Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:25.775487324Z 
-2025-06-04T20:32:25.775490164Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:25.775492554Z 
-2025-06-04T20:32:25.775494914Z Traceback (most recent call last):
-2025-06-04T20:32:25.775497975Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:25.775500495Z     response = get_response(request)
-2025-06-04T20:32:25.775503255Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775505905Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:25.775508395Z     response = response or self.get_response(request)
-2025-06-04T20:32:25.775510905Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775513545Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:25.775516195Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:25.775518805Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775521965Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:25.775524745Z     response = handle_uncaught_exception(
-2025-06-04T20:32:25.775527155Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775529785Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:25.775532385Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:25.775534956Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775537666Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:25.775545856Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:25.775548386Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775550636Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:25.775552946Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:25.775555346Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775557946Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:25.775560386Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:25.775562837Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775565217Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:25.775567637Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:25.775577617Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775580337Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:25.775582927Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:25.775585457Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:25.775587987Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:25.775590397Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:25.775593037Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:25.775595558Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:25.775598327Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:25.775600348Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775602158Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:25.775603808Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:25.775605448Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775607168Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:25.775608728Z 
-2025-06-04T20:32:25.775610358Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:25.775612008Z 
-2025-06-04T20:32:25.775613678Z Traceback (most recent call last):
-2025-06-04T20:32:25.775615468Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:25.775617158Z     response = get_response(request)
-2025-06-04T20:32:25.775618768Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775620478Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:25.775625208Z     response = response or self.get_response(request)
-2025-06-04T20:32:25.775628068Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775630688Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:25.775633229Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:25.775635799Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775638589Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:25.775646809Z     response = handle_uncaught_exception(
-2025-06-04T20:32:25.775649449Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775651989Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:25.775654409Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:25.775656729Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77565914Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:25.77566166Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:25.77566422Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77566688Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:25.77566937Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:25.77567211Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77567539Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:25.77567816Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:25.77568052Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.7756832Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:25.77568554Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:25.77568817Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77569093Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:25.77569357Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:25.77569533Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:25.77569701Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:25.775698651Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:25.775700401Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:25.775702051Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:25.775703671Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:25.775705471Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775707201Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:25.775708871Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:25.775710631Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775712281Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:25.775713871Z 
-2025-06-04T20:32:25.775715561Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:25.775717121Z 
-2025-06-04T20:32:25.775718721Z Traceback (most recent call last):
-2025-06-04T20:32:25.775728591Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:25.775730522Z     response = get_response(request)
-2025-06-04T20:32:25.775732232Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775734022Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:25.775739262Z     response = response or self.get_response(request)
-2025-06-04T20:32:25.775740982Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775742742Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:25.775745642Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:25.775748482Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775781313Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:25.775793024Z     response = handle_uncaught_exception(
-2025-06-04T20:32:25.775795984Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775798294Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:25.775800114Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:25.775801744Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775803474Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:25.775805134Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:25.775806844Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775808534Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:25.775810294Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:25.775813884Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775815644Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:25.775817394Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:25.775819054Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775820874Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:25.775822514Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:25.775824194Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775825914Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:25.775827634Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:25.775829275Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:25.775830925Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:25.775832565Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:25.775834175Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:25.775835825Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:25.775837465Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:25.775840135Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775842995Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:25.775845895Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:25.775848365Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775851225Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:25.775853555Z 
-2025-06-04T20:32:25.775861486Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:25.775863946Z 
-2025-06-04T20:32:25.775866306Z Traceback (most recent call last):
-2025-06-04T20:32:25.775868986Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:25.775871846Z     response = get_response(request)
-2025-06-04T20:32:25.775874556Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775876326Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:25.775878066Z     response = response or self.get_response(request)
-2025-06-04T20:32:25.775880126Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775881766Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:25.775883456Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:25.775885106Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775886886Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:25.775888536Z     response = handle_uncaught_exception(
-2025-06-04T20:32:25.775890256Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775891907Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:25.775893637Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:25.775902077Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775904027Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:25.775905787Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:25.775907467Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775909097Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:25.775910817Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:25.775912457Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775914107Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:25.775915857Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:25.775917667Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775919387Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:25.775921148Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:25.775922837Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775927318Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:25.775930298Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:25.775933318Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:25.775935928Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:25.775938668Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:25.775941478Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:25.775944198Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:25.775952318Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:25.775955249Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775958238Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:25.775961259Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:25.775963289Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775965019Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:25.775966569Z 
-2025-06-04T20:32:25.775968209Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:25.775969769Z 
-2025-06-04T20:32:25.775971679Z Traceback (most recent call last):
-2025-06-04T20:32:25.775973589Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:25.775975259Z     response = get_response(request)
-2025-06-04T20:32:25.775977019Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775978759Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:25.775980409Z     response = response or self.get_response(request)
-2025-06-04T20:32:25.775982109Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775983819Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:25.77598553Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:25.77598727Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.775989019Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:25.77599071Z     response = handle_uncaught_exception(
-2025-06-04T20:32:25.77599237Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77599406Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:25.77599576Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:25.77599742Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77599909Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:25.77600077Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:25.77600243Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77600412Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:25.77600579Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:25.77600746Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77600912Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:25.77601077Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:25.77601245Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77601512Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:25.77601782Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:25.776020391Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77602324Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:25.776038841Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:25.776042041Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:25.776044711Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:25.776047201Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:25.776048971Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:25.776050712Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:25.776052481Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:25.776054141Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776057782Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:25.776059492Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:25.776061142Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776062762Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:25.776064332Z 
-2025-06-04T20:32:25.776065962Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:25.776067512Z 
-2025-06-04T20:32:25.776069142Z Traceback (most recent call last):
-2025-06-04T20:32:25.776070862Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:25.776072532Z     response = get_response(request)
-2025-06-04T20:32:25.776074202Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776075832Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/whitenoise/middleware.py", line 123, in __call__
-2025-06-04T20:32:25.776077462Z     return self.get_response(request)
-2025-06-04T20:32:25.776079172Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776080822Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:25.776082452Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:25.776084093Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776085822Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:25.776087473Z     response = handle_uncaught_exception(
-2025-06-04T20:32:25.776089103Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776090833Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:25.776092613Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:25.776094273Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776095963Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:25.776097623Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:25.776099843Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776102663Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:25.776105613Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:25.776108123Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776110673Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:25.776118483Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:25.776121554Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776124324Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:25.776126634Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:25.776128754Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776131274Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:25.776134104Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:25.776136544Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:25.776139124Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:25.776141684Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:25.776143954Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:25.776146604Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:25.776149135Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:25.776151424Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776153835Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:25.776156495Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:25.776159325Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776161885Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:25.776164165Z 
-2025-06-04T20:32:25.776166645Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:25.776168945Z 
-2025-06-04T20:32:25.776171345Z Traceback (most recent call last):
-2025-06-04T20:32:25.776173975Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
-2025-06-04T20:32:25.776178835Z     response = get_response(request)
-2025-06-04T20:32:25.776181356Z                ^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776192296Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 120, in __call__
-2025-06-04T20:32:25.776195456Z     response = response or self.get_response(request)
-2025-06-04T20:32:25.776198016Z                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776200806Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:25.776203516Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:25.776206286Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776209146Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:25.776211876Z     response = handle_uncaught_exception(
-2025-06-04T20:32:25.776214337Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776217266Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:25.776219847Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:25.776222607Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776225317Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:25.776228027Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:25.776234857Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776237737Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:25.776240237Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:25.776242767Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776245227Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:25.776247747Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:25.776250327Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776252878Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:25.776255468Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:25.776258048Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776260608Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:25.776263178Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:25.776265768Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:25.776268408Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:25.776270958Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:25.776273648Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:25.776276098Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:25.776278608Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:25.776281039Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776283759Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:25.776286279Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:25.776288879Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776292659Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
-2025-06-04T20:32:25.776295099Z 
-2025-06-04T20:32:25.776297869Z During handling of the above exception, another exception occurred:
-2025-06-04T20:32:25.776300249Z 
-2025-06-04T20:32:25.776302579Z Traceback (most recent call last):
-2025-06-04T20:32:25.776305099Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 134, in handle
-2025-06-04T20:32:25.776307959Z     self.handle_request(listener, req, client, addr)
-2025-06-04T20:32:25.776310479Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/gunicorn/workers/sync.py", line 177, in handle_request
-2025-06-04T20:32:25.77631308Z     respiter = self.wsgi(environ, resp.start_response)
-2025-06-04T20:32:25.776315769Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77631826Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/wsgi.py", line 124, in __call__
-2025-06-04T20:32:25.77632069Z     response = self.get_response(request)
-2025-06-04T20:32:25.77632327Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77632605Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 140, in get_response
-2025-06-04T20:32:25.77632862Z     response = self._middleware_chain(request)
-2025-06-04T20:32:25.77633116Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77633801Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 57, in inner
-2025-06-04T20:32:25.77634078Z     response = response_for_exception(request, exc)
-2025-06-04T20:32:25.77634321Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.77634571Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 140, in response_for_exception
-2025-06-04T20:32:25.776348461Z     response = handle_uncaught_exception(
-2025-06-04T20:32:25.776350921Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776368491Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 184, in handle_uncaught_exception
-2025-06-04T20:32:25.776372251Z     callback = resolver.resolve_error_handler(500)
-2025-06-04T20:32:25.776374951Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776377742Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 732, in resolve_error_handler
-2025-06-04T20:32:25.776380371Z     callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
-2025-06-04T20:32:25.776382842Z                        ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776385652Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
-2025-06-04T20:32:25.776388512Z     res = instance.__dict__[self.name] = self.func(instance)
-2025-06-04T20:32:25.776390942Z                                          ^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776393512Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
-2025-06-04T20:32:25.776396242Z     return import_module(self.urlconf_name)
-2025-06-04T20:32:25.776399032Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776401722Z   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
-2025-06-04T20:32:25.776404282Z     return _bootstrap._gcd_import(name[level:], package, level)
-2025-06-04T20:32:25.776406842Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776409552Z   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
-2025-06-04T20:32:25.776411992Z   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
-2025-06-04T20:32:25.776414563Z   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
-2025-06-04T20:32:25.776417333Z   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
-2025-06-04T20:32:25.776419983Z   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
-2025-06-04T20:32:25.776422433Z   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-2025-06-04T20:32:25.776425293Z   File "/opt/render/project/src/hoztechsite/urls.py", line 24, in <module>
-2025-06-04T20:32:25.776427963Z     admin.site.site_header = settings.ADMIN_SITE_HEADER
-2025-06-04T20:32:25.776430753Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776433153Z   File "/opt/render/project/src/.venv/lib/python3.11/site-packages/django/conf/__init__.py", line 83, in __getattr__
-2025-06-04T20:32:25.776435863Z     val = getattr(_wrapped, name)
-2025-06-04T20:32:25.776438413Z           ^^^^^^^^^^^^^^^^^^^^^^^
-2025-06-04T20:32:25.776440963Z AttributeError: 'Settings' object has no attribute 'ADMIN_SITE_HEADER'
+Estou com alguns erros de deploy no render. Gostaria de entender e corrigí-los.
+
+2025-06-04T21:33:14.006476458Z ==> Cloning from https://github.com/patrickresende/hoztech.services
+2025-06-04T21:33:19.47717862Z ==> Checking out commit fe27d2b77a9c9261f0faba6b85fafe4aaa794464 in branch main
+2025-06-04T21:33:20.455220466Z ==> Downloading cache...
+2025-06-04T21:33:32.292706388Z ==> Transferred 216MB in 8s. Extraction took 3s.
+2025-06-04T21:33:37.367946739Z ==> Using Python version 3.11.11 (default)
+2025-06-04T21:33:37.393906224Z ==> Docs on specifying a Python version: https://render.com/docs/python-version
+2025-06-04T21:33:41.114860344Z ==> Using Poetry version 1.7.1 (default)
+2025-06-04T21:33:41.161593018Z ==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
+2025-06-04T21:33:41.171372632Z ==> Running build command 'pip install -r requirements.txt'...
+2025-06-04T21:33:41.773576416Z Collecting Django<5.3.0,>=5.2.1 (from -r requirements.txt (line 2))
+2025-06-04T21:33:41.775161295Z   Using cached django-5.2.2-py3-none-any.whl.metadata (4.1 kB)
+2025-06-04T21:33:41.805227923Z Collecting python-dotenv>=1.0.0 (from -r requirements.txt (line 3))
+2025-06-04T21:33:41.806754849Z   Using cached python_dotenv-1.1.0-py3-none-any.whl.metadata (24 kB)
+2025-06-04T21:33:41.832875282Z Collecting dj-database-url>=2.1.0 (from -r requirements.txt (line 4))
+2025-06-04T21:33:41.834326404Z   Using cached dj_database_url-3.0.0-py3-none-any.whl.metadata (13 kB)
+2025-06-04T21:33:41.868427412Z Collecting whitenoise>=6.6.0 (from -r requirements.txt (line 5))
+2025-06-04T21:33:41.869945537Z   Using cached whitenoise-6.9.0-py3-none-any.whl.metadata (3.6 kB)
+2025-06-04T21:33:41.901158742Z Collecting gunicorn>=21.2.0 (from -r requirements.txt (line 6))
+2025-06-04T21:33:41.902576733Z   Using cached gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)
+2025-06-04T21:33:41.974753886Z Collecting psycopg2-binary>=2.9.9 (from -r requirements.txt (line 9))
+2025-06-04T21:33:41.976215618Z   Using cached psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+2025-06-04T21:33:42.006593362Z Collecting pyOpenSSL>=24.0.0 (from -r requirements.txt (line 12))
+2025-06-04T21:33:42.008028544Z   Using cached pyopenssl-25.1.0-py3-none-any.whl.metadata (17 kB)
+2025-06-04T21:33:42.197119825Z Collecting cryptography>=42.0.0 (from -r requirements.txt (line 13))
+2025-06-04T21:33:42.198826999Z   Using cached cryptography-45.0.3-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+2025-06-04T21:33:42.237552967Z Collecting django-debug-toolbar>=4.2.0 (from -r requirements.txt (line 16))
+2025-06-04T21:33:42.23903843Z   Using cached django_debug_toolbar-5.2.0-py3-none-any.whl.metadata (4.5 kB)
+2025-06-04T21:33:42.301756665Z Collecting pytest>=8.0.0 (from -r requirements.txt (line 17))
+2025-06-04T21:33:42.303237428Z   Using cached pytest-8.4.0-py3-none-any.whl.metadata (7.7 kB)
+2025-06-04T21:33:42.349163082Z Collecting pytest-django>=4.7.0 (from -r requirements.txt (line 18))
+2025-06-04T21:33:42.350590663Z   Using cached pytest_django-4.11.1-py3-none-any.whl.metadata (8.3 kB)
+2025-06-04T21:33:42.400874612Z Collecting pytest-cov>=4.1.0 (from -r requirements.txt (line 19))
+2025-06-04T21:33:42.402397827Z   Using cached pytest_cov-6.1.1-py3-none-any.whl.metadata (28 kB)
+2025-06-04T21:33:42.465463129Z Collecting black>=24.1.0 (from -r requirements.txt (line 20))
+2025-06-04T21:33:42.46729089Z   Using cached black-25.1.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl.metadata (81 kB)
+2025-06-04T21:33:42.511004364Z Collecting flake8>=7.0.0 (from -r requirements.txt (line 21))
+2025-06-04T21:33:42.512675687Z   Using cached flake8-7.2.0-py2.py3-none-any.whl.metadata (3.8 kB)
+2025-06-04T21:33:42.56121518Z Collecting isort>=5.13.0 (from -r requirements.txt (line 22))
+2025-06-04T21:33:42.562721394Z   Using cached isort-6.0.1-py3-none-any.whl.metadata (11 kB)
+2025-06-04T21:33:42.626688431Z Collecting sentry-sdk>=1.40.0 (from -r requirements.txt (line 25))
+2025-06-04T21:33:42.628132652Z   Using cached sentry_sdk-2.29.1-py2.py3-none-any.whl.metadata (10 kB)
+2025-06-04T21:33:42.655441175Z Collecting django-redis>=5.4.0 (from -r requirements.txt (line 26))
+2025-06-04T21:33:42.656875886Z   Using cached django_redis-5.4.0-py3-none-any.whl.metadata (32 kB)
+2025-06-04T21:33:42.748384576Z Collecting hiredis>=2.3.0 (from -r requirements.txt (line 27))
+2025-06-04T21:33:42.749871339Z   Using cached hiredis-3.2.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.2 kB)
+2025-06-04T21:33:42.775281357Z Collecting django-compressor>=4.4 (from -r requirements.txt (line 30))
+2025-06-04T21:33:42.776723669Z   Using cached django_compressor-4.5.1-py2.py3-none-any.whl.metadata (5.0 kB)
+2025-06-04T21:33:42.797997252Z Collecting django-libsass>=0.9 (from -r requirements.txt (line 31))
+2025-06-04T21:33:42.799402382Z   Using cached django_libsass-0.9-py3-none-any.whl.metadata (6.4 kB)
+2025-06-04T21:33:42.931954254Z Collecting newrelic>=9.3.0 (from -r requirements.txt (line 34))
+2025-06-04T21:33:42.933668539Z   Using cached newrelic-10.12.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.7 kB)
+2025-06-04T21:33:42.99975236Z Collecting Sphinx>=7.2.0 (from -r requirements.txt (line 37))
+2025-06-04T21:33:43.001230013Z   Using cached sphinx-8.2.3-py3-none-any.whl.metadata (7.0 kB)
+2025-06-04T21:33:43.035895139Z Collecting sphinx-rtd-theme>=2.0.0 (from -r requirements.txt (line 38))
+2025-06-04T21:33:43.037352802Z   Using cached sphinx_rtd_theme-3.0.2-py2.py3-none-any.whl.metadata (4.4 kB)
+2025-06-04T21:33:43.063252324Z Collecting django-browser-reload>=1.12.1 (from -r requirements.txt (line 41))
+2025-06-04T21:33:43.06480053Z   Using cached django_browser_reload-1.18.0-py3-none-any.whl.metadata (9.7 kB)
+2025-06-04T21:33:43.091102092Z Collecting django-bootstrap5==25.1 (from -r requirements.txt (line 42))
+2025-06-04T21:33:43.092561675Z   Using cached django_bootstrap5-25.1-py3-none-any.whl.metadata (5.8 kB)
+2025-06-04T21:33:43.120666456Z Collecting django-environ==0.11.2 (from -r requirements.txt (line 43))
+2025-06-04T21:33:43.122092346Z   Using cached django_environ-0.11.2-py2.py3-none-any.whl.metadata (11 kB)
+2025-06-04T21:33:43.157466408Z Collecting rcssmin>=1.1.1 (from -r requirements.txt (line 44))
+2025-06-04T21:33:43.158880788Z   Using cached rcssmin-1.2.1-cp311-cp311-manylinux1_x86_64.whl.metadata (4.7 kB)
+2025-06-04T21:33:43.190883272Z Collecting rjsmin>=1.2.1 (from -r requirements.txt (line 45))
+2025-06-04T21:33:43.192390357Z   Using cached rjsmin-1.2.4-cp311-cp311-manylinux1_x86_64.whl.metadata (4.5 kB)
+2025-06-04T21:33:43.391969377Z Collecting Pillow>=10.1.0 (from -r requirements.txt (line 46))
+2025-06-04T21:33:43.393689642Z   Using cached pillow-11.2.1-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (8.9 kB)
+2025-06-04T21:33:43.421987033Z Collecting django-crispy-forms==2.1 (from -r requirements.txt (line 49))
+2025-06-04T21:33:43.423426704Z   Using cached django_crispy_forms-2.1-py3-none-any.whl.metadata (5.0 kB)
+2025-06-04T21:33:43.44798826Z Collecting crispy-bootstrap5==2023.10 (from -r requirements.txt (line 50))
+2025-06-04T21:33:43.44959808Z   Using cached crispy_bootstrap5-2023.10-py3-none-any.whl.metadata (3.5 kB)
+2025-06-04T21:33:43.47667178Z Collecting django-cleanup==9.0.0 (from -r requirements.txt (line 51))
+2025-06-04T21:33:43.47849773Z   Using cached django_cleanup-9.0.0-py3-none-any.whl.metadata (10 kB)
+2025-06-04T21:33:43.530832651Z Collecting redis==6.1.0 (from -r requirements.txt (line 54))
+2025-06-04T21:33:43.532562717Z   Using cached redis-6.1.0-py3-none-any.whl.metadata (10 kB)
+2025-06-04T21:33:43.573719254Z Collecting djangorestframework==3.16.0 (from -r requirements.txt (line 57))
+2025-06-04T21:33:43.575563075Z   Using cached djangorestframework-3.16.0-py3-none-any.whl.metadata (11 kB)
+2025-06-04T21:33:43.606392792Z Collecting django-filter==25.1 (from -r requirements.txt (line 58))
+2025-06-04T21:33:43.60818162Z   Using cached django_filter-25.1-py3-none-any.whl.metadata (5.1 kB)
+2025-06-04T21:33:43.631100225Z Collecting django-user-agents==0.4.0 (from -r requirements.txt (line 61))
+2025-06-04T21:33:43.632800389Z   Using cached django_user_agents-0.4.0-py3-none-any.whl.metadata (6.2 kB)
+2025-06-04T21:33:43.6602975Z Collecting python-dateutil==2.9.0.post0 (from -r requirements.txt (line 62))
+2025-06-04T21:33:43.662000585Z   Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+2025-06-04T21:33:43.709268414Z Collecting PyYAML==6.0.2 (from -r requirements.txt (line 63))
+2025-06-04T21:33:43.711020991Z   Using cached PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+2025-06-04T21:33:43.752968138Z Collecting requests==2.31.0 (from -r requirements.txt (line 64))
+2025-06-04T21:33:43.754795258Z   Using cached requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)
+2025-06-04T21:33:43.801567634Z Collecting urllib3==2.4.0 (from -r requirements.txt (line 65))
+2025-06-04T21:33:43.80330663Z   Using cached urllib3-2.4.0-py3-none-any.whl.metadata (6.5 kB)
+2025-06-04T21:33:43.841014107Z Collecting django-cors-headers==4.3.1 (from -r requirements.txt (line 68))
+2025-06-04T21:33:43.842555363Z   Using cached django_cors_headers-4.3.1-py3-none-any.whl.metadata (16 kB)
+2025-06-04T21:33:43.865911159Z Collecting python-decouple==3.8 (from -r requirements.txt (line 69))
+2025-06-04T21:33:43.867492397Z   Using cached python_decouple-3.8-py3-none-any.whl.metadata (14 kB)
+2025-06-04T21:33:43.922181954Z Collecting XlsxWriter==3.1.9 (from -r requirements.txt (line 72))
+2025-06-04T21:33:43.923864768Z   Using cached XlsxWriter-3.1.9-py3-none-any.whl.metadata (2.6 kB)
+2025-06-04T21:33:43.99420684Z Collecting user-agents (from django-user-agents==0.4.0->-r requirements.txt (line 61))
+2025-06-04T21:33:43.99581989Z   Using cached user_agents-2.2.0-py3-none-any.whl.metadata (7.9 kB)
+2025-06-04T21:33:44.024072979Z Collecting six>=1.5 (from python-dateutil==2.9.0.post0->-r requirements.txt (line 62))
+2025-06-04T21:33:44.025670048Z   Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+2025-06-04T21:33:44.174784079Z Collecting charset-normalizer<4,>=2 (from requests==2.31.0->-r requirements.txt (line 64))
+2025-06-04T21:33:44.176584178Z   Using cached charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (35 kB)
+2025-06-04T21:33:44.205322481Z Collecting idna<4,>=2.5 (from requests==2.31.0->-r requirements.txt (line 64))
+2025-06-04T21:33:44.206863197Z   Using cached idna-3.10-py3-none-any.whl.metadata (10 kB)
+2025-06-04T21:33:44.244951513Z Collecting certifi>=2017.4.17 (from requests==2.31.0->-r requirements.txt (line 64))
+2025-06-04T21:33:44.246435666Z   Using cached certifi-2025.4.26-py3-none-any.whl.metadata (2.5 kB)
+2025-06-04T21:33:44.285490519Z Collecting asgiref>=3.6 (from django-cors-headers==4.3.1->-r requirements.txt (line 68))
+2025-06-04T21:33:44.286979403Z   Using cached asgiref-3.8.1-py3-none-any.whl.metadata (9.3 kB)
+2025-06-04T21:33:44.341102863Z Collecting sqlparse>=0.3.1 (from Django<5.3.0,>=5.2.1->-r requirements.txt (line 2))
+2025-06-04T21:33:44.342568795Z   Using cached sqlparse-0.5.3-py3-none-any.whl.metadata (3.9 kB)
+2025-06-04T21:33:44.380756055Z Collecting typing_extensions>=4.0.0 (from dj-database-url>=2.1.0->-r requirements.txt (line 4))
+2025-06-04T21:33:44.382213007Z   Using cached typing_extensions-4.14.0-py3-none-any.whl.metadata (3.0 kB)
+2025-06-04T21:33:44.424265779Z Collecting packaging (from gunicorn>=21.2.0->-r requirements.txt (line 6))
+2025-06-04T21:33:44.425717961Z   Using cached packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+2025-06-04T21:33:44.572839804Z Collecting cffi>=1.14 (from cryptography>=42.0.0->-r requirements.txt (line 13))
+2025-06-04T21:33:44.574550589Z   Using cached cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)
+2025-06-04T21:33:44.631980022Z Collecting iniconfig>=1 (from pytest>=8.0.0->-r requirements.txt (line 17))
+2025-06-04T21:33:44.633495677Z   Using cached iniconfig-2.1.0-py3-none-any.whl.metadata (2.7 kB)
+2025-06-04T21:33:44.664393267Z Collecting pluggy<2,>=1.5 (from pytest>=8.0.0->-r requirements.txt (line 17))
+2025-06-04T21:33:44.66588584Z   Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+2025-06-04T21:33:44.699507165Z Collecting pygments>=2.7.2 (from pytest>=8.0.0->-r requirements.txt (line 17))
+2025-06-04T21:33:44.70101708Z   Using cached pygments-2.19.1-py3-none-any.whl.metadata (2.5 kB)
+2025-06-04T21:33:45.069593445Z Collecting coverage>=7.5 (from coverage[toml]>=7.5->pytest-cov>=4.1.0->-r requirements.txt (line 19))
+2025-06-04T21:33:45.07130479Z   Using cached coverage-7.8.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (8.9 kB)
+2025-06-04T21:33:45.113052976Z Collecting click>=8.0.0 (from black>=24.1.0->-r requirements.txt (line 20))
+2025-06-04T21:33:45.114508068Z   Using cached click-8.2.1-py3-none-any.whl.metadata (2.5 kB)
+2025-06-04T21:33:45.13554359Z Collecting mypy-extensions>=0.4.3 (from black>=24.1.0->-r requirements.txt (line 20))
+2025-06-04T21:33:45.137005342Z   Using cached mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+2025-06-04T21:33:45.163312684Z Collecting pathspec>=0.9.0 (from black>=24.1.0->-r requirements.txt (line 20))
+2025-06-04T21:33:45.164773747Z   Using cached pathspec-0.12.1-py3-none-any.whl.metadata (21 kB)
+2025-06-04T21:33:45.206096192Z Collecting platformdirs>=2 (from black>=24.1.0->-r requirements.txt (line 20))
+2025-06-04T21:33:45.207967055Z   Using cached platformdirs-4.3.8-py3-none-any.whl.metadata (12 kB)
+2025-06-04T21:33:45.238244474Z Collecting mccabe<0.8.0,>=0.7.0 (from flake8>=7.0.0->-r requirements.txt (line 21))
+2025-06-04T21:33:45.239699315Z   Using cached mccabe-0.7.0-py2.py3-none-any.whl.metadata (5.0 kB)
+2025-06-04T21:33:45.265318524Z Collecting pycodestyle<2.14.0,>=2.13.0 (from flake8>=7.0.0->-r requirements.txt (line 21))
+2025-06-04T21:33:45.266755015Z   Using cached pycodestyle-2.13.0-py2.py3-none-any.whl.metadata (4.5 kB)
+2025-06-04T21:33:45.295016774Z Collecting pyflakes<3.4.0,>=3.3.0 (from flake8>=7.0.0->-r requirements.txt (line 21))
+2025-06-04T21:33:45.296455135Z   Using cached pyflakes-3.3.2-py2.py3-none-any.whl.metadata (3.5 kB)
+2025-06-04T21:33:45.385777577Z Collecting django-appconf>=1.0.3 (from django-compressor>=4.4->-r requirements.txt (line 30))
+2025-06-04T21:33:45.387178366Z   Using cached django_appconf-1.1.0-py3-none-any.whl.metadata (5.2 kB)
+2025-06-04T21:33:45.393962832Z Collecting rcssmin>=1.1.1 (from -r requirements.txt (line 44))
+2025-06-04T21:33:45.395418524Z   Using cached rcssmin-1.1.2-cp311-cp311-manylinux1_x86_64.whl.metadata (4.5 kB)
+2025-06-04T21:33:45.402294164Z Collecting rjsmin>=1.2.1 (from -r requirements.txt (line 45))
+2025-06-04T21:33:45.403946956Z   Using cached rjsmin-1.2.2-cp311-cp311-manylinux1_x86_64.whl.metadata (4.4 kB)
+2025-06-04T21:33:45.479330608Z Collecting libsass<1,>=0.7.0 (from django-libsass>=0.9->-r requirements.txt (line 31))
+2025-06-04T21:33:45.481110766Z   Using cached libsass-0.23.0-cp38-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.whl.metadata (4.2 kB)
+2025-06-04T21:33:45.533404634Z Collecting sphinxcontrib-applehelp>=1.0.7 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.535105779Z   Using cached sphinxcontrib_applehelp-2.0.0-py3-none-any.whl.metadata (2.3 kB)
+2025-06-04T21:33:45.55715826Z Collecting sphinxcontrib-devhelp>=1.0.6 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.558632823Z   Using cached sphinxcontrib_devhelp-2.0.0-py3-none-any.whl.metadata (2.3 kB)
+2025-06-04T21:33:45.581420961Z Collecting sphinxcontrib-htmlhelp>=2.0.6 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.582889274Z   Using cached sphinxcontrib_htmlhelp-2.1.0-py3-none-any.whl.metadata (2.3 kB)
+2025-06-04T21:33:45.604728715Z Collecting sphinxcontrib-jsmath>=1.0.1 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.606132285Z   Using cached sphinxcontrib_jsmath-1.0.1-py2.py3-none-any.whl.metadata (1.4 kB)
+2025-06-04T21:33:45.629050249Z Collecting sphinxcontrib-qthelp>=1.0.6 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.630464589Z   Using cached sphinxcontrib_qthelp-2.0.0-py3-none-any.whl.metadata (2.3 kB)
+2025-06-04T21:33:45.655060157Z Collecting sphinxcontrib-serializinghtml>=1.1.9 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.656497128Z   Using cached sphinxcontrib_serializinghtml-2.0.0-py3-none-any.whl.metadata (2.4 kB)
+2025-06-04T21:33:45.684464982Z Collecting Jinja2>=3.1 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.685910814Z   Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+2025-06-04T21:33:45.718042074Z Collecting docutils<0.22,>=0.20 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.719459434Z   Using cached docutils-0.21.2-py3-none-any.whl.metadata (2.8 kB)
+2025-06-04T21:33:45.746763156Z Collecting snowballstemmer>=2.2 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.748175526Z   Using cached snowballstemmer-3.0.1-py3-none-any.whl.metadata (7.9 kB)
+2025-06-04T21:33:45.776854365Z Collecting babel>=2.13 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.778256225Z   Using cached babel-2.17.0-py3-none-any.whl.metadata (2.0 kB)
+2025-06-04T21:33:45.80299563Z Collecting alabaster>=0.7.14 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.80442002Z   Using cached alabaster-1.0.0-py3-none-any.whl.metadata (2.8 kB)
+2025-06-04T21:33:45.829723353Z Collecting imagesize>=1.3 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.831142103Z   Using cached imagesize-1.4.1-py2.py3-none-any.whl.metadata (1.5 kB)
+2025-06-04T21:33:45.859155759Z Collecting roman-numerals-py>=1.0.0 (from Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:45.86058869Z   Using cached roman_numerals_py-3.1.0-py3-none-any.whl.metadata (3.6 kB)
+2025-06-04T21:33:45.9120914Z Collecting sphinxcontrib-jquery<5,>=4 (from sphinx-rtd-theme>=2.0.0->-r requirements.txt (line 38))
+2025-06-04T21:33:45.913516421Z   Using cached sphinxcontrib_jquery-4.1-py2.py3-none-any.whl.metadata (2.6 kB)
+2025-06-04T21:33:45.990581255Z Collecting pycparser (from cffi>=1.14->cryptography>=42.0.0->-r requirements.txt (line 13))
+2025-06-04T21:33:45.992054088Z   Using cached pycparser-2.22-py3-none-any.whl.metadata (943 bytes)
+2025-06-04T21:33:46.115509499Z Collecting MarkupSafe>=2.0 (from Jinja2>=3.1->Sphinx>=7.2.0->-r requirements.txt (line 37))
+2025-06-04T21:33:46.117124779Z   Using cached MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+2025-06-04T21:33:46.364234981Z Collecting ua-parser>=0.10.0 (from user-agents->django-user-agents==0.4.0->-r requirements.txt (line 61))
+2025-06-04T21:33:46.366388927Z   Using cached ua_parser-1.0.1-py3-none-any.whl.metadata (5.6 kB)
+2025-06-04T21:33:46.420917617Z Collecting ua-parser-builtins (from ua-parser>=0.10.0->user-agents->django-user-agents==0.4.0->-r requirements.txt (line 61))
+2025-06-04T21:33:46.422670473Z   Using cached ua_parser_builtins-0.18.0.post1-py3-none-any.whl.metadata (1.4 kB)
+2025-06-04T21:33:46.456230755Z Using cached django_bootstrap5-25.1-py3-none-any.whl (26 kB)
+2025-06-04T21:33:46.458040914Z Using cached django_environ-0.11.2-py2.py3-none-any.whl (19 kB)
+2025-06-04T21:33:46.45977712Z Using cached django_crispy_forms-2.1-py3-none-any.whl (31 kB)
+2025-06-04T21:33:46.461514676Z Using cached crispy_bootstrap5-2023.10-py3-none-any.whl (22 kB)
+2025-06-04T21:33:46.463275403Z Using cached django_cleanup-9.0.0-py3-none-any.whl (10 kB)
+2025-06-04T21:33:46.464976398Z Using cached redis-6.1.0-py3-none-any.whl (273 kB)
+2025-06-04T21:33:46.467082122Z Using cached djangorestframework-3.16.0-py3-none-any.whl (1.1 MB)
+2025-06-04T21:33:46.470505901Z Using cached django_filter-25.1-py3-none-any.whl (94 kB)
+2025-06-04T21:33:46.47230359Z Using cached django_user_agents-0.4.0-py3-none-any.whl (8.6 kB)
+2025-06-04T21:33:46.473928671Z Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+2025-06-04T21:33:46.475916779Z Using cached PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (762 kB)
+2025-06-04T21:33:46.47877175Z Using cached requests-2.31.0-py3-none-any.whl (62 kB)
+2025-06-04T21:33:46.480500646Z Using cached urllib3-2.4.0-py3-none-any.whl (128 kB)
+2025-06-04T21:33:46.482352608Z Using cached django_cors_headers-4.3.1-py3-none-any.whl (12 kB)
+2025-06-04T21:33:46.48401657Z Using cached python_decouple-3.8-py3-none-any.whl (9.9 kB)
+2025-06-04T21:33:46.485646321Z Using cached XlsxWriter-3.1.9-py3-none-any.whl (154 kB)
+2025-06-04T21:33:46.487521563Z Using cached django-5.2.2-py3-none-any.whl (8.3 MB)
+2025-06-04T21:33:46.502654973Z Using cached python_dotenv-1.1.0-py3-none-any.whl (20 kB)
+2025-06-04T21:33:46.504409359Z Using cached dj_database_url-3.0.0-py3-none-any.whl (8.8 kB)
+2025-06-04T21:33:46.506105054Z Using cached whitenoise-6.9.0-py3-none-any.whl (20 kB)
+2025-06-04T21:33:46.507815468Z Using cached gunicorn-23.0.0-py3-none-any.whl (85 kB)
+2025-06-04T21:33:46.509563335Z Using cached psycopg2_binary-2.9.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
+2025-06-04T21:33:46.516310159Z Using cached pyopenssl-25.1.0-py3-none-any.whl (56 kB)
+2025-06-04T21:33:46.518111098Z Using cached cryptography-45.0.3-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
+2025-06-04T21:33:46.527029169Z Using cached django_debug_toolbar-5.2.0-py3-none-any.whl (262 kB)
+2025-06-04T21:33:46.529322233Z Using cached pytest-8.4.0-py3-none-any.whl (363 kB)
+2025-06-04T21:33:46.531500571Z Using cached pytest_django-4.11.1-py3-none-any.whl (25 kB)
+2025-06-04T21:33:46.533133751Z Using cached pytest_cov-6.1.1-py3-none-any.whl (23 kB)
+2025-06-04T21:33:46.534754812Z Using cached black-25.1.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl (1.7 MB)
+2025-06-04T21:33:46.539061235Z Using cached flake8-7.2.0-py2.py3-none-any.whl (57 kB)
+2025-06-04T21:33:46.540698036Z Using cached isort-6.0.1-py3-none-any.whl (94 kB)
+2025-06-04T21:33:46.54240404Z Using cached sentry_sdk-2.29.1-py2.py3-none-any.whl (341 kB)
+2025-06-04T21:33:46.544480513Z Using cached django_redis-5.4.0-py3-none-any.whl (31 kB)
+2025-06-04T21:33:46.546129295Z Using cached hiredis-3.2.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (170 kB)
+2025-06-04T21:33:46.547979856Z Using cached django_compressor-4.5.1-py2.py3-none-any.whl (145 kB)
+2025-06-04T21:33:46.549789556Z Using cached rcssmin-1.1.2-cp311-cp311-manylinux1_x86_64.whl (48 kB)
+2025-06-04T21:33:46.551399465Z Using cached rjsmin-1.2.2-cp311-cp311-manylinux1_x86_64.whl (31 kB)
+2025-06-04T21:33:46.553049557Z Using cached django_libsass-0.9-py3-none-any.whl (6.6 kB)
+2025-06-04T21:33:46.554598694Z Using cached newrelic-10.12.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (842 kB)
+2025-06-04T21:33:46.557506458Z Using cached sphinx-8.2.3-py3-none-any.whl (3.6 MB)
+2025-06-04T21:33:46.564556257Z Using cached sphinx_rtd_theme-3.0.2-py2.py3-none-any.whl (7.7 MB)
+2025-06-04T21:33:46.577562191Z Using cached django_browser_reload-1.18.0-py3-none-any.whl (12 kB)
+2025-06-04T21:33:46.579151259Z Using cached pillow-11.2.1-cp311-cp311-manylinux_2_28_x86_64.whl (4.6 MB)
+2025-06-04T21:33:46.587777866Z Using cached alabaster-1.0.0-py3-none-any.whl (13 kB)
+2025-06-04T21:33:46.589357094Z Using cached asgiref-3.8.1-py3-none-any.whl (23 kB)
+2025-06-04T21:33:46.590969644Z Using cached babel-2.17.0-py3-none-any.whl (10.2 MB)
+2025-06-04T21:33:46.607800617Z Using cached certifi-2025.4.26-py3-none-any.whl (159 kB)
+2025-06-04T21:33:46.609945303Z Using cached cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (467 kB)
+2025-06-04T21:33:46.612280469Z Using cached charset_normalizer-3.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (147 kB)
+2025-06-04T21:33:46.614474198Z Using cached click-8.2.1-py3-none-any.whl (102 kB)
+2025-06-04T21:33:46.61654702Z Using cached coverage-7.8.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (244 kB)
+2025-06-04T21:33:46.618510967Z Using cached django_appconf-1.1.0-py3-none-any.whl (6.4 kB)
+2025-06-04T21:33:46.620118297Z Using cached docutils-0.21.2-py3-none-any.whl (587 kB)
+2025-06-04T21:33:46.622571138Z Using cached idna-3.10-py3-none-any.whl (70 kB)
+2025-06-04T21:33:46.6242156Z Using cached imagesize-1.4.1-py2.py3-none-any.whl (8.8 kB)
+2025-06-04T21:33:46.625733185Z Using cached iniconfig-2.1.0-py3-none-any.whl (6.0 kB)
+2025-06-04T21:33:46.627228209Z Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+2025-06-04T21:33:46.628915073Z Using cached libsass-0.23.0-cp38-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.whl (9.4 MB)
+2025-06-04T21:33:46.643997949Z Using cached mccabe-0.7.0-py2.py3-none-any.whl (7.3 kB)
+2025-06-04T21:33:46.645516824Z Using cached mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
+2025-06-04T21:33:46.646985127Z Using cached packaging-25.0-py3-none-any.whl (66 kB)
+2025-06-04T21:33:46.648559345Z Using cached pathspec-0.12.1-py3-none-any.whl (31 kB)
+2025-06-04T21:33:46.650115102Z Using cached platformdirs-4.3.8-py3-none-any.whl (18 kB)
+2025-06-04T21:33:46.651600675Z Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+2025-06-04T21:33:46.653129161Z Using cached pycodestyle-2.13.0-py2.py3-none-any.whl (31 kB)
+2025-06-04T21:33:46.654653187Z Using cached pyflakes-3.3.2-py2.py3-none-any.whl (63 kB)
+2025-06-04T21:33:46.656232485Z Using cached pygments-2.19.1-py3-none-any.whl (1.2 MB)
+2025-06-04T21:33:46.659447624Z Using cached roman_numerals_py-3.1.0-py3-none-any.whl (7.7 kB)
+2025-06-04T21:33:46.660962549Z Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+2025-06-04T21:33:46.662432732Z Using cached snowballstemmer-3.0.1-py3-none-any.whl (103 kB)
+2025-06-04T21:33:46.664082313Z Using cached sphinxcontrib_applehelp-2.0.0-py3-none-any.whl (119 kB)
+2025-06-04T21:33:46.665769637Z Using cached sphinxcontrib_devhelp-2.0.0-py3-none-any.whl (82 kB)
+2025-06-04T21:33:46.667338164Z Using cached sphinxcontrib_htmlhelp-2.1.0-py3-none-any.whl (98 kB)
+2025-06-04T21:33:46.668975755Z Using cached sphinxcontrib_jquery-4.1-py2.py3-none-any.whl (121 kB)
+2025-06-04T21:33:46.670602766Z Using cached sphinxcontrib_jsmath-1.0.1-py2.py3-none-any.whl (5.1 kB)
+2025-06-04T21:33:46.67209497Z Using cached sphinxcontrib_qthelp-2.0.0-py3-none-any.whl (88 kB)
+2025-06-04T21:33:46.673688409Z Using cached sphinxcontrib_serializinghtml-2.0.0-py3-none-any.whl (92 kB)
+2025-06-04T21:33:46.675279408Z Using cached sqlparse-0.5.3-py3-none-any.whl (44 kB)
+2025-06-04T21:33:46.676833154Z Using cached typing_extensions-4.14.0-py3-none-any.whl (43 kB)
+2025-06-04T21:33:46.678409062Z Using cached user_agents-2.2.0-py3-none-any.whl (9.6 kB)
+2025-06-04T21:33:46.679942628Z Using cached MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
+2025-06-04T21:33:46.681461223Z Using cached ua_parser-1.0.1-py3-none-any.whl (31 kB)
+2025-06-04T21:33:46.682969188Z Using cached pycparser-2.22-py3-none-any.whl (117 kB)
+2025-06-04T21:33:46.684591118Z Using cached ua_parser_builtins-0.18.0.post1-py3-none-any.whl (86 kB)
+2025-06-04T21:33:47.083841541Z Installing collected packages: rjsmin, rcssmin, python-decouple, XlsxWriter, whitenoise, urllib3, ua-parser-builtins, typing_extensions, sqlparse, sphinxcontrib-serializinghtml, sphinxcontrib-qthelp, sphinxcontrib-jsmath, sphinxcontrib-htmlhelp, sphinxcontrib-devhelp, sphinxcontrib-applehelp, snowballstemmer, six, roman-numerals-py, redis, PyYAML, python-dotenv, pygments, pyflakes, pycparser, pycodestyle, psycopg2-binary, pluggy, platformdirs, Pillow, pathspec, packaging, newrelic, mypy-extensions, mccabe, MarkupSafe, libsass, isort, iniconfig, imagesize, idna, hiredis, docutils, django-environ, django-cleanup, coverage, click, charset-normalizer, certifi, babel, asgiref, alabaster, ua-parser, sentry-sdk, requests, python-dateutil, pytest, Jinja2, gunicorn, flake8, Django, cffi, black, user-agents, Sphinx, pytest-django, pytest-cov, djangorestframework, django-redis, django-filter, django-debug-toolbar, django-crispy-forms, django-cors-headers, django-browser-reload, django-bootstrap5, django-appconf, dj-database-url, cryptography, sphinxcontrib-jquery, pyOpenSSL, django-user-agents, django-compressor, crispy-bootstrap5, sphinx-rtd-theme, django-libsass
+2025-06-04T21:33:54.910650125Z Successfully installed Django-5.2.2 Jinja2-3.1.6 MarkupSafe-3.0.2 Pillow-11.2.1 PyYAML-6.0.2 Sphinx-8.2.3 XlsxWriter-3.1.9 alabaster-1.0.0 asgiref-3.8.1 babel-2.17.0 black-25.1.0 certifi-2025.4.26 cffi-1.17.1 charset-normalizer-3.4.2 click-8.2.1 coverage-7.8.2 crispy-bootstrap5-2023.10 cryptography-45.0.3 dj-database-url-3.0.0 django-appconf-1.1.0 django-bootstrap5-25.1 django-browser-reload-1.18.0 django-cleanup-9.0.0 django-compressor-4.5.1 django-cors-headers-4.3.1 django-crispy-forms-2.1 django-debug-toolbar-5.2.0 django-environ-0.11.2 django-filter-25.1 django-libsass-0.9 django-redis-5.4.0 django-user-agents-0.4.0 djangorestframework-3.16.0 docutils-0.21.2 flake8-7.2.0 gunicorn-23.0.0 hiredis-3.2.1 idna-3.10 imagesize-1.4.1 iniconfig-2.1.0 isort-6.0.1 libsass-0.23.0 mccabe-0.7.0 mypy-extensions-1.1.0 newrelic-10.12.0 packaging-25.0 pathspec-0.12.1 platformdirs-4.3.8 pluggy-1.6.0 psycopg2-binary-2.9.10 pyOpenSSL-25.1.0 pycodestyle-2.13.0 pycparser-2.22 pyflakes-3.3.2 pygments-2.19.1 pytest-8.4.0 pytest-cov-6.1.1 pytest-django-4.11.1 python-dateutil-2.9.0.post0 python-decouple-3.8 python-dotenv-1.1.0 rcssmin-1.1.2 redis-6.1.0 requests-2.31.0 rjsmin-1.2.2 roman-numerals-py-3.1.0 sentry-sdk-2.29.1 six-1.17.0 snowballstemmer-3.0.1 sphinx-rtd-theme-3.0.2 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jquery-4.1 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 sqlparse-0.5.3 typing_extensions-4.14.0 ua-parser-1.0.1 ua-parser-builtins-0.18.0.post1 urllib3-2.4.0 user-agents-2.2.0 whitenoise-6.9.0
+2025-06-04T21:33:54.998581187Z 
+2025-06-04T21:33:54.998604088Z [notice] A new release of pip is available: 24.0 -> 25.1.1
+2025-06-04T21:33:54.998607018Z [notice] To update, run: pip install --upgrade pip
+2025-06-04T21:33:58.244803238Z ==> Uploading build...
+2025-06-04T21:34:08.782558836Z ==> Uploaded in 8.3s. Compression took 2.2s
+2025-06-04T21:34:08.81175585Z ==> Build successful 🎉
+2025-06-04T21:34:10.555541999Z ==> Deploying...
+2025-06-04T21:34:36.543937415Z ==> Running 'gunicorn core.wsgi:application'
+2025-06-04T21:34:41.737676514Z 
+2025-06-04T21:34:41.737707326Z === Configuração de Arquivos Estáticos ===
+2025-06-04T21:34:41.737713546Z BASE_DIR: /opt/render/project/src
+2025-06-04T21:34:41.737717876Z STATIC_URL: /static/
+2025-06-04T21:34:41.737722026Z STATIC_ROOT: /opt/render/project/src/staticfiles
+2025-06-04T21:34:41.737725907Z STATICFILES_DIRS: ['/opt/render/project/src/static']
+2025-06-04T21:34:41.737730247Z STATICFILES_STORAGE: whitenoise.storage.CompressedStaticFilesStorage
+2025-06-04T21:34:41.737735087Z WHITENOISE_USE_FINDERS: True
+2025-06-04T21:34:41.737739047Z WHITENOISE_MANIFEST_STRICT: False
+2025-06-04T21:34:41.737742937Z WHITENOISE_ALLOW_ALL_ORIGINS: True
+2025-06-04T21:34:41.737746858Z WHITENOISE_ROOT: None
+2025-06-04T21:34:41.737750788Z WHITENOISE_MAX_AGE: 31536000
+2025-06-04T21:34:41.737754838Z WHITENOISE_AUTOREFRESH: True
+2025-06-04T21:34:41.737761689Z WHITENOISE_MIMETYPES: {'.png': 'image/png', '.jpg': 'image/jpeg', '.ico': 'image/x-icon', '.css': 'text/css', '.js': 'application/javascript', '.woff': 'application/font-woff', '.woff2': 'application/font-woff2', '.ttf': 'application/font-sfnt', '.eot': 'application/vnd.ms-fontobject', '.svg': 'image/svg+xml'}
+2025-06-04T21:34:41.737767789Z =====================================
+2025-06-04T21:34:41.737771759Z 
+2025-06-04T21:34:43.332975216Z [2025-06-04 18:34:43 -0300] [104] [INFO] Starting gunicorn 23.0.0
+2025-06-04T21:34:43.332998647Z [2025-06-04 18:34:43 -0300] [104] [INFO] Listening at: http://0.0.0.0:10000 (104)
+2025-06-04T21:34:43.333003837Z [2025-06-04 18:34:43 -0300] [104] [INFO] Using worker: sync
+2025-06-04T21:34:43.336894045Z [2025-06-04 18:34:43 -0300] [105] [INFO] Booting worker with pid: 105
+2025-06-04T21:34:44.240890927Z === WSGI Application iniciada com sucesso ===
+2025-06-04T21:34:44.240918549Z 127.0.0.1 - - [04/Jun/2025:18:34:44 -0300] "HEAD / HTTP/1.1" 301 0 "-" "Go-http-client/1.1"
+2025-06-04T21:34:51.384743819Z ==> Your service is live 🎉
+2025-06-04T21:34:53.828401073Z [INFO] 2025-06-04 18:34:53,828 views 105 125599158295424 Executing view: home
+2025-06-04T21:34:53.828501539Z [INFO] 2025-06-04 18:34:53,828 views 105 125599158295424 Executing view: home
+2025-06-04T21:34:54.028359831Z [INFO] 2025-06-04 18:34:54,028 views 105 125599158295424 View home executed successfully
+2025-06-04T21:34:54.028389363Z [INFO] 2025-06-04 18:34:54,028 views 105 125599158295424 View home executed successfully
+2025-06-04T21:34:54.029050831Z 127.0.0.1 - - [04/Jun/2025:18:34:54 -0300] "GET / HTTP/1.1" 200 36766 "-" "Go-http-client/2.0"
+2025-06-04T21:34:54.224153135Z [INFO] 2025-06-04 18:34:54,223 views 105 125599158295424 Executing view: home
+2025-06-04T21:34:54.224185317Z [INFO] 2025-06-04 18:34:54,223 views 105 125599158295424 Executing view: home
+2025-06-04T21:34:54.226555036Z [INFO] 2025-06-04 18:34:54,226 views 105 125599158295424 View home executed successfully
+2025-06-04T21:34:54.226632931Z [INFO] 2025-06-04 18:34:54,226 views 105 125599158295424 View home executed successfully
+2025-06-04T21:34:54.227217255Z 127.0.0.1 - - [04/Jun/2025:18:34:54 -0300] "GET / HTTP/1.1" 200 36766 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:34:54.503353506Z [WARNING] 2025-06-04 18:34:54,503 log 105 125599158295424 Not Found: /static/css/variables.css
+2025-06-04T21:34:54.503377447Z [WARNING] 2025-06-04 18:34:54,503 log 105 125599158295424 Not Found: /static/css/variables.css
+2025-06-04T21:34:54.503782341Z 127.0.0.1 - - [04/Jun/2025:18:34:54 -0300] "GET /static/css/variables.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:34:54.505168722Z [WARNING] 2025-06-04 18:34:54,505 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:34:54.505198474Z [WARNING] 2025-06-04 18:34:54,505 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:34:54.505498191Z 127.0.0.1 - - [04/Jun/2025:18:34:54 -0300] "GET /static/css/images.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:34:54.506532421Z [WARNING] 2025-06-04 18:34:54,506 log 105 125599158295424 Not Found: /static/js/contact_form.js
+2025-06-04T21:34:54.506548342Z [WARNING] 2025-06-04 18:34:54,506 log 105 125599158295424 Not Found: /static/js/contact_form.js
+2025-06-04T21:34:54.5068541Z 127.0.0.1 - - [04/Jun/2025:18:34:54 -0300] "GET /static/js/contact_form.js HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:34:54.507834498Z [WARNING] 2025-06-04 18:34:54,507 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:34:54.507861829Z [WARNING] 2025-06-04 18:34:54,507 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:34:54.508127475Z 127.0.0.1 - - [04/Jun/2025:18:34:54 -0300] "GET /static/css/base.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:34:54.509088851Z [WARNING] 2025-06-04 18:34:54,508 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:34:54.509098942Z [WARNING] 2025-06-04 18:34:54,508 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:34:54.509395109Z 127.0.0.1 - - [04/Jun/2025:18:34:54 -0300] "GET /static/images/logo.png HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:34:54.510316803Z [WARNING] 2025-06-04 18:34:54,510 log 105 125599158295424 Not Found: /static/css/cookie_manager.css
+2025-06-04T21:34:54.510338864Z [WARNING] 2025-06-04 18:34:54,510 log 105 125599158295424 Not Found: /static/css/cookie_manager.css
+2025-06-04T21:34:54.510580258Z 127.0.0.1 - - [04/Jun/2025:18:34:54 -0300] "GET /static/css/cookie_manager.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:34:54.940214091Z [WARNING] 2025-06-04 18:34:54,939 log 105 125599158295424 Not Found: /static/js/cookie_manager.js
+2025-06-04T21:34:54.940236513Z [WARNING] 2025-06-04 18:34:54,939 log 105 125599158295424 Not Found: /static/js/cookie_manager.js
+2025-06-04T21:34:54.940390172Z 127.0.0.1 - - [04/Jun/2025:18:34:54 -0300] "GET /static/js/cookie_manager.js HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:34:55.193886899Z [WARNING] 2025-06-04 18:34:55,193 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:34:55.193905131Z [WARNING] 2025-06-04 18:34:55,193 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:34:55.193935292Z 127.0.0.1 - - [04/Jun/2025:18:34:55 -0300] "GET /static/images/favicon.ico HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:34:55.417372843Z 127.0.0.1 - - [04/Jun/2025:18:34:55 -0300] "GET /static/images/logo.png HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:34:55.417406225Z [WARNING] 2025-06-04 18:34:55,415 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:34:55.417410685Z [WARNING] 2025-06-04 18:34:55,415 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:35:06.221221906Z [INFO] 2025-06-04 18:35:06,221 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:06.221251978Z [INFO] 2025-06-04 18:35:06,221 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:06.222932666Z [INFO] 2025-06-04 18:35:06,222 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:06.222947547Z [INFO] 2025-06-04 18:35:06,222 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:06.223438685Z 127.0.0.1 - - [04/Jun/2025:18:35:06 -0300] "GET / HTTP/1.1" 200 36766 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:06.501030711Z [WARNING] 2025-06-04 18:35:06,500 log 105 125599158295424 Not Found: /static/css/variables.css
+2025-06-04T21:35:06.501052303Z [WARNING] 2025-06-04 18:35:06,500 log 105 125599158295424 Not Found: /static/css/variables.css
+2025-06-04T21:35:06.50151986Z 127.0.0.1 - - [04/Jun/2025:18:35:06 -0300] "GET /static/css/variables.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:06.507915754Z [WARNING] 2025-06-04 18:35:06,507 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:06.507943005Z [WARNING] 2025-06-04 18:35:06,507 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:06.508448815Z 127.0.0.1 - - [04/Jun/2025:18:35:06 -0300] "GET /static/css/base.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:06.509593562Z [WARNING] 2025-06-04 18:35:06,509 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:35:06.509611973Z [WARNING] 2025-06-04 18:35:06,509 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:35:06.509949552Z 127.0.0.1 - - [04/Jun/2025:18:35:06 -0300] "GET /static/images/logo.png HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:06.510812953Z [WARNING] 2025-06-04 18:35:06,510 log 105 125599158295424 Not Found: /static/css/cookie_manager.css
+2025-06-04T21:35:06.510825294Z [WARNING] 2025-06-04 18:35:06,510 log 105 125599158295424 Not Found: /static/css/cookie_manager.css
+2025-06-04T21:35:06.511128531Z 127.0.0.1 - - [04/Jun/2025:18:35:06 -0300] "GET /static/css/cookie_manager.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:06.513798108Z [WARNING] 2025-06-04 18:35:06,513 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:06.513815418Z [WARNING] 2025-06-04 18:35:06,513 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:06.514131867Z 127.0.0.1 - - [04/Jun/2025:18:35:06 -0300] "GET /static/css/images.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:06.517857735Z [WARNING] 2025-06-04 18:35:06,517 log 105 125599158295424 Not Found: /static/js/contact_form.js
+2025-06-04T21:35:06.517875016Z [WARNING] 2025-06-04 18:35:06,517 log 105 125599158295424 Not Found: /static/js/contact_form.js
+2025-06-04T21:35:06.518215486Z 127.0.0.1 - - [04/Jun/2025:18:35:06 -0300] "GET /static/js/contact_form.js HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:06.663243783Z [WARNING] 2025-06-04 18:35:06,663 log 105 125599158295424 Not Found: /static/js/cookie_manager.js
+2025-06-04T21:35:06.663260224Z [WARNING] 2025-06-04 18:35:06,663 log 105 125599158295424 Not Found: /static/js/cookie_manager.js
+2025-06-04T21:35:06.663558861Z 127.0.0.1 - - [04/Jun/2025:18:35:06 -0300] "GET /static/js/cookie_manager.js HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:06.904380348Z [WARNING] 2025-06-04 18:35:06,904 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:06.90441104Z [WARNING] 2025-06-04 18:35:06,904 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:06.904747369Z 127.0.0.1 - - [04/Jun/2025:18:35:06 -0300] "GET /static/images/favicon.ico HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:15.664234565Z [INFO] 2025-06-04 18:35:15,664 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:15.664274977Z [INFO] 2025-06-04 18:35:15,664 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:15.666223321Z [INFO] 2025-06-04 18:35:15,666 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:15.666244683Z [INFO] 2025-06-04 18:35:15,666 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:15.666685458Z 127.0.0.1 - - [04/Jun/2025:18:35:15 -0300] "GET / HTTP/1.1" 200 36766 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:15.978735138Z [WARNING] 2025-06-04 18:35:15,978 log 105 125599158295424 Not Found: /static/css/variables.css
+2025-06-04T21:35:15.97876141Z [WARNING] 2025-06-04 18:35:15,978 log 105 125599158295424 Not Found: /static/css/variables.css
+2025-06-04T21:35:15.979083918Z 127.0.0.1 - - [04/Jun/2025:18:35:15 -0300] "GET /static/css/variables.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:15.979851463Z [WARNING] 2025-06-04 18:35:15,979 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:15.979903456Z [WARNING] 2025-06-04 18:35:15,979 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:15.980242396Z 127.0.0.1 - - [04/Jun/2025:18:35:15 -0300] "GET /static/css/base.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:15.982043302Z [WARNING] 2025-06-04 18:35:15,981 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:15.982055972Z [WARNING] 2025-06-04 18:35:15,981 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:15.982338249Z 127.0.0.1 - - [04/Jun/2025:18:35:15 -0300] "GET /static/css/images.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:15.985522185Z [WARNING] 2025-06-04 18:35:15,985 log 105 125599158295424 Not Found: /static/css/cookie_manager.css
+2025-06-04T21:35:15.985540346Z [WARNING] 2025-06-04 18:35:15,985 log 105 125599158295424 Not Found: /static/css/cookie_manager.css
+2025-06-04T21:35:15.985804311Z 127.0.0.1 - - [04/Jun/2025:18:35:15 -0300] "GET /static/css/cookie_manager.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:15.990790653Z [WARNING] 2025-06-04 18:35:15,990 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:35:15.990810034Z [WARNING] 2025-06-04 18:35:15,990 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:35:15.991150374Z 127.0.0.1 - - [04/Jun/2025:18:35:15 -0300] "GET /static/images/logo.png HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:16.061893149Z [WARNING] 2025-06-04 18:35:16,061 log 105 125599158295424 Not Found: /static/js/contact_form.js
+2025-06-04T21:35:16.06191195Z [WARNING] 2025-06-04 18:35:16,061 log 105 125599158295424 Not Found: /static/js/contact_form.js
+2025-06-04T21:35:16.06225618Z 127.0.0.1 - - [04/Jun/2025:18:35:16 -0300] "GET /static/js/contact_form.js HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:16.482139353Z [WARNING] 2025-06-04 18:35:16,481 log 105 125599158295424 Not Found: /static/js/cookie_manager.js
+2025-06-04T21:35:16.482207666Z [WARNING] 2025-06-04 18:35:16,481 log 105 125599158295424 Not Found: /static/js/cookie_manager.js
+2025-06-04T21:35:16.482629061Z 127.0.0.1 - - [04/Jun/2025:18:35:16 -0300] "GET /static/js/cookie_manager.js HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:16.760316202Z [WARNING] 2025-06-04 18:35:16,759 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:16.760345904Z [WARNING] 2025-06-04 18:35:16,759 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:16.760658372Z 127.0.0.1 - - [04/Jun/2025:18:35:16 -0300] "GET /static/images/favicon.ico HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:17.017400309Z [WARNING] 2025-06-04 18:35:17,017 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:17.017517466Z [WARNING] 2025-06-04 18:35:17,017 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:17.017973343Z 127.0.0.1 - - [04/Jun/2025:18:35:17 -0300] "GET /static/images/favicon.ico HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:19.032310142Z [INFO] 2025-06-04 18:35:19,032 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:19.032338354Z [INFO] 2025-06-04 18:35:19,032 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:19.034738935Z [INFO] 2025-06-04 18:35:19,034 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:19.034786397Z [INFO] 2025-06-04 18:35:19,034 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:19.035393753Z 127.0.0.1 - - [04/Jun/2025:18:35:19 -0300] "GET / HTTP/1.1" 200 36766 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:19.318535452Z [WARNING] 2025-06-04 18:35:19,318 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:35:19.318557014Z [WARNING] 2025-06-04 18:35:19,318 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:35:19.318874072Z 127.0.0.1 - - [04/Jun/2025:18:35:19 -0300] "GET /static/images/logo.png HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:19.319636217Z [WARNING] 2025-06-04 18:35:19,319 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:19.31969125Z [WARNING] 2025-06-04 18:35:19,319 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:19.320007169Z 127.0.0.1 - - [04/Jun/2025:18:35:19 -0300] "GET /static/css/base.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:19.331692302Z [WARNING] 2025-06-04 18:35:19,331 log 105 125599158295424 Not Found: /static/css/variables.css
+2025-06-04T21:35:19.331768166Z [WARNING] 2025-06-04 18:35:19,331 log 105 125599158295424 Not Found: /static/css/variables.css
+2025-06-04T21:35:19.332101565Z 127.0.0.1 - - [04/Jun/2025:18:35:19 -0300] "GET /static/css/variables.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:19.33954083Z [WARNING] 2025-06-04 18:35:19,339 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:19.339560232Z [WARNING] 2025-06-04 18:35:19,339 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:19.339903792Z 127.0.0.1 - - [04/Jun/2025:18:35:19 -0300] "GET /static/css/images.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:19.341870307Z [WARNING] 2025-06-04 18:35:19,341 log 105 125599158295424 Not Found: /static/css/cookie_manager.css
+2025-06-04T21:35:19.341891218Z [WARNING] 2025-06-04 18:35:19,341 log 105 125599158295424 Not Found: /static/css/cookie_manager.css
+2025-06-04T21:35:19.34226799Z 127.0.0.1 - - [04/Jun/2025:18:35:19 -0300] "GET /static/css/cookie_manager.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:19.486574595Z [WARNING] 2025-06-04 18:35:19,486 log 105 125599158295424 Not Found: /static/js/contact_form.js
+2025-06-04T21:35:19.486591515Z [WARNING] 2025-06-04 18:35:19,486 log 105 125599158295424 Not Found: /static/js/contact_form.js
+2025-06-04T21:35:19.48820606Z 127.0.0.1 - - [04/Jun/2025:18:35:19 -0300] "GET /static/js/contact_form.js HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:19.491421728Z [WARNING] 2025-06-04 18:35:19,491 log 105 125599158295424 Not Found: /static/js/cookie_manager.js
+2025-06-04T21:35:19.491438899Z [WARNING] 2025-06-04 18:35:19,491 log 105 125599158295424 Not Found: /static/js/cookie_manager.js
+2025-06-04T21:35:19.492644489Z 127.0.0.1 - - [04/Jun/2025:18:35:19 -0300] "GET /static/js/cookie_manager.js HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:19.843929222Z [WARNING] 2025-06-04 18:35:19,842 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:19.843974585Z [WARNING] 2025-06-04 18:35:19,842 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:19.843994436Z 127.0.0.1 - - [04/Jun/2025:18:35:19 -0300] "GET /static/images/favicon.ico HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:20.084465332Z 127.0.0.1 - - [04/Jun/2025:18:35:20 -0300] "GET /static/images/favicon.ico HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:20.084517135Z [WARNING] 2025-06-04 18:35:20,083 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:20.084525875Z [WARNING] 2025-06-04 18:35:20,083 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:23.279986432Z [INFO] 2025-06-04 18:35:23,279 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:23.280024354Z [INFO] 2025-06-04 18:35:23,279 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:23.282130007Z [INFO] 2025-06-04 18:35:23,282 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:23.28217491Z [INFO] 2025-06-04 18:35:23,282 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:23.282615895Z 127.0.0.1 - - [04/Jun/2025:18:35:23 -0300] "GET / HTTP/1.1" 200 36766 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:23.600439082Z [WARNING] 2025-06-04 18:35:23,600 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:35:23.600457544Z [WARNING] 2025-06-04 18:35:23,600 log 105 125599158295424 Not Found: /static/images/logo.png
+2025-06-04T21:35:23.60073647Z 127.0.0.1 - - [04/Jun/2025:18:35:23 -0300] "GET /static/images/logo.png HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:23.601726978Z [WARNING] 2025-06-04 18:35:23,601 log 105 125599158295424 Not Found: /static/css/variables.css
+2025-06-04T21:35:23.601736448Z [WARNING] 2025-06-04 18:35:23,601 log 105 125599158295424 Not Found: /static/css/variables.css
+2025-06-04T21:35:23.602005734Z 127.0.0.1 - - [04/Jun/2025:18:35:23 -0300] "GET /static/css/variables.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:23.602694304Z [WARNING] 2025-06-04 18:35:23,602 log 105 125599158295424 Not Found: /static/css/cookie_manager.css
+2025-06-04T21:35:23.602711775Z [WARNING] 2025-06-04 18:35:23,602 log 105 125599158295424 Not Found: /static/css/cookie_manager.css
+2025-06-04T21:35:23.603004172Z 127.0.0.1 - - [04/Jun/2025:18:35:23 -0300] "GET /static/css/cookie_manager.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:23.607977563Z [WARNING] 2025-06-04 18:35:23,607 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:23.607992194Z [WARNING] 2025-06-04 18:35:23,607 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:23.608303672Z 127.0.0.1 - - [04/Jun/2025:18:35:23 -0300] "GET /static/css/images.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:23.61493989Z [WARNING] 2025-06-04 18:35:23,614 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:23.61580657Z 127.0.0.1 - - [04/Jun/2025:18:35:23 -0300] "GET /static/css/base.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:23.61580687Z [WARNING] 2025-06-04 18:35:23,614 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:23.718238468Z [WARNING] 2025-06-04 18:35:23,718 log 105 125599158295424 Not Found: /static/js/contact_form.js
+2025-06-04T21:35:23.71826971Z [WARNING] 2025-06-04 18:35:23,718 log 105 125599158295424 Not Found: /static/js/contact_form.js
+2025-06-04T21:35:23.718560107Z 127.0.0.1 - - [04/Jun/2025:18:35:23 -0300] "GET /static/js/contact_form.js HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:23.729828135Z [WARNING] 2025-06-04 18:35:23,729 log 105 125599158295424 Not Found: /static/js/cookie_manager.js
+2025-06-04T21:35:23.729884769Z [WARNING] 2025-06-04 18:35:23,729 log 105 125599158295424 Not Found: /static/js/cookie_manager.js
+2025-06-04T21:35:23.730284742Z 127.0.0.1 - - [04/Jun/2025:18:35:23 -0300] "GET /static/js/cookie_manager.js HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:23.979191821Z [WARNING] 2025-06-04 18:35:23,978 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:23.979295927Z [WARNING] 2025-06-04 18:35:23,978 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:23.979717261Z 127.0.0.1 - - [04/Jun/2025:18:35:23 -0300] "GET /static/images/favicon.ico HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:24.252266772Z [WARNING] 2025-06-04 18:35:24,252 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:24.252288623Z [WARNING] 2025-06-04 18:35:24,252 log 105 125599158295424 Not Found: /static/images/favicon.ico
+2025-06-04T21:35:24.252632603Z 127.0.0.1 - - [04/Jun/2025:18:35:24 -0300] "GET /static/images/favicon.ico HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+2025-06-04T21:35:42.679994463Z [INFO] 2025-06-04 18:35:42,679 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:42.680021594Z [INFO] 2025-06-04 18:35:42,679 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:42.682593645Z [INFO] 2025-06-04 18:35:42,682 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:42.682611875Z [INFO] 2025-06-04 18:35:42,682 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:42.683070732Z 127.0.0.1 - - [04/Jun/2025:18:35:42 -0300] "GET / HTTP/1.1" 200 36766 "-" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36"
+2025-06-04T21:35:42.967496157Z [WARNING] 2025-06-04 18:35:42,967 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:42.96755445Z [WARNING] 2025-06-04 18:35:42,967 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:42.96789482Z 127.0.0.1 - - [04/Jun/2025:18:35:42 -0300] "GET /static/css/base.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36"
+2025-06-04T21:35:43.006704769Z [WARNING] 2025-06-04 18:35:43,006 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:43.00672657Z [WARNING] 2025-06-04 18:35:43,006 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:43.007035658Z 127.0.0.1 - - [04/Jun/2025:18:35:43 -0300] "GET /static/css/images.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36"
+2025-06-04T21:35:45.175860952Z [INFO] 2025-06-04 18:35:45,175 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:45.175888364Z [INFO] 2025-06-04 18:35:45,175 views 105 125599158295424 Executing view: home
+2025-06-04T21:35:45.177977046Z [INFO] 2025-06-04 18:35:45,177 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:45.178019239Z [INFO] 2025-06-04 18:35:45,177 views 105 125599158295424 View home executed successfully
+2025-06-04T21:35:45.178484276Z 127.0.0.1 - - [04/Jun/2025:18:35:45 -0300] "GET / HTTP/1.1" 200 36766 "-" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36"
+2025-06-04T21:35:45.43964647Z [WARNING] 2025-06-04 18:35:45,439 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:45.439671741Z [WARNING] 2025-06-04 18:35:45,439 log 105 125599158295424 Not Found: /static/css/base.css
+2025-06-04T21:35:45.440280167Z 127.0.0.1 - - [04/Jun/2025:18:35:45 -0300] "GET /static/css/base.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36"
+2025-06-04T21:35:45.445819611Z [WARNING] 2025-06-04 18:35:45,445 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:45.445835262Z [WARNING] 2025-06-04 18:35:45,445 log 105 125599158295424 Not Found: /static/css/images.css
+2025-06-04T21:35:45.446136819Z 127.0.0.1 - - [04/Jun/2025:18:35:45 -0300] "GET /static/css/images.css HTTP/1.1" 404 179 "https://hoz-tech.onrender.com/" "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.3
