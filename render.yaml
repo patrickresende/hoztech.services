@@ -21,7 +21,7 @@ services:
       pip install -r requirements.txt
       npm install
       npm run build
-      python manage.py collectstatic --noinput --clear
+      python manage.py collectstatic --noinput
       python manage.py migrate
     startCommand: |
       newrelic-admin run-program gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60
@@ -99,16 +99,12 @@ services:
         value: true
       - key: CSP_UPGRADE_INSECURE_REQUESTS
         value: true
-      - key: WHITENOISE_USE_FINDERS
-        value: true
       - key: WHITENOISE_MANIFEST_STRICT
         value: false
       - key: WHITENOISE_ALLOW_ALL_ORIGINS
         value: true
       - key: WHITENOISE_MAX_AGE
         value: 31536000
-      - key: WHITENOISE_AUTOREFRESH
-        value: true
       - key: NEW_RELIC_LICENSE_KEY
         sync: false
       - key: NEW_RELIC_APP_NAME

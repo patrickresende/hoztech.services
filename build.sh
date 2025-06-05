@@ -51,7 +51,7 @@ echo "5.3. Verificando imagens..."
 check_files "static/images" "*"
 
 echo "6. Coletando arquivos estáticos..."
-python manage.py collectstatic --no-input --clear -v 3
+python manage.py collectstatic --no-input -v 3
 
 echo "7. Verificando arquivos coletados..."
 echo "7.1. Verificando CSS coletados..."
