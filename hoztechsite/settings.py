@@ -135,12 +135,34 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# Configurações de Segurança
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 31536000  # 1 ano
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
+SECURE_CROSS_ORIGIN_EMBEDDER_POLICY = 'require-corp'
+SECURE_CROSS_ORIGIN_RESOURCE_POLICY = 'same-site'
+
+# Headers de segurança adicionais
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
+SECURE_CROSS_ORIGIN_EMBEDDER_POLICY = 'require-corp'
+SECURE_CROSS_ORIGIN_RESOURCE_POLICY = 'same-site'
+
 # WhiteNoise Configuration
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 WHITENOISE_ALLOW_ALL_ORIGINS = True
-WHITENOISE_ROOT = None
+WHITENOISE_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 WHITENOISE_MAX_AGE = 31536000
 WHITENOISE_AUTOREFRESH = True
 
@@ -170,34 +192,64 @@ WHITENOISE_MIMETYPES = {
     '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     '.ppt': 'application/vnd.ms-powerpoint',
     '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    '.webp': 'image/webp',
+    '.avif': 'image/avif',
+    '.webm': 'video/webm',
+    '.mp4': 'video/mp4',
+    '.m4v': 'video/x-m4v',
+    '.m4a': 'audio/mp4',
+    '.mp3': 'audio/mpeg',
+    '.ogg': 'audio/ogg',
+    '.wav': 'audio/wav',
 }
 
 # Headers de cache e segurança
 WHITENOISE_HEADERS = {
     '/static/css/*': {
-        'Cache-Control': 'public, max-age=31536000',
+        'Cache-Control': 'public, max-age=31536000, immutable',
         'X-Content-Type-Options': 'nosniff',
+        'Content-Type': 'text/css',
+        'Cross-Origin-Resource-Policy': 'same-site',
+        'Cross-Origin-Embedder-Policy': 'require-corp',
     },
     '/static/js/*': {
-        'Cache-Control': 'public, max-age=31536000',
+        'Cache-Control': 'public, max-age=31536000, immutable',
         'X-Content-Type-Options': 'nosniff',
+        'Content-Type': 'application/javascript',
+        'Cross-Origin-Resource-Policy': 'same-site',
+        'Cross-Origin-Embedder-Policy': 'require-corp',
     },
     '/static/images/*': {
-        'Cache-Control': 'public, max-age=31536000',
+        'Cache-Control': 'public, max-age=31536000, immutable',
         'X-Content-Type-Options': 'nosniff',
+        'Cross-Origin-Resource-Policy': 'same-site',
+        'Cross-Origin-Embedder-Policy': 'require-corp',
     },
     '/static/fonts/*': {
-        'Cache-Control': 'public, max-age=31536000',
+        'Cache-Control': 'public, max-age=31536000, immutable',
         'X-Content-Type-Options': 'nosniff',
+        'Cross-Origin-Resource-Policy': 'same-site',
+        'Cross-Origin-Embedder-Policy': 'require-corp',
     },
 }
 
-# Configurações de segurança adicionais
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'
+# Configurações de CSP (Content Security Policy)
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
+CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "'unsafe-eval'")
+CSP_IMG_SRC = ("'self'", "data:", "https:")
+CSP_FONT_SRC = ("'self'", "data:", "https:")
+CSP_CONNECT_SRC = ("'self'", "https:")
+CSP_MEDIA_SRC = ("'self'", "https:")
+CSP_OBJECT_SRC = ("'none'",)
+CSP_FRAME_SRC = ("'none'",)
+CSP_BASE_URI = ("'self'",)
+CSP_FORM_ACTION = ("'self'",)
+CSP_FRAME_ANCESTORS = ("'none'",)
+CSP_BLOCK_ALL_MIXED_CONTENT = True
+CSP_UPGRADE_INSECURE_REQUESTS = True
 
-# Logging Configuration
+# Configurações de logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -251,10 +303,6 @@ LOGGING = {
             'propagate': True,
         },
     },
-    'root': {
-        'handlers': ['console', 'file'],
-        'level': 'INFO',
-    },
 }
 
 # Print configuration for debugging
@@ -298,12 +346,6 @@ SERVER_EMAIL = os.getenv('SERVER_EMAIL', 'hoztech.services@gmail.com')
 EMAIL_TIMEOUT = 30  # seconds
 EMAIL_SSL_KEYFILE = None
 EMAIL_SSL_CERTFILE = None
-
-# Configurações SSL/HTTPS
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
 
 # Desenvolvimento
 if DEBUG:

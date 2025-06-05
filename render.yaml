@@ -19,6 +19,8 @@ services:
     plan: starter
     buildCommand: |
       pip install -r requirements.txt
+      npm install
+      npm run build
       python manage.py collectstatic --noinput --clear
       python manage.py migrate
     startCommand: |
@@ -55,14 +57,48 @@ services:
         value: true
       - key: SECURE_HSTS_PRELOAD
         value: true
-      - key: NEW_RELIC_LICENSE_KEY
-        sync: false
-      - key: NEW_RELIC_APP_NAME
-        value: "HOZ TECH"
-      - key: NEW_RELIC_MONITOR_MODE
+      - key: SECURE_CONTENT_TYPE_NOSNIFF
         value: true
-      - key: SENTRY_DSN
-        sync: false
+      - key: SECURE_BROWSER_XSS_FILTER
+        value: true
+      - key: X_FRAME_OPTIONS
+        value: DENY
+      - key: SECURE_REFERRER_POLICY
+        value: strict-origin-when-cross-origin
+      - key: SECURE_CROSS_ORIGIN_OPENER_POLICY
+        value: same-origin
+      - key: SECURE_CROSS_ORIGIN_EMBEDDER_POLICY
+        value: require-corp
+      - key: SECURE_CROSS_ORIGIN_RESOURCE_POLICY
+        value: same-site
+      - key: CSP_DEFAULT_SRC
+        value: "'self'"
+      - key: CSP_STYLE_SRC
+        value: "'self' 'unsafe-inline'"
+      - key: CSP_SCRIPT_SRC
+        value: "'self' 'unsafe-inline' 'unsafe-eval'"
+      - key: CSP_IMG_SRC
+        value: "'self' data: https:"
+      - key: CSP_FONT_SRC
+        value: "'self' data: https:"
+      - key: CSP_CONNECT_SRC
+        value: "'self' https:"
+      - key: CSP_MEDIA_SRC
+        value: "'self' https:"
+      - key: CSP_OBJECT_SRC
+        value: "'none'"
+      - key: CSP_FRAME_SRC
+        value: "'none'"
+      - key: CSP_BASE_URI
+        value: "'self'"
+      - key: CSP_FORM_ACTION
+        value: "'self'"
+      - key: CSP_FRAME_ANCESTORS
+        value: "'none'"
+      - key: CSP_BLOCK_ALL_MIXED_CONTENT
+        value: true
+      - key: CSP_UPGRADE_INSECURE_REQUESTS
+        value: true
       - key: WHITENOISE_USE_FINDERS
         value: true
       - key: WHITENOISE_MANIFEST_STRICT
@@ -73,12 +109,14 @@ services:
         value: 31536000
       - key: WHITENOISE_AUTOREFRESH
         value: true
-      - key: SECURE_CONTENT_TYPE_NOSNIFF
+      - key: NEW_RELIC_LICENSE_KEY
+        sync: false
+      - key: NEW_RELIC_APP_NAME
+        value: "HOZ TECH"
+      - key: NEW_RELIC_MONITOR_MODE
         value: true
-      - key: SECURE_BROWSER_XSS_FILTER
-        value: true
-      - key: X_FRAME_OPTIONS
-        value: DENY
+      - key: SENTRY_DSN
+        sync: false
     healthCheckPath: /health/
     autoDeploy: false  # Desabilitar deploy automático
     domains:

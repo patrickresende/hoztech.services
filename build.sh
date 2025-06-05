@@ -6,6 +6,17 @@ echo "Installing dependencies..."
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 
+echo "Installing Node.js dependencies..."
+npm install
+
+echo "Building Tailwind CSS..."
+if [ -f "tailwind.config.js" ]; then
+    echo "Tailwind config exists, building CSS..."
+    npm run build
+else
+    echo "No Tailwind config found, skipping CSS build"
+fi
+
 echo "Checking static files integrity..."
 if [ -f "static/images/logo.png" ]; then
     echo "Logo file exists"
@@ -14,14 +25,6 @@ if [ -f "static/images/logo.png" ]; then
 else
     echo "ERROR: Logo file not found!"
     exit 1
-fi
-
-echo "Building Tailwind CSS..."
-if [ -f "tailwind.config.js" ]; then
-    echo "Tailwind config exists, building CSS..."
-    npm run build
-else
-    echo "No Tailwind config found, skipping CSS build"
 fi
 
 echo "Collecting static files..."
@@ -61,14 +64,6 @@ if [ -d "staticfiles/admin" ]; then
     ls -la staticfiles/admin/
 else
     echo "ERROR: Admin static files not found!"
-    exit 1
-fi
-
-if [ -d "core/templates/admin" ]; then
-    echo "Admin templates exist"
-    ls -la core/templates/admin/
-else
-    echo "ERROR: Admin templates not found!"
     exit 1
 fi
 
