@@ -43,8 +43,13 @@ SECRET_KEY = os.getenv("SECRET_KEY", "chave-insegura-para-dev")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENVIRONMENT == 'development'
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(',')
+#ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(',')
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
+if DEBUG:
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+else:
+    ALLOWED_HOSTS = ['hoz-tech.onrender.com']  # ou o domínio do seu projeto
 
 # Application definition
 
@@ -77,6 +82,9 @@ MIDDLEWARE = [
 # Configuração do WhiteNoise
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_AUTOREFRESH = True
+WHITENOISE_ENABLE_GZIP = True
+WHITENOISE_SKIP_COMPRESS_EXTENSIONS = []  # Comprimir todos os tipos de arquivo
+WHITENOISE_INDEX_FILE = True
 WHITENOISE_MIMETYPES = {
     '.js': 'application/javascript',
     '.mjs': 'application/javascript',
@@ -97,11 +105,22 @@ WHITENOISE_MIMETYPES = {
 }
 
 # Headers de segurança e cache
-WHITENOISE_ADD_HEADERS_FUNCTION = lambda headers, path, url: {
-    'Cache-Control': 'public, max-age=31536000',
-    'X-Content-Type-Options': 'nosniff',
-    'Content-Type': WHITENOISE_MIMETYPES.get(os.path.splitext(path)[1], 'application/octet-stream'),
-}
+def whitenoise_headers(headers, path, url):
+    """Função para configurar headers do WhiteNoise"""
+    ext = os.path.splitext(path)[1]
+    content_type = WHITENOISE_MIMETYPES.get(ext, 'application/octet-stream')
+    
+    headers['Cache-Control'] = 'public, max-age=31536000'
+    headers['X-Content-Type-Options'] = 'nosniff'
+    headers['Content-Type'] = content_type
+    
+    # Adicionar headers de compressão se necessário
+    if ext in ['.js', '.css', '.html', '.txt', '.json']:
+        headers['Vary'] = 'Accept-Encoding'
+    
+    return headers
+
+WHITENOISE_ADD_HEADERS_FUNCTION = whitenoise_headers
 
 # Configurações de Segurança - Apenas para produção
 if not DEBUG:
@@ -213,7 +232,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'core/static'),
 ]
@@ -223,6 +246,8 @@ if ENVIRONMENT == 'development':
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 else:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    if 'whitenoise.middleware.WhiteNoiseMiddleware' not in MIDDLEWARE:
+        MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 # Debug info para arquivos estáticos
 print("=== Configuração de Arquivos Estáticos ===")
@@ -235,7 +260,6 @@ print(f"WHITENOISE_USE_FINDERS: {WHITENOISE_USE_FINDERS}")
 print("========================================")
 
 # Media files
-MEDIA_URL = os.environ.get('MEDIA_URL', '/media/')
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'mediafiles'))
 
 # Default primary key field type

@@ -1,0 +1,31 @@
+/* Estilos para Saídas e Mensagens */
+.output-container {
+    background: rgba(10, 11, 30, 0.8);
+    border: 1px solid var(--tech-blue);
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+    margin: 1rem 0;
+    box-shadow: 0 0 20px rgba(0, 247, 255, 0.1);
+}
+
+.output-text {
+    font-family: var(--font-tech);
+    color: var(--tech-light);
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+.output-success {
+    border-color: #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.output-error {
+    border-color: var(--tech-red);
+    box-shadow: 0 0 20px rgba(255, 7, 58, 0.1);
+}
+
+.output-warning {
+    border-color: #ffff00;
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.1);
+} 
