@@ -20,18 +20,21 @@ services:
     buildCommand: |
       pip install -r requirements.txt
       npm install
-      npm run build
-    echo "---> CHEGOU ANTES DO COLLECTSTATIC"
+      npm run build:css
+      echo "---> EXECUTANDO NPM BUILD:CSS"
+      npm run build:css
+      echo "---> CHEGOU ANTES DO COLLECTSTATIC"
       python manage.py collectstatic --noinput
-    echo "---> CHEGOU DEPOIS DO COLLECTSTATIC"
+      echo "---> CHEGOU DEPOIS DO COLLECTSTATIC"
       python manage.py migrate
-      # Instalar e configurar Nginx
+      echo "---> INSTALANDO E CONFIGURANDO NGINX"
       apt-get update && apt-get install -y nginx
       cp nginx.conf /etc/nginx/sites-available/default
       ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
       nginx -t && service nginx restart
+      
     startCommand: |
-      # Iniciar Gunicorn e Nginx
+      echo "---> INICIANDO GUNICORN"
       service nginx start
       newrelic-admin run-program gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60 --bind 127.0.0.1:8000
     envVars:
