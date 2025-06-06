@@ -55,12 +55,6 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 ]
 
-# Debug Toolbar - Adicionar apenas se DEBUG estiver ativo
-if DEBUG:
-    INSTALLED_APPS.append('debug_toolbar')
-    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
-    INTERNAL_IPS = ['127.0.0.1']
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -71,6 +65,21 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Configuração do WhiteNoise
+WHITENOISE_USE_FINDERS = os.environ.get('WHITENOISE_USE_FINDERS', 'True') == 'True'
+WHITENOISE_MANIFEST_STRICT = os.environ.get('WHITENOISE_MANIFEST_STRICT', 'False') == 'True'
+WHITENOISE_ALLOW_ALL_ORIGINS = os.environ.get('WHITENOISE_ALLOW_ALL_ORIGINS', 'True') == 'True'
+WHITENOISE_MAX_AGE = 31536000  # 1 ano em segundos
+
+# Debug Toolbar - Adicionar apenas se DEBUG estiver ativo
+if DEBUG:
+    INSTALLED_APPS.append('debug_toolbar')
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    INTERNAL_IPS = ['127.0.0.1']
+    # Configurações de debug do WhiteNoise
+    WHITENOISE_AUTOREFRESH = True
+    WHITENOISE_USE_FINDERS = True
 
 # Configurações de Segurança - Apenas para produção
 if not DEBUG:
@@ -84,12 +93,6 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000  # 1 year
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
-
-# Configuração do WhiteNoise
-WHITENOISE_USE_FINDERS = os.environ.get('WHITENOISE_USE_FINDERS', 'True') == 'True'
-WHITENOISE_MANIFEST_STRICT = os.environ.get('WHITENOISE_MANIFEST_STRICT', 'False') == 'True'
-WHITENOISE_ALLOW_ALL_ORIGINS = os.environ.get('WHITENOISE_ALLOW_ALL_ORIGINS', 'True') == 'True'
-WHITENOISE_MAX_AGE = 31536000  # 1 ano em segundos
 
 ROOT_URLCONF = 'hoztechsite.urls'
 
