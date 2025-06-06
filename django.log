@@ -2,3 +2,781 @@ Watching for file changes with StatReloader
 Executing view: home
 View home executed successfully
 "GET / HTTP/1.1" 200 38254
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'djdt'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\middleware.py", line 130, in __call__
+    return self._postprocess(request, response, toolbar)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\middleware.py", line 172, in _postprocess
+    rendered = toolbar.render_toolbar()
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\toolbar.py", line 96, in render_toolbar
+    return render_to_string("debug_toolbar/base.html", context)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\test\utils.py", line 112, in instrumented_test_render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'djdt' is not a registered namespace
+"GET / HTTP/1.1" 500 144062
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'djdt'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\middleware.py", line 130, in __call__
+    return self._postprocess(request, response, toolbar)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\middleware.py", line 172, in _postprocess
+    rendered = toolbar.render_toolbar()
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\toolbar.py", line 96, in render_toolbar
+    return render_to_string("debug_toolbar/base.html", context)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\test\utils.py", line 112, in instrumented_test_render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'djdt' is not a registered namespace
+"GET / HTTP/1.1" 500 144199
+Executing view: home
+View home executed successfully
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'djdt'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\middleware.py", line 130, in __call__
+    return self._postprocess(request, response, toolbar)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\middleware.py", line 172, in _postprocess
+    rendered = toolbar.render_toolbar()
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\toolbar.py", line 96, in render_toolbar
+    return render_to_string("debug_toolbar/base.html", context)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\test\utils.py", line 112, in instrumented_test_render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'djdt' is not a registered namespace
+"GET / HTTP/1.1" 500 144199
+Executing view: home
+View home executed successfully
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'djdt'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\middleware.py", line 130, in __call__
+    return self._postprocess(request, response, toolbar)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\middleware.py", line 172, in _postprocess
+    rendered = toolbar.render_toolbar()
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\debug_toolbar\toolbar.py", line 96, in render_toolbar
+    return render_to_string("debug_toolbar/base.html", context)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\test\utils.py", line 112, in instrumented_test_render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 321, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'djdt' is not a registered namespace
+"GET / HTTP/1.1" 500 144199
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Executing view: home
+Error in view home: 'core' is not a registered namespace
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'core'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 125, in wrapper
+    result = view_func(*args, **kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 136, in home
+    return render(request, 'home.html')
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'core' is not a registered namespace
+"GET / HTTP/1.1" 500 153845
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 38075
+"GET /static/core/css/core_base.css HTTP/1.1" 200 3808
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 200 7373
+"GET /static/images/logo.png HTTP/1.1" 404 1918
+"GET /static/core/css/core_output.css HTTP/1.1" 200 11299
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 200 4604
+"GET /static/core/css/core_images.css HTTP/1.1" 200 1726
+"GET /static/images/logo.png HTTP/1.1" 404 1918
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 200 8174
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 38075
+"GET /static/images/logo.png HTTP/1.1" 404 1918
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 37943
+"GET /static/core/images/logo.png HTTP/1.1" 200 258929
+"GET /static/images/logo.png HTTP/1.1" 404 1918
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 37943
+"GET /static/images/logo.png HTTP/1.1" 404 1918
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 37943
+"GET /static/images/logo.png HTTP/1.1" 404 1918
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 37953
+"GET /static/images/logo.png HTTP/1.1" 404 1918
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 37953
+"GET /static/images/logo.png HTTP/1.1" 404 1918
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4100
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 37958
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4100
+"GET /static/images/logo.png HTTP/1.1" 404 1918
+code 400, message Bad request version ('\x02h2\x08http/1.1\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00+\x00\x07\x06\x1a\x1a\x03\x04\x03\x03DÍ\x00\x05\x00\x03\x02h2\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ã\x0f\x06Ú/E¢>K¤%%1Â\x01²P·¯9àÑ\x82')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('Bp\x18ÏÑO\x94)`x¥m7Ê\\:')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('zz\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93**\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('2TdãX\x07\x19\x87\x9a{±«"P')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\xad7\x0e)@Hìq\x05Ñ(¸\x10HpàÅ\x98')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x8d')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x02\x01\x00\x00\x1b\x00\x03\x02\x00\x02ÿ\x01\x00\x01\x00\x00#\x00\x00\x003\x04ï\x04í')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 37117
+"GET /servicos HTTP/1.1" 301 0
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 65270
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4100
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 63301
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4100
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 63065
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4100
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35153
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4100
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35153
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4100
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 37466
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4100
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 63757
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4100
+"GET /contato/ HTTP/1.1" 200 32010
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4100
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35845
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4100
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35845
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35845
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35845
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35845
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35845
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35949
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35949
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35949
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 35949
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 36014
+"GET /static/core/js/core_navbar.js HTTP/1.1" 200 3542
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 36014
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 36363
+"GET /static/core/js/core_navbar.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 38057
+"GET /static/core/js/core_navbar.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 38057
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 38057
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 38057
+"GET /static/core/js/core_navbar.js HTTP/1.1" 304 0
+Executing view: home
+Error in view home: Reverse for 'sobre_nos' not found. 'sobre_nos' is not a valid view function or pattern name.
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 125, in wrapper
+    result = view_func(*args, **kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 136, in home
+    return render(request, 'home.html')
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'sobre_nos' not found. 'sobre_nos' is not a valid view function or pattern name.
+"GET / HTTP/1.1" 500 153693
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Executing view: home
+Error in view home: Reverse for 'servicos' not found. 'servicos' is not a valid view function or pattern name.
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 125, in wrapper
+    result = view_func(*args, **kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 136, in home
+    return render(request, 'home.html')
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'servicos' not found. 'servicos' is not a valid view function or pattern name.
+"GET / HTTP/1.1" 500 168073
+Executing view: home
+Error in view home: Reverse for 'servicos' not found. 'servicos' is not a valid view function or pattern name.
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 125, in wrapper
+    result = view_func(*args, **kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 136, in home
+    return render(request, 'home.html')
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'servicos' not found. 'servicos' is not a valid view function or pattern name.
+"GET / HTTP/1.1" 500 168073
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 38684
+"GET /static/core/js/core_navbar.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 39713
+"GET /static/core/css/core_base.css HTTP/1.1" 200 8028
+"GET /static/core/images/logo.png HTTP/1.1" 200 258929
+"GET /static/core/css/core_output.css HTTP/1.1" 200 11299
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 200 8174
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 200 7373
+"GET /static/core/css/core_images.css HTTP/1.1" 200 1726
+"GET /static/core/js/core_navbar.js HTTP/1.1" 200 3542
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 200 4604
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3993
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 40327
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 40327
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 39819
+"GET /static/core/css/core_base.css HTTP/1.1" 304 0
+"GET /static/core/js/core_navbar.js HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4104
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 39819
+"GET /static/core/css/core_base.css HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 39819
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 39819
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 67104
+"GET /static/core/js/core_navbar.js HTTP/1.1" 304 0
+"GET /contato/ HTTP/1.1" 200 35357
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 40813
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 39819
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 40813
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 67104
+"GET /contato/ HTTP/1.1" 200 35357
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 67104
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 40813
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 39819
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 40813
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 67104
+"GET /contato/ HTTP/1.1" 200 35357
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 67104
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 40813
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 39819
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 40813
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 67104
+"GET /contato/ HTTP/1.1" 200 35357
+"GET /contato/ HTTP/1.1" 200 37004
+"GET /static/core/css/core_base.css HTTP/1.1" 304 0
+"GET /static/core/js/core_navbar.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41466
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41466
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41466
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4104
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 42460
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4104

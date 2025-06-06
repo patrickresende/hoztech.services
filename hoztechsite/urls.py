@@ -28,7 +28,7 @@ admin.site.index_title = "Bem-vindo ao Portal Admin da HOZ TECH"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls')),
+    path('', include('core.urls', namespace='core')),
     path('core_admin/', include('core.admin_urls', namespace='core_admin')),
     path('health/', health_check, name='health_check'),
 ]
