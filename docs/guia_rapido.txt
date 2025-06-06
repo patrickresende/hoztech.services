@@ -1,0 +1,90 @@
+=== GUIA RÁPIDO HOZ TECH ===
+
+1. DESENVOLVIMENTO LOCAL
+=======================
+Comando recomendado:
+python scripts/run_dev.py
+
+Características:
+- Servidor de desenvolvimento Django otimizado
+- DEBUG = True
+- Sem HTTPS forçado
+- Auto-reload desativado para evitar problemas
+- Ideal para desenvolvimento local
+- Acesso: http://127.0.0.1:8000 ou http://localhost:8000
+
+2. AMBIENTE DE TESTE
+===================
+Comando:
+python scripts/run_environment.py --env test --collect-static
+
+Características:
+- Usa Waitress (servidor mais robusto)
+- DEBUG = False
+- Bom para testes de integração
+- Simula ambiente de produção
+
+3. AMBIENTE DE PRODUÇÃO
+======================
+Comando:
+python scripts/run_environment.py --env prod --collect-static --migrate
+
+Características:
+- Waitress com configurações otimizadas
+- DEBUG = False
+- Configurações completas de produção
+
+4. VERIFICAÇÃO DO SISTEMA
+========================
+Comando:
+python scripts/check_system.py
+
+Verifica:
+- Configuração do Django
+- Conexão com banco de dados
+- Arquivos estáticos
+- Status do servidor
+- URLs disponíveis
+
+5. COMANDOS ÚTEIS
+================
+
+Coletar arquivos estáticos:
+python manage.py collectstatic --noinput
+
+Executar migrações:
+python manage.py migrate
+
+Criar superusuário:
+python manage.py createsuperuser
+
+Verificar URLs disponíveis:
+python manage.py show_urls
+
+6. SOLUÇÃO DE PROBLEMAS
+======================
+
+Se o servidor não iniciar:
+1. Verificar se a porta está livre:
+   netstat -ano | findstr :8000
+
+2. Matar processos Python:
+   taskkill /F /IM python.exe
+
+3. Limpar arquivos estáticos:
+   - Apagar pasta staticfiles
+   - Executar collectstatic novamente
+
+4. Verificar configurações:
+   python scripts/check_system.py
+
+7. OBSERVAÇÕES IMPORTANTES
+========================
+
+- Use run_dev.py para desenvolvimento local
+- Mantenha DEBUG=True apenas em desenvolvimento
+- Faça backup do banco antes de migrações
+- Teste em ambiente de teste antes de produção
+- Monitore os logs para identificar problemas
+
+=== FIM DO GUIA RÁPIDO === 

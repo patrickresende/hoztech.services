@@ -1,0 +1,153 @@
+=== GUIA DE SOLUÇÃO DE PROBLEMAS HOZ TECH ===
+
+1. PROBLEMAS COMUNS DE CONEXÃO
+=============================
+
+1.1 Erro: "Não é possível acessar esse site"
+-----------------------------------------
+Sintomas:
+- ERR_TIMED_OUT
+- 127.0.0.1 demorou muito para responder
+- Conexão recusada
+
+Soluções:
+1. Verifique se o servidor está rodando:
+   python scripts/check_system.py
+
+2. Tente diferentes hosts:
+   - localhost ao invés de 127.0.0.1
+   - python scripts/run_environment.py --env test --host localhost
+
+3. Tente diferentes portas:
+   python scripts/run_environment.py --env test --port 8080
+
+4. Verifique firewall:
+   - Desative temporariamente para teste
+   - Adicione exceção para a porta
+
+1.2 Erro: "Apenas /admin funciona"
+-------------------------------
+Causas comuns:
+1. Arquivos estáticos não coletados
+2. URLs mal configuradas
+3. Permissões incorretas
+
+Soluções:
+1. Colete os estáticos:
+   python manage.py collectstatic --noinput
+
+2. Verifique URLs:
+   python manage.py show_urls
+
+3. Reinicie com configurações completas:
+   python scripts/run_environment.py --env test --collect-static --migrate
+
+2. PROBLEMAS COM ARQUIVOS ESTÁTICOS
+=================================
+
+2.1 CSS/JS não carrega
+--------------------
+1. Execute collectstatic:
+   python manage.py collectstatic --noinput
+
+2. Verifique configurações:
+   - STATIC_ROOT em settings.py
+   - STATIC_URL em settings.py
+   - STATICFILES_DIRS em settings.py
+
+3. Confirme Whitenoise:
+   - Middleware configurado
+   - Arquivos no diretório correto
+
+2.2 Arquivos 404
+-------------
+1. Verifique caminhos:
+   - URLs começam com /static/
+   - Arquivos existem no STATIC_ROOT
+
+2. Permissões:
+   - Diretório static acessível
+   - Usuário do servidor tem acesso
+
+3. PROBLEMAS DE BANCO DE DADOS
+============================
+
+3.1 Erros de Migração
+------------------
+1. Resete migrações:
+   python manage.py migrate --fake-initial
+
+2. Sincronize banco:
+   python manage.py migrate --run-syncdb
+
+3. Verifique conexão:
+   python manage.py dbshell
+
+4. PROBLEMAS DE PERFORMANCE
+=========================
+
+4.1 Servidor Lento
+---------------
+1. Verifique logs:
+   tail -f system_check.log
+
+2. Monitore recursos:
+   - CPU
+   - Memória
+   - Conexões de banco
+
+3. Ajuste configurações:
+   - Número de threads
+   - Timeouts
+   - Cache
+
+5. VERIFICAÇÃO RÁPIDA
+===================
+
+5.1 Checklist Básico
+-----------------
+1. Servidor rodando?
+   ps aux | grep python
+
+2. Porta disponível?
+   netstat -ano | findstr :8000
+
+3. Arquivos estáticos?
+   ls staticfiles/
+
+4. Banco conectado?
+   python manage.py dbshell
+
+5.2 Comandos Úteis
+---------------
+# Verificação completa
+python scripts/check_system.py
+
+# Reinício limpo
+python scripts/run_environment.py --env test --collect-static --migrate
+
+# Debug
+python manage.py runserver --traceback
+
+6. LOGS E DIAGNÓSTICO
+===================
+
+6.1 Arquivos de Log
+----------------
+- system_check.log: Verificações do sistema
+- error.log: Erros do servidor
+- debug.log: Informações de debug
+- access.log: Acessos ao servidor
+
+6.2 Comandos de Diagnóstico
+------------------------
+# Ver últimos erros
+tail -f system_check.log
+
+# Verificar conexões
+netstat -ano | findstr :8000
+
+# Verificar processos
+ps aux | grep python
+
+=== FIM DO GUIA DE SOLUÇÃO DE PROBLEMAS === 

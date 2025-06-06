@@ -595,3 +595,10 @@ humans.txt
 sitemap.xml
 .htaccess
 .well-known/
+
+# Server logs
+server.log
+waitress.log
+*.log.*
+logs/server/
+logs/waitress/

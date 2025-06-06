@@ -819,3 +819,1025 @@ Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 301 0
+code 400, message Bad request version ('JJ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063êê\x00\x00\x00\x17\x00\x00\x00#\x00\x00\x00+\x00\x07\x06')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('Áy')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Serving on http://0.0.0.0:8000
+Serving on http://0.0.0.0:8000
+Serving on http://127.0.0.1:8000
+Watching for file changes with StatReloader
+
+=== Iniciando servidor HOZ TECH ===
+Ambiente: development
+Debug: True
+Host: 127.0.0.1
+Porta: 8000
+Diretório: C:\Users\TXX\Desktop\HOZ_TECH
+===================================
+
+Erro ao iniciar servidor: Unknown adjustment 'threads_per_process'
+
+Execute 'python scripts/check_env.py' para diagnóstico detalhado.
+
+=== Iniciando servidor HOZ TECH ===
+Ambiente: development
+Debug: True
+Host: 127.0.0.1
+Porta: 8000
+Diretório: C:\Users\TXX\Desktop\HOZ_TECH
+===================================
+
+Serving on http://127.0.0.1:8000
+Session data corrupted
+Session data corrupted
+Task queue depth is 1
+Session data corrupted
+
+=== Configuração de Arquivos Estáticos ===
+STATIC_ROOT: staticfiles
+STATIC_URL: /static/
+STATICFILES_DIRS: ['C:\\Users\\TXX\\Desktop\\HOZ_TECH\\core/static']
+Executing view: home
+View home executed successfully
+Not Found: /static/
+! URL http://127.0.0.1:8000/static/ - Status: 404
+Not Found: /media/
+! URL http://127.0.0.1:8000/media/ - Status: 404
+
+=== Resumo da Verificação ===
+
+Status das URLs:
+! /static/: 404
+! /media/: 404
+
+=== Configuração de Arquivos Estáticos ===
+STATIC_ROOT: staticfiles
+STATIC_URL: /static/
+STATICFILES_DIRS: ['C:\\Users\\TXX\\Desktop\\HOZ_TECH\\core/static']
+! Porta 8000 está disponível (servidor não está rodando)
+
+=== Resumo da Verificação ===
+
+Status das URLs:
+[OK] Django configurado corretamente
+[OK] Conexão com banco de dados 'default' OK
+
+=== Configuração de Arquivos Estáticos ===
+STATIC_ROOT: staticfiles
+STATIC_URL: /static/
+STATICFILES_DIRS: ['C:\\Users\\TXX\\Desktop\\HOZ_TECH\\core/static']
+[OK] STATIC_ROOT existe
+[OK] Diretório estático existe: C:\Users\TXX\Desktop\HOZ_TECH\core/static
+[AVISO] Porta 8000 está disponível (servidor não está rodando)
+
+=== Resumo da Verificação ===
+Django: [OK]
+Banco de Dados: [OK]
+Arquivos Estáticos: [OK]
+Servidor: [ERRO]
+
+=== Iniciando servidor HOZ TECH ===
+Ambiente: test
+Debug: False
+Host: 127.0.0.1
+Porta: 8000
+Diretório: C:\Users\TXX\Desktop\HOZ_TECH
+===================================
+
+Serving on http://127.0.0.1:8000
+
+=== Iniciando servidor HOZ TECH ===
+Ambiente: production
+Debug: False
+Host: 127.0.0.1
+Porta: 8000
+Diretório: C:\Users\TXX\Desktop\HOZ_TECH
+===================================
+
+Serving on http://127.0.0.1:8000
+
+=== Iniciando servidor HOZ TECH ===
+Ambiente: test
+Debug: False
+Host: 127.0.0.1
+Porta: 8000
+Diretório: C:\Users\TXX\Desktop\HOZ_TECH
+===================================
+
+Serving on http://127.0.0.1:8000
+Watching for file changes with StatReloader
+code 400, message Bad request version ('\x96§&ú\x82')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01DÍ\x00\x05\x00\x03\x02h2\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('êê\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06Sªª\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('[kÍcÖÆ;ªlA£%ýñÇÝã<D4»h\x10Cu<')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+
+=== Configurações do Servidor ===
+Host: 127.0.0.1
+Porta: 8000
+Threads: 4
+Timeout: 30s
+Debug: False
+Ambiente: test
+=============================
+
+Servidor iniciando em http://127.0.0.1:8000
+Pressione Ctrl+C para encerrar
+
+Serving on http://127.0.0.1:8000
+
+=== Configurações do Servidor ===
+Host: 127.0.0.1
+Porta: 8000
+Threads: 4
+Timeout: 30s
+Debug: False
+Ambiente: test
+=============================
+
+Servidor iniciando em http://127.0.0.1:8000
+Pressione Ctrl+C para encerrar
+
+Serving on http://127.0.0.1:8000
+
+=== Configurações do Servidor ===
+Host: 127.0.0.1
+Porta: 8000
+Threads: 4
+Timeout: 30s
+Debug: False
+Ambiente: test
+=============================
+
+Servidor iniciando em http://127.0.0.1:8000
+Pressione Ctrl+C para encerrar
+
+Serving on http://127.0.0.1:8000
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('\x1a\x1a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sºº\x00\x00DÍ\x00\x05\x00\x03\x02h2ÿ\x01\x00\x01\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00\x12\x00\x00\x00+\x00\x07\x06')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x1a\x1a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063ÊÊ\x00\x00DÍ\x00\x05\x00\x03\x02h2\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('localhostDÍ\x00\x05\x00\x03\x02h2\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('D½éûÓ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06²\x01\x00\x06®\x03\x03¦æ»«')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x1a\x1a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06¥ÚÚ\x00\x00DÍ\x00\x05\x00\x03\x02h2\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ôñ±ýºkpÏjÒTnùC©x')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request syntax ('\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03\x98IÎ\x08A\x8a\x9axôºu¤ýM%å½¬Exd\x8d\x94\x91V?§¡Ü\x89u')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 200 8028
+"GET /static/core/images/logo.png HTTP/1.1" 200 258929
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 200 8174
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 200 7373
+"GET /static/core/css/core_output.css HTTP/1.1" 200 11299
+"GET /static/core/css/core_images.css HTTP/1.1" 200 1726
+"GET /static/core/js/core_navbar.js HTTP/1.1" 200 3542
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 200 4604
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3993
+code 400, message Bad request version ('ì8e\x93zØäÎÇHP>P1E\x87')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ºº\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06s')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 200 8028
+"GET /static/core/images/logo.png HTTP/1.1" 200 258929
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 200 4604
+"GET /static/core/css/core_images.css HTTP/1.1" 200 1726
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 200 7373
+"GET /static/core/css/core_output.css HTTP/1.1" 200 11299
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 200 8174
+"GET /static/core/js/core_navbar.js HTTP/1.1" 200 3542
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 42465
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 42465
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 68756
+"GET /contato/ HTTP/1.1" 200 37009
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+
+=== Configurações do Servidor ===
+Host: 127.0.0.1
+Porta: 8000
+Threads: 4
+Timeout: 30s
+Debug: False
+Ambiente: test
+=============================
+
+Servidor iniciando em http://127.0.0.1:8000
+Pressione Ctrl+C para encerrar
+
+Serving on http://127.0.0.1:8000
+Executing view: home
+View home executed successfully
+Task queue depth is 1
+Task queue depth is 2
+Not Found: /static/admin\\css\\autocomplete.4a81fc4242d0.css
+Not Found: /static/admin\\css\\autocomplete.4a81fc4242d0.css.br
+Not Found: /static/admin\\css\\autocomplete.4a81fc4242d0.css.gz
+Not Found: /static/admin\\css\\autocomplete.css
+Not Found: /static/admin\\css\\autocomplete.css.br
+Not Found: /static/admin\\css\\autocomplete.css.gz
+Not Found: /static/admin\\css\\base.523eb49842a7.css
+Not Found: /static/admin\\css\\base.523eb49842a7.css.br
+Not Found: /static/admin\\css\\base.523eb49842a7.css.gz
+Not Found: /static/admin\\css\\base.css
+Not Found: /static/admin\\css\\base.css.br
+Not Found: /static/admin\\css\\base.css.gz
+Not Found: /static/admin\\css\\changelists.9237a1ac391b.css
+Not Found: /static/admin\\css\\changelists.9237a1ac391b.css.br
+Not Found: /static/admin\\css\\changelists.9237a1ac391b.css.gz
+Not Found: /static/admin\\css\\changelists.css
+Not Found: /static/admin\\css\\changelists.css.br
+Not Found: /static/admin\\css\\changelists.css.gz
+Not Found: /static/admin\\css\\dark_mode.css
+Not Found: /static/admin\\css\\dark_mode.css.br
+Not Found: /static/admin\\css\\dark_mode.css.gz
+Not Found: /static/admin\\css\\dark_mode.ef27a31af300.css
+Not Found: /static/admin\\css\\dark_mode.ef27a31af300.css.br
+Not Found: /static/admin\\css\\dark_mode.ef27a31af300.css.gz
+Not Found: /static/admin\\css\\dashboard.css
+Not Found: /static/admin\\css\\dashboard.css.br
+Not Found: /static/admin\\css\\dashboard.css.gz
+Not Found: /static/admin\\css\\dashboard.e90f2068217b.css
+Not Found: /static/admin\\css\\dashboard.e90f2068217b.css.br
+Not Found: /static/admin\\css\\dashboard.e90f2068217b.css.gz
+Not Found: /static/admin\\css\\forms.c14e1cb06392.css
+Executing view: home
+View home executed successfully
+Not Found: /static/admin\\css\\autocomplete.4a81fc4242d0.css
+Not Found: /static/admin\\css\\autocomplete.4a81fc4242d0.css.br
+Not Found: /static/admin\\css\\autocomplete.4a81fc4242d0.css.gz
+Not Found: /static/admin\\css\\autocomplete.css
+Not Found: /static/admin\\css\\autocomplete.css.br
+Not Found: /static/admin\\css\\autocomplete.css.gz
+Not Found: /static/admin\\css\\base.523eb49842a7.css
+Not Found: /static/admin\\css\\base.523eb49842a7.css.br
+Not Found: /static/admin\\css\\base.523eb49842a7.css.gz
+Not Found: /static/admin\\css\\base.css
+Not Found: /static/admin\\css\\base.css.br
+Not Found: /static/admin\\css\\base.css.gz
+Not Found: /static/admin\\css\\changelists.9237a1ac391b.css
+Not Found: /static/admin\\css\\changelists.9237a1ac391b.css.br
+Not Found: /static/admin\\css\\changelists.9237a1ac391b.css.gz
+Not Found: /static/admin\\css\\changelists.css
+Not Found: /static/admin\\css\\changelists.css.br
+Not Found: /static/admin\\css\\changelists.css.gz
+Not Found: /static/admin\\css\\dark_mode.css
+Executing view: home
+View home executed successfully
+Not Found: /static/admin\\css\\autocomplete.css
+Not Found: /static/admin\\css\\autocomplete.css.br
+Not Found: /static/admin\\css\\autocomplete.css.gz
+Not Found: /static/admin\\css\\base.css
+Not Found: /static/admin\\css\\base.css.br
+Not Found: /static/admin\\css\\base.css.gz
+Not Found: /static/admin\\css\\changelists.css
+Not Found: /static/admin\\css\\changelists.css.br
+Not Found: /static/admin\\css\\changelists.css.gz
+Not Found: /static/admin\\css\\dark_mode.css
+Not Found: /static/admin\\css\\dark_mode.css.br
+Not Found: /static/admin\\css\\dark_mode.css.gz
+Not Found: /static/admin\\css\\dashboard.css
+Not Found: /static/admin\\css\\dashboard.css.br
+Not Found: /static/admin\\css\\dashboard.css.gz
+Not Found: /static/admin\\css\\forms.css
+Not Found: /static/admin\\css\\forms.css.br
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 4120
+"HEAD /static/admin%5Cimg%5Csearch.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cselector-icons.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Csorting-icons.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Ctooltag-add.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Ctooltag-arrowright.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cgis%5Cmove_vertex_off.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cgis%5Cmove_vertex_on.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cactions.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cautocomplete.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ccalendar.js HTTP/1.1" 200 0
+Watching for file changes with StatReloader
+"HEAD /static/admin%5Cjs%5Ccancel.js HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"HEAD /static/admin%5Cjs%5Cchange_form.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ccollapse.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ccore.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cfilters.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cinlines.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cjquery.init.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cnav_sidebar.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cpopup_response.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cprepopulate.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cprepopulate_init.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5CSelectBox.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5CSelectFilter2.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ctheme.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Curlify.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cadmin%5CDateTimeShortcuts.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cadmin%5CRelatedObjectLookups.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cjquery%5Cjquery.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cjquery%5Cjquery.min.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cjquery%5CLICENSE.txt HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5CLICENSE.md HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Cselect2.full.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Cselect2.full.min.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Caf.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Car.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Caz.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cbg.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cbn.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cbs.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cca.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ccs.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cda.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cde.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cdsb.js HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cel.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cen.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ces.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cet.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ceu.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cfa.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cfi.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cfr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cgl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Che.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chi.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chsb.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chu.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chy.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cid.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cis.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cit.js HTTP/1.1" 200 0
+
+=== Configurações do Servidor ===
+Host: 127.0.0.1
+Porta: 8001
+Threads: 4
+Timeout: 30s
+Debug: False
+Ambiente: production
+=============================
+
+Servidor iniciando em http://127.0.0.1:8001
+Pressione Ctrl+C para encerrar
+
+Serving on http://127.0.0.1:8001
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cja.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cka.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ckm.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cko.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Clt.js HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Clv.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cmk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cms.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cnb.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cne.js HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cnl.js HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cpl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cps.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cpt-BR.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cpt.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cro.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cru.js HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csq.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csr-Cyrl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csv.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cth.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ctk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ctr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cuk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cvi.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Czh-CN.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Czh-TW.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5CLICENSE.txt HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5CLICENSE.txt.br HTTP/1.1" 404 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5CLICENSE.txt.gz HTTP/1.1" 404 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5Cxregexp.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5Cxregexp.js.br HTTP/1.1" 404 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5Cxregexp.js.gz HTTP/1.1" 404 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5Cxregexp.min.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5Cxregexp.min.js.br HTTP/1.1" 404 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5Cxregexp.min.js.gz HTTP/1.1" 404 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"HEAD /static/admin%5Ccss%5Cautocomplete.css HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"HEAD /static/admin%5Ccss%5Cbase.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cchangelists.css HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"HEAD /static/admin%5Ccss%5Cdark_mode.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cdashboard.css HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"HEAD /static/admin%5Ccss%5Cforms.css HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"HEAD /static/admin%5Ccss%5Clogin.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cnav_sidebar.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cresponsive.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cresponsive_rtl.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Crtl.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cwidgets.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5CLICENSE-SELECT2.md HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5Cselect2.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5Cselect2.min.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Ccalendar-icons.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-addlink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-alert.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-calendar.svg HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"HEAD /static/admin%5Cimg%5Cicon-changelink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cautocomplete.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-clock.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cbase.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-deletelink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cchangelists.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-no.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cdark_mode.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-unknown-alt.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cdashboard.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-unknown.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cforms.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-viewlink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Clogin.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-yes.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cnav_sidebar.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cinline-delete.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cresponsive.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5CLICENSE HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5CREADME.txt HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Csearch.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cselector-icons.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Csorting-icons.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Ctooltag-add.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Ctooltag-arrowright.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cgis%5Cmove_vertex_off.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cgis%5Cmove_vertex_on.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cactions.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cautocomplete.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ccalendar.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ccancel.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cchange_form.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ccollapse.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ccore.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cfilters.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cinlines.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cjquery.init.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cnav_sidebar.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cpopup_response.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cprepopulate.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cprepopulate_init.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5CSelectBox.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5CSelectFilter2.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ctheme.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Curlify.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cadmin%5CDateTimeShortcuts.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cadmin%5CRelatedObjectLookups.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cjquery%5Cjquery.js HTTP/1.1" 200 0
+Watching for file changes with StatReloader
+"HEAD /static/admin%5Cjs%5Cvendor%5Cjquery%5Cjquery.min.js HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"HEAD /static/admin%5Cjs%5Cvendor%5Cjquery%5CLICENSE.txt HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5CLICENSE.md HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Cselect2.full.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Cselect2.full.min.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Caf.js HTTP/1.1" 200 0
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Car.js HTTP/1.1" 200 0
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Caz.js HTTP/1.1" 200 0
+Watching for file changes with StatReloader
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cbg.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cbn.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cbs.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cca.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ccs.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cda.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cde.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cdsb.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cel.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cen.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ces.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cet.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ceu.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cfa.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cfi.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cfr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cgl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Che.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chi.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chsb.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chu.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chy.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cid.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cis.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cit.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cja.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cka.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ckm.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cko.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Clt.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Clv.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cmk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cms.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cnb.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cne.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cnl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cpl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cps.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cpt-BR.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cpt.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cro.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cru.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csq.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csr-Cyrl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csv.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cth.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ctk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ctr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cuk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cvi.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Czh-CN.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Czh-TW.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5CLICENSE.txt HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5Cxregexp.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5Cxregexp.min.js HTTP/1.1" 200 0
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"HEAD /static/admin%5Ccss%5Cautocomplete.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cbase.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cchangelists.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cdark_mode.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cdashboard.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cforms.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Clogin.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cnav_sidebar.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cresponsive.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cresponsive_rtl.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Crtl.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cwidgets.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5CLICENSE-SELECT2.md HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5Cselect2.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5Cselect2.min.css HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"HEAD /static/admin%5Cimg%5Ccalendar-icons.svg HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"HEAD /static/admin%5Cimg%5Cicon-addlink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-alert.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-calendar.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-changelink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-clock.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-deletelink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-no.svg HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"HEAD /static/admin%5Ccss%5Cautocomplete.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cbase.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cchangelists.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cdark_mode.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cdashboard.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cforms.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Clogin.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cnav_sidebar.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cresponsive.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cresponsive_rtl.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Crtl.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cwidgets.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5CLICENSE-SELECT2.md HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5Cselect2.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5Cselect2.min.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Ccalendar-icons.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-addlink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-alert.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-calendar.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-changelink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-clock.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-deletelink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-no.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-unknown-alt.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-unknown.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-viewlink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-yes.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cinline-delete.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5CLICENSE HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5CREADME.txt HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Csearch.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cselector-icons.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Csorting-icons.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Ctooltag-add.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Ctooltag-arrowright.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cgis%5Cmove_vertex_off.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cgis%5Cmove_vertex_on.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cactions.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cautocomplete.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ccalendar.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ccancel.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cchange_form.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ccollapse.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ccore.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cfilters.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cinlines.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cjquery.init.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cnav_sidebar.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cpopup_response.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cprepopulate.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cprepopulate_init.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5CSelectBox.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5CSelectFilter2.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Ctheme.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Curlify.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cadmin%5CDateTimeShortcuts.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cadmin%5CRelatedObjectLookups.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cjquery%5Cjquery.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cjquery%5Cjquery.min.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cjquery%5CLICENSE.txt HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5CLICENSE.md HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Cselect2.full.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Cselect2.full.min.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Caf.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Car.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Caz.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cbg.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cbn.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cbs.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cca.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ccs.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cda.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cde.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cdsb.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cel.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cen.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ces.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cet.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ceu.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cfa.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cfi.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cfr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cgl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Che.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chi.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chsb.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chu.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Chy.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cid.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cis.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cit.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cja.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cka.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ckm.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cko.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Clt.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Clv.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cmk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cms.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cnb.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cne.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cnl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cpl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cps.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cpt-BR.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cpt.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cro.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cru.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csq.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csr-Cyrl.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Csv.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cth.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ctk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Ctr.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cuk.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Cvi.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Czh-CN.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cselect2%5Ci18n%5Czh-TW.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5CLICENSE.txt HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5Cxregexp.js HTTP/1.1" 200 0
+"HEAD /static/admin%5Cjs%5Cvendor%5Cxregexp%5Cxregexp.min.js HTTP/1.1" 200 0
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"HEAD /static/admin%5Ccss%5Cautocomplete.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cbase.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cchangelists.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cdark_mode.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cdashboard.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cforms.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Clogin.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cnav_sidebar.css HTTP/1.1" 200 0
+Watching for file changes with StatReloader
+"HEAD /static/admin%5Ccss%5Cresponsive.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cresponsive_rtl.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Crtl.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cwidgets.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5CLICENSE-SELECT2.md HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5Cselect2.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cvendor%5Cselect2%5Cselect2.min.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Ccalendar-icons.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-addlink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-alert.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-calendar.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-changelink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-clock.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-deletelink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-no.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-unknown-alt.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-unknown.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-viewlink.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cicon-yes.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Cinline-delete.svg HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5CLICENSE HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5CREADME.txt HTTP/1.1" 200 0
+"HEAD /static/admin%5Cimg%5Csearch.svg HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"HEAD /static/admin%5Ccss%5Cautocomplete.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cbase.css HTTP/1.1" 200 0
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+"HEAD /static/admin%5Ccss%5Cchangelists.css HTTP/1.1" 200 0
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"HEAD /static/admin%5Ccss%5Cdark_mode.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cdashboard.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cforms.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Clogin.css HTTP/1.1" 200 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"HEAD /static/staticfiles.json HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cautocomplete.4a81fc4242d0.css HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cautocomplete.4a81fc4242d0.css.br HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cautocomplete.4a81fc4242d0.css.gz HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cautocomplete.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cautocomplete.css.br HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cautocomplete.css.gz HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cbase.523eb49842a7.css HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cbase.523eb49842a7.css.br HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cbase.523eb49842a7.css.gz HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cbase.css HTTP/1.1" 200 0
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"HEAD /static/admin%5Ccss%5Cbase.css.gz HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cchangelists.9237a1ac391b.css HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cchangelists.9237a1ac391b.css.br HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cchangelists.9237a1ac391b.css.gz HTTP/1.1" 404 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"HEAD /static/admin%5Ccss%5Cautocomplete.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cautocomplete.css.br HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cautocomplete.css.gz HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cbase.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cbase.css.br HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cbase.css.gz HTTP/1.1" 404 0
+"HEAD /static/admin%5Ccss%5Cchangelists.css HTTP/1.1" 200 0
+"HEAD /static/admin%5Ccss%5Cchangelists.css.br HTTP/1.1" 404 0
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 41471
+"GET /static/core/css/core_base.css HTTP/1.1" 404 1939
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 404 1969
+"GET /static/core/css/core_output.css HTTP/1.1" 404 1945
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 404 1963
+"GET /static/core/css/core_images.css HTTP/1.1" 404 1945
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 404 1957
+"GET /static/core/images/logo.png HTTP/1.1" 404 1933
+"GET /static/core/js/core_navbar.js HTTP/1.1" 404 1939
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader

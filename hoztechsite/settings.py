@@ -15,11 +15,20 @@ import os
 from dotenv import load_dotenv
 import dj_database_url
 
+print("DEBUG (Render):", os.getenv("DEBUG"))
+print("SECRET_KEY (Render):", os.getenv("SECRET_KEY"))
+
 # Load environment variables from .env file
 if os.path.exists(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env.dev')):
     load_dotenv('.env.dev')
+    print("Carregando variáveis de ambiente de .env.dev")
 else:
     load_dotenv()
+    print("Carregando variáveis de ambiente de .env")
+
+# Verificar ambiente
+ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
+print(f"Ambiente atual: {ENVIRONMENT}")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,17 +38,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-your-secret-key'
+SECRET_KEY = os.getenv("SECRET_KEY", "chave-insegura-para-dev")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = ENVIRONMENT == 'development'
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'hoz-tech.onrender.com',
-    '.onrender.com',  # Permite todos os subdomínios do Render
-]
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(',')
 
 
 # Application definition
@@ -72,14 +76,39 @@ MIDDLEWARE = [
 
 # Configuração do WhiteNoise
 WHITENOISE_USE_FINDERS = True
-WHITENOISE_MANIFEST_STRICT = False
-WHITENOISE_ALLOW_ALL_ORIGINS = True
-WHITENOISE_MAX_AGE = 31536000  # 1 ano em segundos
+WHITENOISE_AUTOREFRESH = True
+WHITENOISE_MIMETYPES = {
+    '.js': 'application/javascript',
+    '.mjs': 'application/javascript',
+    '.css': 'text/css',
+    '.json': 'application/json',
+    '.html': 'text/html',
+    '.txt': 'text/plain',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.gif': 'image/gif',
+    '.svg': 'image/svg+xml',
+    '.ico': 'image/x-icon',
+    '.woff': 'font/woff',
+    '.woff2': 'font/woff2',
+    '.ttf': 'font/ttf',
+    '.eot': 'application/vnd.ms-fontobject',
+}
+
+# Headers de segurança e cache
+WHITENOISE_ADD_HEADERS_FUNCTION = lambda headers, path, url: {
+    'Cache-Control': 'public, max-age=31536000',
+    'X-Content-Type-Options': 'nosniff',
+    'Content-Type': WHITENOISE_MIMETYPES.get(os.path.splitext(path)[1], 'application/octet-stream'),
+}
 
 # Configurações de Segurança - Apenas para produção
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SECURE_BROWSER_XSS_FILTER = os.environ.get('SECURE_BROWSER_XSS_FILTER', 'True') == 'True'
+
+
     SECURE_CONTENT_TYPE_NOSNIFF = os.environ.get('SECURE_CONTENT_TYPE_NOSNIFF', 'True') == 'True'
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -91,6 +120,14 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000  # 1 year
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+
+# Configuração de CORS
+CORS_ALLOW_ALL_ORIGINS = DEBUG  # Apenas em dev
+CORS_ALLOW_CREDENTIALS = True
+
+# Configuração do servidor
+USE_X_FORWARDED_HOST = False
+USE_X_FORWARDED_PORT = False
 
 ROOT_URLCONF = 'hoztechsite.urls'
 
@@ -116,12 +153,22 @@ WSGI_APPLICATION = 'hoztechsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if os.getenv("DATABASE_URL"):
+    DATABASES = {
+        'default': dj_database_url.parse(
+            os.getenv("DATABASE_URL"),
+            conn_max_age=600,
+            ssl_require=not DEBUG
+        )
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
 
 # Cache settings
 CACHES = {
@@ -165,16 +212,17 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
 STATIC_URL = '/static/'
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'core/static'),
 ]
 
-# Configuração do Storage
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Configuração do Storage e WhiteNoise
+if ENVIRONMENT == 'development':
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Debug info para arquivos estáticos
 print("=== Configuração de Arquivos Estáticos ===")

@@ -47,9 +47,9 @@ compilar_tailwind() {
 
 verificar_arquivos_origem() {
     echo "3. Verificando arquivos estáticos de origem..."
-    check_files "static/css" "*.css"
-    check_files "static/js" "*.js"
-    check_files "static/images" "*"
+    check_files "core/static/css" "*.css"
+    check_files "core/static/js" "*.js"
+    check_files "core/static/images" "*"
 }
 
 coletar_staticfiles() {
@@ -60,9 +60,9 @@ coletar_staticfiles() {
 
 verificar_staticfiles() {
     echo "5. Verificando arquivos coletados..."
-    check_files "staticfiles/css" "*.css"
-    check_files "staticfiles/js" "*.js"
-    check_files "staticfiles/images" "*"
+    check_files "core/staticfiles/css" "*.css"
+    check_files "core/staticfiles/js" "*.js"
+    check_files "core/staticfiles/images" "*"
 
     echo "5.4. Verificando admin..."
     if [ -d "staticfiles/admin" ]; then
@@ -133,9 +133,20 @@ exibir_debug() {
     echo "=== Fim do Debug ==="
 }
 
+verificar_diretorios_criticos() {
+    echo "0. Verificando diretórios críticos..."
+    for dir in "core/static" "core/templates" "staticfiles" "logs/deploy"; do
+        if [ ! -d "$dir" ]; then
+            echo "Criando diretório: $dir"
+            mkdir -p "$dir"
+        fi
+    done
+}
+
 # Execução
 echo "=== Iniciando processo de build ==="
 
+verificar_diretorios_criticos
 instalar_dependencias
 compilar_tailwind
 verificar_arquivos_origem
