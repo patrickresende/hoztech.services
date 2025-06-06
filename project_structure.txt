@@ -51,9 +51,8 @@ HOZ_TECH/
 │   │   ├── cookie_manager.js     # Gerenciador de cookies
 │   │   └── contact_form.js       # Formulário de contato
 │   └── images/
-│       ├── favicon.ico           # Favicon
-│       ├── logo.png             # Logo otimizado
-│       └── logo_original.png    # Logo original
+│       ├── logo.png             # Logo principal
+│       └── logo-dark.png        # Versão escura do logo
 │
 ├── staticfiles/                   # Arquivos estáticos coletados
 ├── media/                         # Arquivos de mídia
