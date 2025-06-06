@@ -16,7 +16,10 @@ from dotenv import load_dotenv
 import dj_database_url
 
 # Load environment variables from .env file
-load_dotenv()
+if os.path.exists(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env.dev')):
+    load_dotenv('.env.dev')
+else:
+    load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +35,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-secret-key-here')
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 # ALLOWED_HOSTS configuration
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,[::1],.onrender.com,hoz-tech.onrender.com').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,[::1]').split(',')
 
 
 # Application definition
@@ -50,8 +53,13 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_cleanup.apps.CleanupConfig',
-    'django_extensions',  # Para suporte a HTTPS no servidor de desenvolvimento
 ]
+
+# Debug Toolbar - Adicionar apenas se DEBUG estiver ativo
+if DEBUG:
+    INSTALLED_APPS.append('debug_toolbar')
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    INTERNAL_IPS = ['127.0.0.1']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,27 +72,24 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Configurações de Segurança
-SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'True') == 'True'
-SECURE_BROWSER_XSS_FILTER = os.environ.get('SECURE_BROWSER_XSS_FILTER', 'True') == 'True'
-SECURE_CONTENT_TYPE_NOSNIFF = os.environ.get('SECURE_CONTENT_TYPE_NOSNIFF', 'True') == 'True'
-SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', 'True') == 'True'
-CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', 'True') == 'True'
-
-# CSRF Trusted Origins
-CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://*.onrender.com').split(',')
+# Configurações de Segurança - Apenas para produção
+if not DEBUG:
+    SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'True') == 'True'
+    SECURE_BROWSER_XSS_FILTER = os.environ.get('SECURE_BROWSER_XSS_FILTER', 'True') == 'True'
+    SECURE_CONTENT_TYPE_NOSNIFF = os.environ.get('SECURE_CONTENT_TYPE_NOSNIFF', 'True') == 'True'
+    SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', 'True') == 'True'
+    CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', 'True') == 'True'
+    CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://*.onrender.com').split(',')
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
 
 # Configuração do WhiteNoise
 WHITENOISE_USE_FINDERS = os.environ.get('WHITENOISE_USE_FINDERS', 'True') == 'True'
 WHITENOISE_MANIFEST_STRICT = os.environ.get('WHITENOISE_MANIFEST_STRICT', 'False') == 'True'
 WHITENOISE_ALLOW_ALL_ORIGINS = os.environ.get('WHITENOISE_ALLOW_ALL_ORIGINS', 'True') == 'True'
 WHITENOISE_MAX_AGE = 31536000  # 1 ano em segundos
-
-# Debug Toolbar - Adicionar apenas se DEBUG estiver ativo
-if DEBUG:
-    INSTALLED_APPS.append('debug_toolbar')
-    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
-    INTERNAL_IPS = ['127.0.0.1']
 
 ROOT_URLCONF = 'hoztechsite.urls'
 
@@ -197,17 +202,19 @@ MEDIA_ROOT = os.environ.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'mediafiles'))
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Site Configuration
+SITE_NAME = os.getenv('SITE_NAME', 'HOZ TECH')
+CONTACT_EMAIL = os.getenv('CONTACT_EMAIL', 'contato@hoztech.com')
+
 # Email Configuration
-EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
-EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False') == 'True'
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'hoztech.services@gmail.com')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'hoztech.services@gmail.com')
-CONTACT_EMAIL = os.getenv('CONTACT_EMAIL', 'hoztech.services@gmail.com')
-SERVER_EMAIL = os.getenv('SERVER_EMAIL', 'hoztech.services@gmail.com')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', CONTACT_EMAIL)
+SERVER_EMAIL = os.getenv('SERVER_EMAIL', CONTACT_EMAIL)
 
 # Email timeout settings
 EMAIL_TIMEOUT = 30  # seconds
@@ -215,15 +222,7 @@ EMAIL_SSL_KEYFILE = None
 EMAIL_SSL_CERTFILE = None
 
 # Site settings
-SITE_NAME = os.getenv('SITE_NAME', 'Hoz Tech')
 ADMIN_URL = os.getenv('ADMIN_URL', 'admin/')
-
-# Production settings
-if not DEBUG:
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_HSTS_SECONDS = 31536000  # 1 year
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
 
 # Logging Configuration
 LOGGING = {
