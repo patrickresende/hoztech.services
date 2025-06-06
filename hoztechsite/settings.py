@@ -152,54 +152,31 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Aponta para HOZ_TECH/static/
 ]
 
-# Configuração do WhiteNoise para servir arquivos estáticos
-if not DEBUG:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-else:
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# Configuração do WhiteNoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Configurações do WhiteNoise
-WHITENOISE_AUTOREFRESH = DEBUG
-WHITENOISE_USE_FINDERS = DEBUG
-WHITENOISE_INDEX_FILE = True
-
-# Configurações adicionais para servir arquivos estáticos
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+# Configurações de arquivos estáticos
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
 ]
 
-# Headers de segurança para arquivos estáticos
-STATIC_FILE_HEADERS = {
-    '/*': {
-        'Cache-Control': 'public, max-age=31536000',
-        'Access-Control-Allow-Origin': '*',
-        'X-Content-Type-Options': 'nosniff',
-    }
-}
-
-# Configuração de compressão para arquivos estáticos
-WHITENOISE_COMPRESSION_ENABLED = True
-WHITENOISE_BROTLI_ENABLED = True  # Habilita compressão Brotli se disponível
+# Configurações do WhiteNoise
+WHITENOISE_USE_FINDERS = False
+WHITENOISE_MANIFEST_STRICT = True
+WHITENOISE_ALLOW_ALL_ORIGINS = True
 WHITENOISE_MAX_AGE = 31536000  # 1 ano em segundos
 
-# Configurações de cache para arquivos estáticos
-if not DEBUG:
-    WHITENOISE_STATIC_PREFIX = '/static/'
-    WHITENOISE_ALLOW_ALL_ORIGINS = True
-    WHITENOISE_SKIP_COMPRESS_EXTENSIONS = []
-    WHITENOISE_ADD_HEADERS_FUNCTION = None
-
-# Imprime informações de configuração
-print("\n=== Configuração de Arquivos Estáticos ===")
+# Debug info para arquivos estáticos
+print("=== Configuração de Arquivos Estáticos ===")
 print(f"BASE_DIR: {BASE_DIR}")
 print(f"STATIC_URL: {STATIC_URL}")
 print(f"STATIC_ROOT: {STATIC_ROOT}")
 print(f"STATICFILES_DIRS: {STATICFILES_DIRS}")
 print(f"STATICFILES_STORAGE: {STATICFILES_STORAGE}")
 print(f"WHITENOISE_USE_FINDERS: {WHITENOISE_USE_FINDERS}")
-print(f"WHITENOISE_MIMETYPES: {WHITENOISE_MIMETYPES}")
-print("=====================================\n")
+print("========================================")
 
 # Media files
 MEDIA_URL = '/media/'
