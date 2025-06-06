@@ -163,22 +163,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Aponta para HOZ_TECH/static/
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Configuração do WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Configurações de arquivos estáticos
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
-# Configurações do WhiteNoise
-WHITENOISE_USE_FINDERS = False
-WHITENOISE_MANIFEST_STRICT = True
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_MANIFEST_STRICT = False  # Temporariamente False para debug
 WHITENOISE_ALLOW_ALL_ORIGINS = True
 WHITENOISE_MAX_AGE = 31536000  # 1 ano em segundos
 
