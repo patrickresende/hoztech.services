@@ -21,9 +21,9 @@ services:
       pip install -r requirements.txt
       npm install
       npm run build
-      echo "---> CHEGOU ANTES DO COLLECTSTATIC"
+    echo "---> CHEGOU ANTES DO COLLECTSTATIC"
       python manage.py collectstatic --noinput
-      echo "---> CHEGOU DEPOIS DO COLLECTSTATIC"
+    echo "---> CHEGOU DEPOIS DO COLLECTSTATIC"
       python manage.py migrate
       # Instalar e configurar Nginx
       apt-get update && apt-get install -y nginx
