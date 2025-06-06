@@ -25,8 +25,15 @@ services:
       echo "---> NPM INSTALL CONCLUÍDO"
       npm run build
       echo "---> NPM BUILD CONCLUÍDO"
-      python manage.py collectstatic --noinput
+      echo "---> LIMPANDO DIRETÓRIO STATICFILES"
+      rm -rf staticfiles/*
+      echo "---> COLETANDO ARQUIVOS ESTÁTICOS"
+      DJANGO_DEBUG=False python manage.py collectstatic --noinput --clear
       echo "---> COLLECTSTATIC CONCLUÍDO"
+      echo "---> VERIFICANDO ARQUIVOS ESTÁTICOS"
+      ls -la staticfiles/
+      echo "---> VERIFICANDO MANIFESTO"
+      cat staticfiles/staticfiles.json || echo "Manifesto não encontrado!"
       python manage.py migrate
       echo "---> MIGRATE CONCLUÍDO"
       echo "---> INSTALANDO E CONFIGURANDO NGINX"
@@ -37,8 +44,10 @@ services:
       echo "---> BUILD FINALIZADO COM SUCESSO"
     startCommand: |
       echo "---> INICIANDO GUNICORN"
+      echo "---> VERIFICANDO VARIÁVEIS DE AMBIENTE"
+      env | grep -E "DJANGO_|STATIC_|WHITENOISE_"
       service nginx start
-      newrelic-admin run-program gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60 --bind 127.0.0.1:8000
+      newrelic-admin run-program gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60 --bind 127.0.0.1:8000 --access-logfile logs/deploy/gunicorn_access.log --error-logfile logs/deploy/gunicorn_error.log --log-level debug
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true
@@ -114,11 +123,15 @@ services:
       - key: CSP_UPGRADE_INSECURE_REQUESTS
         value: true
       - key: WHITENOISE_MANIFEST_STRICT
-        value: false
+        value: true
       - key: WHITENOISE_ALLOW_ALL_ORIGINS
         value: true
       - key: WHITENOISE_MAX_AGE
         value: 31536000
+      - key: WHITENOISE_INDEX_FILE
+        value: true
+      - key: DJANGO_STATICFILES_STORAGE
+        value: "whitenoise.storage.CompressedManifestStaticFilesStorage"
       - key: NEW_RELIC_LICENSE_KEY
         sync: false
       - key: NEW_RELIC_APP_NAME

@@ -149,35 +149,19 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),  # Aponta para HOZ_TECH/static/
 ]
 
-# Configurações de MIME types para o WhiteNoise
-WHITENOISE_MIMETYPES = {
-    '.css': 'text/css',
-    '.js': 'application/javascript',
-    '.mjs': 'application/javascript',
-    '.json': 'application/json',
-    '.html': 'text/html',
-    '.txt': 'text/plain',
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.jpeg': 'image/jpeg',
-    '.gif': 'image/gif',
-    '.ico': 'image/x-icon',
-    '.svg': 'image/svg+xml',
-    '.woff': 'font/woff',
-    '.woff2': 'font/woff2',
-    '.ttf': 'font/ttf',
-    '.eot': 'application/vnd.ms-fontobject',
-    '.otf': 'font/otf',
-    '.webp': 'image/webp',
-    '.map': 'application/json',
-    '.xml': 'application/xml',
-    '.pdf': 'application/pdf',
-    '.zip': 'application/zip',
-    '.gz': 'application/gzip',
-}
+# Configuração do WhiteNoise para servir arquivos estáticos
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+# Configurações do WhiteNoise
+WHITENOISE_AUTOREFRESH = DEBUG
+WHITENOISE_USE_FINDERS = DEBUG
+WHITENOISE_INDEX_FILE = True
 
 # Configurações adicionais para servir arquivos estáticos
 STATICFILES_FINDERS = [
@@ -191,13 +175,7 @@ STATIC_FILE_HEADERS = {
         'Cache-Control': 'public, max-age=31536000',
         'Access-Control-Allow-Origin': '*',
         'X-Content-Type-Options': 'nosniff',
-    },
-    '*.css': {
-        'Content-Type': 'text/css; charset=utf-8',
-    },
-    '*.js': {
-        'Content-Type': 'application/javascript; charset=utf-8',
-    },
+    }
 }
 
 # Configuração de compressão para arquivos estáticos

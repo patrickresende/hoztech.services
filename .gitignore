@@ -32,7 +32,6 @@ wheels/
 [0-9].[0-9][0-9].[0-9]
 
 # Django
-*.log
 *.pot
 *.pyc
 local_settings.py
@@ -107,8 +106,9 @@ coverage.xml
 cover/
 
 # Logs and databases
-logs/
-*.log
+logs/*
+!logs/build/
+!logs/deploy/
 *.sqlite3
 *.sqlite3-journal
 *.db

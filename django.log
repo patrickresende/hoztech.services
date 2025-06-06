@@ -1,0 +1,127 @@
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 301 0
+code 400, message Bad request version ('}\x1aê÷Z\x04õ\x93/\x9d\x15=\x99s"')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('Z©%\x89xcÇû\x86»¬\x13\x93\x05«ÏµàF-¬\x19ë\x8e)ïvh½h\x11K\x00Ð')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ÊÊ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06s::\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('Hû±\x0eq\x97÷ð¨ÿ\x89½ºæÞÓXHA\x82ÄxÙ´o\x14Î\x01#Â\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('¥¼\x15¡<\x1b\x9dô]2!')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1DÍ\x00\x05\x00\x03\x02h2\x00-\x00\x02\x01\x01\x003\x04ï\x04íºº\x00\x01\x00\x11ì\x04À\x1aq¨E¤/\x9eµO')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('¨\x8bDÏ¦\x05É4àcéà\x7f²Ã\x82§cMãö')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('Ë(Íºdÿ¾ê')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\urls.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 51711
+"GET /static/css/variables.css HTTP/1.1" 200 2484
+"GET /static/css/cookie_manager.css HTTP/1.1" 200 4604
+"GET /static/css/images.css HTTP/1.1" 200 1726
+"GET /static/css/base.css HTTP/1.1" 200 3808
+"GET /static/js/cookie_manager.js HTTP/1.1" 200 7373
+"GET /static/js/contact_form.js HTTP/1.1" 200 8174
+"GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14803
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 17514
+"GET /static/images/logo.png HTTP/1.1" 200 258929
+"GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+"GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 29444
+"GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4692
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 51710
+"GET /static/css/variables.css HTTP/1.1" 200 2484
+"GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 200 14803
+"GET /static/images/logo.png HTTP/1.1" 200 258929
+"GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 200 29444
+"GET /static/css/images.css HTTP/1.1" 200 1726
+"GET /static/css/base.css HTTP/1.1" 200 3808
+"GET /static/js/cookie_manager.js HTTP/1.1" 200 7373
+"GET /static/css/cookie_manager.css HTTP/1.1" 200 4604
+"GET /static/debug_toolbar/css/print.css HTTP/1.1" 200 43
+"GET /static/js/contact_form.js HTTP/1.1" 200 8174
+"GET /static/debug_toolbar/js/utils.js HTTP/1.1" 200 4692
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET /servicos/ HTTP/1.1" 200 79885
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 17513
+"GET /__debug__/render_panel/?store_id=168341f0c48a43a68d82dfff9ab8b791&panel_id=HeadersPanel HTTP/1.1" 200 4394
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET /static/debug_toolbar/js/toolbar.js HTTP/1.1" 304 0
+"GET /static/debug_toolbar/css/toolbar.css HTTP/1.1" 304 0
+"GET /static/debug_toolbar/css/print.css HTTP/1.1" 304 0
+"GET /static/debug_toolbar/js/utils.js HTTP/1.1" 304 0
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET / HTTP/1.1" 200 51710
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+"GET / HTTP/1.1" 200 51710
+"GET /static/images/favicon.ico HTTP/1.1" 200 384
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\wsgi.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
