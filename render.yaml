@@ -18,21 +18,23 @@ services:
     env: python
     plan: starter
     buildCommand: |
+      echo "---> INICIANDO BUILD"
       pip install -r requirements.txt
+      echo "---> PIP INSTALL CONCLUÍDO"
       npm install
-      npm run build:css
-      echo "---> EXECUTANDO NPM BUILD:CSS"
-      npm run build:css
-      echo "---> CHEGOU ANTES DO COLLECTSTATIC"
+      echo "---> NPM INSTALL CONCLUÍDO"
+      npm run build
+      echo "---> NPM BUILD CONCLUÍDO"
       python manage.py collectstatic --noinput
-      echo "---> CHEGOU DEPOIS DO COLLECTSTATIC"
+      echo "---> COLLECTSTATIC CONCLUÍDO"
       python manage.py migrate
+      echo "---> MIGRATE CONCLUÍDO"
       echo "---> INSTALANDO E CONFIGURANDO NGINX"
       apt-get update && apt-get install -y nginx
       cp nginx.conf /etc/nginx/sites-available/default
       ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
       nginx -t && service nginx restart
-      
+      echo "---> BUILD FINALIZADO COM SUCESSO"
     startCommand: |
       echo "---> INICIANDO GUNICORN"
       service nginx start
