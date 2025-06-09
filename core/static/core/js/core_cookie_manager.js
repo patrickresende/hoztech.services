@@ -1,35 +1,36 @@
 // Gerenciador de Cookies
 class CookieManager {
     constructor() {
-        this.cookieBanner = document.querySelector('.cookie-banner');
-        this.acceptButton = document.querySelector('#accept-cookies');
-        this.rejectButton = document.querySelector('#reject-cookies');
+        this.cookieConsent = document.getElementById('cookieConsent');
+        this.cookieSettingsModal = document.getElementById('cookieSettingsModal');
+        this.cookiePolicyModal = document.getElementById('cookiePolicyModal');
+        this.saveCookieSettings = document.getElementById('saveCookieSettings');
         this.init();
     }
 
     init() {
         if (!this.getCookie('cookie-consent')) {
-            this.showBanner();
+            this.showConsent();
         }
 
-        if (this.acceptButton) {
-            this.acceptButton.addEventListener('click', () => this.acceptCookies());
+        // Event Listeners
+        if (this.saveCookieSettings) {
+            this.saveCookieSettings.addEventListener('click', () => this.saveSettings());
         }
 
-        if (this.rejectButton) {
-            this.rejectButton.addEventListener('click', () => this.rejectCookies());
+        // Initialize cookie settings
+        this.initializeCookieSettings();
+    }
+
+    showConsent() {
+        if (this.cookieConsent) {
+            this.cookieConsent.classList.add('active');
         }
     }
 
-    showBanner() {
-        if (this.cookieBanner) {
-            this.cookieBanner.classList.add('show');
-        }
-    }
-
-    hideBanner() {
-        if (this.cookieBanner) {
-            this.cookieBanner.classList.remove('show');
+    hideConsent() {
+        if (this.cookieConsent) {
+            this.cookieConsent.classList.remove('active');
         }
     }
 
@@ -55,20 +56,63 @@ class CookieManager {
         return null;
     }
 
-    acceptCookies() {
-        this.setCookie('cookie-consent', 'accepted');
-        this.hideBanner();
-        // Aqui você pode adicionar código para ativar scripts de análise
+    initializeCookieSettings() {
+        // Set default values if not already set
+        if (!this.getCookie('performanceCookies')) {
+            this.setCookie('performanceCookies', 'false');
+        }
+        if (!this.getCookie('marketingCookies')) {
+            this.setCookie('marketingCookies', 'false');
+        }
+
+        // Update UI to reflect current settings
+        const performanceCheckbox = document.getElementById('performanceCookies');
+        const marketingCheckbox = document.getElementById('marketingCookies');
+
+        if (performanceCheckbox) {
+            performanceCheckbox.checked = this.getCookie('performanceCookies') === 'true';
+        }
+        if (marketingCheckbox) {
+            marketingCheckbox.checked = this.getCookie('marketingCookies') === 'true';
+        }
     }
 
-    rejectCookies() {
-        this.setCookie('cookie-consent', 'rejected');
-        this.hideBanner();
-        // Aqui você pode adicionar código para desativar scripts de análise
+    saveSettings() {
+        const performanceCookies = document.getElementById('performanceCookies').checked;
+        const marketingCookies = document.getElementById('marketingCookies').checked;
+
+        this.setCookie('performanceCookies', performanceCookies.toString());
+        this.setCookie('marketingCookies', marketingCookies.toString());
+        this.setCookie('cookie-consent', 'accepted');
+
+        // Close modals
+        const modal = bootstrap.Modal.getInstance(this.cookieSettingsModal);
+        if (modal) {
+            modal.hide();
+        }
+        this.hideConsent();
+
+        // Reload page to apply new settings
+        window.location.reload();
     }
 }
 
-// Inicializar o gerenciador de cookies quando o DOM estiver pronto
+// Funções globais para uso nos botões
+function acceptAllCookies() {
+    const cookieManager = new CookieManager();
+    cookieManager.setCookie('cookie-consent', 'accepted');
+    cookieManager.setCookie('performanceCookies', 'true');
+    cookieManager.setCookie('marketingCookies', 'true');
+    cookieManager.hideConsent();
+    window.location.reload();
+}
+
+function openCookieSettings() {
+    const cookieSettingsModal = new bootstrap.Modal(document.getElementById('cookieSettingsModal'));
+    cookieSettingsModal.show();
+}
+
+// Inicializar quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
-    new CookieManager();
+    window.cookieManager = new CookieManager();
 }); 

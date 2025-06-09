@@ -1,24 +1,19 @@
 <!-- Cookie Consent Overlay -->
 <div id="cookieOverlay" class="cookie-overlay"></div>
 
-<!-- Cookie Consent Modal -->
-<div id="cookieConsent" class="cookie-modal">
+<!-- Cookie Consent -->
+<div class="cookie-consent" id="cookieConsent">
     <div class="cookie-content">
-        <div class="d-flex justify-content-between align-items-start flex-column flex-md-row">
-            <div class="cookie-text-wrapper">
-                <h5 class="neon-text mb-2">Política de Cookies</h5>
-                <p class="mb-0">Utilizamos cookies para melhorar sua experiência em nosso site. 
-                Ao continuar navegando, você concorda com o uso de cookies conforme nossa 
-                <a href="#" data-bs-toggle="modal" data-bs-target="#cookiePolicyModal">Política de Cookies</a>.</p>
-            </div>
-            <div class="cookie-buttons">
-                <button type="button" class="btn btn-cookie btn-cookie-settings" data-bs-toggle="modal" data-bs-target="#cookieSettingsModal">
-                    <i class="bi bi-gear me-2"></i>Configurações
-                </button>
-                <button type="button" class="btn btn-cookie btn-cookie-accept" id="acceptCookies">
-                    <i class="bi bi-check-lg me-2"></i>Aceitar Todos
-                </button>
-            </div>
+        <p class="cookie-text">Utilizamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa política de cookies.</p>
+        <div class="cookie-buttons">
+            <button class="btn-cookie btn-secondary" onclick="openCookieSettings()">
+                <i class="bi bi-gear"></i>
+                Configurações
+            </button>
+            <button class="btn-cookie" onclick="acceptAllCookies()">
+                <i class="bi bi-check-lg"></i>
+                Aceitar Todos
+            </button>
         </div>
     </div>
 </div>
@@ -28,48 +23,37 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="cookieSettingsModalLabel">
-                    <i class="bi bi-gear me-2"></i>Configurações de Cookies
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="cookieSettingsModalLabel">Configurações de Cookies</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="cookieSettingsForm">
-                    <div class="cookie-option">
-                        <div class="cookie-option-label">
-                            <h6>Cookies Essenciais</h6>
-                            <p class="text-muted small mb-0">Necessários para o funcionamento básico do site.</p>
-                        </div>
+                <div class="cookie-settings">
+                    <div class="cookie-setting-item">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="essentialCookies" checked disabled>
+                            <input class="form-check-input" type="checkbox" id="necessaryCookies" checked disabled>
+                            <label class="form-check-label" for="necessaryCookies">Cookies Necessários</label>
                         </div>
+                        <p class="cookie-setting-description">Essenciais para o funcionamento do site. Não podem ser desativados.</p>
                     </div>
-
-                    <div class="cookie-option">
-                        <div class="cookie-option-label">
-                            <h6>Cookies de Desempenho</h6>
-                            <p class="text-muted small mb-0">Nos ajudam a entender como os visitantes interagem com o site.</p>
-                        </div>
+                    <div class="cookie-setting-item">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="performanceCookies">
+                            <label class="form-check-label" for="performanceCookies">Cookies de Performance</label>
                         </div>
+                        <p class="cookie-setting-description">Ajudam a entender como os visitantes interagem com o site.</p>
                     </div>
-
-                    <div class="cookie-option">
-                        <div class="cookie-option-label">
-                            <h6>Cookies de Marketing</h6>
-                            <p class="text-muted small mb-0">Usados para personalizar anúncios e conteúdo.</p>
-                        </div>
+                    <div class="cookie-setting-item">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="marketingCookies">
+                            <label class="form-check-label" for="marketingCookies">Cookies de Marketing</label>
                         </div>
+                        <p class="cookie-setting-description">Usados para personalizar anúncios e conteúdo.</p>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-save" id="saveCookieSettings">
-                    <i class="bi bi-save me-2"></i>Salvar Preferências
-                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="saveCookieSettings">Salvar Preferências</button>
             </div>
         </div>
     </div>
@@ -80,89 +64,315 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="cookiePolicyModalLabel">
-                    <i class="bi bi-shield-lock me-2"></i>Política de Cookies
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="cookiePolicyModalLabel">Política de Cookies</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="cookie-policy-section">
-                    <h6 class="text-primary mb-3">O que são cookies?</h6>
-                    <p>Cookies são pequenos arquivos de texto que são armazenados no seu dispositivo quando você visita nosso site. 
-                    Eles nos ajudam a melhorar sua experiência de navegação e a entender como você interage com nosso conteúdo.</p>
-                </div>
+                <h6>O que são cookies?</h6>
+                <p>Cookies são pequenos arquivos de texto que são armazenados no seu dispositivo quando você visita nosso site. Eles nos ajudam a melhorar sua experiência de navegação e a entender como você interage com nosso conteúdo.</p>
 
-                <div class="cookie-policy-section">
-                    <h6 class="text-primary mb-3">Tipos de cookies que utilizamos</h6>
-                    
-                    <div class="cookie-type mb-4">
-                        <h6 class="text-primary">Cookies Essenciais</h6>
-                        <p class="mb-0">Necessários para o funcionamento básico do site. Incluem cookies que permitem que você faça login em áreas seguras do site.</p>
-                    </div>
+                <h6>Tipos de cookies que utilizamos</h6>
+                <ul>
+                    <li><strong>Cookies Necessários:</strong> Essenciais para o funcionamento do site.</li>
+                    <li><strong>Cookies de Performance:</strong> Nos ajudam a entender como os visitantes usam o site.</li>
+                    <li><strong>Cookies de Marketing:</strong> Usados para personalizar anúncios e conteúdo.</li>
+                </ul>
 
-                    <div class="cookie-type mb-4">
-                        <h6 class="text-primary">Cookies de Desempenho</h6>
-                        <p class="mb-0">Nos ajudam a entender como os visitantes interagem com o site, coletando e relatando informações anonimamente.</p>
-                    </div>
-
-                    <div class="cookie-type mb-4">
-                        <h6 class="text-primary">Cookies de Marketing</h6>
-                        <p class="mb-0">São usados para rastrear visitantes em websites. A intenção é exibir anúncios que sejam relevantes e envolventes para o usuário individual.</p>
-                    </div>
-                </div>
-
-                <div class="cookie-policy-section">
-                    <h6 class="text-primary mb-3">Como controlar os cookies</h6>
-                    <p>Você pode controlar e/ou excluir cookies conforme desejar. Você pode excluir todos os cookies que já estão no seu computador 
-                    e pode configurar a maioria dos navegadores para impedir que eles sejam colocados.</p>
-                </div>
+                <h6>Como gerenciar cookies</h6>
+                <p>Você pode controlar e/ou excluir cookies conforme desejar. Você pode excluir todos os cookies que já estão no seu computador e pode configurar a maioria dos navegadores para impedir que eles sejam colocados.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-save" data-bs-dismiss="modal">
-                    <i class="bi bi-check-lg me-2"></i>Entendi
-                </button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Promotional Modal -->
+<div class="modal fade" id="promoModal" tabindex="-1" aria-labelledby="promoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content promo-modal-content">
+            <div class="modal-header promo-modal-header">
+                <h5 class="modal-title" id="promoModalLabel">
+                    <i class="bi bi-lightning-charge"></i>
+                    PROMOÇÃO RELÂMPAGO
+                </h5>
+                <div class="promo-countdown" id="promoCountdown">06:00:00</div>
+            </div>
+            <div class="modal-body promo-modal-body">
+                <div class="promo-content">
+                    <h3>Site Institucional por R$397,90</h3>
+                    <ul class="promo-features">
+                        <li><i class="bi bi-check-circle"></i> Design Responsivo</li>
+                        <li><i class="bi bi-check-circle"></i> Gerenciador de Conteúdo</li>
+                        <li><i class="bi bi-check-circle"></i> SEO Otimizado</li>
+                        <li><i class="bi bi-check-circle"></i> Suporte 24/7</li>
+                    </ul>
+                    <div class="promo-timer">
+                        <div class="timer-item">
+                            <span class="timer-value" id="promoHours">06</span>
+                            <span class="timer-label">Horas</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="timer-value" id="promoMinutes">00</span>
+                            <span class="timer-label">Minutos</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="timer-value" id="promoSeconds">00</span>
+                            <span class="timer-label">Segundos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer promo-modal-footer">
+                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na promoção do Site Institucional. Poderia me enviar mais informações?" 
+                   class="btn btn-primary promo-cta" 
+                   target="_blank" 
+                   rel="noopener">
+                    <i class="bi bi-whatsapp"></i>
+                    Garantir Agora
+                </a>
             </div>
         </div>
     </div>
 </div>
 
 <style>
+    /* Estilos do Body quando modal está aberto */
+    body.modal-open {
+        overflow: hidden;
+        padding-right: 0 !important;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Estilos do Modal Backdrop */
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1040;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.show {
+        opacity: 1;
+    }
+
+    /* Ajustes para o Banner Promocional */
+    .promo-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: var(--gradient-tech);
+        color: var(--tech-dark);
+        padding: 0.75rem;
+        z-index: 1030;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .promo-banner.show {
+        transform: translateY(0);
+    }
+
+    .promo-banner-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .promo-banner-text {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-small);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .promo-banner-countdown {
+        font-family: var(--font-tech);
+        font-size: var(--font-size-small);
+        font-weight: 700;
+        color: var(--tech-red);
+        text-shadow: 0 0 10px var(--tech-red-soft);
+    }
+
+    .promo-banner-cta {
+        background: var(--tech-dark);
+        color: var(--tech-light);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-small);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .promo-banner-cta:hover {
+        background: var(--tech-light);
+        color: var(--tech-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .promo-banner-close {
+        background: transparent;
+        border: none;
+        color: var(--tech-dark);
+        font-size: 1.25rem;
+        cursor: pointer;
+        padding: 0.25rem;
+        transition: all 0.3s ease;
+    }
+
+    .promo-banner-close:hover {
+        transform: rotate(90deg);
+        color: var(--tech-red);
+    }
+
+    /* Ajustes para a Navbar */
+    .navbar {
+        transition: all 0.3s ease;
+    }
+
+    .navbar-scrolled {
+        background: var(--gradient-card);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .navbar-collapse {
+        transition: max-height 0.3s ease;
+    }
+
+    .navbar-collapse.show {
+        max-height: calc(100vh - 80px) !important;
+        overflow-y: auto;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+        .promo-banner-content {
+            flex-direction: column;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .promo-banner-text {
+            font-size: var(--font-size-tiny);
+        }
+
+        .promo-banner-countdown {
+            font-size: var(--font-size-tiny);
+        }
+
+        .promo-banner-cta {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .navbar-collapse.show {
+            max-height: calc(100vh - 60px) !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .promo-banner {
+            padding: 0.5rem;
+        }
+
+        .promo-banner-content {
+            gap: 0.5rem;
+        }
+
+        .promo-banner-cta {
+            padding: 0.4rem 0.75rem;
+            font-size: var(--font-size-tiny);
+        }
+    }
+
     .cookie-overlay {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.5);
         z-index: 1040;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     }
 
-    .cookie-modal {
+    .cookie-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .cookie-consent {
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba(13, 13, 13, 0.98);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid var(--neon-red);
-        box-shadow: 0 0 20px var(--neon-red-soft);
+        background: var(--tech-dark);
+        color: var(--tech-light);
+        padding: clamp(0.5rem, 1.5vw, 1rem);
         z-index: 1050;
-        padding: 1rem;
         transform: translateY(100%);
-        transition: transform 0.3s ease-in-out;
-        pointer-events: auto; /* Garante que o modal seja interativo */
+        transition: transform 0.3s ease;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
     }
 
-    .cookie-modal.show {
+    .cookie-consent.show {
         transform: translateY(0);
     }
 
     .cookie-content {
         max-width: 1200px;
         margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: clamp(0.5rem, 1.5vw, 1rem);
+        flex-wrap: wrap;
+    }
+
+    .cookie-text {
+        flex: 1;
+        min-width: 200px;
+        font-size: clamp(0.75rem, 1.5vw, 1rem);
+        margin: 0;
+    }
+
+    .cookie-buttons {
+        display: flex;
+        gap: clamp(0.25rem, 0.75vw, 0.5rem);
+        flex-wrap: wrap;
+    }
+
+    .btn-cookie {
+        padding: clamp(0.25rem, 0.75vw, 0.5rem) clamp(0.75rem, 1.5vw, 1rem);
+        font-size: clamp(0.75rem, 1.25vw, 0.875rem);
+        white-space: nowrap;
+        cursor: pointer;
+        z-index: 1051;
     }
 
     .cookie-text-wrapper {
@@ -228,85 +438,24 @@
         text-decoration: underline;
     }
 
-    .cookie-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        min-width: 200px;
-    }
-
-    .btn-cookie {
-        padding: 0.75rem 1rem;
-        border-radius: 4px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        font-size: 0.95rem;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        min-height: 44px;
-        width: 100%;
-        position: relative;
-    }
-
-    .btn-cookie i {
-        font-size: 1.1rem;
-    }
-
-    .btn-cookie::after {
-        content: '*';
-        position: absolute;
-        right: 10px;
-        color: var(--neon-red);
-        font-size: 1.2em;
-    }
-
-    .btn-cookie-settings {
-        background-color: transparent;
-        color: var(--light-gray);
-        border: 1px solid var(--neon-red);
-    }
-
-    .btn-cookie-settings:hover {
-        background-color: rgba(255, 0, 51, 0.1);
-        color: var(--neon-red);
-    }
-
-    .btn-cookie-accept {
-        background-color: var(--neon-red);
-        color: white;
-        border: none;
-    }
-
-    .btn-cookie-accept:hover {
-        background-color: #ff1a4d;
-        transform: translateY(-2px);
-        box-shadow: 0 0 15px var(--neon-red-soft);
-    }
-
     /* Estilos para tablets */
     @media (min-width: 768px) {
-        .cookie-modal {
+        .cookie-consent {
             padding: 1.25rem;
         }
 
         .cookie-buttons {
             flex-direction: row;
-            min-width: 220px;
         }
 
         .btn-cookie {
             padding: 0.6rem 1.25rem;
-            font-size: 0.9rem;
-            min-height: 40px;
         }
     }
 
     /* Estilos para desktop */
     @media (min-width: 992px) {
-        .cookie-modal {
+        .cookie-consent {
             padding: 1.5rem;
         }
 
@@ -325,7 +474,7 @@
 
     /* Ajustes específicos para telas muito pequenas */
     @media (max-width: 360px) {
-        .cookie-modal {
+        .cookie-consent {
             padding: 0.75rem;
         }
 
@@ -339,11 +488,438 @@
 
         .btn-cookie {
             padding: 0.6rem 0.75rem;
-            font-size: 0.85rem;
         }
 
         .btn-cookie i {
             font-size: 1rem;
+        }
+    }
+
+    /* Estilos do Modal de Configurações */
+    .modal.fade.show {
+        display: block;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+        background: var(--gradient-card);
+        color: var(--tech-light);
+        border: 1px solid var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .modal-header {
+        border-bottom: 1px solid var(--tech-blue);
+        background: rgba(0, 247, 255, 0.1);
+        padding: 1.5rem;
+    }
+
+    .modal-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-large);
+        color: var(--tech-blue);
+        font-weight: 600;
+        text-shadow: 0 0 10px var(--tech-blue);
+    }
+
+    .btn-close {
+        filter: invert(1) grayscale(100%) brightness(200%);
+        opacity: 0.8;
+        transition: all 0.3s ease;
+    }
+
+    .btn-close:hover {
+        opacity: 1;
+        transform: rotate(90deg);
+    }
+
+    .modal-body {
+        background: transparent;
+        padding: 1.5rem;
+    }
+
+    .cookie-setting-item {
+        padding: 1.25rem;
+        border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .cookie-setting-item:hover {
+        background: rgba(0, 247, 255, 0.05);
+    }
+
+    .cookie-setting-item:last-child {
+        border-bottom: none;
+    }
+
+    .form-check-label {
+        color: var(--tech-light);
+        font-weight: 500;
+        font-size: var(--font-size-base);
+    }
+
+    .cookie-setting-description {
+        color: var(--tech-light);
+        opacity: 0.8;
+        font-size: var(--font-size-small);
+        margin: 0.5rem 0 0 0;
+    }
+
+    .form-check-input {
+        background-color: var(--tech-dark);
+        border-color: var(--tech-blue);
+        width: 3em;
+        height: 1.5em;
+        margin-top: 0.25em;
+        transition: all 0.3s ease;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--tech-blue);
+        border-color: var(--tech-blue);
+        box-shadow: 0 0 10px var(--tech-blue);
+    }
+
+    .form-check-input:disabled {
+        background-color: var(--tech-blue);
+        border-color: var(--tech-blue);
+        opacity: 0.5;
+    }
+
+    /* Estilos do Modal Footer */
+    .modal-footer {
+        border-top: 1px solid var(--tech-blue);
+        background: rgba(0, 247, 255, 0.1);
+        padding: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .modal-footer .btn {
+        min-width: 140px;
+        height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-small);
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .modal-footer .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+    }
+
+    .modal-footer .btn:hover::before {
+        transform: translateX(100%);
+    }
+
+    .modal-footer .btn-secondary {
+        background: transparent;
+        color: var(--tech-light);
+        border: 2px solid var(--tech-blue);
+        box-shadow: 0 0 10px rgba(0, 247, 255, 0.1);
+    }
+
+    .modal-footer .btn-secondary:hover {
+        background: rgba(0, 247, 255, 0.1);
+        color: var(--tech-blue);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .modal-footer .btn-primary {
+        background: var(--gradient-tech);
+        color: var(--tech-dark);
+        border: none;
+        box-shadow: 0 0 15px rgba(0, 247, 255, 0.2);
+    }
+
+    .modal-footer .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-blue);
+    }
+
+    /* Media Queries para o Footer */
+    @media (max-width: 768px) {
+        .modal-footer {
+            padding: 1.25rem;
+            gap: 0.75rem;
+        }
+
+        .modal-footer .btn {
+            min-width: 120px;
+            height: 42px;
+            font-size: var(--font-size-tiny);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .modal-footer {
+            padding: 1rem;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .modal-footer .btn {
+            width: 100%;
+            min-width: unset;
+            height: 40px;
+            font-size: var(--font-size-tiny);
+        }
+
+        .modal-footer .btn-secondary {
+            order: 2;
+        }
+
+        .modal-footer .btn-primary {
+            order: 1;
+        }
+    }
+
+    /* Ajustes para telas muito pequenas */
+    @media (max-width: 360px) {
+        .modal-footer {
+            padding: 0.75rem;
+        }
+
+        .modal-footer .btn {
+            height: 36px;
+            font-size: var(--font-size-micro);
+        }
+    }
+
+    /* Estilos do Modal Promocional */
+    .promo-modal-content {
+        background: var(--gradient-card);
+        border: 2px solid var(--tech-blue);
+        box-shadow: var(--shadow-blue);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .promo-modal-header {
+        border-bottom: 1px solid var(--tech-blue);
+        background: rgba(0, 247, 255, 0.1);
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .promo-modal-header .modal-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-large);
+        color: var(--tech-blue);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0;
+    }
+
+    .promo-modal-header .modal-title i {
+        color: var(--tech-red);
+        font-size: 1.2em;
+    }
+
+    .promo-countdown {
+        font-family: var(--font-tech);
+        font-size: var(--font-size-medium);
+        color: var(--tech-red);
+        font-weight: 700;
+        text-shadow: 0 0 10px var(--tech-red-soft);
+    }
+
+    .promo-modal-body {
+        padding: 2rem;
+        background: transparent;
+    }
+
+    .promo-content h3 {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-xlarge);
+        color: var(--tech-light);
+        text-align: center;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 0 10px var(--tech-blue);
+    }
+
+    .promo-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2rem 0;
+    }
+
+    .promo-features li {
+        color: var(--tech-light);
+        font-size: var(--font-size-base);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .promo-features li i {
+        color: var(--tech-blue);
+        font-size: 1.2em;
+    }
+
+    .promo-timer {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .timer-item {
+        background: rgba(0, 247, 255, 0.1);
+        border: 1px solid var(--tech-blue);
+        border-radius: 8px;
+        padding: 1rem;
+        min-width: 80px;
+        text-align: center;
+    }
+
+    .timer-value {
+        display: block;
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-large);
+        color: var(--tech-blue);
+        font-weight: 700;
+        text-shadow: 0 0 10px var(--tech-blue);
+    }
+
+    .timer-label {
+        display: block;
+        font-size: var(--font-size-tiny);
+        color: var(--tech-light);
+        margin-top: 0.25rem;
+    }
+
+    .promo-modal-footer {
+        border-top: 1px solid var(--tech-blue);
+        background: rgba(0, 247, 255, 0.1);
+        padding: 1.5rem;
+        justify-content: center;
+    }
+
+    .promo-cta {
+        background: var(--gradient-tech);
+        color: var(--tech-dark);
+        border: none;
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-base);
+        padding: 1rem 2rem;
+        min-width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        transition: all 0.3s ease;
+    }
+
+    .promo-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-blue);
+    }
+
+    .promo-cta i {
+        font-size: 1.2em;
+    }
+
+    /* Media Queries para o Modal Promocional */
+    @media (max-width: 768px) {
+        .promo-modal-header {
+            padding: 1.25rem;
+        }
+
+        .promo-modal-header .modal-title {
+            font-size: var(--font-size-medium);
+        }
+
+        .promo-countdown {
+            font-size: var(--font-size-base);
+        }
+
+        .promo-modal-body {
+            padding: 1.5rem;
+        }
+
+        .promo-content h3 {
+            font-size: var(--font-size-large);
+        }
+
+        .promo-features li {
+            font-size: var(--font-size-small);
+        }
+
+        .timer-item {
+            min-width: 70px;
+            padding: 0.75rem;
+        }
+
+        .timer-value {
+            font-size: var(--font-size-medium);
+        }
+
+        .promo-cta {
+            font-size: var(--font-size-small);
+            padding: 0.75rem 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .promo-modal-header {
+            padding: 1rem;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: center;
+        }
+
+        .promo-modal-body {
+            padding: 1rem;
+        }
+
+        .promo-content h3 {
+            font-size: var(--font-size-medium);
+        }
+
+        .promo-timer {
+            flex-wrap: wrap;
+        }
+
+        .timer-item {
+            min-width: 60px;
+            padding: 0.5rem;
+        }
+
+        .timer-value {
+            font-size: var(--font-size-base);
+        }
+
+        .promo-cta {
+            width: 100%;
+            font-size: var(--font-size-tiny);
+            padding: 0.75rem 1rem;
         }
     }
 </style>
@@ -351,83 +927,109 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const cookieConsent = document.getElementById('cookieConsent');
-    const cookieOverlay = document.getElementById('cookieOverlay');
     const acceptCookies = document.getElementById('acceptCookies');
     const saveCookieSettings = document.getElementById('saveCookieSettings');
     const cookieSettingsModal = document.getElementById('cookieSettingsModal');
     const cookiePolicyModal = document.getElementById('cookiePolicyModal');
+    let isCookieConsentOpen = false;
 
-    // Função para mostrar o modal e o overlay
+    // Função para mostrar o modal
     function showCookieConsent() {
-        if (!localStorage.getItem('cookieConsent')) {
+        if (!localStorage.getItem('cookieConsent') && !isCookieConsentOpen) {
             cookieConsent.classList.add('show');
-            cookieOverlay.classList.add('show');
-            document.body.style.overflow = 'hidden'; // Apenas previne scroll
+            isCookieConsentOpen = true;
         }
     }
 
-    // Função para esconder o modal e o overlay
+    // Função para esconder o modal
     function hideCookieConsent() {
+        if (!isCookieConsentOpen) return;
         cookieConsent.classList.remove('show');
-        cookieOverlay.classList.remove('show');
-        document.body.style.overflow = ''; // Restaura scroll
+        isCookieConsentOpen = false;
+    }
+
+    // Event listeners para os botões
+    if (acceptCookies) {
+        acceptCookies.addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            hideCookieConsent();
+        });
+    }
+
+    if (saveCookieSettings) {
+        saveCookieSettings.addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'settings');
+            hideCookieConsent();
+        });
     }
 
     // Mostrar o modal após um pequeno delay
     setTimeout(showCookieConsent, 1000);
+});
 
-    // Aceitar cookies
-    acceptCookies.addEventListener('click', function() {
-        localStorage.setItem('cookieConsent', 'accepted');
-        localStorage.setItem('performanceCookies', 'true');
-        localStorage.setItem('marketingCookies', 'true');
-        hideCookieConsent();
-    });
-
-    // Salvar configurações
-    saveCookieSettings.addEventListener('click', function() {
-        const performanceCookies = document.getElementById('performanceCookies').checked;
-        const marketingCookies = document.getElementById('marketingCookies').checked;
-        
-        localStorage.setItem('cookieConsent', 'custom');
-        localStorage.setItem('performanceCookies', performanceCookies);
-        localStorage.setItem('marketingCookies', marketingCookies);
-        
-        hideCookieConsent();
-    });
-
-    // Prevenir interação com o conteúdo principal da página
-    cookieOverlay.addEventListener('click', function(e) {
-        // Permite cliques apenas no modal de cookies e seus elementos
-        if (!e.target.closest('.cookie-modal') && 
-            !e.target.closest('.modal-content') && 
-            !e.target.closest('.modal-dialog')) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-    });
-
-    // Verificar se o usuário já aceitou os cookies
-    if (!localStorage.getItem('cookieConsent')) {
-        showCookieConsent();
+// PromoManager atualizado
+class PromoManager {
+    constructor() {
+        this.modal = document.getElementById('promoModal');
+        this.countdown = document.getElementById('promoCountdown');
+        this.hoursElement = document.getElementById('promoHours');
+        this.minutesElement = document.getElementById('promoMinutes');
+        this.secondsElement = document.getElementById('promoSeconds');
+        this.endTime = new Date();
+        this.endTime.setHours(this.endTime.getHours() + 6); // 6 horas de cooldown
+        this.checkPromoStatus();
+        this.startCountdown();
     }
 
-    // Permitir interação com os modais de cookies
-    [cookieSettingsModal, cookiePolicyModal].forEach(modal => {
-        if (modal) {
-            // Prevenir fechamento ao clicar fora do modal
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal && !localStorage.getItem('cookieConsent')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-            });
-
-            // Permitir interação com elementos dentro do modal
-            modal.querySelector('.modal-content').addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
+    checkPromoStatus() {
+        const lastShown = localStorage.getItem('promoLastShown');
+        const now = new Date().getTime();
+        
+        if (!lastShown || (now - parseInt(lastShown)) > (6 * 60 * 60 * 1000)) {
+            this.showModal();
+            localStorage.setItem('promoLastShown', now.toString());
         }
-    });
+    }
+
+    showModal() {
+        const modal = new bootstrap.Modal(this.modal);
+        modal.show();
+    }
+
+    startCountdown() {
+        const updateCountdown = () => {
+            const now = new Date();
+            const timeLeft = this.endTime - now;
+
+            if (timeLeft <= 0) {
+                this.hideModal();
+                return;
+            }
+
+            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            this.hoursElement.textContent = hours.toString().padStart(2, '0');
+            this.minutesElement.textContent = minutes.toString().padStart(2, '0');
+            this.secondsElement.textContent = seconds.toString().padStart(2, '0');
+            this.countdown.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        };
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
+
+    hideModal() {
+        const modal = bootstrap.Modal.getInstance(this.modal);
+        if (modal) {
+            modal.hide();
+        }
+    }
+}
+
+// Inicializar PromoManager quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', () => {
+    window.promoManager = new PromoManager();
 });
 </script> 

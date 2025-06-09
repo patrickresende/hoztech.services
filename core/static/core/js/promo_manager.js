@@ -1,168 +1,73 @@
 class PromoManager {
     constructor() {
-        // Initialize properties
-        this.modal = null;
-        this.banner = null;
-        this.countdownElement = null;
-        this.endTime = null;
-        this.isInitialized = false;
-
-        // Bind methods to preserve context
-        this.closeModal = this.closeModal.bind(this);
-        this.handleOutsideClick = this.handleOutsideClick.bind(this);
-        this.handleEscapeKey = this.handleEscapeKey.bind(this);
-
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.init());
-        } else {
-            this.init();
-        }
+        this.modal = document.getElementById('promoModal');
+        this.countdown = document.getElementById('promoCountdown');
+        this.hoursElement = document.getElementById('promoHours');
+        this.minutesElement = document.getElementById('promoMinutes');
+        this.secondsElement = document.getElementById('promoSeconds');
+        this.endTime = new Date();
+        this.endTime.setHours(this.endTime.getHours() + 6); // 6 horas de cooldown
+        this.checkPromoStatus();
+        this.startCountdown();
     }
 
-    init() {
-        console.log('Initializing PromoManager...'); // Debug log
+    checkPromoStatus() {
+        const lastShown = localStorage.getItem('promoLastShown');
+        const now = new Date().getTime();
         
-        // Get DOM elements
-        this.modal = document.getElementById('promoOverlay');
-        this.banner = document.getElementById('promoBanner');
-        this.countdownElement = document.getElementById('promoCountdown');
-
-        if (!this.modal && !this.banner) {
-            console.warn('No promo elements found in the DOM');
-            return;
-        }
-
-        // Check if promo has been closed before
-        const modalClosed = this.getCookie('modal_closed');
-        const promoEndTime = this.getCookie('promo_end_time');
-        
-        // Set end time if not set
-        if (!promoEndTime) {
-            this.endTime = Date.now() + (48 * 60 * 60 * 1000); // 48 hours
-            this.setCookie('promo_end_time', this.endTime, 2); // 2 days
-        } else {
-            this.endTime = parseInt(promoEndTime);
-        }
-
-        // Show modal if not closed
-        if (this.modal && !modalClosed) {
+        if (!lastShown || (now - parseInt(lastShown)) > (6 * 60 * 60 * 1000)) {
             this.showModal();
+            localStorage.setItem('promoLastShown', now.toString());
         }
-
-        // Show banner always
-        if (this.banner) {
-            this.showBanner();
-        }
-
-        // Start countdown if either element is visible
-        if ((this.modal && !modalClosed) || this.banner) {
-            this.startCountdown();
-        }
-
-        this.addEventListeners();
-        this.isInitialized = true;
-        console.log('PromoManager initialized successfully'); // Debug log
     }
 
     showModal() {
-        if (!this.modal) return;
-        
-        // Ensure modal is visible in the DOM
-        this.modal.style.display = 'flex';
-        
-        // Use requestAnimationFrame for smooth animation
-        requestAnimationFrame(() => {
-            setTimeout(() => {
-                this.modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }, 3000);
-        });
-    }
-
-    showBanner() {
-        if (!this.banner) return;
-        this.banner.classList.add('active');
-    }
-
-    hideModal() {
-        if (!this.modal) return;
-        this.modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    closeModal() {
-        console.log('Closing modal...'); // Debug log
-        this.setCookie('modal_closed', 'true', 2); // 2 days
-        this.hideModal();
-    }
-
-    handleOutsideClick(e) {
-        if (this.modal && e.target === this.modal) {
-            this.closeModal();
-        }
-    }
-
-    handleEscapeKey(e) {
-        if (e.key === 'Escape') {
-            this.closeModal();
-        }
+        const modal = new bootstrap.Modal(this.modal);
+        modal.show();
     }
 
     startCountdown() {
-        if (!this.countdownElement) return;
-
         const updateCountdown = () => {
-            const now = Date.now();
-            const distance = this.endTime - now;
+            const now = new Date();
+            const timeLeft = this.endTime - now;
 
-            if (distance <= 0) {
-                this.closeModal();
+            if (timeLeft <= 0) {
+                this.hideModal();
                 return;
             }
 
-            const hours = Math.floor(distance / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-            this.countdownElement.textContent = `${hours}h ${minutes}m ${seconds}s`;
-            requestAnimationFrame(updateCountdown);
+            this.hoursElement.textContent = hours.toString().padStart(2, '0');
+            this.minutesElement.textContent = minutes.toString().padStart(2, '0');
+            this.secondsElement.textContent = seconds.toString().padStart(2, '0');
+            this.countdown.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         };
 
         updateCountdown();
+        this.countdownInterval = setInterval(updateCountdown, 1000);
     }
 
-    addEventListeners() {
-        // Close modal on X button click
-        const modalCloseButtons = document.querySelectorAll('.promo-close');
-        modalCloseButtons.forEach(button => {
-            button.addEventListener('click', this.closeModal);
-        });
-
-        // Close modal on outside click
-        if (this.modal) {
-            this.modal.addEventListener('click', this.handleOutsideClick);
+    hideModal() {
+        const modal = bootstrap.Modal.getInstance(this.modal);
+        if (modal) {
+            modal.hide();
         }
-
-        // Close modal on escape key
-        document.addEventListener('keydown', this.handleEscapeKey);
+        if (this.countdownInterval) {
+            clearInterval(this.countdownInterval);
+        }
     }
 
-    setCookie(name, value, days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/;SameSite=Lax`;
-    }
-
-    getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-        return null;
+    // Método para resetar o cooldown (útil para testes)
+    resetCooldown() {
+        localStorage.removeItem('promoLastShown');
+        this.checkPromoStatus();
     }
 }
 
-// Initialize when DOM is ready
-if (typeof window.promoManager === 'undefined') {
+// Inicializar PromoManager quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', () => {
     window.promoManager = new PromoManager();
-}
+}); 

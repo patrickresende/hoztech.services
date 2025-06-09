@@ -1,5 +1,5 @@
 /* Estilos para o Gerenciador de Cookies */
-.cookie-banner {
+.cookie-consent {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -10,9 +10,10 @@
     z-index: 1000;
     display: none;
     box-shadow: 0 -5px 20px rgba(0, 247, 255, 0.1);
+    font-family: var(--font-orbitron);
 }
 
-.cookie-banner.show {
+.cookie-consent.active {
     display: block;
     animation: slideUp 0.5s ease;
 }
@@ -30,7 +31,9 @@
 .cookie-text {
     flex: 1;
     min-width: 300px;
-    font-size: 0.9rem;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    color: var(--tech-light);
+    line-height: 1.5;
 }
 
 .cookie-buttons {
@@ -39,11 +42,94 @@
     flex-wrap: wrap;
 }
 
+.btn-cookie {
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: clamp(0.875rem, 1.25vw, 1rem);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    position: relative;
+    font-family: var(--font-orbitron);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-cookie i {
+    font-size: 1.1rem;
+}
+
+.btn-cookie.btn-secondary {
+    background: transparent;
+    color: var(--tech-light);
+    border: 1px solid var(--tech-blue);
+}
+
+.btn-cookie.btn-secondary:hover {
+    background: rgba(0, 247, 255, 0.1);
+    color: var(--tech-blue);
+    transform: translateY(-2px);
+}
+
+.btn-cookie:not(.btn-secondary) {
+    background: linear-gradient(135deg, var(--tech-blue), var(--tech-red));
+    color: var(--tech-dark);
+    border: none;
+}
+
+.btn-cookie:not(.btn-secondary):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+}
+
 @keyframes slideUp {
     from {
         transform: translateY(100%);
     }
     to {
         transform: translateY(0);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .cookie-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cookie-text {
+        min-width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .cookie-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-cookie {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cookie-consent {
+        padding: 0.75rem;
+    }
+
+    .cookie-text {
+        font-size: 0.875rem;
+    }
+
+    .btn-cookie {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
     }
 } 

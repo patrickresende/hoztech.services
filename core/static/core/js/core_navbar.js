@@ -5,42 +5,72 @@ class NavbarManager {
         this.navbarToggler = document.querySelector('.navbar-toggler');
         this.navbarCollapse = document.querySelector('.navbar-collapse');
         this.lastScrollTop = 0;
+        this.scrollTimeout = null;
+        this.isMenuOpen = false;
         this.init();
     }
 
     init() {
         if (this.navbar) {
-            window.addEventListener('scroll', () => this.handleScroll());
-            window.addEventListener('resize', () => this.handleResize());
-            
-            if (this.navbarToggler) {
-                this.navbarToggler.addEventListener('click', () => this.handleToggle());
-            }
-
-            // Fechar menu ao clicar em um link
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => this.closeMenu());
-            });
+            this.setupScrollListener();
+            this.setupResizeListener();
+            this.setupClickListeners();
         }
+    }
+
+    setupScrollListener() {
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    this.handleScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+    }
+
+    setupResizeListener() {
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                this.handleResize();
+            }, 250);
+        }, { passive: true });
+    }
+
+    setupClickListeners() {
+        if (this.navbarToggler) {
+            this.navbarToggler.addEventListener('click', () => this.handleToggle());
+        }
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => this.closeMenu());
+        });
+
+        document.addEventListener('click', (event) => {
+            const isClickInside = this.navbar.contains(event.target);
+            if (!isClickInside && this.isMenuOpen) {
+                this.closeMenu();
+            }
+        });
     }
 
     handleScroll() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // Adicionar classe quando rolar para baixo
         if (scrollTop > 50) {
             this.navbar.classList.add('navbar-scrolled');
         } else {
             this.navbar.classList.remove('navbar-scrolled');
         }
 
-        // Esconder/mostrar navbar ao rolar
         if (scrollTop > this.lastScrollTop && scrollTop > 200) {
-            // Rolando para baixo
             this.navbar.style.transform = 'translateY(-100%)';
         } else {
-            // Rolando para cima
             this.navbar.style.transform = 'translateY(0)';
         }
 
@@ -48,17 +78,13 @@ class NavbarManager {
     }
 
     handleResize() {
-        if (window.innerWidth > 991) {
-            this.navbarCollapse.classList.remove('show');
-            this.navbarToggler.classList.remove('collapsed');
-            this.navbarToggler.setAttribute('aria-expanded', 'false');
+        if (window.innerWidth >= 992) {
+            this.closeMenu();
         }
     }
 
     handleToggle() {
-        const isExpanded = this.navbarToggler.getAttribute('aria-expanded') === 'true';
-        
-        if (isExpanded) {
+        if (this.isMenuOpen) {
             this.closeMenu();
         } else {
             this.openMenu();
@@ -66,17 +92,42 @@ class NavbarManager {
     }
 
     openMenu() {
+        if (this.isMenuOpen) return;
+        
+        const scrollY = window.scrollY;
         this.navbarCollapse.classList.add('show');
         this.navbarToggler.classList.add('collapsed');
         this.navbarToggler.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden';
+        
+        // Verifica se o cookie consent está ativo
+        const cookieConsent = document.querySelector('.cookie-consent.show');
+        if (!cookieConsent) {
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.width = '100%';
+        }
+        
+        this.isMenuOpen = true;
     }
 
     closeMenu() {
+        if (!this.isMenuOpen) return;
+        
+        const scrollY = document.body.style.top;
         this.navbarCollapse.classList.remove('show');
         this.navbarToggler.classList.remove('collapsed');
         this.navbarToggler.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+        
+        // Verifica se o cookie consent está ativo
+        const cookieConsent = document.querySelector('.cookie-consent.show');
+        if (!cookieConsent) {
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
+        
+        this.isMenuOpen = false;
     }
 }
 

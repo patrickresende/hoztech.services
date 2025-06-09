@@ -4,6 +4,7 @@ class ContactForm {
         this.form = document.querySelector('#contactForm');
         this.submitButton = this.form ? this.form.querySelector('button[type="submit"]') : null;
         this.isAutoFilling = false;
+        this.validationTimeout = null;
         this.init();
     }
 
@@ -42,10 +43,9 @@ class ContactForm {
         const inputs = this.form.querySelectorAll('input, textarea');
         inputs.forEach(input => {
             // Adiciona delay na validação para evitar conflitos com autopreenchimento
-            let validationTimeout;
             input.addEventListener('input', () => {
-                clearTimeout(validationTimeout);
-                validationTimeout = setTimeout(() => {
+                clearTimeout(this.validationTimeout);
+                this.validationTimeout = setTimeout(() => {
                     if (!this.isAutoFilling) {
                         this.validateInput(input);
                     }

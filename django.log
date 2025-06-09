@@ -3954,3 +3954,1687 @@ View home executed successfully
 Executing view: home
 View home executed successfully
 "GET / HTTP/1.1" 200 68919
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 68919
+"GET /static/core/css/core_base.css HTTP/1.1" 200 1213
+"GET /static/core/images/logo.png HTTP/1.1" 200 205393
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 5235
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 200 899
+"GET /static/core/css/core_images.css HTTP/1.1" 200 514
+"GET /static/core/css/core_output.css HTTP/1.1" 200 721
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 200 15027
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 200 2245
+"GET /static/core/js/core_navbar.js HTTP/1.1" 200 2898
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67652
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 62032
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67652
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67652
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67652
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67652
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67652
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67652
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67652
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 72430
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 72430
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 71615
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 64884
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+Error in view home: Reverse for 'services' not found. 'services' is not a valid view function or pattern name.
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 126, in wrapper
+    result = view_func(*args, **kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 137, in home
+    return render(request, 'home.html')
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'services' not found. 'services' is not a valid view function or pattern name.
+"GET / HTTP/1.1" 500 170203
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+Error in view home: Reverse for 'services' not found. 'services' is not a valid view function or pattern name.
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 126, in wrapper
+    result = view_func(*args, **kwargs)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\core\views.py", line 137, in home
+    return render(request, 'home.html')
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\template\defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'services' not found. 'services' is not a valid view function or pattern name.
+"GET / HTTP/1.1" 500 170203
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+C:\Users\TXX\Desktop\HOZ_TECH\core\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65144
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 59661
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 59638
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65121
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65289
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65243
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65243
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65288
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65288
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 64990
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 65126
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 69010
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 68919
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 68919
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 71455
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70990
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70990
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70990
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70990
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70990
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70990
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75807
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75595
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75595
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75595
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75595
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75595
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75595
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75595
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75595
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75595
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 74924
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 74924
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 6502
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+"GET /static/core/css/core_base.css HTTP/1.1" 200 1213
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 200 3907
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 200 2723
+"GET /static/core/css/core_images.css HTTP/1.1" 200 514
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 200 15041
+"GET /static/core/css/core_output.css HTTP/1.1" 200 721
+"GET /static/core/images/logo.png HTTP/1.1" 200 205393
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 6502
+"GET /static/core/js/core_navbar.js HTTP/1.1" 200 2898
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 70539
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 70539
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 4975
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 72533
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 72533
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 72533
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 72533
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 5751
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77482
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 57636
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 6249
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 57636
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 57636
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 57636
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 57636
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 6690
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 61739
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 61739
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 61739
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 83215
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 61739
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 61739
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 83215
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+"GET /contato/ HTTP/1.1" 200 56283
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66389
+"GET /static/core/css/core_base.css HTTP/1.1" 200 1213
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 200 3907
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 200 15041
+"GET /static/core/css/core_images.css HTTP/1.1" 200 514
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 200 2723
+"GET /static/core/images/logo.png HTTP/1.1" 200 205393
+"GET /static/core/css/core_output.css HTTP/1.1" 200 721
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 6690
+"GET /static/core/js/core_navbar.js HTTP/1.1" 200 2898
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 61739
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67689
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+"GET /contato/ HTTP/1.1" 200 57583
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67689
+"GET /contato/ HTTP/1.1" 200 57583
+"GET /contato/ HTTP/1.1" 200 57583
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67689
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67689
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+"GET /contato/ HTTP/1.1" 200 57583
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67689
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+"GET /contato/ HTTP/1.1" 200 57583
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67689
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67689
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+"GET /contato/ HTTP/1.1" 200 57583
+"GET /contato/ HTTP/1.1" 200 57583
+"GET /contato/ HTTP/1.1" 200 57583
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 63039
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67689
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67689
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 84515
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 99898
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 6502
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 70539
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 99898
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 99898
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 99898
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 99898
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75488
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77903
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 8062
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 77903
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 102313
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 96232
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 96232
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 101326
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 76916
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 76916
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 71967
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 76916
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 71967
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 101326
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 101326
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 76916
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 76916
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 200 3907
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 200 15041
+"GET /static/core/css/core_base.css HTTP/1.1" 200 1213
+"GET /static/core/css/core_images.css HTTP/1.1" 200 514
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 200 2723
+"GET /static/core/css/core_output.css HTTP/1.1" 200 721
+"GET /static/core/images/logo.png HTTP/1.1" 200 205393
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 8062
+"GET /static/core/js/core_navbar.js HTTP/1.1" 200 2898
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 76916
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67938
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 3176
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 68522
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 68522
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 68522
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 68522
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 68522
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 68522
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 69191
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 70611
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70027
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 3176
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70027
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 70611
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70027
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70027
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70027
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70027
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70027
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67964
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67964
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67964
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67026
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67026
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 67026
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 96521
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 67162
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 67162
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 96521
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /faq/ HTTP/1.1" 200 55248
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 67162
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 67162
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 96521
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 96521
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 96521
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 67162
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 66578
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 68654
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70739
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70739
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70739
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 71323
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 100682
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70739
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70739
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 74699
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 75283
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /faq/ HTTP/1.1" 200 63369
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 74699
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 75740
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 404 1945
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 82278
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 5013
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 82278
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 82278
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 82278
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 82862
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 82278
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 2659
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 200 15041
+"GET /static/core/images/logo.png HTTP/1.1" 200 205393
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 2659
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 200 3907
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 200 2723
+"GET /static/core/css/core_output.css HTTP/1.1" 200 721
+"GET /static/core/css/core_images.css HTTP/1.1" 200 514
+"GET /static/core/css/core_base.css HTTP/1.1" 200 1213
+"GET /static/core/js/core_navbar.js HTTP/1.1" 200 4301
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 85498
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 79810
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 80394
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 109753
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 79810
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 79810
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 79810
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 109753
+"GET /contato/ HTTP/1.1" 200 74938
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 79810
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 79810
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 80394
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 79810
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 79810
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 79810
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 84407
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/core_navbar.js HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 84407
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 84407
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 84991
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114350
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 84407
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 84407
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 84407
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 84407
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 84407
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 83697
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 83697
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 83697
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 83697
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 84281
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 113640
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114959
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114590
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+"GET /static/core/js/core_navbar.js HTTP/1.1" 304 0
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114580
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114580
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114570
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114583
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114583
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114586
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114595
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114762
+"GET /static/core/js/core_navbar.js HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114762
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114656
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 84713
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 85297
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114656
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 114985
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 115342
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 116570
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 116981
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 117760
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Executing view: sobre_nos
+View sobre_nos executed successfully
+"GET /sobre/ HTTP/1.1" 200 88401
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
