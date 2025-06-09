@@ -12,4 +12,6 @@ urlpatterns = [
     path('privacidade/', views.privacy, name='privacy'),
     path('termos/', views.terms, name='terms'),
     path('download-pdf/', views.download_pdf, name='download_pdf'),
+    path('faq/', views.faq, name='faq'),
+    path('security-policy/', views.security_policy, name='security_policy')
 ] 

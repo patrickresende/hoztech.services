@@ -135,7 +135,7 @@
         }
 
         .navbar-brand img {
-            height: 35px;
+            height: 40px;
             width: auto;
             filter: drop-shadow(0 0 5px var(--tech-blue));
             transition: all 0.3s ease;
@@ -260,7 +260,7 @@
         }
 
         .footer-logo {
-            max-width: 200px;
+            max-width: 300px;
             margin-bottom: var(--spacing-md);
             filter: drop-shadow(var(--shadow-blue));
             transition: all var(--transition-normal);
@@ -458,6 +458,377 @@
                 padding-top: calc(71px + 1rem);
             }
         }
+
+        /* Promo Banner Styles */
+        .promo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--tech-blue), var(--tech-red));
+            color: var(--tech-dark);
+            padding: 0.5rem 1rem;
+            z-index: 1100;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .promo-banner.active {
+            transform: translateY(0);
+        }
+
+        .promo-banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            font-family: var(--font-orbitron);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .promo-banner-text {
+            flex: 1;
+            text-align: center;
+        }
+
+        .promo-banner-countdown {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 5px;
+            font-weight: 700;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .promo-banner-cta {
+            background: var(--tech-dark);
+            color: var(--tech-light);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .promo-banner-cta:hover {
+            background: var(--tech-light);
+            color: var(--tech-dark);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .promo-banner-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+                padding: 0.5rem;
+            }
+
+            .promo-banner-text {
+                font-size: 0.8rem;
+            }
+
+            .promo-banner-countdown {
+                font-size: 0.8rem;
+                min-width: 100px;
+            }
+
+            .promo-banner-cta {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Ajuste para o navbar */
+        .navbar {
+            top: 40px; /* Altura do banner */
+        }
+
+        /* Ajuste para o conteúdo principal */
+        main {
+            padding-top: calc(40px + 80px); /* Altura do banner + altura do navbar */
+        }
+
+        /* Estilos do Cookie Consent */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--gradient-dark);
+            border-top: 1px solid rgba(0, 247, 255, 0.2);
+            padding: 1rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .cookie-consent.active {
+            transform: translateY(0);
+        }
+
+        .cookie-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .cookie-text {
+            color: var(--tech-light);
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-cookie {
+            background: linear-gradient(135deg, var(--tech-blue), var(--tech-red));
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 1.5rem;
+            color: var(--tech-dark);
+            font-family: var(--font-orbitron);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
+        }
+
+        .btn-cookie::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .btn-cookie:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
+        }
+
+        .btn-cookie:hover::before {
+            left: 100%;
+        }
+
+        .btn-cookie i {
+            font-size: 1.2em;
+        }
+
+        .btn-cookie.btn-secondary {
+            background: transparent;
+            border: 2px solid var(--tech-blue);
+            color: var(--tech-blue);
+            box-shadow: none;
+        }
+
+        .btn-cookie.btn-secondary:hover {
+            background: rgba(0, 247, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .cookie-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cookie-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn-cookie {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Estilos do Cookie Settings Modal */
+        .cookie-settings {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 1100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .cookie-settings.active {
+            display: flex;
+        }
+
+        .cookie-settings-content {
+            background: var(--gradient-dark);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.1);
+        }
+
+        .cookie-settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+        }
+
+        .cookie-settings-header h3 {
+            color: var(--tech-light);
+            font-family: var(--font-orbitron);
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .cookie-settings-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .cookie-option {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 247, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 247, 255, 0.1);
+        }
+
+        .cookie-option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .cookie-option-header h4 {
+            color: var(--tech-light);
+            font-family: var(--font-orbitron);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .cookie-option p {
+            color: var(--tech-light);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Switch Toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 247, 255, 0.1);
+            transition: .4s;
+            border-radius: 24px;
+            border: 1px solid rgba(0, 247, 255, 0.3);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 3px;
+            background-color: var(--tech-blue);
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: rgba(0, 247, 255, 0.2);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .cookie-settings-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 247, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .cookie-settings-content {
+                padding: 1rem;
+            }
+
+            .cookie-settings-footer {
+                flex-direction: column;
+            }
+
+            .cookie-settings-footer .btn-cookie {
+                width: 100%;
+            }
+        }
     </style>
     {% block extra_css %}{% endblock %}
     
@@ -509,6 +880,18 @@
     </script>
 </head>
 <body>
+    <!-- Promo Banner -->
+    <div id="promoBanner" class="promo-banner active">
+        <div class="promo-banner-content">
+            <span class="promo-banner-text">🔥 PROMOÇÃO RELÂMPAGO - Site Institucional por R$397,90 🔥</span>
+            <span class="promo-banner-countdown" id="promoCountdown">47h 59m 38s</span>
+            <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na promoção do Site Institucional. Poderia me enviar mais informações?" class="promo-banner-cta" target="_blank" rel="noopener">
+                <i class="bi bi-whatsapp"></i>
+                Garantir Agora
+            </a>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid px-4">
@@ -546,6 +929,12 @@
                            <i class="bi bi-envelope"></i> CONTATO
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'faq' %}active{% endif %}" 
+                           href="{% url 'core:faq' %}">
+                           <i class="bi bi-question-circle"></i> FAQ
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -555,6 +944,77 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <p class="cookie-text">Utilizamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa política de cookies.</p>
+            <div class="cookie-buttons">
+                <button class="btn-cookie btn-secondary" onclick="openCookieSettings()">
+                    <i class="bi bi-gear"></i>
+                    Configurações
+                </button>
+                <button class="btn-cookie" onclick="acceptAllCookies()">
+                    <i class="bi bi-check-lg"></i>
+                    Aceitar Todos
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Settings Modal -->
+    <div class="cookie-settings" id="cookieSettings">
+        <div class="cookie-settings-content">
+            <div class="cookie-settings-header">
+                <h3>Configurações de Cookies</h3>
+                <button class="btn-cookie btn-secondary" onclick="closeCookieSettings()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="cookie-settings-body">
+                <div class="cookie-option">
+                    <div class="cookie-option-header">
+                        <h4>Cookies Essenciais</h4>
+                        <label class="switch">
+                            <input type="checkbox" checked disabled>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p>Necessários para o funcionamento básico do site.</p>
+                </div>
+                <div class="cookie-option">
+                    <div class="cookie-option-header">
+                        <h4>Cookies de Desempenho</h4>
+                        <label class="switch">
+                            <input type="checkbox" id="performanceCookies">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p>Nos ajudam a entender como os visitantes interagem com o site.</p>
+                </div>
+                <div class="cookie-option">
+                    <div class="cookie-option-header">
+                        <h4>Cookies de Marketing</h4>
+                        <label class="switch">
+                            <input type="checkbox" id="marketingCookies">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p>Usados para personalizar anúncios e conteúdo.</p>
+                </div>
+            </div>
+            <div class="cookie-settings-footer">
+                <button class="btn-cookie btn-secondary" onclick="closeCookieSettings()">Cancelar</button>
+                <button class="btn-cookie" onclick="saveCookieSettings()">
+                    <i class="bi bi-check-lg"></i>
+                    Salvar Preferências
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include WhatsApp Widget -->
+    {% include 'whatsapp_widget.html' %}
 
     <!-- Footer -->
     <footer class="footer">
@@ -589,14 +1049,15 @@
                         <li><a href="{% url 'core:privacy' %}">Política de Privacidade</a></li>
                         <li><a href="{% url 'core:terms' %}">Termos de Uso</a></li>
                         <li><a href="{% url 'core:minha_seguranca' %}">Minha Segurança</a></li>
+                        <li><a href="{% url 'core:security_policy' %}">Políticas de Segurança</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h5>Contato</h5>
                     <ul class="list-unstyled contact-info">
                         <li><i class="bi bi-envelope"></i> contato@hoztech.com.br</li>
-                        <li><i class="bi bi-whatsapp"></i> (11) 99999-9999</li>
-                        <li><i class="bi bi-geo-alt"></i> São Paulo, SP</li>
+                        <li><i class="bi bi-whatsapp"></i> (21) 97300-7575</li>
+                        <li><i class="bi bi-geo-alt"></i> Rio de Janeiro, RJ</li>
                     </ul>
                 </div>
             </div>
@@ -726,6 +1187,68 @@
             window.addEventListener('resize', updateCollapseHeight);
             updateCollapseHeight();
         });
+    </script>
+
+    <script>
+        // Cookie Management
+        document.addEventListener('DOMContentLoaded', function() {
+            const cookieConsent = document.getElementById('cookieConsent');
+            const cookieSettings = document.getElementById('cookieSettings');
+            
+            // Check if user has already made a choice
+            if (!getCookie('cookie_consent')) {
+                setTimeout(() => {
+                    cookieConsent.classList.add('active');
+                }, 1000);
+            }
+        });
+
+        function openCookieSettings() {
+            const cookieSettings = document.getElementById('cookieSettings');
+            cookieSettings.classList.add('active');
+        }
+
+        function closeCookieSettings() {
+            const cookieSettings = document.getElementById('cookieSettings');
+            cookieSettings.classList.remove('active');
+        }
+
+        function acceptAllCookies() {
+            setCookie('cookie_consent', 'all', 365);
+            setCookie('performance_cookies', 'true', 365);
+            setCookie('marketing_cookies', 'true', 365);
+            hideCookieConsent();
+        }
+
+        function saveCookieSettings() {
+            const performanceCookies = document.getElementById('performanceCookies').checked;
+            const marketingCookies = document.getElementById('marketingCookies').checked;
+            
+            setCookie('cookie_consent', 'custom', 365);
+            setCookie('performance_cookies', performanceCookies.toString(), 365);
+            setCookie('marketing_cookies', marketingCookies.toString(), 365);
+            
+            hideCookieConsent();
+            closeCookieSettings();
+        }
+
+        function hideCookieConsent() {
+            const cookieConsent = document.getElementById('cookieConsent');
+            cookieConsent.classList.remove('active');
+        }
+
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/;SameSite=Lax`;
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return null;
+        }
     </script>
 </body>
 </html>

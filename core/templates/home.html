@@ -21,9 +21,9 @@
     /* Hero Section */
     .hero-section {
         position: relative;
-        padding: var(--spacing-xl) 0;
+        padding: var(--spacing-lg) 0;
         overflow: hidden;
-        min-height: calc(100vh - 76px);
+        min-height: calc(100vh - 300px);
         display: flex;
         align-items: center;
     }
@@ -51,10 +51,10 @@
     }
 
     .hero-logo {
-        max-width: clamp(180px, 25vw, 250px); /* Reduced and made responsive */
+        max-width: clamp(180px, 25vw, 250px);
         width: 100%;
         height: auto;
-        margin-bottom: var(--spacing-lg);
+        margin-bottom: var(--spacing-md);
         filter: drop-shadow(var(--shadow-blue));
         transition: all var(--transition-normal);
     }
@@ -388,10 +388,218 @@
             font-size: var(--font-size-base);
         }
     }
+
+    /* Promo Overlay Styles */
+    .promo-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        padding: 2rem;
+    }
+
+    .promo-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .promo-modal {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        border-radius: 20px;
+        padding: 2.5rem;
+        width: 90%;
+        max-width: 600px;
+        position: relative;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+        margin: 2rem;
+    }
+
+    .promo-overlay.active .promo-modal {
+        transform: translateY(0);
+    }
+
+    .promo-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 10;
+    }
+
+    .promo-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: rotate(90deg);
+    }
+
+    .promo-close i {
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .promo-content {
+        text-align: center;
+        color: white;
+    }
+
+    .promo-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .promo-content p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    .promo-countdown {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .promo-pricing {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .promo-price-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease;
+    }
+
+    .promo-price-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .promo-price-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #fff;
+    }
+
+    .promo-price-card .original-price {
+        text-decoration: line-through;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .promo-price-card .promo-price {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 1rem;
+    }
+
+    .promo-cta {
+        display: inline-block;
+        background: #25D366;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    }
+
+    .promo-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        background: #22c55e;
+    }
+
+    @media (max-width: 768px) {
+        .promo-modal {
+            padding: 2rem;
+            margin: 1rem;
+        }
+
+        .promo-content h2 {
+            font-size: 2rem;
+        }
+
+        .promo-pricing {
+            grid-template-columns: 1fr;
+        }
+
+        .promo-close {
+            top: 1rem;
+            right: 1rem;
+            width: 35px;
+            height: 35px;
+        }
+    }
 </style>
 {% endblock %}
 
 {% block content %}
+<!-- Promotional Overlay -->
+<div id="promoOverlay" class="promo-overlay">
+    <div class="promo-modal">
+        <button type="button" class="promo-close" aria-label="Fechar promoção">
+            <i class="bi bi-x-lg"></i>
+        </button>
+        <div class="promo-content">
+            <div id="promoCountdown" class="promo-countdown">🔥 PROMOÇÃO RELÂMPAGO - 48H 🔥</div>
+            <h2>Impulsione seu Negócio</h2>
+            <p>Aproveite esta oportunidade única para transformar sua presença digital</p>
+            <div class="promo-pricing">
+                <div class="promo-price-card">
+                    <h3>Site Institucional</h3>
+                    <div class="original-price">De R$797,90</div>
+                    <div class="promo-price">Por R$397,90</div>
+                </div>
+                <div class="promo-price-card">
+                    <h3>Landing Page</h3>
+                    <div class="promo-price">R$249,90</div>
+                </div>
+            </div>
+            <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na promoção de Site Institucional e Landing Page. Poderia me enviar mais informações?" 
+               class="promo-cta" 
+               target="_blank" 
+               rel="noopener">
+                <i class="bi bi-whatsapp"></i>
+                Garantir Promoção
+            </a>
+        </div>
+    </div>
+</div>
+
 <!-- Hero Section -->
 <section class="hero-section">
     <div class="hero-content">
@@ -529,10 +737,39 @@
         <p class="cta-description">
             Entre em contato conosco e descubra como podemos ajudar seu negócio a crescer no mundo digital.
         </p>
-        <a href="#" class="btn btn-hero btn-primary" data-bs-toggle="modal" data-bs-target="#contatoModal">
-            <i class="bi bi-rocket-takeoff"></i>
+        <a href="https://api.whatsapp.com/send/?phone=5521973007575&amp;text=Olá! Tenho interesse em criar meu site. Poderia me enviar mais informações?" 
+           class="btn btn-hero btn-primary" 
+           target="_blank" 
+           rel="noopener">
+            <i class="bi bi-whatsapp"></i>
             Solicitar Orçamento
         </a>
     </div>
 </section>
+
+<!-- Promo Banner -->
+<div id="promoBanner" class="promo-banner active">
+    <div class="promo-banner-content">
+        <span class="promo-banner-text">🔥 PROMOÇÃO RELÂMPAGO - Site Institucional por R$397,90 🔥</span>
+        <span class="promo-banner-countdown" id="promoCountdown">47h 59m 38s</span>
+        <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na promoção do Site Institucional. Poderia me enviar mais informações?" class="promo-banner-cta" target="_blank" rel="noopener">
+            Garantir Agora
+        </a>
+        <button class="promo-banner-close" onclick="window.promoManager.closeBanner()">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'core/js/promo_manager.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Ensure PromoManager is initialized only once
+        if (!window.promoManager) {
+            window.promoManager = new PromoManager();
+        }
+    });
+</script>
 {% endblock %}

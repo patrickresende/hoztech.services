@@ -28,6 +28,7 @@ import xlsxwriter
 from io import BytesIO
 import zipfile
 import redis
+from django.db import connection
 
 logger = logging.getLogger(__name__)
 
@@ -467,7 +468,7 @@ def handle_contact_submission(request):
     try:
         # Process form data
         print("\nProcessando dados do formulário...")
-        form_data = form.get_cleaned_data()
+        form_data = form.cleaned_data
         print(f"Dados processados: {form_data}")
         
         # Send email
@@ -969,4 +970,12 @@ def check_workers():
             return {'status': 'healthy', 'message': 'Workers are running'}
         return {'status': 'unhealthy', 'message': 'No worker heartbeat detected'}
     except Exception as e:
-        return {'status': 'unhealthy', 'message': str(e)} 
+        return {'status': 'unhealthy', 'message': str(e)}
+
+def faq(request):
+    """View for the FAQ page."""
+    return render(request, 'faq.html') 
+
+def security_policy(request):
+    """View for the security policy page."""
+    return render(request, 'security_policy.html') 

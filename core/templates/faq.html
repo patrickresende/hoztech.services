@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}FAQ - HOZ TECH{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-5">Perguntas Frequentes</h1>
+    
+    <div class="accordion" id="faqAccordion">
+        <!-- Serviços -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                    Quais serviços a HOZ TECH oferece?
+                </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Oferecemos desenvolvimento de sites institucionais, landing pages, sistemas web personalizados, 
+                    e-commerce e soluções tecnológicas para empresas. Todos os nossos serviços são desenvolvidos 
+                    com as mais modernas tecnologias e seguindo as melhores práticas de desenvolvimento.
+                </div>
+            </div>
+        </div>
+
+        <!-- Preços -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                    Como são definidos os preços dos serviços?
+                </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Nossos preços são definidos com base nas necessidades específicas de cada projeto, 
+                    considerando fatores como complexidade, prazo de entrega e recursos necessários. 
+                    Oferecemos pacotes personalizados para atender diferentes orçamentos e necessidades.
+                </div>
+            </div>
+        </div>
+
+        <!-- Prazos -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                    Qual o prazo médio de entrega dos projetos?
+                </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    O prazo varia de acordo com o tipo e complexidade do projeto. Sites institucionais 
+                    geralmente são entregues em 15-30 dias, enquanto sistemas mais complexos podem levar 
+                    de 2 a 6 meses. Durante o processo de orçamento, definimos um cronograma detalhado 
+                    para seu projeto.
+                </div>
+            </div>
+        </div>
+
+        <!-- Suporte -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                    Vocês oferecem suporte após a entrega?
+                </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Sim! Oferecemos suporte técnico e manutenção para todos os projetos desenvolvidos. 
+                    Nossos planos de suporte incluem atualizações, correções e melhorias contínuas para 
+                    garantir o melhor funcionamento do seu sistema.
+                </div>
+            </div>
+        </div>
+
+        <!-- Tecnologias -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                    Quais tecnologias vocês utilizam?
+                </button>
+            </h2>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Utilizamos as mais modernas tecnologias do mercado, incluindo HTML5, CSS3, JavaScript, 
+                    React, Node.js, Python, Django, e outras ferramentas de acordo com as necessidades 
+                    específicas de cada projeto.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.accordion-item {
+    background: transparent;
+    border: 1px solid var(--tech-blue);
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-button {
+    background: rgba(0, 247, 255, 0.1);
+    color: var(--tech-light);
+    font-family: var(--font-orbitron);
+    font-size: 1.1rem;
+    padding: 1rem;
+}
+
+.accordion-button:not(.collapsed) {
+    background: rgba(0, 247, 255, 0.2);
+    color: var(--tech-blue);
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: var(--tech-blue);
+}
+
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2300f7ff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-body {
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--tech-light);
+    padding: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+h1 {
+    color: var(--tech-blue);
+    font-family: var(--font-orbitron);
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+    margin-bottom: 2rem;
+}
+</style>
+{% endblock %} 
