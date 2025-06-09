@@ -5638,3 +5638,20 @@ View sobre_nos executed successfully
 "GET /sobre/ HTTP/1.1" 200 88401
 Not Found: /.well-known/appspecific/com.chrome.devtools.json
 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 4581
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 87817
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 304 0
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 304 0
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 304 0
+"GET /static/core/images/logo.png HTTP/1.1" 304 0
+"GET /static/core/js/core_navbar.js HTTP/1.1" 304 0
+"GET /static/core/js/promo_manager.js HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 87817
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 87817
