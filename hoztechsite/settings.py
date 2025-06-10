@@ -23,7 +23,7 @@ load_dotenv()
 
 # Verificar ambiente
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
-DEBUG = False  # Forçando DEBUG=False
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'  # Corrigindo DEBUB para DEBUG
 
 print(f"Ambiente: {ENVIRONMENT}")
 print(f"DEBUG: {DEBUG}")
@@ -44,7 +44,9 @@ DEFAULT_ALLOWED_HOSTS = [
     '.railway.app'
 ]
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", ",".join(DEFAULT_ALLOWED_HOSTS)).split(',')
+# Processar ALLOWED_HOSTS corretamente
+raw_hosts = os.getenv("ALLOWED_HOSTS", ",".join(DEFAULT_ALLOWED_HOSTS))
+ALLOWED_HOSTS = [host.strip().split(':')[0] for host in raw_hosts.split(',')]
 print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 
 
@@ -140,20 +142,19 @@ if ENVIRONMENT == 'development' or DEBUG:
     ]
 else:
     # Configurações de Produção
-    SECURE_SSL_REDIRECT = True
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'True').lower() == 'true'
+    SECURE_BROWSER_XSS_FILTER = os.getenv('SECURE_BROWSER_XSS_FILTER', 'True').lower() == 'true'
+    SECURE_CONTENT_TYPE_NOSNIFF = os.getenv('SECURE_CONTENT_TYPE_NOSNIFF', 'True').lower() == 'true'
+    SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'True').lower() == 'true'
+    CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'True').lower() == 'true'
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-    CSRF_TRUSTED_ORIGINS = [
-        'https://hoz-tech.onrender.com',
-        'https://*.onrender.com',
-        'https://hoztech.up.railway.app',
-    ]
+    SECURE_HSTS_SECONDS = int(os.getenv('SECURE_HSTS_SECONDS', '31536000'))
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = os.getenv('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'True').lower() == 'true'
+    SECURE_HSTS_PRELOAD = os.getenv('SECURE_HSTS_PRELOAD', 'True').lower() == 'true'
+    
+    # Processar CSRF_TRUSTED_ORIGINS corretamente
+    raw_origins = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://*.onrender.com,https://*.railway.app')
+    CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in raw_origins.split(',')]
 
 # Configuração de CORS
 CORS_ALLOW_ALL_ORIGINS = DEBUG
@@ -286,12 +287,13 @@ CONTACT_EMAIL = os.getenv('CONTACT_EMAIL', 'contato@hoztech.com')
 # Email Configuration
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', CONTACT_EMAIL)
-SERVER_EMAIL = os.getenv('SERVER_EMAIL', CONTACT_EMAIL)
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True').lower() == 'true'
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False').lower() == 'true'
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@hoztech.com')
+SERVER_EMAIL = os.getenv('SERVER_EMAIL', DEFAULT_FROM_EMAIL)
 
 # Email timeout settings
 EMAIL_TIMEOUT = 30  # seconds
@@ -300,6 +302,11 @@ EMAIL_SSL_CERTFILE = None
 
 # Site settings
 ADMIN_URL = os.getenv('ADMIN_URL', 'admin/')
+
+# Configurações do Admin
+ADMIN_SITE_HEADER = os.getenv('ADMIN_SITE_HEADER', 'HOZ TECH - Painel Administrativo')
+ADMIN_SITE_TITLE = os.getenv('ADMIN_SITE_TITLE', 'HOZ TECH Admin')
+ADMIN_INDEX_TITLE = os.getenv('ADMIN_INDEX_TITLE', 'Bem-vindo ao Painel Administrativo')
 
 # Logging Configuration
 LOGGING = {
@@ -316,32 +323,12 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console', 'file'],
-        'level': 'INFO',
+        'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
     },
     'loggers': {
         'django': {
             'handlers': ['console', 'file'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-            'propagate': False,
-        },
-        'django.server': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'django.request': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'django.db.backends': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'whitenoise': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
             'propagate': False,
         },
     },

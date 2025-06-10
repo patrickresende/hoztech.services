@@ -1,3 +1,4 @@
+// Gerenciador de Promoções
 class PromoManager {
     constructor() {
         // Elementos da UI
@@ -133,7 +134,8 @@ class PromoManager {
     }
 }
 
-// Inicialização única
+// Inicialização única do PromoManager
+// Evita múltiplas instâncias mesmo se o script for carregado mais de uma vez
 if (!window.promoManager) {
     window.promoManager = new PromoManager();
 }

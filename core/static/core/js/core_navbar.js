@@ -133,5 +133,8 @@ class NavbarManager {
 
 // Inicializar o gerenciador da navbar quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
-    new NavbarManager();
+    // Evitar inicialização duplicada
+    if (!window.navbarManager) {
+        window.navbarManager = new NavbarManager();
+    }
 }); 
