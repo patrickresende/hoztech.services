@@ -1,141 +1,153 @@
 // Gerenciador de Promoções
-class PromoManager {
-    constructor() {
-        // Elementos da UI
-        this.modal = document.getElementById('promoModal');
-        this.countdownContainer = document.querySelector('.promo-timer');
-        this.countdownNavContainer = document.querySelector('.promo-countdown');
-        this.hoursElement = document.getElementById('promoHours');
-        this.minutesElement = document.getElementById('promoMinutes');
-        this.secondsElement = document.getElementById('promoSeconds');
-        this.countdown = document.getElementById('promoCountdown');
-        this.navCountdown = document.getElementById('promoNavCountdown');
+// Verifica se o PromoManager já existe antes de criar uma nova instância
+if (typeof window.promoManager === 'undefined') {
+    class PromoManager {
+        constructor() {
+            // Elementos da UI
+            this.modal = document.getElementById('promoModal');
+            this.countdownContainer = document.querySelector('.promo-timer');
+            this.countdownNavContainer = document.querySelector('.promo-countdown');
+            this.hoursElement = document.getElementById('promoHours');
+            this.minutesElement = document.getElementById('promoMinutes');
+            this.secondsElement = document.getElementById('promoSeconds');
+            this.countdown = document.getElementById('promoCountdown');
+            this.navCountdown = document.getElementById('promoNavCountdown');
+            this.promoBanner = document.getElementById('promoBanner');
+            this.promoCountdown = document.getElementById('promoCountdown');
 
-        // Configurações
-        this.COOKIE_NAME = 'promo_cooldown';
-        this.COOLDOWN_DURATION = 6 * 60 * 60 * 1000; // 6h em ms
+            // Configurações
+            this.COOKIE_NAME = 'promo_cooldown';
+            this.COOLDOWN_DURATION = 24 * 60 * 60 * 1000; // 24 horas em milissegundos
 
-        this.countdownInterval = null;
-        this.initializePromo();
-    }
+            this.countdownInterval = null;
+            this.endTime = null;
+            
+            // Inicializa o banner se não estiver em cooldown
+            if (!this.isInCooldown()) {
+                this.showPromo();
+            }
+        }
 
-    // Lê cookie
-    getCookie(name) {
-        const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
-        return match ? decodeURIComponent(match[1]) : null;
-    }
+        // Lê cookie
+        getCookie(name) {
+            const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+            return match ? decodeURIComponent(match[1]) : null;
+        }
 
-    // Grava cookie com tempo (ms) de expiração
-    setCookie(name, value, maxAgeMs) {
-        const expires = new Date(Date.now() + maxAgeMs).toUTCString();
-        document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires};path=/`;
-    }
+        // Grava cookie com tempo (ms) de expiração
+        setCookie(name, value, maxAgeMs) {
+            const expires = new Date(Date.now() + maxAgeMs).toUTCString();
+            document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires};path=/`;
+        }
 
-    // Remove cookie
-    clearCookie(name) {
-        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
-    }
+        // Remove cookie
+        clearCookie(name) {
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+        }
 
-    // Calcula ms restantes
-    getRemainingTime() {
-        const raw = this.getCookie(this.COOKIE_NAME);
-        if (!raw) return null;
-        const endTime = parseInt(raw, 10);
-        if (isNaN(endTime)) return null;
-        return Math.max(0, endTime - Date.now());
-    }
+        // Calcula ms restantes
+        getRemainingTime() {
+            const raw = this.getCookie(this.COOKIE_NAME);
+            if (!raw) return null;
+            const endTime = parseInt(raw, 10);
+            if (isNaN(endTime)) return null;
+            return Math.max(0, endTime - Date.now());
+        }
 
-    // Formata ms para hh:mm:ss
-    formatTime(ms) {
-        const h = Math.floor(ms / 3_600_000);
-        const m = Math.floor((ms % 3_600_000) / 60_000);
-        const s = Math.floor((ms % 60_000) / 1000);
-        return {
-            hours: String(h).padStart(2, '0'),
-            minutes: String(m).padStart(2, '0'),
-            seconds: String(s).padStart(2, '0'),
-            full: `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
-        };
-    }
+        // Formata ms para hh:mm:ss
+        formatTime(ms) {
+            const h = Math.floor(ms / 3_600_000);
+            const m = Math.floor((ms % 3_600_000) / 60_000);
+            const s = Math.floor((ms % 60_000) / 1000);
+            return {
+                hours: String(h).padStart(2, '0'),
+                minutes: String(m).padStart(2, '0'),
+                seconds: String(s).padStart(2, '0'),
+                full: `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
+            };
+        }
 
-    // Atualiza UI
-    updateDisplay(ms) {
-        const { hours, minutes, seconds, full } = this.formatTime(ms);
-        if (this.hoursElement) this.hoursElement.textContent = hours;
-        if (this.minutesElement) this.minutesElement.textContent = minutes;
-        if (this.secondsElement) this.secondsElement.textContent = seconds;
-        if (this.countdown) this.countdown.textContent = full;
-        if (this.navCountdown) this.navCountdown.textContent = full;
-    }
+        // Atualiza UI
+        updateDisplay(ms) {
+            const { hours, minutes, seconds, full } = this.formatTime(ms);
+            if (this.hoursElement) this.hoursElement.textContent = hours;
+            if (this.minutesElement) this.minutesElement.textContent = minutes;
+            if (this.secondsElement) this.secondsElement.textContent = seconds;
+            if (this.countdown) this.countdown.textContent = full;
+            if (this.navCountdown) this.navCountdown.textContent = full;
+        }
 
-    showCountdown() {
-        [this.countdownContainer, this.countdownNavContainer, this.countdown, this.navCountdown]
-            .forEach(el => el && (el.style.display = 'block'));
-    }
+        showCountdown() {
+            [this.countdownContainer, this.countdownNavContainer, this.countdown, this.navCountdown]
+                .forEach(el => el && (el.style.display = 'block'));
+        }
 
-    hideCountdown() {
-        [this.countdownContainer, this.countdownNavContainer, this.countdown, this.navCountdown]
-            .forEach(el => el && (el.style.display = 'none'));
-    }
+        hideCountdown() {
+            [this.countdownContainer, this.countdownNavContainer, this.countdown, this.navCountdown]
+                .forEach(el => el && (el.style.display = 'none'));
+        }
 
-    // Inicia ou reinicia o contador
-    startCountdown() {
-        // Garante que só exista 1 intervalo ativo
-        if (this.countdownInterval) clearInterval(this.countdownInterval);
+        // Inicia ou reinicia o contador
+        startCountdown() {
+            // Garante que só exista 1 intervalo ativo
+            if (this.countdownInterval) clearInterval(this.countdownInterval);
 
-        const tick = () => {
+            const tick = () => {
+                const remaining = this.getRemainingTime();
+                if (remaining === null || remaining <= 0) {
+                    clearInterval(this.countdownInterval);
+                    this.hideCountdown();
+                    this.clearCookie(this.COOKIE_NAME);
+                    return;
+                }
+                this.updateDisplay(remaining);
+            };
+
+            this.showCountdown();
+            tick(); // update imediato
+            this.countdownInterval = setInterval(tick, 1000);
+        }
+
+        // Lógica inicial
+        initializePromo() {
+            // 1) Verifica se já existe cookie válido
+            const existing = this.getCookie(this.COOKIE_NAME);
+            const now = Date.now();
+
+            if (!existing) {
+                // primeira visita: grava com timestamp de expiração
+                const endTime = now + this.COOLDOWN_DURATION;
+                this.setCookie(this.COOKIE_NAME, endTime, this.COOLDOWN_DURATION);
+            }
+
+            // 2) Se ainda faltam ms, inicia o countdown; se expirou, limpa tudo
             const remaining = this.getRemainingTime();
-            if (remaining === null || remaining <= 0) {
-                clearInterval(this.countdownInterval);
+            if (remaining && remaining > 0) {
+                this.startCountdown();
+            } else {
                 this.hideCountdown();
                 this.clearCookie(this.COOKIE_NAME);
-                return;
             }
-            this.updateDisplay(remaining);
-        };
-
-        this.showCountdown();
-        tick(); // update imediato
-        this.countdownInterval = setInterval(tick, 1000);
-    }
-
-    // Lógica inicial
-    initializePromo() {
-        // 1) Verifica se já existe cookie válido
-        const existing = this.getCookie(this.COOKIE_NAME);
-        const now = Date.now();
-
-        if (!existing) {
-            // primeira visita: grava com timestamp de expiração
-            const endTime = now + this.COOLDOWN_DURATION;
-            this.setCookie(this.COOKIE_NAME, endTime, this.COOLDOWN_DURATION);
         }
 
-        // 2) Se ainda faltam ms, inicia o countdown; se expirou, limpa tudo
-        const remaining = this.getRemainingTime();
-        if (remaining && remaining > 0) {
-            this.startCountdown();
-        } else {
-            this.hideCountdown();
-            this.clearCookie(this.COOKIE_NAME);
+        // Exibe o modal promo
+        showPromo() {
+            if (this.modal) new bootstrap.Modal(this.modal).show();
+        }
+
+        hidePromo() {
+            if (this.modal) {
+                const m = bootstrap.Modal.getInstance(this.modal);
+                if (m) m.hide();
+            }
+        }
+
+        isInCooldown() {
+            const remaining = this.getRemainingTime();
+            return remaining && remaining > 0;
         }
     }
 
-    // Exibe o modal promo
-    showPromo() {
-        if (this.modal) new bootstrap.Modal(this.modal).show();
-    }
-
-    hidePromo() {
-        if (this.modal) {
-            const m = bootstrap.Modal.getInstance(this.modal);
-            if (m) m.hide();
-        }
-    }
-}
-
-// Inicialização única do PromoManager
-// Evita múltiplas instâncias mesmo se o script for carregado mais de uma vez
-if (!window.promoManager) {
+    // Inicializa o PromoManager apenas se ainda não existir
     window.promoManager = new PromoManager();
 }

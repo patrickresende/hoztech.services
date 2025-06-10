@@ -30,7 +30,7 @@ import zipfile
 import redis
 from django.db import connection
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('core')
 
 @dataclass
 class ValidationResult:
@@ -133,8 +133,18 @@ def log_view_execution(view_func):
 
 @log_view_execution
 def home(request):
-    """Render home page"""
-    return render(request, 'home.html')
+    """View para a página inicial"""
+    logger.info("Executing view: home")
+    try:
+        context = {
+            'site_name': settings.SITE_NAME,
+            'contact_email': settings.CONTACT_EMAIL,
+        }
+        logger.info("View home executed successfully")
+        return render(request, 'home.html', context)
+    except Exception as e:
+        logger.error(f"Error in home view: {str(e)}", exc_info=True)
+        raise
 
 @log_view_execution
 def sobre_nos(request):

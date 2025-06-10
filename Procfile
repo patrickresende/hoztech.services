@@ -1,3 +1,3 @@
-web: newrelic-admin run-program gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60
+web: gunicorn hoztechsite.wsgi:application --config gunicorn.conf.py
 worker: python manage.py rqworker default
 release: python manage.py migrate 

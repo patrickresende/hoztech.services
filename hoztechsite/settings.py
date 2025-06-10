@@ -14,6 +14,10 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import dj_database_url
+import sys
+import json
+import logging
+from datetime import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -323,25 +327,63 @@ ADMIN_SITE_TITLE = os.getenv('ADMIN_SITE_TITLE', 'HOZ TECH Admin')
 ADMIN_INDEX_TITLE = os.getenv('ADMIN_INDEX_TITLE', 'Bem-vindo ao Painel Administrativo')
 
 # Logging Configuration
+class RailwayJSONFormatter(logging.Formatter):
+    def format(self, record):
+        # Mapear níveis de log do Python para severidade do Railway
+        severity_map = {
+            'DEBUG': 'debug',
+            'INFO': 'info',
+            'WARNING': 'warning',
+            'ERROR': 'error',
+            'CRITICAL': 'critical'
+        }
+        
+        # Criar o objeto de log no formato do Railway
+        log_entry = {
+            "severity": severity_map.get(record.levelname, 'info'),
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "message": record.getMessage(),
+            "tags": {
+                "deploymentId": os.getenv('RAILWAY_DEPLOYMENT_ID', ''),
+                "deploymentInstanceId": os.getenv('RAILWAY_INSTANCE_ID', ''),
+                "environmentId": os.getenv('RAILWAY_ENVIRONMENT_ID', ''),
+                "projectId": os.getenv('RAILWAY_PROJECT_ID', ''),
+                "serviceId": os.getenv('RAILWAY_SERVICE_ID', '')
+            },
+            "attributes": {
+                "level": severity_map.get(record.levelname, 'info')
+            }
+        }
+        
+        return json.dumps(log_entry)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'railway_json': {
+            '()': RailwayJSONFormatter,
+        },
+    },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': 'django.log',
+            'formatter': 'railway_json',
+            'stream': sys.stdout,
         },
     },
     'root': {
-        'handlers': ['console', 'file'],
+        'handlers': ['console'],
         'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+        'core': {
+            'handlers': ['console'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': False,
         },

@@ -1230,3 +1230,11 @@ View home executed successfully
 Executing view: home
 View home executed successfully
 "GET / HTTP/1.1" 200 70741
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70741
+"GET /static/core/css/cookie_modals.css HTTP/1.1" 304 0
+"GET /static/core/img/favicon.svg HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70741
