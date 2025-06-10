@@ -85,7 +85,7 @@ WHITENOISE_AUTOREFRESH = True
 WHITENOISE_ENABLE_GZIP = True
 WHITENOISE_SKIP_COMPRESS_EXTENSIONS = []  # Comprimir todos os tipos de arquivo
 WHITENOISE_INDEX_FILE = True
-'''WHITENOISE_MIMETYPES = {
+WHITENOISE_MIMETYPES = {
     '.js': 'application/javascript',
     '.mjs': 'application/javascript',
     '.css': 'text/css',
@@ -101,24 +101,36 @@ WHITENOISE_INDEX_FILE = True
     '.woff': 'font/woff',
     '.woff2': 'font/woff2',
     '.ttf': 'font/ttf',
-    '.eot': 'application/vnd.ms-fontobject','''
+    '.eot': 'application/vnd.ms-fontobject',
+}
 
-WHITENOISE_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Adicionando WHITENOISE_ROOT
-WHITENOISE_MANIFEST_STRICT = False  # Mais permissivo com arquivos faltantes
+# Configurações adicionais do WhiteNoise
+WHITENOISE_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+WHITENOISE_MANIFEST_STRICT = False
 WHITENOISE_MAX_AGE = 31536000  # 1 ano em segundos
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_KEEP_ONLY_HASHED_FILES = True
+
 # Headers de segurança e cache
 def whitenoise_headers(headers, path, url):
     """Função para configurar headers do WhiteNoise"""
     ext = os.path.splitext(path)[1]
     content_type = WHITENOISE_MIMETYPES.get(ext, 'application/octet-stream')
     
+    # Configuração base de cache
     headers['Cache-Control'] = 'public, max-age=31536000'
     headers['X-Content-Type-Options'] = 'nosniff'
     headers['Content-Type'] = content_type
     
-    # Adicionar headers de compressão se necessário
+    # Headers específicos por tipo de arquivo
     if ext in ['.js', '.css', '.html', '.txt', '.json']:
         headers['Vary'] = 'Accept-Encoding'
+        headers['X-Content-Type-Options'] = 'nosniff'
+    elif ext in ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico']:
+        headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+    elif ext in ['.woff', '.woff2', '.ttf', '.eot']:
+        headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+        headers['Access-Control-Allow-Origin'] = '*'
     
     return headers
 
@@ -261,6 +273,8 @@ if ENVIRONMENT == 'development':
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 else:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    WHITENOISE_USE_FINDERS = False  # Desativa finders em produção
+    WHITENOISE_KEEP_ONLY_HASHED_FILES = True  # Mantém apenas arquivos com hash
 
 # Debug info para arquivos estáticos
 print("=== Configuração de Arquivos Estáticos ===")
