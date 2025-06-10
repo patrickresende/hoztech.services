@@ -17,7 +17,7 @@ max_requests_jitter = int(os.getenv("MAX_REQUESTS_JITTER", "50"))
 graceful_timeout = int(os.getenv("GRACEFUL_TIMEOUT", "30"))
 
 # Configurações de segurança
-forwarded_allow_ips = os.getenv("FORWARDED_ALLOW_IPS", "127.0.0.1,::1").split(",")
+forwarded_allow_ips = os.getenv("FORWARDED_ALLOW_IPS", "127.0.0.1,::1")
 secure_scheme_headers = {
     'X-FORWARDED-PROTOCOL': 'ssl',
     'X-FORWARDED-PROTO': 'https',
