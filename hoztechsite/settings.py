@@ -23,7 +23,7 @@ load_dotenv()
 
 # Verificar ambiente
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
-DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
+DEBUG = False  # Forçando DEBUG=False
 
 print(f"Ambiente: {ENVIRONMENT}")
 print(f"DEBUG: {DEBUG}")
