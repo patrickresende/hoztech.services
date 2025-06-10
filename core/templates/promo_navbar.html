@@ -322,35 +322,74 @@
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const countdownElement = document.getElementById('promoNavCountdown');
-    let countdownInterval;
-
-    function startCountdown() {
-        const endTime = new Date();
-        endTime.setHours(endTime.getHours() + 6);
-
-        function updateCountdown() {
-            const now = new Date();
-            const timeLeft = endTime - now;
-
-            if (timeLeft <= 0) {
-                clearInterval(countdownInterval);
-                return;
-            }
-
-            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.addEventListener('DOMContentLoaded', function() {
+        const COOKIE_NAME = 'promo_cooldown';
+        const DURATION_MS = 6 * 60 * 60 * 1000; // 6 horas
+        const countdownElement = document.getElementById('promoNavCountdown');
+        let countdownInterval;
+    
+        // Lê um cookie pelo nome
+        function getCookie(name) {
+            const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+            return match ? decodeURIComponent(match[1]) : null;
         }
-
-        updateCountdown();
-        countdownInterval = setInterval(updateCountdown, 1000);
-    }
-
-    // Inicializa o contador
-    startCountdown();
-});
-</script> 
+    
+        // Grava um cookie com expiration em ms a partir de agora
+        function setCookie(name, value, maxAgeMs) {
+            const expires = new Date(Date.now() + maxAgeMs).toUTCString();
+            document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires};path=/`;
+        }
+    
+        // Remove o cookie
+        function clearCookie(name) {
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+        }
+    
+        // Obtém o timestamp de término (em ms) do cookie ou cria um novo
+        function getEndTime() {
+            const stored = getCookie(COOKIE_NAME);
+            if (stored) {
+                const t = parseInt(stored, 10);
+                if (!isNaN(t) && t > Date.now()) {
+                    return t;
+                }
+            }
+            // Se não há cookie válido, cria um novo
+            const endTime = Date.now() + DURATION_MS;
+            setCookie(COOKIE_NAME, endTime, DURATION_MS);
+            return endTime;
+        }
+    
+        function startCountdown() {
+            const endTime = getEndTime();
+    
+            function updateCountdown() {
+                const now = Date.now();
+                const timeLeft = endTime - now;
+    
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    clearCookie(COOKIE_NAME);
+                    countdownElement.textContent = '00:00:00';
+                    return;
+                }
+    
+                const hours   = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    
+                countdownElement.textContent =
+                    `${hours.toString().padStart(2, '0')}:` +
+                    `${minutes.toString().padStart(2, '0')}:` +
+                    `${seconds.toString().padStart(2, '0')}`;
+            }
+    
+            updateCountdown(); // primeira exibição imediata
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+    
+        // Inicia o contador ao carregar
+        startCountdown();
+    });
+    </script>
+    

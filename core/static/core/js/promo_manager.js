@@ -1,73 +1,139 @@
 class PromoManager {
     constructor() {
+        // Elementos da UI
         this.modal = document.getElementById('promoModal');
-        this.countdown = document.getElementById('promoCountdown');
+        this.countdownContainer = document.querySelector('.promo-timer');
+        this.countdownNavContainer = document.querySelector('.promo-countdown');
         this.hoursElement = document.getElementById('promoHours');
         this.minutesElement = document.getElementById('promoMinutes');
         this.secondsElement = document.getElementById('promoSeconds');
-        this.endTime = new Date();
-        this.endTime.setHours(this.endTime.getHours() + 6); // 6 horas de cooldown
-        this.checkPromoStatus();
-        this.startCountdown();
+        this.countdown = document.getElementById('promoCountdown');
+        this.navCountdown = document.getElementById('promoNavCountdown');
+
+        // Configurações
+        this.COOKIE_NAME = 'promo_cooldown';
+        this.COOLDOWN_DURATION = 6 * 60 * 60 * 1000; // 6h em ms
+
+        this.countdownInterval = null;
+        this.initializePromo();
     }
 
-    checkPromoStatus() {
-        const lastShown = localStorage.getItem('promoLastShown');
-        const now = new Date().getTime();
-        
-        if (!lastShown || (now - parseInt(lastShown)) > (6 * 60 * 60 * 1000)) {
-            this.showModal();
-            localStorage.setItem('promoLastShown', now.toString());
-        }
+    // Lê cookie
+    getCookie(name) {
+        const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+        return match ? decodeURIComponent(match[1]) : null;
     }
 
-    showModal() {
-        const modal = new bootstrap.Modal(this.modal);
-        modal.show();
+    // Grava cookie com tempo (ms) de expiração
+    setCookie(name, value, maxAgeMs) {
+        const expires = new Date(Date.now() + maxAgeMs).toUTCString();
+        document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires};path=/`;
     }
 
+    // Remove cookie
+    clearCookie(name) {
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+    }
+
+    // Calcula ms restantes
+    getRemainingTime() {
+        const raw = this.getCookie(this.COOKIE_NAME);
+        if (!raw) return null;
+        const endTime = parseInt(raw, 10);
+        if (isNaN(endTime)) return null;
+        return Math.max(0, endTime - Date.now());
+    }
+
+    // Formata ms para hh:mm:ss
+    formatTime(ms) {
+        const h = Math.floor(ms / 3_600_000);
+        const m = Math.floor((ms % 3_600_000) / 60_000);
+        const s = Math.floor((ms % 60_000) / 1000);
+        return {
+            hours: String(h).padStart(2, '0'),
+            minutes: String(m).padStart(2, '0'),
+            seconds: String(s).padStart(2, '0'),
+            full: `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
+        };
+    }
+
+    // Atualiza UI
+    updateDisplay(ms) {
+        const { hours, minutes, seconds, full } = this.formatTime(ms);
+        if (this.hoursElement) this.hoursElement.textContent = hours;
+        if (this.minutesElement) this.minutesElement.textContent = minutes;
+        if (this.secondsElement) this.secondsElement.textContent = seconds;
+        if (this.countdown) this.countdown.textContent = full;
+        if (this.navCountdown) this.navCountdown.textContent = full;
+    }
+
+    showCountdown() {
+        [this.countdownContainer, this.countdownNavContainer, this.countdown, this.navCountdown]
+            .forEach(el => el && (el.style.display = 'block'));
+    }
+
+    hideCountdown() {
+        [this.countdownContainer, this.countdownNavContainer, this.countdown, this.navCountdown]
+            .forEach(el => el && (el.style.display = 'none'));
+    }
+
+    // Inicia ou reinicia o contador
     startCountdown() {
-        const updateCountdown = () => {
-            const now = new Date();
-            const timeLeft = this.endTime - now;
+        // Garante que só exista 1 intervalo ativo
+        if (this.countdownInterval) clearInterval(this.countdownInterval);
 
-            if (timeLeft <= 0) {
-                this.hideModal();
+        const tick = () => {
+            const remaining = this.getRemainingTime();
+            if (remaining === null || remaining <= 0) {
+                clearInterval(this.countdownInterval);
+                this.hideCountdown();
+                this.clearCookie(this.COOKIE_NAME);
                 return;
             }
-
-            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            this.hoursElement.textContent = hours.toString().padStart(2, '0');
-            this.minutesElement.textContent = minutes.toString().padStart(2, '0');
-            this.secondsElement.textContent = seconds.toString().padStart(2, '0');
-            this.countdown.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            this.updateDisplay(remaining);
         };
 
-        updateCountdown();
-        this.countdownInterval = setInterval(updateCountdown, 1000);
+        this.showCountdown();
+        tick(); // update imediato
+        this.countdownInterval = setInterval(tick, 1000);
     }
 
-    hideModal() {
-        const modal = bootstrap.Modal.getInstance(this.modal);
-        if (modal) {
-            modal.hide();
+    // Lógica inicial
+    initializePromo() {
+        // 1) Verifica se já existe cookie válido
+        const existing = this.getCookie(this.COOKIE_NAME);
+        const now = Date.now();
+
+        if (!existing) {
+            // primeira visita: grava com timestamp de expiração
+            const endTime = now + this.COOLDOWN_DURATION;
+            this.setCookie(this.COOKIE_NAME, endTime, this.COOLDOWN_DURATION);
         }
-        if (this.countdownInterval) {
-            clearInterval(this.countdownInterval);
+
+        // 2) Se ainda faltam ms, inicia o countdown; se expirou, limpa tudo
+        const remaining = this.getRemainingTime();
+        if (remaining && remaining > 0) {
+            this.startCountdown();
+        } else {
+            this.hideCountdown();
+            this.clearCookie(this.COOKIE_NAME);
         }
     }
 
-    // Método para resetar o cooldown (útil para testes)
-    resetCooldown() {
-        localStorage.removeItem('promoLastShown');
-        this.checkPromoStatus();
+    // Exibe o modal promo
+    showPromo() {
+        if (this.modal) new bootstrap.Modal(this.modal).show();
+    }
+
+    hidePromo() {
+        if (this.modal) {
+            const m = bootstrap.Modal.getInstance(this.modal);
+            if (m) m.hide();
+        }
     }
 }
 
-// Inicializar PromoManager quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', () => {
+// Inicialização única
+if (!window.promoManager) {
     window.promoManager = new PromoManager();
-}); 
+}

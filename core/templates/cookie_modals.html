@@ -1,59 +1,63 @@
+{% load static %}
+
 <!-- Cookie Consent Overlay -->
 <div id="cookieOverlay" class="cookie-overlay"></div>
 
 <!-- Cookie Consent -->
-<div class="cookie-consent" id="cookieConsent">
+<div id="cookieConsent" class="cookie-consent">
     <div class="cookie-content">
-        <p class="cookie-text">Utilizamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa política de cookies.</p>
-        <div class="cookie-buttons">
-            <button class="btn-cookie btn-secondary" onclick="openCookieSettings()">
-                <i class="bi bi-gear"></i>
-                Configurações
-            </button>
-            <button class="btn-cookie" onclick="acceptAllCookies()">
-                <i class="bi bi-check-lg"></i>
-                Aceitar Todos
-            </button>
+        <div class="cookie-header">
+            <h3>Política de Cookies</h3>
+        </div>
+        <div class="cookie-body">
+            <p>Utilizamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa política de cookies.</p>
+        </div>
+        <div class="cookie-footer">
+            <button onclick="openCookieSettings()" class="btn btn-outline">Configurações</button>
+            <button onclick="acceptAllCookies()" class="btn btn-primary">Aceitar Todos</button>
         </div>
     </div>
 </div>
 
 <!-- Cookie Settings Modal -->
-<div class="modal fade" id="cookieSettingsModal" tabindex="-1" aria-labelledby="cookieSettingsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+<div id="cookieSettings" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="cookieSettingsModalLabel">Configurações de Cookies</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title">Configurações de Cookies</h5>
             </div>
             <div class="modal-body">
-                <div class="cookie-settings">
-                    <div class="cookie-setting-item">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="necessaryCookies" checked disabled>
-                            <label class="form-check-label" for="necessaryCookies">Cookies Necessários</label>
-                        </div>
-                        <p class="cookie-setting-description">Essenciais para o funcionamento do site. Não podem ser desativados.</p>
+                <div class="cookie-setting-item">
+                    <div class="cookie-setting-info">
+                        <h6>Cookies Essenciais</h6>
+                        <p>Necessários para o funcionamento básico do site.</p>
                     </div>
-                    <div class="cookie-setting-item">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="performanceCookies">
-                            <label class="form-check-label" for="performanceCookies">Cookies de Performance</label>
-                        </div>
-                        <p class="cookie-setting-description">Ajudam a entender como os visitantes interagem com o site.</p>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="essentialCookies" checked disabled>
                     </div>
-                    <div class="cookie-setting-item">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="marketingCookies">
-                            <label class="form-check-label" for="marketingCookies">Cookies de Marketing</label>
-                        </div>
-                        <p class="cookie-setting-description">Usados para personalizar anúncios e conteúdo.</p>
+                </div>
+                <div class="cookie-setting-item">
+                    <div class="cookie-setting-info">
+                        <h6>Cookies de Desempenho</h6>
+                        <p>Nos ajudam a entender como os visitantes interagem com o site.</p>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="performanceCookies">
+                    </div>
+                </div>
+                <div class="cookie-setting-item">
+                    <div class="cookie-setting-info">
+                        <h6>Cookies de Marketing</h6>
+                        <p>Usados para personalizar anúncios e conteúdo.</p>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="marketingCookies">
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="saveCookieSettings">Salvar Preferências</button>
+                <button type="button" class="btn btn-primary" onclick="saveCookieSettings()">Salvar Preferências</button>
             </div>
         </div>
     </div>
@@ -925,46 +929,65 @@
 </style>
 
 <script>
+// Funções de gerenciamento de cookies
+function showCookieConsent() {
+    const consent = document.getElementById('cookieConsent');
+    if (consent && !consent.classList.contains('show')) {
+        consent.classList.add('show');
+    }
+}
+
+function hideCookieConsent() {
+    const consent = document.getElementById('cookieConsent');
+    if (consent) {
+        consent.classList.remove('show');
+    }
+}
+
+function openCookieSettings() {
+    const settingsModal = new bootstrap.Modal(document.getElementById('cookieSettings'));
+    settingsModal.show();
+    hideCookieConsent();
+}
+
+function acceptAllCookies() {
+    // Aceitar todos os cookies
+    localStorage.setItem('cookiesAccepted', 'true');
+    localStorage.setItem('performanceCookies', 'true');
+    localStorage.setItem('marketingCookies', 'true');
+    hideCookieConsent();
+}
+
+function saveCookieSettings() {
+    const performanceCookies = document.getElementById('performanceCookies').checked;
+    const marketingCookies = document.getElementById('marketingCookies').checked;
+    
+    localStorage.setItem('cookiesAccepted', 'true');
+    localStorage.setItem('performanceCookies', performanceCookies);
+    localStorage.setItem('marketingCookies', marketingCookies);
+    
+    const settingsModal = bootstrap.Modal.getInstance(document.getElementById('cookieSettings'));
+    settingsModal.hide();
+}
+
+// Inicialização
 document.addEventListener('DOMContentLoaded', function() {
-    const cookieConsent = document.getElementById('cookieConsent');
-    const acceptCookies = document.getElementById('acceptCookies');
-    const saveCookieSettings = document.getElementById('saveCookieSettings');
-    const cookieSettingsModal = document.getElementById('cookieSettingsModal');
-    const cookiePolicyModal = document.getElementById('cookiePolicyModal');
-    let isCookieConsentOpen = false;
-
-    // Função para mostrar o modal
-    function showCookieConsent() {
-        if (!localStorage.getItem('cookieConsent') && !isCookieConsentOpen) {
-            cookieConsent.classList.add('show');
-            isCookieConsentOpen = true;
-        }
+    // Verificar se já aceitou os cookies
+    if (!localStorage.getItem('cookiesAccepted')) {
+        showCookieConsent();
     }
-
-    // Função para esconder o modal
-    function hideCookieConsent() {
-        if (!isCookieConsentOpen) return;
-        cookieConsent.classList.remove('show');
-        isCookieConsentOpen = false;
+    
+    // Inicializar switches com valores salvos
+    const performanceCookies = document.getElementById('performanceCookies');
+    const marketingCookies = document.getElementById('marketingCookies');
+    
+    if (performanceCookies) {
+        performanceCookies.checked = localStorage.getItem('performanceCookies') === 'true';
     }
-
-    // Event listeners para os botões
-    if (acceptCookies) {
-        acceptCookies.addEventListener('click', function() {
-            localStorage.setItem('cookieConsent', 'accepted');
-            hideCookieConsent();
-        });
+    
+    if (marketingCookies) {
+        marketingCookies.checked = localStorage.getItem('marketingCookies') === 'true';
     }
-
-    if (saveCookieSettings) {
-        saveCookieSettings.addEventListener('click', function() {
-            localStorage.setItem('cookieConsent', 'settings');
-            hideCookieConsent();
-        });
-    }
-
-    // Mostrar o modal após um pequeno delay
-    setTimeout(showCookieConsent, 1000);
 });
 
 // PromoManager atualizado
