@@ -1192,3 +1192,6 @@ You're accessing the development server over HTTPS, but it only supports HTTP.
 Executing view: home
 View home executed successfully
 "GET / HTTP/1.1" 200 89671
+Executing view: services
+View services executed successfully
+"GET /servicos/ HTTP/1.1" 200 119614

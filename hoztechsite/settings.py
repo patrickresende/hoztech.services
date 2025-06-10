@@ -34,7 +34,17 @@ print(f"DEBUG: {DEBUG}")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", "chave-insegura-para-dev")
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(',')
+# Lista de hosts permitidos
+DEFAULT_ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'hoz-tech.onrender.com',
+    'hoztech.up.railway.app',
+    '.onrender.com',
+    '.railway.app'
+]
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", ",".join(DEFAULT_ALLOWED_HOSTS)).split(',')
 print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 
 
