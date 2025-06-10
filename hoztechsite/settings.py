@@ -15,24 +15,18 @@ import os
 from dotenv import load_dotenv
 import dj_database_url
 
-print("DEBUG (Render):", os.getenv("DEBUG"))
-print("SECRET_KEY (Render):", os.getenv("SECRET_KEY"))
-
-# Load environment variables from .env file
-if os.path.exists(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env.dev')):
-    load_dotenv('.env.dev')
-    print("Carregando variáveis de ambiente de .env.dev")
-else:
-    load_dotenv()
-    print("Carregando variáveis de ambiente de .env")
-
-# Verificar ambiente
-ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
-print(f"Ambiente atual: {ENVIRONMENT}")
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables from .env file
+load_dotenv()
+
+# Verificar ambiente
+ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
+
+print(f"Ambiente: {ENVIRONMENT}")
+print(f"DEBUG: {DEBUG}")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -40,16 +34,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", "chave-insegura-para-dev")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = ENVIRONMENT == 'development'
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(',')
+print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 
-#ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(',')
-DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
-
-if DEBUG:
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'hoztech.up.railway.app', 'hoz-tech.onrender.com']
-else:
-    ALLOWED_HOSTS = ['hoztech.up.railway.app', 'hoz-tech.onrender.com']  # ou o domínio do seu projeto
 
 # Application definition
 
@@ -68,8 +55,8 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 ]
 
+# Middleware base - Sem SecurityMiddleware em desenvolvimento
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -122,26 +109,42 @@ def whitenoise_headers(headers, path, url):
 
 WHITENOISE_ADD_HEADERS_FUNCTION = whitenoise_headers
 
-# Configurações de Segurança - Apenas para produção
-if not DEBUG:
+# Configurações de Segurança
+if ENVIRONMENT == 'development' or DEBUG:
+    # Configurações de Desenvolvimento
+    SECURE_SSL_REDIRECT = False
+    SECURE_BROWSER_XSS_FILTER = False
+    SECURE_CONTENT_TYPE_NOSNIFF = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_PROXY_SSL_HEADER = None
+    SECURE_HSTS_SECONDS = 0
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_PRELOAD = False
+    CSRF_TRUSTED_ORIGINS = [
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+    ]
+else:
+    # Configurações de Produção
+    MIDDLEWARE.insert(0, 'django.middleware.security.SecurityMiddleware')
     SECURE_SSL_REDIRECT = True
-    SECURE_BROWSER_XSS_FILTER = os.environ.get('SECURE_BROWSER_XSS_FILTER', 'True') == 'True'
-
-
-    SECURE_CONTENT_TYPE_NOSNIFF = os.environ.get('SECURE_CONTENT_TYPE_NOSNIFF', 'True') == 'True'
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
     CSRF_TRUSTED_ORIGINS = [
         'https://hoz-tech.onrender.com',
         'https://*.onrender.com',
+        'https://hoztech.up.railway.app',
     ]
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_HSTS_SECONDS = 31536000  # 1 year
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
 
 # Configuração de CORS
-CORS_ALLOW_ALL_ORIGINS = DEBUG  # Apenas em dev
+CORS_ALLOW_ALL_ORIGINS = DEBUG
 CORS_ALLOW_CREDENTIALS = True
 
 # Configuração do servidor
@@ -235,7 +238,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'core/static'),

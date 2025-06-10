@@ -552,3 +552,643 @@ C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
 Watching for file changes with StatReloader
 C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
 Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 301 0
+code 400, message Bad request version ('\x02h2\x08http/1.1\x00\x17\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03\x0e')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('Q¹\x95o')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03ëè')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('µ\x93\x81')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('©')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('YêÄ\x99a¹')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ts\x8c¶c')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('\x02h2\x08http/1.1\x00\x17\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('Fä\x04[\x8dÝB¢@.Åþ(')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('\x02h2\x08http/1.1\x00\x17\x00\x00ÿ\x01\x00\x01\x00\x00\x1b\x00\x03\x02\x00\x02\x00#\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ö')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+code 400, message Bad request version (';¯Ü')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request syntax ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03Ò\x84\x95v\x03\x0eÅ¿')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('úú\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06s')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03\x17éz%³¯\x12)*+\x18c*Êë[\x02Ú\x99ÿÃè\x81µ¹óF\x00¥B$L')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('þóâ-~i7\x13\x7fB»')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03rÃmäUåæÄ@\x84¯\x94å\x10n\x89ÊÄá')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request syntax ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03\\~mó')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ü±y\x9d1\x0f¿¨vâ\x90p#qd\x98Aì¦h')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ºº\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06s**\x00\x00\x00#\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00\x12\x00\x00\x003\x04ï\x04í')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request syntax ('\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03ü\x94g\xad\x9b')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00\x1b\x00\x03\x02\x00\x02DÍ\x00\x05\x00\x03\x02h2\x00-\x00\x02\x01\x01\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1ÿ\x01\x00\x01\x00\x00-\x00\x02\x01\x01\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+code 400, message Bad request version ('B×')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('È³\x07\x13¾JÁ"3Dhý¬\x8a\x02")n')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('Ïû7cÔº\x0eË')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ("\x00Çªº6¾á2²\x9f_ü5\x93\x0f£Ýi}¦þU<'w\x8fF\x00")
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request syntax ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03\x89')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('::\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sZZ\x00\x00\x00#\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00DÍ\x00\x05\x00\x03\x02h2\x00-\x00\x02\x01\x01\x00+\x00\x07\x06\x1a\x1a\x03\x04\x03\x03\x00\x1b\x00\x03\x02\x00\x02\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('¦DBÚÁËy0uÖÀ9\x81w.y\x89"\x81Ë¸¶Y·µaA\x80ì!Ó\x16©K3¯r\x15:\x01e7\x90s{á°¬¶|@\x8cæz\x93üG´Dj\x19ê')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('**\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063\x1a\x1a\x00\x00\x00-\x00\x02\x01\x01\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Bad Request: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 400 143
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+Watching for file changes with StatReloader
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+Watching for file changes with StatReloader
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ªª\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sÚÚ\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1\x003\x04ï\x04í\x1a\x1a\x00\x01\x00\x11ì\x04À·\x83¡i°¸Ø\x04P')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ÚÚ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063jj\x00\x00\x00+\x00\x07\x06::\x03\x04\x03\x03\x003\x04ï\x04íÚÚ\x00\x01\x00\x11ì\x04À`Óz\x89\x17I\\ÔrSð\x14\x98\x05(þ42Úä´j\x89=HÐ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('JJ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06SJJ\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00\x1b\x00\x03\x02\x00\x02DÍ\x00\x05\x00\x03\x02h2\x00\x12\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('`ó\x8e')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x9a\x9a@É\x8bz):.')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x0e\x8c')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('Þ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('=çÑ\x0eÍ¦fºu¾N%D/yÍM\x11\xadt7G$Qww')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('{üé\x18c\x8dë\x9c')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03[\x9ac')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+code 400, message Bad request version ('ðè>ãqìõ0ùR\x98ô\x17P\x06À®µ\x15Åch!-ëÎ\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\xad\x01¡²§\x8dU\x92hÌï~5T\x06¿e\x19tIùL\x91ê\x18\x9a\x89rS\x16^\\cT.\xadë\x05\x03\x90â\x05\x0f\x1a3\x8e\x19+4\x08ÈÞDí')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('XQU\x02DU\x86')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('¥\x8eë\x06;?+ð')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\utils\deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\middleware\security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+                                 ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\TXX\Desktop\HOZ_TECH\.hoztech\Lib\site-packages\django\http\request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Bad Request: /
+"GET / HTTP/1.1" 400 143
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 301 0
+code 400, message Bad request version ('?óslò)[\x86²Ï½n%·]\x9a\x1b\xad\x9f«ó¶\x9c\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x02\x01\x00\x003\x04ï\x04íÊÊ\x00\x01\x00\x11ì\x04À\x92L=\x01W©')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('\x9c»\x9ex\x17\x9b½\x08D2ÉÎ%f\x04£å¡´qS\x17t\x02')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03Ø\x13\x08t\x11ÂÉ§ö\x9e\x98\x9214ÛQ$\x1bq´\x160mÐº.\x18\x12]å\x81\x07')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+code 400, message Bad request version ('\x00\x02\x01\x00\x00\x12\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\xadì½¬^@Ü4WÌÆÞ\x9cå:\x95\x8bÉ_=ò\x93þÐØtr1\x00°å½RÛ$*It\x8c[3O]|OÇU`/\x96ºûåÕ\x92\x04\xad')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x8aO\x9b4\x8bÝ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x02\x01\x00\x00\x12\x00\x00\x00-\x00\x02\x01\x01\x00#\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('+')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ªª\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93ÚÚ\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ÊÊ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93\x1a\x1a\x00\x00\x00+\x00\x07\x06ÊÊ\x03\x04\x03\x03\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request syntax ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03\x98X\x00É-W4ãÃ\x99\xad#G%\x18\x8eÏ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01DÍ\x00\x05\x00\x03\x02h2\x00\x12\x00\x00\x00-\x00\x02\x01\x01\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('>"\x88Ea')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x9a\x9a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sJJ\x00\x00\x00\x12\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+code 400, message Bad request version ('0[yU\x1a¾úÃÚw\x97G\x1a\x0f\x8eû<ñYt\xad§Ï\x13ì\x0eh[<L\x00\x86X\x83±ð9a0¸\x02Z\x19u\x83\x16iHd¸\x18')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('C\x83Õ\x0e')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('%M{á&\x97¡\x06êû32>d^\x87cÈ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ZZ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06S\x9a\x9a\x00\x00\x00#\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ÿúH\x84\x18Á¿|')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x87\x8c¨Ð\x92pÀvI!\x83')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET / HTTP/1.1" 301 0
+code 400, message Bad request version ('^#k¥\x94Òq½\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x02\x01\x00DÍ\x00\x05\x00\x03\x02h2\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version (".\x04o\x1b½Étg6'¿¿Øí¦Àg&òåº")
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('localhost\x00#\x00\x00\x00\x12\x00\x00ÿ\x01\x00\x01\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request syntax ('\x16\x03\x01\x06²\x01\x00\x06®\x03\x03\x805\x00±pmÈ\x88ðI¡S\x7fh\x04\x08âÚ¸c_ã»åI')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('K4\x07õ^µÊ\x11')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x07\x12\x01\x00\x07\x0e\x03\x03j')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('%O\x00\x1bL\x8c¶Ì\x8azç')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /sobre/ HTTP/1.1" 301 0
+code 400, message Bad request version ('ÝR\x0fPJ\x89~µ\x8d\x04Þ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1DÍ\x00\x05\x00\x03\x02h2\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00\x12\x00\x00\x00\x1b\x00\x03\x02\x00\x02\x00+\x00\x07\x06êê\x03\x04\x03\x03\x00\x17\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('U·ÃÜFjÑT\x06Ù!\x00I\x93µÄFÒ\x03G,ðtª×X0')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+"GET /sobre/ HTTP/1.1" 301 0
+code 400, message Bad request version ('\x8a\x8a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('{ø¯\x84¨»£\xadýøOí:\x87\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+code 400, message Bad request version ('\x00°+4\x7fâ\x89W\xad©ÀR')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('úú\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('²\x029')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03¸')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+code 400, message Bad request version ('ZZ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063JJ\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('cêt\x8e\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version (']_û¶üßª\x15®F\x1a\x84ÿ¸zhÑ¾gfÓir\xadü\x06¬8ÈB%g\x00ðáC\x06i6µ\x89k£\x89{\x0eìk')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('aÌ¢%]L')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ÑþÔrI\x0fEr(k\x01½LÊñªôÉÇ\x8eÚ\x87\x18<Ù7W\x92·ÍÁ¯\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('**\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93ÚÚ\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('"\x14\x8f|:É56ÃkÌ\x04eÀ:QEé+´\x1534Ñ\x13\x9aÂX»¹Pª\x88§Zð\x12\x81Hø\x06$¥\x19Þ»IãÉÆÔÛÉ³\x99\x8ae')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('|©\x10Sró±î¹I@\x94\x8aO\x1a\x19')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('Ø\x06')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x16_%åè\x10´\x86Ú·\\Ê\x1bx\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('¸îÂ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('êê\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063êê\x00\x00\x00#\x00\x00\x00\x12\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('#')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1\x003\x04ï\x04íJJ\x00\x01\x00\x11ì\x04ÀÙ\x021\x9fÑSÖ;;T{yH\x93P\x87\x1ai\x9bËlÙ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x1bÑ=\x8f8éDsõ\x03´\x05Ñ\x94\x15ÛHè\x836Eès"°0ðúíÄÈV\x00°)reô\x00¹\x0eèÄÆÜ\x15K')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('6\x9ai\x86Ù\x17\x8bÐu5*¢~Ó\x9a]\x82.\x8f\x06¸þó\x90z£\x1bÙE®\x92Õ\x05ï\x91e?D;úé')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x13¿àV\x9c¡CÛã?jë½\x0eàe\x10I\x14\x01wU\x95¹7ÐRF\x14Ñ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1DÍ\x00\x05\x00\x03\x02h2\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x01\x02\x81ÿ\x04\x08³*q"Ö\x8c"Ðf²\x14¹£¿x\x97r')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('4pJ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ("#%\x9eÿ9Ã\x06'\x081YxZ")
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 301 0
+code 400, message Bad request version ('»Ð07F¿Ë<AÒÞÉDÍ\x00\x05\x00\x03\x02h2\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x02\x01\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+code 400, message Bad request version ('ú\x84³¨\\')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('úú\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063jj\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('vb')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('iz\x9aw½j<xæ\x8fÙY\x08\\Ê')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('a\x83v\x820£]\x94e\x0fë¤ÊåyÀ\x9b\x88\x824)~òvô')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x02\x01\x00\x00+\x00\x07\x06jj\x03\x04\x03\x03ÿ\x01\x00\x01\x00\x00\x1b\x00\x03\x02\x00\x02\x00-\x00\x02\x01\x01\x003\x04ï\x04íZZ\x00\x01\x00\x11ì\x04ÀËé@»\x90¾\x87Qº\x8da¨\x07*}\x1b\x87*\x13\x17Y\x15<\x12Äê\x9eÈV<\x9b\x91¬°§"\x9aÆA\x97')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('iÄXü¼\x9ePSwf\x12}ý\x80\x088\x99«#ë\x07ÉÑM\x08Ó~')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('i*\x9aÈ¹àÏ')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('êê\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06SJJ\x00\x00\x00\x17\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+code 400, message Bad request version ('Þ@Â\x13{\x94\x9c7\x94W\x05\x14P')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('iZì#\x05ÂöÉ\x01´b«Ndª8\x8a!\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('zþ\x11aõºuôì\x9d')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x975q{@H\x9bÅ¤')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('\x82\x7fKª}Ò´cr®@\x9a')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('©\x08\x05o_c\x84ö<lÃ³\'µ"ºùy+Jå\x14í\x89\x8a`ÄrÈ\x16')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('ÉøY7L9tð\x86-rÆ\x19\x18À\x0fúo2\x96\x08ö»K\x11\x97T')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x13«')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x02\x01\x00\x00+\x00\x07\x06ªª\x03\x04\x03\x03\x00\x1b\x00\x03\x02\x00\x02\x00-\x00\x02\x01\x01DÍ\x00\x05\x00\x03\x02h2\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x02\x01\x00\x00\x1b\x00\x03\x02\x00\x02\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 89671
+"GET /static/core/css/core_base.css HTTP/1.1" 200 1213
+"GET /static/core/css/core_images.css HTTP/1.1" 200 514
+"GET /static/core/css/core_cookie_manager.css HTTP/1.1" 200 2723
+"GET /static/core/css/core_output.css HTTP/1.1" 200 721
+"GET /static/core/js/core_cookie_manager.js HTTP/1.1" 200 3907
+"GET /static/core/js/core_contact_form.js HTTP/1.1" 200 15041
+"GET /static/core/images/logo.png HTTP/1.1" 200 205393
+"GET /static/core/js/promo_manager.js HTTP/1.1" 200 5032
+"GET /static/core/js/core_navbar.js HTTP/1.1" 200 4301
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 179
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03ÍsÖ«±¡\x82ê5\x9aÙèä\x87¶"u-\x99n3ÊEAD^ºý¶\x15Ý³')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request syntax ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03µò·\x12d¿\\\x8d\x96:ð\x8fúáÁºø%/\x80hÂ|')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 89671
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+code 400, message Bad request version ('¸zK')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x10û@>2\x80')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('::\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sÊÊ\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('PJ¼\x8bS³\x97')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 89671
+code 400, message Bad request syntax ('\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03Èý«\x966}þÒk\x87EZª')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x01³Áö©ùx\x9a\x95#nùC\x13Wâb#Ë»]\x81Uv\x1b\x93ö"¨\x0fg\x07\x89Ã-ÂÃÇ\x19\x8bP\x96çµá')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('\x02h2\x08http/1.1\x00\x17\x00\x00\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version (',!Rû£Ý¡»Å\x91I¢\\çÔ\x90à£\x93Ð\x18H\x87ilnv®¸ø¶ýà\\\x1bå\x9d+C8\x96mí¦&½\x12R«ç\\Í${®\x13\x15\x00')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ëa\x07\x01q\x84F#')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+- Broken pipe from ('127.0.0.1', 56443)
+C:\Users\TXX\Desktop\HOZ_TECH\hoztechsite\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 89671
+code 400, message Bad request version ('\x00\x02\x01\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00DÍ\x00\x05\x00\x03\x02h2\x00+\x00\x07\x06')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('î\x0fÁÔí\x8dvN\x03]¿ãïôæïik\x87\x9dú')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad request version ('ÅÆq')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06')
+You're accessing the development server over HTTPS, but it only supports HTTP.
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 89671
