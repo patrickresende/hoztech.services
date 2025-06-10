@@ -44,12 +44,12 @@ SECRET_KEY = os.getenv("SECRET_KEY", "chave-insegura-para-dev")
 DEBUG = ENVIRONMENT == 'development'
 
 #ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(',')
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
 if DEBUG:
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'hoztech.up.railway.app', 'hoz-tech.onrender.com']
 else:
-    ALLOWED_HOSTS = ['hoztech.up.railway.app']  # ou o domínio do seu projeto
+    ALLOWED_HOSTS = ['hoztech.up.railway.app', 'hoz-tech.onrender.com']  # ou o domínio do seu projeto
 
 # Application definition
 
