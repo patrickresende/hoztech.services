@@ -67,7 +67,8 @@ INSTALLED_APPS = [
 
 # Middleware base - Sem SecurityMiddleware em desenvolvimento
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.security.SecurityMiddleware',  # Adicionando SecurityMiddleware primeiro
+    'whitenoise.middleware.WhiteNoiseMiddleware',     # WhiteNoise logo após
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -82,7 +83,7 @@ WHITENOISE_AUTOREFRESH = True
 WHITENOISE_ENABLE_GZIP = True
 WHITENOISE_SKIP_COMPRESS_EXTENSIONS = []  # Comprimir todos os tipos de arquivo
 WHITENOISE_INDEX_FILE = True
-WHITENOISE_MIMETYPES = {
+'''WHITENOISE_MIMETYPES = {
     '.js': 'application/javascript',
     '.mjs': 'application/javascript',
     '.css': 'text/css',
@@ -98,9 +99,11 @@ WHITENOISE_MIMETYPES = {
     '.woff': 'font/woff',
     '.woff2': 'font/woff2',
     '.ttf': 'font/ttf',
-    '.eot': 'application/vnd.ms-fontobject',
-}
+    '.eot': 'application/vnd.ms-fontobject','''
 
+WHITENOISE_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Adicionando WHITENOISE_ROOT
+WHITENOISE_MANIFEST_STRICT = False  # Mais permissivo com arquivos faltantes
+WHITENOISE_MAX_AGE = 31536000  # 1 ano em segundos
 # Headers de segurança e cache
 def whitenoise_headers(headers, path, url):
     """Função para configurar headers do WhiteNoise"""
@@ -137,7 +140,6 @@ if ENVIRONMENT == 'development' or DEBUG:
     ]
 else:
     # Configurações de Produção
-    MIDDLEWARE.insert(0, 'django.middleware.security.SecurityMiddleware')
     SECURE_SSL_REDIRECT = True
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -257,9 +259,7 @@ STATICFILES_DIRS = [
 if ENVIRONMENT == 'development':
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 else:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-    if 'whitenoise.middleware.WhiteNoiseMiddleware' not in MIDDLEWARE:
-        MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Debug info para arquivos estáticos
 print("=== Configuração de Arquivos Estáticos ===")
