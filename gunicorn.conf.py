@@ -1,73 +1,94 @@
 import os
 import sys
+import json
+from datetime import datetime
 
-# Configurações básicas
-bind = "0.0.0.0:8080"
-workers = 2
-threads = 4
+# Configurações básicas do Gunicorn
+bind = "0.0.0.0:" + str(os.getenv("PORT", "8000"))
+workers = int(os.getenv("WEB_CONCURRENCY", "4"))
 worker_class = "gthread"
-timeout = 120
+threads = int(os.getenv("MAX_THREADS", "2"))
+timeout = int(os.getenv("TIMEOUT", "120"))
+keepalive = int(os.getenv("KEEPALIVE", "5"))
 
-# Configuração de logs
+# Configurações de performance
+max_requests = int(os.getenv("MAX_REQUESTS", "1000"))
+max_requests_jitter = int(os.getenv("MAX_REQUESTS_JITTER", "50"))
+graceful_timeout = int(os.getenv("GRACEFUL_TIMEOUT", "30"))
+
+# Configurações de segurança
+forwarded_allow_ips = os.getenv("FORWARDED_ALLOW_IPS", "127.0.0.1,::1").split(",")
+secure_scheme_headers = {
+    'X-FORWARDED-PROTOCOL': 'ssl',
+    'X-FORWARDED-PROTO': 'https',
+    'X-FORWARDED-SSL': 'on'
+}
+
+# Configurações de log
 accesslog = "-"
 errorlog = "-"
-loglevel = "info"
+loglevel = os.getenv("LOG_LEVEL", "info")
 
-# Formato de log personalizado para o Railway
-def on_starting(server):
-    """Callback executado quando o servidor inicia"""
-    server.log.info("Server is starting up")
-
-def post_fork(server, worker):
-    """Callback executado após o fork de cada worker"""
-    server.log.info(f"Worker spawned (pid: {worker.pid})")
-
-def pre_fork(server, worker):
-    """Callback executado antes do fork de cada worker"""
-    pass
-
-def pre_exec(server):
-    """Callback executado antes do exec de cada worker"""
-    server.log.info("Forked child, re-executing.")
-
-def when_ready(server):
-    """Callback executado quando o servidor está pronto"""
-    server.log.info("Server is ready. Spawning workers")
-
-def worker_int(worker):
-    """Callback executado quando um worker recebe SIGINT ou SIGQUIT"""
-    worker.log.info("worker received INT or QUIT signal")
-
-def worker_abort(worker):
-    """Callback executado quando um worker recebe SIGABRT"""
-    worker.log.info("worker received SIGABRT signal")
-
-# Configuração de log personalizada
-class CustomLogger:
+# Logger simplificado para o Railway
+class RailwayLogger:
     def __init__(self, app):
         self.app = app
         self.error_log = sys.stderr
         self.access_log = sys.stdout
-        self.loglevel = "info"
+        self.loglevel = loglevel
         self.access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
 
+    def _log(self, level, msg, *args, **kwargs):
+        log_entry = {
+            'severity': level,
+            'timestamp': datetime.utcnow().isoformat() + 'Z',
+            'message': msg % args if args else msg,
+            'service': 'hoztechsite'
+        }
+        print(json.dumps(log_entry), file=sys.stdout)
+
     def critical(self, msg, *args, **kwargs):
-        self.error_log.write(f"[CRITICAL] {msg}\n")
+        self._log('critical', msg, *args, **kwargs)
 
     def error(self, msg, *args, **kwargs):
-        self.error_log.write(f"[ERROR] {msg}\n")
+        self._log('error', msg, *args, **kwargs)
 
     def warning(self, msg, *args, **kwargs):
-        self.error_log.write(f"[WARNING] {msg}\n")
+        self._log('warning', msg, *args, **kwargs)
 
     def info(self, msg, *args, **kwargs):
-        self.error_log.write(f"[INFO] {msg}\n")
+        self._log('info', msg, *args, **kwargs)
 
     def debug(self, msg, *args, **kwargs):
-        self.error_log.write(f"[DEBUG] {msg}\n")
+        self._log('debug', msg, *args, **kwargs)
 
     def exception(self, msg, *args, **kwargs):
-        self.error_log.write(f"[EXCEPTION] {msg}\n")
+        self._log('error', msg, *args, **kwargs)
 
-# Configuração do logger
-logger_class = CustomLogger 
+    def close_on_exec(self):
+        pass
+
+# Usar o logger do Railway
+logger_class = RailwayLogger
+
+# Callbacks
+def on_starting(server):
+    server.log.info('Iniciando servidor Gunicorn no Railway...')
+
+def post_fork(server, worker):
+    server.log.info(f'Worker {worker.pid} iniciado')
+
+def pre_fork(server, worker):
+    pass
+
+def pre_exec(server):
+    server.log.info('Reiniciando workers...')
+
+def when_ready(server):
+    server.log.info('Servidor pronto para receber conexões')
+
+def worker_int(worker):
+    worker.log.info('Worker recebeu SIGINT ou SIGQUIT')
+
+def worker_abort(worker):
+    worker.log.info('Worker recebeu SIGABRT') 
