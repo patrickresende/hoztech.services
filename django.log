@@ -1195,3 +1195,30 @@ View home executed successfully
 Executing view: services
 View services executed successfully
 "GET /servicos/ HTTP/1.1" 200 119614
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 88866
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 88866
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70737
+"GET /static/core/css/cookie_modals.css HTTP/1.1" 200 16356
+"GET /static/core/img/favicon.png HTTP/1.1" 404 1933
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70737
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70741
+"GET /static/core/css/cookie_modals.css HTTP/1.1" 304 0
+"GET /static/core/img/favicon.svg HTTP/1.1" 200 1
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70741
+"GET /static/core/css/cookie_modals.css HTTP/1.1" 304 0
+"GET /static/core/img/favicon.svg HTTP/1.1" 304 0
+Executing view: home
+View home executed successfully
+"GET / HTTP/1.1" 200 70741
