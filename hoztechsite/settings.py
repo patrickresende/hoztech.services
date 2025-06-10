@@ -49,7 +49,7 @@ DEBUG = os.getenv('DEBUG', 'True') == 'True'
 if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 else:
-    ALLOWED_HOSTS = ['hoz-tech.onrender.com']  # ou o domínio do seu projeto
+    ALLOWED_HOSTS = ['hoztech.up.railway.app']  # ou o domínio do seu projeto
 
 # Application definition
 
