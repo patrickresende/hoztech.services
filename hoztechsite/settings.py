@@ -45,7 +45,9 @@ DEFAULT_ALLOWED_HOSTS = [
     'hoz-tech.onrender.com',
     'hoztech.up.railway.app',
     '.onrender.com',
-    '.railway.app'
+    '.railway.app',
+    'hoztech.com.br',
+    'www.hoztech.com.br'
 ]
 
 # Processar ALLOWED_HOSTS corretamente
@@ -169,7 +171,7 @@ else:
     SECURE_HSTS_PRELOAD = os.getenv('SECURE_HSTS_PRELOAD', 'True').lower() == 'true'
     
     # Processar CSRF_TRUSTED_ORIGINS corretamente
-    raw_origins = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://*.onrender.com,https://*.railway.app')
+    raw_origins = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://*.onrender.com,https://*.railway.app,https://hoztech.com.br,https://www.hoztech.com.br')
     CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in raw_origins.split(',')]
 
 # Configuração de CORS
