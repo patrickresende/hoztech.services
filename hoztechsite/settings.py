@@ -352,15 +352,14 @@ EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False').lower() == 'true'
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@hoztech.com')
 SERVER_EMAIL = os.getenv('SERVER_EMAIL', DEFAULT_FROM_EMAIL)
 
-# Configurações adicionais para produção
-if ENVIRONMENT != 'development' and not DEBUG:
-    EMAIL_TIMEOUT = 30
-    EMAIL_CONNECTION_TIMEOUT = 30
-
 # Email timeout settings
 EMAIL_TIMEOUT = 30  # seconds
 EMAIL_SSL_KEYFILE = None
 EMAIL_SSL_CERTFILE = None
+
+# Configurações adicionais para produção
+if ENVIRONMENT != 'development' and not DEBUG:
+    EMAIL_CONNECTION_TIMEOUT = 30
 
 # Site settings
 ADMIN_URL = os.getenv('ADMIN_URL', 'admin/')

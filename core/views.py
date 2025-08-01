@@ -398,8 +398,8 @@ class ContactFormHandler:
         </html>
         """
     
-    @classmethod
-    def send_email(cls, form_data: Dict[str, Any]) -> None:
+    @staticmethod
+    def send_email(form_data: Dict[str, Any]) -> None:
         """Send contact form email"""
         print("\n=== Iniciando envio de email ===")
         print(f"Dados do formulário: {form_data}")
@@ -411,7 +411,7 @@ class ContactFormHandler:
             logger.error(f"Falha na conexão com servidor de email: {connection_msg}")
             raise Exception(f"Erro na conexão com servidor de email: {connection_msg}")
         
-        email_content = cls.format_email_content(form_data)
+        email_content = ContactFormHandler.format_email_content(form_data)
         
         try:
             # Log das configurações de email (sem a senha)
@@ -482,7 +482,7 @@ def handle_contact_submission(request):
         print(f"Dados processados: {form_data}")
         
         # Send email
-        handler.send_email(form_data)
+        ContactFormHandler.send_email(form_data)
         
         # Set rate limit
         handler.set_rate_limit(client_ip)

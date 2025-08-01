@@ -140,6 +140,29 @@ services:
         value: true
       - key: SENTRY_DSN
         sync: false
+      # Configurações de E-mail (CRÍTICO - FALTAVAM!)
+      - key: ENVIRONMENT
+        value: production
+      - key: EMAIL_BACKEND
+        value: django.core.mail.backends.smtp.EmailBackend
+      - key: EMAIL_HOST
+        value: smtp.gmail.com
+      - key: EMAIL_PORT
+        value: 587
+      - key: EMAIL_USE_TLS
+        value: true
+      - key: EMAIL_USE_SSL
+        value: false
+      - key: EMAIL_HOST_USER
+        sync: false  # Adicionar manualmente no painel do Render
+      - key: EMAIL_HOST_PASSWORD
+        sync: false  # Adicionar manualmente no painel do Render
+      - key: DEFAULT_FROM_EMAIL
+        sync: false  # Adicionar manualmente no painel do Render
+      - key: CONTACT_EMAIL
+        sync: false  # Adicionar manualmente no painel do Render
+      - key: SITE_NAME
+        value: "HOZ TECH"
       # Novas variáveis para Nginx
       - key: NGINX_WORKER_PROCESSES
         value: auto
