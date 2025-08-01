@@ -124,22 +124,7 @@ class PromoManager {
     initializePromo() {
         const now = Date.now();
         
-        // 1) Verificar se a promoção foi fechada pelo usuário
-        const promoClosed = this.getCookie(this.CLOSED_COOKIE_NAME);
-        if (promoClosed) {
-            const closedTime = parseInt(promoClosed);
-            const timeUntilReopen = closedTime - now;
-            
-            if (timeUntilReopen > 0) {
-                // Ainda dentro do período de "fechado"
-                this.hideBanner();
-                this.hideCountdown();
-                return;
-            } else {
-                // Período de "fechado" expirou, limpar cookie
-                this.clearCookie(this.CLOSED_COOKIE_NAME);
-            }
-        }
+        // Banner sempre visível - não verificar fechamento por usuário
 
         // 2) Verificar se já existe cookie de cooldown válido
         let existing = this.getCookie(this.COOKIE_NAME);
@@ -170,15 +155,14 @@ class PromoManager {
             localStorage.setItem(localStorageKey, existing);
         }
 
-        // 3) Verificar se ainda há tempo restante
+        // 3) Sempre mostrar o banner e verificar se há tempo restante
+        this.showBanner(); // Banner sempre visível
+        
         const remaining = this.getRemainingTime();
         if (remaining && remaining > 0) {
             this.startCountdown();
-            this.showBanner();
         } else {
-            // Tempo expirou, limpar tudo e iniciar novo ciclo
-            this.hideCountdown();
-            this.hideBanner();
+            // Tempo expirou, iniciar novo ciclo automaticamente
             this.clearCookie(this.COOKIE_NAME);
             localStorage.removeItem(localStorageKey);
             
@@ -187,7 +171,6 @@ class PromoManager {
             this.setCookie(this.COOKIE_NAME, newEndTime, this.COOLDOWN_DURATION);
             localStorage.setItem(localStorageKey, newEndTime.toString());
             this.startCountdown();
-            this.showBanner();
         }
     }
 
@@ -203,47 +186,31 @@ class PromoManager {
         }
     }
 
-    // Gerencia o banner
+    // Gerencia o banner - Sempre visível
     showBanner() {
         if (this.banner) {
             this.banner.classList.add('show');
-            // Ajusta o padding-top do body para compensar o banner
+            // Ajusta o padding-top do body para compensar o banner fixo
             document.body.style.paddingTop = this.banner.offsetHeight + 'px';
+            
+            // Garantir que o banner seja sempre visível
+            this.banner.style.display = 'block';
+            this.banner.style.transform = 'translateY(0)';
         }
     }
 
     hideBanner() {
+        // Banner não deve ser escondido - manter sempre visível
         if (this.banner) {
-            this.banner.classList.remove('show');
-            // Remove o padding-top do body
-            document.body.style.paddingTop = '0';
+            // Manter visível mas com opacidade reduzida se necessário
+            this.banner.style.opacity = '0.85';
         }
     }
 
     closePromo() {
-        this.hideBanner();
-        this.hidePromo();
-        this.hideCountdown();
-        
-        // Parar countdown
-        if (this.countdownInterval) {
-            clearInterval(this.countdownInterval);
-            this.countdownInterval = null;
-        }
-        
-        // Marcar como fechado pelo usuário por 1 semana
-        const reopenTime = Date.now() + this.CLOSED_DURATION;
-        this.setCookie(this.CLOSED_COOKIE_NAME, reopenTime.toString(), this.CLOSED_DURATION);
-        
-        // Limpar dados da promoção atual
-        this.clearCookie(this.COOKIE_NAME);
-        localStorage.removeItem('promo_end_time');
-        
-        // Sinalizar para outras abas que a promoção foi fechada
-        localStorage.setItem('promo_closed_sync', Date.now().toString());
-        setTimeout(() => localStorage.removeItem('promo_closed_sync'), 1000);
-        
-        console.log('Promoção fechada por 1 semana. Reabrirá em:', new Date(reopenTime));
+        // Banner fixo - não permite fechamento
+        console.log('Banner promocional é fixo e não pode ser fechado');
+        return false;
     }
 }
 
