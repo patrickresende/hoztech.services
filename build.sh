@@ -133,8 +133,18 @@ exibir_debug() {
     echo "=== Fim do Debug ==="
 }
 
+verificar_dominio() {
+    echo "0. Verificando configuração de domínio..."
+    if grep -q "hoztech.com.br" hoztechsite/settings.py; then
+        echo "✓ Domínio configurado corretamente"
+    else
+        echo "✗ Domínio não configurado"
+        exit 1
+    fi
+}
+
 verificar_diretorios_criticos() {
-    echo "0. Verificando diretórios críticos..."
+    echo "1. Verificando diretórios críticos..."
     for dir in "core/static" "core/templates" "staticfiles" "logs/deploy"; do
         if [ ! -d "$dir" ]; then
             echo "Criando diretório: $dir"
@@ -146,6 +156,7 @@ verificar_diretorios_criticos() {
 # Execução
 echo "=== Iniciando processo de build ==="
 
+verificar_dominio
 verificar_diretorios_criticos
 instalar_dependencias
 compilar_tailwind

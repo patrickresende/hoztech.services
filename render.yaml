@@ -67,7 +67,7 @@ services:
       - key: WEB_CONCURRENCY
         value: 2
       - key: DJANGO_ALLOWED_HOSTS
-        value: ".onrender.com,hoztech.com,www.hoztech.com"
+        value: ".onrender.com,hoztech.com.br,www.hoztech.com.br"
       - key: SECURE_SSL_REDIRECT
         value: true
       - key: SESSION_COOKIE_SECURE
@@ -152,8 +152,8 @@ services:
     healthCheckPath: /health/
     autoDeploy: false  # Desabilitar deploy automático
     domains:
-      - hoztech.com
-      - www.hoztech.com
+      - hoztech.com.br
+      - www.hoztech.com.br
     scaling:
       minInstances: 1
       maxInstances: 3
