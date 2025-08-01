@@ -78,33 +78,67 @@ class CookieManager {
     }
 
     saveSettings() {
-        const performanceCookies = document.getElementById('performanceCookies').checked;
-        const marketingCookies = document.getElementById('marketingCookies').checked;
+        const performanceCheckbox = document.getElementById('performanceCookies');
+        const marketingCheckbox = document.getElementById('marketingCookies');
 
-        this.setCookie('performanceCookies', performanceCookies.toString());
-        this.setCookie('marketingCookies', marketingCookies.toString());
-        this.setCookie('cookie-consent', 'accepted');
+        if (performanceCheckbox && marketingCheckbox) {
+            const performanceCookies = performanceCheckbox.checked;
+            const marketingCookies = marketingCheckbox.checked;
 
-        // Close modals
-        const modal = bootstrap.Modal.getInstance(this.cookieSettingsModal);
-        if (modal) {
-            modal.hide();
+            this.setCookie('performanceCookies', performanceCookies.toString());
+            this.setCookie('marketingCookies', marketingCookies.toString());
+            this.setCookie('cookie-consent', 'accepted');
+
+            // Close modals
+            if (this.cookieSettingsModal) {
+                const modal = bootstrap.Modal.getInstance(this.cookieSettingsModal);
+                if (modal) {
+                    modal.hide();
+                }
+            }
+            this.hideConsent();
+
+            // Mostrar confirmação sem reload
+            this.showSaveConfirmation();
         }
-        this.hideConsent();
+    }
 
-        // Reload page to apply new settings
-        window.location.reload();
+    showSaveConfirmation() {
+        // Criar notificação de confirmação
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 99999;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        `;
+        notification.textContent = 'Configurações de cookies salvas com sucesso!';
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 3000);
     }
 }
 
 // Funções globais para uso nos botões
 function acceptAllCookies() {
-    const cookieManager = new CookieManager();
-    cookieManager.setCookie('cookie-consent', 'accepted');
-    cookieManager.setCookie('performanceCookies', 'true');
-    cookieManager.setCookie('marketingCookies', 'true');
-    cookieManager.hideConsent();
-    window.location.reload();
+    if (window.cookieManager) {
+        window.cookieManager.setCookie('cookie-consent', 'accepted');
+        window.cookieManager.setCookie('performanceCookies', 'true');
+        window.cookieManager.setCookie('marketingCookies', 'true');
+        window.cookieManager.hideConsent();
+        window.cookieManager.showSaveConfirmation();
+    }
 }
 
 function openCookieSettings() {

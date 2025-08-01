@@ -658,6 +658,71 @@ class ContactForm {
     }
 
     showSuccessModal(message) {
+        // Detectar Brave browser
+        const isBrave = navigator.brave && navigator.brave.isBrave;
+        
+        if (isBrave) {
+            // Fallback para Brave: usar notificação nativa do browser
+            this.showBraveCompatibleSuccess(message);
+        } else {
+            // Modal normal para outros browsers
+            this.showNormalModal(message);
+        }
+    }
+
+    showBraveCompatibleSuccess(message) {
+        // Criar overlay simples sem elementos que o Brave pode bloquear
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        `;
+
+        const successBox = document.createElement('div');
+        successBox.style.cssText = `
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            margin: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        `;
+
+        successBox.innerHTML = `
+            <div style="color: #28a745; font-size: 60px; margin-bottom: 20px;">✓</div>
+            <h2 style="color: #333; margin-bottom: 15px;">Mensagem Enviada!</h2>
+            <p style="color: #666; margin-bottom: 25px;">${message}</p>
+            <p style="color: #999; font-size: 14px; margin-bottom: 25px;">Entraremos em contato em breve.</p>
+            <button onclick="this.closest('div[style*=\"position: fixed\"]').remove(); document.body.style.overflow = 'auto';" 
+                    style="background: #28a745; color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-size: 16px;">
+                OK
+            </button>
+        `;
+
+        overlay.appendChild(successBox);
+        document.body.appendChild(overlay);
+        document.body.style.overflow = 'hidden';
+
+        // Auto-remover após 10 segundos
+        setTimeout(() => {
+            if (overlay.parentNode) {
+                overlay.remove();
+                document.body.style.overflow = 'auto';
+            }
+        }, 10000);
+    }
+
+    showNormalModal(message) {
         // Criar modal de sucesso
         const modal = document.createElement('div');
         modal.className = 'modal fade show';

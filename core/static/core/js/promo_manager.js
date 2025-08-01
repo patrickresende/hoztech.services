@@ -102,15 +102,39 @@ class PromoManager {
 
     // Lógica inicial
     initializePromo() {
+        // Verificar se a promoção foi fechada pelo usuário
+        const promoClosed = this.getCookie('promo_closed');
+        if (promoClosed) {
+            this.hideBanner();
+            this.hideCountdown();
+            return;
+        }
+
         // 1) Verifica se já existe cookie válido
-        const existing = this.getCookie(this.COOKIE_NAME);
+        let existing = this.getCookie(this.COOKIE_NAME);
         const now = Date.now();
 
-        if (!existing) {
+        // Usar localStorage como backup para persistir entre abas
+        const localStorageKey = 'promo_end_time';
+        let localEndTime = localStorage.getItem(localStorageKey);
+
+        if (!existing && !localEndTime) {
             // primeira visita: grava com timestamp de expiração
             const endTime = now + this.COOLDOWN_DURATION;
             this.setCookie(this.COOKIE_NAME, endTime, this.COOLDOWN_DURATION);
+            localStorage.setItem(localStorageKey, endTime.toString());
             this.showBanner(); // Mostra o banner na primeira visita
+        } else if (!existing && localEndTime) {
+            // Cookie perdido mas localStorage existe - restaurar
+            const endTime = parseInt(localEndTime);
+            const remainingTime = endTime - now;
+            if (remainingTime > 0) {
+                this.setCookie(this.COOKIE_NAME, endTime, remainingTime);
+                existing = endTime.toString();
+            }
+        } else if (existing && !localEndTime) {
+            // Cookie existe mas localStorage não - sincronizar
+            localStorage.setItem(localStorageKey, existing);
         }
 
         // 2) Se ainda faltam ms, inicia o countdown; se expirou, limpa tudo
@@ -122,6 +146,7 @@ class PromoManager {
             this.hideCountdown();
             this.hideBanner(); // Esconde o banner se expirou
             this.clearCookie(this.COOKIE_NAME);
+            localStorage.removeItem(localStorageKey);
         }
     }
 
@@ -157,9 +182,20 @@ class PromoManager {
     closePromo() {
         this.hideBanner();
         this.hidePromo();
-        // Define um novo tempo de expiração
-        const endTime = Date.now() + this.COOLDOWN_DURATION;
-        this.setCookie(this.COOKIE_NAME, endTime, this.COOLDOWN_DURATION);
+        this.hideCountdown();
+        
+        // Marcar como fechado pelo usuário (24h)
+        this.setCookie('promo_closed', 'true', 24 * 60 * 60 * 1000);
+        
+        // Limpar dados da promoção
+        this.clearCookie(this.COOKIE_NAME);
+        localStorage.removeItem('promo_end_time');
+        
+        // Parar countdown
+        if (this.countdownInterval) {
+            clearInterval(this.countdownInterval);
+            this.countdownInterval = null;
+        }
     }
 }
 

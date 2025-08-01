@@ -338,7 +338,11 @@ SITE_NAME = os.getenv('SITE_NAME', 'HOZ TECH')
 CONTACT_EMAIL = os.getenv('CONTACT_EMAIL', 'contato@hoztech.com')
 
 # Email Configuration
-EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+if ENVIRONMENT == 'development' or DEBUG:
+    EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+else:
+    EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
+
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
@@ -347,6 +351,11 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True').lower() == 'true'
 EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False').lower() == 'true'
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@hoztech.com')
 SERVER_EMAIL = os.getenv('SERVER_EMAIL', DEFAULT_FROM_EMAIL)
+
+# Configurações adicionais para produção
+if ENVIRONMENT != 'development' and not DEBUG:
+    EMAIL_TIMEOUT = 30
+    EMAIL_CONNECTION_TIMEOUT = 30
 
 # Email timeout settings
 EMAIL_TIMEOUT = 30  # seconds
