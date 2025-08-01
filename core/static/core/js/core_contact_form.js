@@ -12,7 +12,6 @@ class ContactForm {
         if (this.form) {
             this.form.addEventListener('submit', (e) => this.handleSubmit(e));
             this.setupInputValidation();
-            this.setupCharacterCounters();
             this.setupPhoneInput();
             this.setupNameFormat();
             this.setupEmailFormat();

@@ -124,7 +124,7 @@ class ContactForm(forms.Form):
         
         # Verificar limite de caracteres
         if len(email) > self.EMAIL_MAX_LENGTH:
-            raise forms.ValidationError(_(f'O email deve ter no máximo {self.EMAIL_MAX_LENGTH} caracteres.'))
+            raise forms.ValidationError(_('O email deve ter no máximo {} caracteres.').format(self.EMAIL_MAX_LENGTH))
         
         try:
             validate_email(email)
@@ -149,7 +149,7 @@ class ContactForm(forms.Form):
         if not subject:
             raise forms.ValidationError(_('O campo assunto é obrigatório.'))
         if len(subject) > self.SUBJECT_MAX_LENGTH:
-            raise forms.ValidationError(_(f'O assunto deve ter no máximo {self.SUBJECT_MAX_LENGTH} caracteres.'))
+            raise forms.ValidationError(_('O assunto deve ter no máximo {} caracteres.').format(self.SUBJECT_MAX_LENGTH))
         
         # Verificar conteúdo malicioso
         if re.search(self.DANGEROUS_CONTENT_PATTERN, subject, flags=re.I):
@@ -162,10 +162,10 @@ class ContactForm(forms.Form):
         
         # Verificar tamanho mínimo e máximo
         if len(message) < self.MESSAGE_MIN_LENGTH:
-            raise forms.ValidationError(_(f'A mensagem deve ter pelo menos {self.MESSAGE_MIN_LENGTH} caracteres.'))
+            raise forms.ValidationError(_('A mensagem deve ter pelo menos {} caracteres.').format(self.MESSAGE_MIN_LENGTH))
         
         if len(message) > self.MESSAGE_MAX_LENGTH:
-            raise forms.ValidationError(_(f'A mensagem deve ter no máximo {self.MESSAGE_MAX_LENGTH} caracteres.'))
+            raise forms.ValidationError(_('A mensagem deve ter no máximo {} caracteres.').format(self.MESSAGE_MAX_LENGTH))
         
         # Verificar conteúdo malicioso
         if re.search(self.DANGEROUS_CONTENT_PATTERN, message, flags=re.I):

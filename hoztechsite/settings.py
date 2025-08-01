@@ -58,6 +58,11 @@ if 'test' in sys.argv or 'testserver' in os.getenv('DJANGO_SETTINGS_MODULE', '')
 # Processar ALLOWED_HOSTS corretamente
 raw_hosts = os.getenv("ALLOWED_HOSTS", ",".join(DEFAULT_ALLOWED_HOSTS))
 ALLOWED_HOSTS = [host.strip().split(':')[0] for host in raw_hosts.split(',')]
+
+# Garantir que testserver esteja sempre incluído para testes
+if 'testserver' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('testserver')
+
 print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 
 # Configurações CSRF
@@ -189,6 +194,14 @@ else:
     SECURE_HSTS_SECONDS = int(os.getenv('SECURE_HSTS_SECONDS', '31536000'))
     SECURE_HSTS_INCLUDE_SUBDOMAINS = os.getenv('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'True').lower() == 'true'
     SECURE_HSTS_PRELOAD = os.getenv('SECURE_HSTS_PRELOAD', 'True').lower() == 'true'
+    
+    # Content Security Policy para produção
+    CSP_DEFAULT_SRC = ("'self'",)
+    CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
+    CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com")
+    CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net")
+    CSP_IMG_SRC = ("'self'", "data:", "https:")
+    CSP_CONNECT_SRC = ("'self'",)
     
     # Processar CSRF_TRUSTED_ORIGINS corretamente
     raw_origins = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://*.onrender.com,https://*.railway.app,https://hoztech.com.br,https://www.hoztech.com.br')
