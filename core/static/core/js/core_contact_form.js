@@ -13,7 +13,7 @@ class ContactForm {
             this.form.addEventListener('submit', (e) => this.handleSubmit(e));
             this.setupInputValidation();
             this.setupCharacterCounters();
-            this.setupPhoneMask();
+            this.setupPhoneInput();
             this.setupNameFormat();
             this.setupEmailFormat();
             this.setupAutoFillDetection();
@@ -71,6 +71,8 @@ class ContactForm {
                     let value = e.target.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '');
                     value = value.replace(/\s+/g, ' ').trim();
                     value = value.substring(0, 50);
+                    // Converter para maiúsculas
+                    value = value.toUpperCase();
                     e.target.value = value;
                 }
             });
@@ -92,7 +94,10 @@ class ContactForm {
             let isUserInput = true;
             emailInput.addEventListener('input', (e) => {
                 if (isUserInput && !this.isAutoFilling) {
-                    e.target.value = e.target.value.toLowerCase();
+                    let value = e.target.value.toLowerCase();
+                    // Limitar a 60 caracteres
+                    value = value.substring(0, 60);
+                    e.target.value = value;
                 }
             });
             
@@ -107,22 +112,17 @@ class ContactForm {
         }
     }
 
-    setupPhoneMask() {
+    setupPhoneInput() {
         const phoneInput = this.form.querySelector('#phone');
         if (phoneInput) {
             let isUserInput = true;
             phoneInput.addEventListener('input', (e) => {
                 if (isUserInput && !this.isAutoFilling) {
+                    // Permitir apenas números
                     let value = e.target.value.replace(/\D/g, '');
-                    if (value.length <= 11) {
-                        if (value.length > 2) {
-                            value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
-                        }
-                        if (value.length > 9) {
-                            value = `${value.substring(0, 10)}-${value.substring(10)}`;
-                        }
-                        e.target.value = value;
-                    }
+                    // Limitar a 15 dígitos
+                    value = value.substring(0, 15);
+                    e.target.value = value;
                 }
             });
 
@@ -132,9 +132,9 @@ class ContactForm {
                 clearTimeout(dddTimeout);
                 dddTimeout = setTimeout(() => {
                     if (!this.isAutoFilling) {
-                        const ddd = e.target.value.match(/\((\d{2})\)/);
-                        if (ddd) {
-                            const dddNum = parseInt(ddd[1]);
+                        const digits = e.target.value.replace(/\D/g, '');
+                        if (digits.length >= 2) {
+                            const dddNum = parseInt(digits.substring(0, 2));
                             if (dddNum < 11 || dddNum > 99) {
                                 this.showError(phoneInput, 'DDD inválido');
                             }
@@ -161,23 +161,14 @@ class ContactForm {
         switch(input.name) {
             case 'name':
                 const cleanName = pastedText.replace(/[^A-Za-zÀ-ÿ\s]/g, '').trim();
-                input.value = cleanName.substring(0, 50);
+                input.value = cleanName.substring(0, 50).toUpperCase();
                 break;
             case 'email':
-                input.value = pastedText.toLowerCase();
+                input.value = pastedText.toLowerCase().substring(0, 60);
                 break;
             case 'phone':
                 const digits = pastedText.replace(/\D/g, '');
-                if (digits.length <= 11) {
-                    let formatted = digits;
-                    if (digits.length > 2) {
-                        formatted = `(${digits.substring(0, 2)}) ${digits.substring(2)}`;
-                    }
-                    if (digits.length > 9) {
-                        formatted = `${formatted.substring(0, 10)}-${formatted.substring(10)}`;
-                    }
-                    input.value = formatted;
-                }
+                input.value = digits.substring(0, 15);
                 break;
             default:
                 input.value = pastedText;
@@ -208,28 +199,42 @@ class ContactForm {
                     break;
 
                 case 'email':
-                    if (!this.isValidEmail(value)) {
+                    if (value.length > 60) {
+                        errorMessage = 'O email deve ter no máximo 60 caracteres';
+                    } else if (!this.isValidEmail(value)) {
                         errorMessage = 'Por favor, insira um email válido';
                     }
                     break;
 
                 case 'phone':
-                    if (!this.isValidPhone(value)) {
-                        errorMessage = 'Telefone inválido. Use o formato: (99) 99999-9999 ou (99) 9999-9999';
+                    const digits = value.replace(/\D/g, '');
+                    if (digits.length < 8) {
+                        errorMessage = 'O telefone deve ter pelo menos 8 dígitos';
+                    } else if (digits.length > 15) {
+                        errorMessage = 'O telefone deve ter no máximo 15 dígitos';
+                    } else if (digits.length >= 2) {
+                        const dddNum = parseInt(digits.substring(0, 2));
+                        if (dddNum < 11 || dddNum > 99) {
+                            errorMessage = 'DDD inválido';
+                        }
                     }
                     break;
 
                 case 'subject':
                     if (value.length > 50) {
                         errorMessage = 'O assunto deve ter no máximo 50 caracteres';
+                    } else if (this.containsSuspiciousContent(value)) {
+                        errorMessage = 'O assunto contém conteúdo suspeito';
                     }
                     break;
 
                 case 'message':
-                    if (value.length < 10) {
-                        errorMessage = 'A mensagem deve ter pelo menos 10 caracteres';
+                    if (value.length < 50) {
+                        errorMessage = 'A mensagem deve ter pelo menos 50 caracteres';
                     } else if (value.length > 5000) {
                         errorMessage = 'A mensagem deve ter no máximo 5000 caracteres';
+                    } else if (this.containsSuspiciousContent(value)) {
+                        errorMessage = 'A mensagem contém conteúdo suspeito';
                     }
                     break;
             }
@@ -244,18 +249,259 @@ class ContactForm {
         return true;
     }
 
+    containsSuspiciousContent(text) {
+        const suspiciousPatterns = [
+            /<script/i,
+            /javascript:/i,
+            /on\w+\s*=/i,
+            /data:/i,
+            /http[s]?:\/\//i,
+            /www\./i,
+            /\.com/i,
+            /\.br/i,
+            /\.org/i,
+            /\.net/i,
+            /\.io/i,
+            /\.co/i,
+            /\.me/i,
+            /\.tv/i,
+            /\.info/i,
+            /\.biz/i,
+            /\.cc/i,
+            /\.tk/i,
+            /\.ml/i,
+            /\.ga/i,
+            /\.cf/i,
+            /\.gq/i,
+            /\.xyz/i,
+            /\.top/i,
+            /\.club/i,
+            /\.online/i,
+            /\.site/i,
+            /\.web/i,
+            /\.app/i,
+            /\.dev/i,
+            /\.tech/i,
+            /\.digital/i,
+            /\.cloud/i,
+            /\.ai/i,
+            /\.ly/i,
+            /\.bit/i,
+            /\.goo/i,
+            /\.gl/i,
+            /\.tiny/i,
+            /\.url/i,
+            /\.short/i,
+            /\.link/i,
+            /\.click/i,
+            /\.to/i,
+            /\.at/i,
+            /\.by/i,
+            /\.is/i,
+            /\.it/i,
+            /\.in/i,
+            /\.on/i,
+            /\.up/i,
+            /\.down/i,
+            /\.out/i,
+            /\.off/i,
+            /\.over/i,
+            /\.under/i,
+            /\.back/i,
+            /\.forward/i,
+            /\.next/i,
+            /\.prev/i,
+            /\.first/i,
+            /\.last/i,
+            /\.new/i,
+            /\.old/i,
+            /\.good/i,
+            /\.bad/i,
+            /\.best/i,
+            /\.worst/i,
+            /\.big/i,
+            /\.small/i,
+            /\.high/i,
+            /\.low/i,
+            /\.fast/i,
+            /\.slow/i,
+            /\.hot/i,
+            /\.cold/i,
+            /\.warm/i,
+            /\.cool/i,
+            /\.soft/i,
+            /\.hard/i,
+            /\.easy/i,
+            /\.simple/i,
+            /\.complex/i,
+            /\.basic/i,
+            /\.advanced/i,
+            /\.pro/i,
+            /\.premium/i,
+            /\.vip/i,
+            /\.exclusive/i,
+            /\.limited/i,
+            /\.special/i,
+            /\.unique/i,
+            /\.rare/i,
+            /\.common/i,
+            /\.popular/i,
+            /\.trending/i,
+            /\.viral/i,
+            /\.famous/i,
+            /\.known/i,
+            /\.unknown/i,
+            /\.hidden/i,
+            /\.visible/i,
+            /\.public/i,
+            /\.private/i,
+            /\.secret/i,
+            /\.open/i,
+            /\.closed/i,
+            /\.locked/i,
+            /\.unlocked/i,
+            /\.secure/i,
+            /\.safe/i,
+            /\.dangerous/i,
+            /\.risky/i,
+            /\.careful/i,
+            /\.careless/i,
+            /\.smart/i,
+            /\.stupid/i,
+            /\.clever/i,
+            /\.dumb/i,
+            /\.wise/i,
+            /\.foolish/i,
+            /\.genius/i,
+            /\.idiot/i,
+            /\.expert/i,
+            /\.amateur/i,
+            /\.professional/i,
+            /\.beginner/i,
+            /\.master/i,
+            /\.student/i,
+            /\.teacher/i,
+            /\.leader/i,
+            /\.follower/i,
+            /\.boss/i,
+            /\.employee/i,
+            /\.manager/i,
+            /\.worker/i,
+            /\.director/i,
+            /\.assistant/i,
+            /\.helper/i,
+            /\.supporter/i,
+            /\.partner/i,
+            /\.friend/i,
+            /\.enemy/i,
+            /\.ally/i,
+            /\.rival/i,
+            /\.competitor/i,
+            /\.opponent/i,
+            /\.challenger/i,
+            /\.defender/i,
+            /\.attacker/i,
+            /\.winner/i,
+            /\.loser/i,
+            /\.champion/i,
+            /\.hero/i,
+            /\.villain/i,
+            /\.savior/i,
+            /\.destroyer/i,
+            /\.creator/i,
+            /\.builder/i,
+            /\.breaker/i,
+            /\.fixer/i,
+            /\.damager/i,
+            /\.healer/i,
+            /\.killer/i,
+            /\.protector/i,
+            /\.guardian/i,
+            /\.warrior/i,
+            /\.fighter/i,
+            /\.soldier/i,
+            /\.commander/i,
+            /\.general/i,
+            /\.captain/i,
+            /\.lieutenant/i,
+            /\.sergeant/i,
+            /\.private/i,
+            /\.officer/i,
+            /\.agent/i,
+            /\.spy/i,
+            /\.detective/i,
+            /\.investigator/i,
+            /\.researcher/i,
+            /\.scientist/i,
+            /\.engineer/i,
+            /\.developer/i,
+            /\.programmer/i,
+            /\.coder/i,
+            /\.hacker/i,
+            /\.cracker/i,
+            /\.phisher/i,
+            /\.spammer/i,
+            /\.scammer/i,
+            /\.fraudster/i,
+            /\.thief/i,
+            /\.robber/i,
+            /\.burglar/i,
+            /\.kidnapper/i,
+            /\.murderer/i,
+            /\.assassin/i,
+            /\.hitman/i,
+            /\.terrorist/i,
+            /\.extremist/i,
+            /\.radical/i,
+            /\.fanatic/i,
+            /\.zealot/i,
+            /\.cultist/i,
+            /\.worshipper/i,
+            /\.believer/i,
+            /\.skeptic/i,
+            /\.cynic/i,
+            /\.optimist/i,
+            /\.pessimist/i,
+            /\.realist/i,
+            /\.idealist/i,
+            /\.pragmatist/i,
+            /\.theorist/i,
+            /\.practitioner/i,
+            /\.academic/i,
+            /\.scholar/i,
+            /\.intellectual/i,
+            /\.philosopher/i,
+            /\.thinker/i,
+            /\.dreamer/i,
+            /\.visionary/i,
+            /\.prophet/i,
+            /\.oracle/i,
+            /\.seer/i,
+            /\.psychic/i,
+            /\.medium/i,
+            /\.shaman/i,
+            /\.witch/i,
+            /\.wizard/i,
+            /\.magician/i,
+            /\.sorcerer/i,
+            /\.warlock/i,
+            /\.necromancer/i,
+            /\.summoner/i,
+            /\.conjurer/i,
+            /\.enchanter/i,
+            /\.illusionist/i,
+            /\.transmuter/i,
+            /\.evoker/i,
+            /\.abjurer/i,
+            /\.diviner/i
+        ];
+        
+        return suspiciousPatterns.some(pattern => pattern.test(text));
+    }
+
     isValidEmail(email) {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return emailRegex.test(email);
-    }
-
-    isValidPhone(phone) {
-        const digits = phone.replace(/\D/g, '');
-        if (digits.length !== 10 && digits.length !== 11) {
-            return false;
-        }
-        const ddd = parseInt(digits.substring(0, 2));
-        return ddd >= 11 && ddd <= 99;
     }
 
     showError(input, message) {
