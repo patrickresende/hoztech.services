@@ -634,26 +634,133 @@ class ContactForm {
     showToast(message, type = 'danger') {
         this.clearAlerts();
 
-        const toast = document.createElement('div');
-        toast.className = `toast align-items-center text-white bg-${type} border-0 show position-fixed top-0 end-0 m-3`;
-        toast.role = 'alert';
-        toast.innerHTML = `
-            <div class="d-flex">
-                <div class="toast-body">${message}</div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        // Criar modal de sucesso mais visível
+        if (type === 'success') {
+            this.showSuccessModal(message);
+        } else {
+            // Toast para erros
+            const toast = document.createElement('div');
+            toast.className = `toast align-items-center text-white bg-${type} border-0 show position-fixed top-0 end-0 m-3`;
+            toast.role = 'alert';
+            toast.style.zIndex = '9999';
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+    }
+
+    showSuccessModal(message) {
+        // Criar modal de sucesso
+        const modal = document.createElement('div');
+        modal.className = 'modal fade show';
+        modal.style.display = 'block';
+        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        modal.style.zIndex = '9999';
+        modal.innerHTML = `
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background: linear-gradient(135deg, #00f7ff, #ff073a); border: none; color: white;">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title">
+                            <i class="bi bi-check-circle-fill me-2" style="color: #28a745;"></i>
+                            Sucesso!
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-envelope-check" style="font-size: 3rem; color: #28a745;"></i>
+                        </div>
+                        <h4 class="mb-3">Mensagem Enviada!</h4>
+                        <p class="mb-0">${message}</p>
+                        <p class="small mt-2">Entraremos em contato em breve.</p>
+                    </div>
+                    <div class="modal-footer border-0 justify-content-center">
+                        <button type="button" class="btn btn-light" onclick="this.closest('.modal').remove(); document.body.style.overflow = 'auto';">
+                            <i class="bi bi-check me-2"></i>OK
+                        </button>
+                    </div>
+                </div>
             </div>
         `;
 
-        document.body.appendChild(toast);
+        document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden';
 
+        // Auto-remover após 8 segundos
         setTimeout(() => {
-            toast.remove();
-        }, 5000);
+            if (modal.parentNode) {
+                modal.remove();
+                document.body.style.overflow = 'auto';
+            }
+        }, 8000);
+
+        // Adicionar efeito de confete
+        this.createConfetti();
+    }
+
+    createConfetti() {
+        // Criar efeito de confete
+        const colors = ['#00f7ff', '#ff073a', '#28a745', '#ffc107', '#17a2b8'];
+        
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.zIndex = '9998';
+                confetti.style.animation = 'confetti-fall 3s linear forwards';
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    if (confetti.parentNode) {
+                        confetti.remove();
+                    }
+                }, 3000);
+            }, i * 100);
+        }
+
+        // Adicionar CSS para animação
+        if (!document.getElementById('confetti-css')) {
+            const style = document.createElement('style');
+            style.id = 'confetti-css';
+            style.textContent = `
+                @keyframes confetti-fall {
+                    to {
+                        transform: translateY(100vh) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
     }
 
     clearAlerts() {
         const existingToasts = document.querySelectorAll('.toast');
         existingToasts.forEach(toast => toast.remove());
+        
+        // Limpar modais também
+        const existingModals = document.querySelectorAll('.modal');
+        existingModals.forEach(modal => modal.remove());
+        
+        // Restaurar overflow do body
+        document.body.style.overflow = 'auto';
     }
 }
 

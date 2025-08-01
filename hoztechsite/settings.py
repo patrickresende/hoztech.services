@@ -42,6 +42,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "chave-insegura-para-dev")
 DEFAULT_ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    'testserver',  # Para testes Django
     'hoz-tech.onrender.com',
     'hoztech.up.railway.app',
     '.onrender.com',
@@ -50,10 +51,29 @@ DEFAULT_ALLOWED_HOSTS = [
     'www.hoztech.com.br'
 ]
 
+# Adicionar testserver se estiver em modo de teste
+if 'test' in sys.argv or 'testserver' in os.getenv('DJANGO_SETTINGS_MODULE', ''):
+    DEFAULT_ALLOWED_HOSTS.append('testserver')
+
 # Processar ALLOWED_HOSTS corretamente
 raw_hosts = os.getenv("ALLOWED_HOSTS", ",".join(DEFAULT_ALLOWED_HOSTS))
 ALLOWED_HOSTS = [host.strip().split(':')[0] for host in raw_hosts.split(',')]
 print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
+
+# Configurações CSRF
+DEFAULT_CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'https://hoz-tech.onrender.com',
+    'https://hoztech.up.railway.app',
+    'https://hoztech.com.br',
+    'https://www.hoztech.com.br'
+]
+
+# Processar CSRF_TRUSTED_ORIGINS corretamente
+raw_origins = os.getenv('CSRF_TRUSTED_ORIGINS', ','.join(DEFAULT_CSRF_TRUSTED_ORIGINS))
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in raw_origins.split(',')]
+print("CSRF_TRUSTED_ORIGINS:", CSRF_TRUSTED_ORIGINS)
 
 
 # Application definition
