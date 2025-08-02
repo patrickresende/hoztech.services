@@ -831,4 +831,10 @@ class ContactForm {
 // Inicializar o gerenciador do formulário quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
     new ContactForm();
+    
+    // Signal script loaded to system
+    if (window.HOZ_SYSTEM) {
+        window.HOZ_SYSTEM.scriptsLoaded++;
+        console.log('📧 ContactForm carregado, scripts:', window.HOZ_SYSTEM.scriptsLoaded);
+    }
 });

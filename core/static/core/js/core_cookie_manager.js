@@ -149,4 +149,10 @@ function openCookieSettings() {
 // Inicializar quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
     window.cookieManager = new CookieManager();
+    
+    // Signal script loaded to system
+    if (window.HOZ_SYSTEM) {
+        window.HOZ_SYSTEM.scriptsLoaded++;
+        console.log('🍪 CookieManager carregado, scripts:', window.HOZ_SYSTEM.scriptsLoaded);
+    }
 }); 

@@ -12,9 +12,43 @@ class NavbarManager {
 
     init() {
         if (this.navbar) {
-            this.setupScrollListener();
-            this.setupResizeListener();
-            this.setupClickListeners();
+            // Wait for system to force elements first
+            const waitForSystem = () => {
+                if (window.HOZ_SYSTEM && window.HOZ_SYSTEM.elementsForced) {
+                    // System has already forced visibility, don't override
+                    console.log('📱 NavbarManager: Sistema já forçou elementos, continuando...');
+                    
+                    this.setupScrollListener();
+                    this.setupResizeListener();
+                    this.setupClickListeners();
+                    
+                    // Signal script loaded
+                    if (window.HOZ_SYSTEM) {
+                        window.HOZ_SYSTEM.scriptsLoaded++;
+                    }
+                } else {
+                    // Fallback: force visibility if system not ready
+                    this.navbar.style.transform = 'translateY(0)';
+                    this.navbar.style.display = 'block';
+                    this.navbar.style.visibility = 'visible';
+                    
+                    this.setupScrollListener();
+                    this.setupResizeListener();
+                    this.setupClickListeners();
+                    
+                    console.log('📱 NavbarManager: Sistema não pronto, forçando visibilidade');
+                }
+            };
+            
+            // Wait up to 1 second for system
+            let attempts = 0;
+            const checkInterval = setInterval(() => {
+                attempts++;
+                if ((window.HOZ_SYSTEM && window.HOZ_SYSTEM.elementsForced) || attempts >= 10) {
+                    clearInterval(checkInterval);
+                    waitForSystem();
+                }
+            }, 100);
         }
     }
 
@@ -68,11 +102,12 @@ class NavbarManager {
             this.navbar.classList.remove('navbar-scrolled');
         }
 
-        if (scrollTop > this.lastScrollTop && scrollTop > 200) {
-            this.navbar.style.transform = 'translateY(-100%)';
-        } else {
-            this.navbar.style.transform = 'translateY(0)';
-        }
+        // Auto-hide navbar desabilitado para manter sempre visível
+        // if (scrollTop > this.lastScrollTop && scrollTop > 200) {
+        //     this.navbar.style.transform = 'translateY(-100%)';
+        // } else {
+        //     this.navbar.style.transform = 'translateY(0)';
+        // }
 
         this.lastScrollTop = scrollTop;
     }

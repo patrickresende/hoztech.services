@@ -186,16 +186,21 @@ class PromoManager {
         }
     }
 
-    // Gerencia o banner - Sempre visível
+    // Gerencia o banner - Sempre visível (posicionamento natural)
     showBanner() {
         if (this.banner) {
-            this.banner.classList.add('show');
-            // Ajusta o padding-top do body para compensar o banner fixo
-            document.body.style.paddingTop = this.banner.offsetHeight + 'px';
-            
-            // Garantir que o banner seja sempre visível
-            this.banner.style.display = 'block';
-            this.banner.style.transform = 'translateY(0)';
+            // Check if system has already forced elements
+            if (window.HOZ_SYSTEM && window.HOZ_SYSTEM.elementsForced) {
+                // System already handled visibility, just add class
+                this.banner.classList.add('show');
+                console.log('🎯 PromoManager: Sistema já forçou banner, apenas adicionando classe');
+            } else {
+                // Fallback: handle visibility ourselves
+                this.banner.classList.add('show');
+                this.banner.style.display = 'block';
+                this.banner.style.transform = 'translateY(0)';
+                console.log('🎯 PromoManager: Sistema não pronto, forçando visibilidade');
+            }
         }
     }
 
@@ -218,4 +223,10 @@ class PromoManager {
 // Evita múltiplas instâncias mesmo se o script for carregado mais de uma vez
 if (!window.promoManager) {
     window.promoManager = new PromoManager();
+    
+    // Signal script loaded to system
+    if (window.HOZ_SYSTEM) {
+        window.HOZ_SYSTEM.scriptsLoaded++;
+        console.log('🎯 PromoManager carregado, scripts:', window.HOZ_SYSTEM.scriptsLoaded);
+    }
 }

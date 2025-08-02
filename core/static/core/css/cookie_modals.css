@@ -26,24 +26,27 @@ body.modal-open {
     opacity: 1;
 }
 
-/* Banner Promocional Superior - Fixo e Sutil */
+/* Banner Promocional Superior - Posicionado acima da navbar */
 .promo-banner {
-    position: fixed;
+    position: relative !important;
     top: 0;
     left: 0;
     right: 0;
     background: linear-gradient(135deg, var(--tech-blue), var(--tech-red));
     color: var(--tech-light);
     padding: clamp(0.4rem, 1.2vw, 0.6rem);
-    z-index: 9999;
-    opacity: 0.85;
+    z-index: 9999 !important;
+    opacity: 0.85 !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     font-family: var(--font-orbitron);
     font-weight: 600;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    transform: translateY(0);
+    transform: translateY(0) !important;
     transition: opacity 0.3s ease;
+    width: 100%;
+    display: block !important;
+    visibility: visible !important;
 }
 
 .promo-banner:hover {
@@ -64,16 +67,72 @@ body.modal-open {
     padding: 0 clamp(0.5rem, 2vw, 1rem);
 }
 
-.promo-banner-text {
+/* Sistema de Marquee LED para o Banner */
+.promo-marquee {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: clamp(0.3rem, 0.8vw, 0.5rem) 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    margin: 0 clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.promo-marquee p {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marqueeScroll 25s linear infinite;
+    margin: 0;
     font-size: clamp(0.75rem, 2vw, 0.9rem);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    color: var(--tech-light);
+}
+
+.promo-marquee .marquee-item {
+    display: inline-block;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+    position: relative;
+    transition: all 0.3s ease;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex: 1;
+}
+
+.promo-marquee .marquee-item:hover {
+    color: var(--tech-blue);
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    transform: scale(1.05);
+}
+
+.promo-marquee .marquee-separator {
+    color: var(--tech-blue);
+    opacity: 0.7;
+    animation: ledBlink 2s infinite;
+    font-size: 1.2em;
+    vertical-align: middle;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes marqueeScroll {
+    0%   { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes ledBlink {
+    0%, 100% { 
+        opacity: 0.7; 
+        text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    }
+    50% { 
+        opacity: 1; 
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+        transform: scale(1.1);
+    }
 }
 
 .promo-banner-countdown {
@@ -125,9 +184,19 @@ body.modal-open {
     font-size: 1em;
 }
 
-/* Ajustes para a Navbar */
+/* Ajustes para a Navbar - Posicionada naturalmente abaixo do banner */
 .navbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1020 !important;
     transition: all 0.3s ease;
+    background: var(--gradient-card);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-blue);
+    display: block !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
 }
 
 .navbar-scrolled {
@@ -146,7 +215,7 @@ body.modal-open {
     overflow-y: auto;
 }
 
-/* Responsividade Mobile - Sistema de Display como Banner do Footer */
+/* Responsividade Mobile - Sistema Marquee LED */
 @media (max-width: 768px) {
     .promo-banner-content {
         flex-direction: row;
@@ -155,20 +224,22 @@ body.modal-open {
         gap: clamp(0.4rem, 1.5vw, 0.8rem);
     }
 
-    .promo-banner-text {
-        font-size: clamp(0.65rem, 1.8vw, 0.8rem);
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        flex: 1;
-        min-width: 0;
+    .promo-marquee {
+        margin: 0 clamp(0.3rem, 1vw, 0.6rem);
+        padding: clamp(0.2rem, 0.6vw, 0.4rem) 0;
     }
 
-    /* Criar efeito de marquee para mobile */
-    .promo-banner-text::before {
-        content: "🔥";
-        flex-shrink: 0;
-        animation: pulse 2s infinite;
+    .promo-marquee p {
+        animation: marqueeScroll 20s linear infinite;
+        font-size: clamp(0.65rem, 1.8vw, 0.8rem);
+    }
+
+    .promo-marquee .marquee-item {
+        padding: 0 clamp(0.8rem, 2vw, 1.5rem);
+    }
+
+    .promo-marquee .marquee-separator {
+        font-size: 1em;
     }
 
     .promo-banner-countdown {
@@ -196,9 +267,19 @@ body.modal-open {
         gap: clamp(0.3rem, 1vw, 0.6rem);
     }
 
-    .promo-banner-text {
+    .promo-marquee {
+        margin: 0 clamp(0.2rem, 0.8vw, 0.4rem);
+        padding: clamp(0.15rem, 0.4vw, 0.3rem) 0;
+    }
+
+    .promo-marquee p {
+        animation: marqueeScroll 18s linear infinite;
         font-size: clamp(0.6rem, 1.6vw, 0.75rem);
         letter-spacing: 0.3px;
+    }
+
+    .promo-marquee .marquee-item {
+        padding: 0 clamp(0.6rem, 1.5vw, 1.2rem);
     }
 
     .promo-banner-countdown {
@@ -213,9 +294,14 @@ body.modal-open {
 }
 
 @media (max-width: 360px) {
-    .promo-banner-text {
+    .promo-marquee p {
+        animation: marqueeScroll 15s linear infinite;
         font-size: 0.6rem;
         letter-spacing: 0.2px;
+    }
+
+    .promo-marquee .marquee-item {
+        padding: 0 0.8rem;
     }
 
     .promo-banner-countdown, .promo-banner-cta {
