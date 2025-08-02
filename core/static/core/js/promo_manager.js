@@ -189,18 +189,15 @@ class PromoManager {
     // Gerencia o banner - Sempre visível (posicionamento natural)
     showBanner() {
         if (this.banner) {
-            // Check if system has already forced elements
-            if (window.HOZ_SYSTEM && window.HOZ_SYSTEM.elementsForced) {
-                // System already handled visibility, just add class
-                this.banner.classList.add('show');
-                console.log('🎯 PromoManager: Sistema já forçou banner, apenas adicionando classe');
-            } else {
-                // Fallback: handle visibility ourselves
-                this.banner.classList.add('show');
-                this.banner.style.display = 'block';
-                this.banner.style.transform = 'translateY(0)';
-                console.log('🎯 PromoManager: Sistema não pronto, forçando visibilidade');
-            }
+            // Simplificar a lógica - sempre mostrar o banner
+            this.banner.classList.add('show');
+            this.banner.style.display = 'block';
+            this.banner.style.visibility = 'visible';
+            this.banner.style.opacity = '0.85';
+            this.banner.style.transform = 'translateY(0)';
+            this.banner.style.position = 'relative';
+            this.banner.style.zIndex = '9999';
+            console.log('🎯 PromoManager: Banner exibido com sucesso');
         }
     }
 

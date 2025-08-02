@@ -71,6 +71,7 @@
                     position: relative !important;
                     z-index: 9999 !important;
                 `;
+                banner.classList.add('show');
                 console.log('✅ Banner superior forçado com !important');
             }
             
@@ -90,37 +91,13 @@
             // Signal elements are forced
             window.HOZ_SYSTEM.elementsForced = true;
             
-            // Wait for all scripts to load before marking ready
-            const checkSystemReady = () => {
-                if (window.HOZ_SYSTEM.scriptsLoaded >= window.HOZ_SYSTEM.totalScripts) {
-                    window.HOZ_SYSTEM.ready = true;
-                    console.log('✅ Sistema completamente pronto');
-                    
-                    // Final debug info
-                    console.log('Banner element:', banner);
-                    console.log('Navbar element:', navbar);
-                    console.log('PromoManager:', window.promoManager);
-                    console.log('NavbarManager:', window.navbarManager);
-                    console.log('CookieManager:', window.cookieManager);
-                }
-            };
+            // Mark system as ready immediately
+            window.HOZ_SYSTEM.ready = true;
+            console.log('✅ Sistema marcado como pronto');
             
-            // Check every 100ms for script readiness
-            const readyInterval = setInterval(() => {
-                checkSystemReady();
-                if (window.HOZ_SYSTEM.ready) {
-                    clearInterval(readyInterval);
-                }
-            }, 100);
-            
-            // Fallback: mark ready after 3 seconds regardless
-            setTimeout(() => {
-                if (!window.HOZ_SYSTEM.ready) {
-                    window.HOZ_SYSTEM.ready = true;
-                    console.log('⚠️ Sistema marcado como pronto por timeout');
-                    clearInterval(readyInterval);
-                }
-            }, 3000);
+            // Final debug info
+            console.log('Banner element:', banner);
+            console.log('Navbar element:', navbar);
         });
     </script>
     

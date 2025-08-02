@@ -110,6 +110,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Adicionar middleware CSP apenas em produção
+if ENVIRONMENT != 'development' and not DEBUG:
+    MIDDLEWARE.append('csp.middleware.CSPMiddleware')
+
 # Configuração do WhiteNoise
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_AUTOREFRESH = True
@@ -202,6 +206,24 @@ else:
     CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net")
     CSP_IMG_SRC = ("'self'", "data:", "https:")
     CSP_CONNECT_SRC = ("'self'",)
+    
+    # Configurações adicionais de CSP
+    CSP_OBJECT_SRC = ("'none'",)
+    CSP_FRAME_SRC = ("'none'",)
+    CSP_BASE_URI = ("'self'",)
+    CSP_FORM_ACTION = ("'self'",)
+    CSP_FRAME_ANCESTORS = ("'none'",)
+    CSP_MEDIA_SRC = ("'self'", "https:")
+    CSP_WORKER_SRC = ("'self'",)
+    CSP_MANIFEST_SRC = ("'self'",)
+    
+    # Configurações de segurança adicional
+    CSP_BLOCK_ALL_MIXED_CONTENT = True
+    CSP_UPGRADE_INSECURE_REQUESTS = True
+    
+    # Configurações específicas para permitir eval() necessário
+    CSP_SCRIPT_SRC_ELEM = ("'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
+    CSP_STYLE_SRC_ELEM = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com")
     
     # Processar CSRF_TRUSTED_ORIGINS corretamente
     raw_origins = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://*.onrender.com,https://*.railway.app,https://hoztech.com.br,https://www.hoztech.com.br')
@@ -312,8 +334,8 @@ if ENVIRONMENT == 'development':
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 else:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    WHITENOISE_USE_FINDERS = False  # Desativa finders em produção
-    WHITENOISE_KEEP_ONLY_HASHED_FILES = True  # Mantém apenas arquivos com hash
+    WHITENOISE_USE_FINDERS = True  # Habilitar finders em produção
+    WHITENOISE_KEEP_ONLY_HASHED_FILES = False  # Manter arquivos sem hash também
 
 # Debug info para arquivos estáticos
 print("=== Configuração de Arquivos Estáticos ===")
