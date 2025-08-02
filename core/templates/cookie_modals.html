@@ -13,8 +13,8 @@
             <p>Utilizamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa política de cookies.</p>
         </div>
         <div class="cookie-footer">
-            <button onclick="openCookieSettings()" class="btn btn-outline">Configurações</button>
-            <button onclick="acceptAllCookies()" class="btn btn-primary">Aceitar Todos</button>
+            <button id="openCookieSettings" class="btn btn-outline">Configurações</button>
+            <button id="acceptAllCookies" class="btn btn-primary">Aceitar Todos</button>
         </div>
     </div>
 </div>
@@ -57,7 +57,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" onclick="saveCookieSettings()">Salvar Preferências</button>
+                <button type="button" id="saveCookieSettings" class="btn btn-primary">Salvar Preferências</button>
             </div>
         </div>
     </div>
@@ -142,64 +142,169 @@
 </div>
 
 <script>
-// Funções de gerenciamento de cookies
-function showCookieConsent() {
-    const consent = document.getElementById('cookieConsent');
-    if (consent && !consent.classList.contains('show')) {
-        consent.classList.add('show');
+// Cookie Consent Manager - Compatível com navegadores restritivos
+class CookieConsentManager {
+    constructor() {
+        this.cookieConsent = document.getElementById('cookieConsent');
+        this.cookieSettings = document.getElementById('cookieSettings');
+        this.performanceCookies = document.getElementById('performanceCookies');
+        this.marketingCookies = document.getElementById('marketingCookies');
+        this.essentialCookies = document.getElementById('essentialCookies');
+        
+        this.init();
+    }
+
+    init() {
+        // Verificar se já aceitou os cookies
+        if (!this.getCookie('cookie-consent')) {
+            this.showConsent();
+        }
+
+        // Event listeners para botões
+        const acceptAllBtn = document.getElementById('acceptAllCookies');
+        const openSettingsBtn = document.getElementById('openCookieSettings');
+        const saveSettingsBtn = document.getElementById('saveCookieSettings');
+
+        if (acceptAllBtn) {
+            acceptAllBtn.addEventListener('click', () => this.acceptAllCookies());
+        }
+
+        if (openSettingsBtn) {
+            openSettingsBtn.addEventListener('click', () => this.openCookieSettings());
+        }
+
+        if (saveSettingsBtn) {
+            saveSettingsBtn.addEventListener('click', () => this.saveCookieSettings());
+        }
+
+        // Inicializar configurações
+        this.initializeCookieSettings();
+    }
+
+    showConsent() {
+        if (this.cookieConsent) {
+            this.cookieConsent.classList.add('show', 'active');
+        }
+    }
+
+    hideConsent() {
+        if (this.cookieConsent) {
+            this.cookieConsent.classList.remove('show', 'active');
+        }
+    }
+
+    setCookie(name, value, days = 365) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = `expires=${date.toUTCString()}`;
+        document.cookie = `${name}=${value};${expires};path=/;SameSite=Lax`;
+    }
+
+    getCookie(name) {
+        const nameEQ = `${name}=`;
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1, c.length);
+            }
+            if (c.indexOf(nameEQ) === 0) {
+                return c.substring(nameEQ.length, c.length);
+            }
+        }
+        return null;
+    }
+
+    initializeCookieSettings() {
+        // Definir valores padrão se não estiverem definidos
+        if (!this.getCookie('performanceCookies')) {
+            this.setCookie('performanceCookies', 'false');
+        }
+        if (!this.getCookie('marketingCookies')) {
+            this.setCookie('marketingCookies', 'false');
+        }
+
+        // Atualizar UI para refletir configurações atuais
+        if (this.performanceCookies) {
+            this.performanceCookies.checked = this.getCookie('performanceCookies') === 'true';
+        }
+        if (this.marketingCookies) {
+            this.marketingCookies.checked = this.getCookie('marketingCookies') === 'true';
+        }
+    }
+
+    acceptAllCookies() {
+        this.setCookie('cookie-consent', 'accepted');
+        this.setCookie('performanceCookies', 'true');
+        this.setCookie('marketingCookies', 'true');
+        this.hideConsent();
+        this.showSaveConfirmation();
+    }
+
+    openCookieSettings() {
+        if (this.cookieSettings) {
+            const modal = new bootstrap.Modal(this.cookieSettings);
+            modal.show();
+            this.hideConsent();
+        }
+    }
+
+    saveCookieSettings() {
+        if (this.performanceCookies && this.marketingCookies) {
+            const performanceCookies = this.performanceCookies.checked;
+            const marketingCookies = this.marketingCookies.checked;
+
+            this.setCookie('performanceCookies', performanceCookies.toString());
+            this.setCookie('marketingCookies', marketingCookies.toString());
+            this.setCookie('cookie-consent', 'accepted');
+
+            // Fechar modal
+            if (this.cookieSettings) {
+                const modal = bootstrap.Modal.getInstance(this.cookieSettings);
+                if (modal) {
+                    modal.hide();
+                }
+            }
+
+            this.showSaveConfirmation();
+        }
+    }
+
+    showSaveConfirmation() {
+        // Criar notificação de confirmação
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 99999;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        `;
+        notification.textContent = 'Configurações de cookies salvas com sucesso!';
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 3000);
     }
 }
 
-function hideCookieConsent() {
-    const consent = document.getElementById('cookieConsent');
-    if (consent) {
-        consent.classList.remove('show');
-    }
-}
-
-function openCookieSettings() {
-    const settingsModal = new bootstrap.Modal(document.getElementById('cookieSettings'));
-    settingsModal.show();
-    hideCookieConsent();
-}
-
-function acceptAllCookies() {
-    // Aceitar todos os cookies
-    localStorage.setItem('cookiesAccepted', 'true');
-    localStorage.setItem('performanceCookies', 'true');
-    localStorage.setItem('marketingCookies', 'true');
-    hideCookieConsent();
-}
-
-function saveCookieSettings() {
-    const performanceCookies = document.getElementById('performanceCookies').checked;
-    const marketingCookies = document.getElementById('marketingCookies').checked;
-    
-    localStorage.setItem('cookiesAccepted', 'true');
-    localStorage.setItem('performanceCookies', performanceCookies);
-    localStorage.setItem('marketingCookies', marketingCookies);
-    
-    const settingsModal = bootstrap.Modal.getInstance(document.getElementById('cookieSettings'));
-    settingsModal.hide();
-}
-
-// Inicialização
+// Inicializar quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', function() {
-    // Verificar se já aceitou os cookies
-    if (!localStorage.getItem('cookiesAccepted')) {
-        showCookieConsent();
-    }
+    window.cookieConsentManager = new CookieConsentManager();
     
-    // Inicializar switches com valores salvos
-    const performanceCookies = document.getElementById('performanceCookies');
-    const marketingCookies = document.getElementById('marketingCookies');
-    
-    if (performanceCookies) {
-        performanceCookies.checked = localStorage.getItem('performanceCookies') === 'true';
-    }
-    
-    if (marketingCookies) {
-        marketingCookies.checked = localStorage.getItem('marketingCookies') === 'true';
+    // Signal script loaded to system
+    if (window.HOZ_SYSTEM) {
+        window.HOZ_SYSTEM.scriptsLoaded++;
+        console.log('🍪 CookieConsentManager carregado, scripts:', window.HOZ_SYSTEM.scriptsLoaded);
     }
 });
 </script> 

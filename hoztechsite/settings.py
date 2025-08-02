@@ -199,9 +199,9 @@ else:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = os.getenv('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'True').lower() == 'true'
     SECURE_HSTS_PRELOAD = os.getenv('SECURE_HSTS_PRELOAD', 'True').lower() == 'true'
     
-    # Content Security Policy para produção
+    # Content Security Policy para produção - Compatível com Brave
     CSP_DEFAULT_SRC = ("'self'",)
-    CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
+    CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
     CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com")
     CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net")
     CSP_IMG_SRC = ("'self'", "data:", "https:")
@@ -221,9 +221,12 @@ else:
     CSP_BLOCK_ALL_MIXED_CONTENT = True
     CSP_UPGRADE_INSECURE_REQUESTS = True
     
-    # Configurações específicas para permitir eval() necessário
-    CSP_SCRIPT_SRC_ELEM = ("'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
+    # Configurações específicas para compatibilidade com Brave
+    CSP_SCRIPT_SRC_ELEM = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
     CSP_STYLE_SRC_ELEM = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com")
+    
+    # Configurações específicas para cookies e localStorage
+    CSP_SCRIPT_SRC_ATTR = ("'unsafe-inline'",)
     
     # Processar CSRF_TRUSTED_ORIGINS corretamente
     raw_origins = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://*.onrender.com,https://*.railway.app,https://hoztech.com.br,https://www.hoztech.com.br')
