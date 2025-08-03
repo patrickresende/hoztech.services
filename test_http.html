@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste HTTP - HOZ TECH</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .warning { color: #ffc107; }
+        .info { color: #17a2b8; }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .btn-success { background: #28a745; color: white; }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-warning { background: #ffc107; color: black; }
+        .instructions {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Teste de Conexão HTTP - HOZ TECH</h1>
+        
+        <div class="instructions">
+            <h3>📋 Instruções para Resolver Redirecionamento HTTPS:</h3>
+            
+            <h4 class="info">1️⃣ Para Chrome/Edge:</h4>
+            <ol>
+                <li>Digite na barra de endereços: <code>chrome://net-internals/#hsts</code></li>
+                <li>Na seção "Delete domain security policies":</li>
+                <li>Digite: <code>127.0.0.1</code> e clique em "Delete"</li>
+                <li>Digite: <code>localhost</code> e clique em "Delete"</li>
+            </ol>
+            
+            <h4 class="info">2️⃣ Para Firefox:</h4>
+            <ol>
+                <li>Digite: <code>about:preferences#privacy</code></li>
+                <li>Role até "Cookies e dados do site"</li>
+                <li>Clique em "Limpar dados..."</li>
+                <li>Marque "Cookies e dados do site" e clique em "Limpar"</li>
+            </ol>
+            
+            <h4 class="warning">3️⃣ Solução Rápida:</h4>
+            <ul>
+                <li>Use uma <strong>aba incógnita/privada</strong></li>
+                <li>Ou limpe o cache: <code>Ctrl+Shift+Delete</code></li>
+            </ul>
+        </div>
+        
+        <h3>🌐 Links para Teste:</h3>
+        <p>Clique nos links abaixo para testar o acesso HTTP:</p>
+        
+        <a href="http://127.0.0.1:8000/" class="btn btn-success" target="_blank">
+            ✅ http://127.0.0.1:8000/
+        </a>
+        
+        <a href="http://localhost:8000/" class="btn btn-primary" target="_blank">
+            ✅ http://localhost:8000/
+        </a>
+        
+        <a href="http://127.0.0.1:8000/admin/" class="btn btn-warning" target="_blank">
+            🔧 Admin (HTTP)
+        </a>
+        
+        <div class="instructions">
+            <h4 class="error">❌ NÃO USE ESTES (HTTPS):</h4>
+            <ul>
+                <li><del>https://127.0.0.1:8000/</del></li>
+                <li><del>https://localhost:8000/</del></li>
+            </ul>
+        </div>
+        
+        <h3>🔍 Status do Servidor:</h3>
+        <p>Se os links acima não funcionarem, verifique se o servidor Django está rodando:</p>
+        <pre style="background: #f8f9fa; padding: 10px; border-radius: 5px;">
+python manage.py runserver
+        </pre>
+        
+        <div id="test-result" style="margin-top: 20px; padding: 15px; border-radius: 5px;">
+            <h4>🧪 Teste Automático:</h4>
+            <p id="status">Testando conexão...</p>
+        </div>
+    </div>
+
+    <script>
+        // Teste automático de conexão
+        function testConnection() {
+            const statusEl = document.getElementById('status');
+            const resultEl = document.getElementById('test-result');
+            
+            // Teste HTTP
+            fetch('http://127.0.0.1:8000/')
+                .then(response => {
+                    if (response.ok) {
+                        statusEl.innerHTML = '✅ <strong>Sucesso!</strong> Servidor HTTP funcionando corretamente.';
+                        resultEl.style.background = '#d4edda';
+                        resultEl.style.border = '1px solid #c3e6cb';
+                    } else {
+                        throw new Error('Resposta não OK');
+                    }
+                })
+                .catch(error => {
+                    statusEl.innerHTML = '❌ <strong>Erro:</strong> Não foi possível conectar ao servidor HTTP.<br>' +
+                                       '<small>Verifique se o servidor Django está rodando.</small>';
+                    resultEl.style.background = '#f8d7da';
+                    resultEl.style.border = '1px solid #f5c6cb';
+                });
+        }
+        
+        // Executar teste após carregar a página
+        setTimeout(testConnection, 1000);
+    </script>
+</body>
+</html>
