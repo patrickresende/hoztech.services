@@ -108,6 +108,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.admin_middleware.AdminErrorMiddleware',     # Middleware de erro do admin
+    'core.admin_middleware.AdminPerformanceMiddleware', # Middleware de performance do admin
 ]
 
 # Adicionar middleware CSP apenas em produção
@@ -451,6 +453,11 @@ LOGGING = {
             'propagate': False,
         },
         'core': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+        'core.admin': {
             'handlers': ['console'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': False,

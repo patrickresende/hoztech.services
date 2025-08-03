@@ -1,33 +1,162 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Test View</title>
-</head>
-<body>
-    <h1>Test View</h1>
-    
-    <h2>Dados de Teste:</h2>
-    <p>{{ test_data }}</p>
-    
-    <h2>Sessões ({{ sessions.count }}):</h2>
-    <ul>
-    {% for session in sessions %}
-        <li>{{ session.session_key }} - {{ session.ip_address }}</li>
-    {% endfor %}
-    </ul>
-    
-    <h2>Exports ({{ exports.count }}):</h2>
-    <ul>
-    {% for export in exports %}
-        <li>{{ export.name }} - {{ export.format }}</li>
-    {% endfor %}
-    </ul>
-    
-    <h2>Métricas SEO ({{ metrics.count }}):</h2>
-    <ul>
-    {% for metric in metrics %}
-        <li>{{ metric.url }} - {{ metric.title }}</li>
-    {% endfor %}
-    </ul>
-</body>
-</html> 
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="bi bi-gear"></i>
+                        Teste de Funcionalidade do Sistema
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% if error_message %}
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle"></i>
+                            <strong>Erro:</strong> {{ error_message }}
+                        </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Status do Sistema</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Database Connection:</span>
+                                    <span class="badge {% if database_connection == 'OK' %}bg-success{% else %}bg-danger{% endif %}">
+                                        {{ database_connection }}
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>XlsxWriter Available:</span>
+                                    <span class="badge {% if xlsx_available %}bg-success{% else %}bg-warning{% endif %}">
+                                        {% if xlsx_available %}Sim{% else %}Não{% endif %}
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Test Data:</span>
+                                    <span class="badge bg-info">{{ test_data }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h5>Contadores de Dados</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Sessões:</span>
+                                    <span class="badge bg-primary">{{ sessions|length }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Exports:</span>
+                                    <span class="badge bg-success">{{ exports|length }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Métricas SEO:</span>
+                                    <span class="badge bg-info">{{ metrics|length }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {% if sessions %}
+                    <div class="mt-4">
+                        <h5>Últimas Sessões</h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>IP</th>
+                                        <th>User Agent</th>
+                                        <th>Criado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for session in sessions %}
+                                    <tr>
+                                        <td>{{ session.ip_address }}</td>
+                                        <td>{{ session.user_agent|truncatechars:50 }}</td>
+                                        <td>{{ session.created_at|date:"d/m/Y H:i" }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if exports %}
+                    <div class="mt-4">
+                        <h5>Últimos Exports</h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Formato</th>
+                                        <th>Criado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for export in exports %}
+                                    <tr>
+                                        <td>{{ export.name }}</td>
+                                        <td>{{ export.format }}</td>
+                                        <td>{{ export.created_at|date:"d/m/Y H:i" }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if metrics %}
+                    <div class="mt-4">
+                        <h5>Últimas Métricas SEO</h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>URL</th>
+                                        <th>Título</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for metric in metrics %}
+                                    <tr>
+                                        <td>{{ metric.url|truncatechars:30 }}</td>
+                                        <td>{{ metric.title|truncatechars:30 }}</td>
+                                        <td>
+                                            {% if metric.page_speed_score and metric.mobile_friendly_score %}
+                                                {{ metric.page_speed_score|floatformat:1 }}
+                                            {% else %}
+                                                N/A
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="mt-4">
+                        <a href="{% url 'core_admin:admin_dashboard' %}" class="btn btn-primary">
+                            <i class="bi bi-arrow-left"></i> Voltar ao Dashboard
+                        </a>
+                        <a href="{% url 'admin:index' %}" class="btn btn-secondary">
+                            <i class="bi bi-house"></i> Admin Principal
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
