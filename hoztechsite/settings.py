@@ -110,6 +110,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'core.admin_middleware.AdminErrorMiddleware',     # Middleware de erro do admin
     'core.admin_middleware.AdminPerformanceMiddleware', # Middleware de performance do admin
+    'core.middleware.AdminLoginErrorMiddleware',      # Middleware para erros de login no admin
 ]
 
 # Adicionar middleware CSP apenas em produção
