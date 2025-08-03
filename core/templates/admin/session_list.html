@@ -3,42 +3,211 @@
 
 {% block dashboard_content %}
 <div class="container-fluid">
-    <div class="card">
-        <div class="card-header">
-            <h6 class="mb-0">Lista de Sessões</h6>
+    <!-- Header com estatísticas -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total de Sessões
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ sessions.count }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-people fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body p-0">
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Sessões Ativas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ sessions|length }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-check-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Usuários Únicos
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ sessions|length }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-person fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Exportar Dados
+                            </div>
+                            <a href="{% url 'core_admin:export_sessions' %}" class="btn btn-sm btn-warning">
+                                <i class="bi bi-download"></i> CSV
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-download fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Sessões -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="bi bi-people"></i> Lista de Sessões de Usuários
+            </h6>
+            <div class="dropdown no-arrow">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in">
+                    <a class="dropdown-item" href="{% url 'core_admin:export_sessions' %}">
+                        <i class="bi bi-download"></i> Exportar CSV
+                    </a>
+                    <a class="dropdown-item" href="{% url 'core_admin:export_data' %}">
+                        <i class="bi bi-file-earmark-excel"></i> Exportar Excel
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            {% if sessions %}
             <div class="table-responsive">
-                <table class="table align-items-center mb-0">
+                <table class="table table-bordered" id="sessionsTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>IP</th>
+                            <th>IP Address</th>
                             <th>User Agent</th>
                             <th>Referrer</th>
                             <th>Criado em</th>
                             <th>Última Atividade</th>
+                            <th>Usuário</th>
                             <th>Status</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for session in sessions %}
                         <tr>
-                            <td>{{ session.ip_address }}</td>
-                            <td>{{ session.user_agent|truncatechars:50 }}</td>
-                            <td>{{ session.referrer|default:"-"|truncatechars:30 }}</td>
-                            <td>{{ session.created_at|date:"d/m/Y H:i" }}</td>
-                            <td>{{ session.last_activity|date:"d/m/Y H:i" }}</td>
                             <td>
-                                <span class="badge {% if session.is_active %}bg-success{% else %}bg-danger{% endif %}">
-                                    {{ session.is_active|yesno:"Ativa,Inativa" }}
-                                </span>
+                                <span class="badge bg-primary">{{ session.ip_address }}</span>
+                            </td>
+                            <td>
+                                <div class="text-truncate" style="max-width: 200px;" title="{{ session.user_agent }}">
+                                    {{ session.user_agent|truncatechars:50 }}
+                                </div>
+                            </td>
+                            <td>
+                                {% if session.referrer %}
+                                    <a href="{{ session.referrer }}" target="_blank" class="text-decoration-none">
+                                        {{ session.referrer|truncatechars:30 }}
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted">-</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <small class="text-muted">{{ session.created_at|date:"d/m/Y H:i" }}</small>
+                            </td>
+                            <td>
+                                <small class="text-muted">{{ session.last_activity|date:"d/m/Y H:i" }}</small>
+                            </td>
+                            <td>
+                                {% if session.user %}
+                                    <span class="badge bg-success">{{ session.user.username }}</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Anônimo</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if session.is_active %}
+                                    <span class="badge bg-success">
+                                        <i class="bi bi-check-circle"></i> Ativa
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-danger">
+                                        <i class="bi bi-x-circle"></i> Inativa
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-sm btn-outline-primary" 
+                                            data-bs-toggle="tooltip" title="Ver detalhes">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-info" 
+                                            data-bs-toggle="tooltip" title="Analisar comportamento">
+                                        <i class="bi bi-graph-up"></i>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
+            {% else %}
+            <div class="text-center py-4">
+                <i class="bi bi-people fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Nenhuma sessão encontrada</h5>
+                <p class="text-muted">As sessões de usuários aparecerão aqui quando houver atividade no site.</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
+
+<script>
+// Inicializar tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+});
+
+// Inicializar DataTable se disponível
+if (typeof $.fn.DataTable !== 'undefined') {
+    $('#sessionsTable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+        },
+        "pageLength": 25,
+        "order": [[4, "desc"]]
+    });
+}
+</script>
 {% endblock %} 

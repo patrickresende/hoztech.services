@@ -3,50 +3,414 @@
 
 {% block dashboard_content %}
 <div class="container-fluid">
-    <div class="card">
-        <div class="card-header">
-            <h6 class="mb-0">Métricas SEO</h6>
+    <!-- Header com estatísticas -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Páginas Analisadas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ metrics.count }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-graph-up fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body p-0">
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Score Médio
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {% if metrics %}
+                                    {% for metric in metrics %}
+                                        {% if forloop.first %}
+                                            {{ metric.page_speed_score|floatformat:1 }}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    0.0
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-speedometer2 fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Mobile Friendly
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {% if metrics %}
+                                    {% for metric in metrics %}
+                                        {% if forloop.first %}
+                                            {{ metric.mobile_friendly_score|floatformat:1 }}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    0.0
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-phone fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Exportar Dados
+                            </div>
+                            <a href="{% url 'core_admin:export_seo' %}" class="btn btn-sm btn-warning">
+                                <i class="bi bi-download"></i> CSV
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-download fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos e Métricas -->
+    <div class="row mb-4">
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="bi bi-graph-up"></i> Performance das Páginas
+                    </h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in">
+                            <a class="dropdown-item" href="#" onclick="updateChart('speed')">
+                                <i class="bi bi-speedometer2"></i> Page Speed
+                            </a>
+                            <a class="dropdown-item" href="#" onclick="updateChart('mobile')">
+                                <i class="bi bi-phone"></i> Mobile Friendly
+                            </a>
+                            <a class="dropdown-item" href="#" onclick="updateChart('seo')">
+                                <i class="bi bi-search"></i> SEO Score
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="bi bi-pie-chart"></i> Distribuição de Scores
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas id="scoreDistributionChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                            <i class="bi bi-circle-fill text-success"></i> Excelente (90-100)
+                        </span>
+                        <span class="mr-2">
+                            <i class="bi bi-circle-fill text-info"></i> Bom (70-89)
+                        </span>
+                        <span class="mr-2">
+                            <i class="bi bi-circle-fill text-warning"></i> Regular (50-69)
+                        </span>
+                        <span class="mr-2">
+                            <i class="bi bi-circle-fill text-danger"></i> Ruim (0-49)
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Métricas SEO -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="bi bi-search"></i> Métricas SEO e Performance
+            </h6>
+            <div class="dropdown no-arrow">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in">
+                    <a class="dropdown-item" href="{% url 'core_admin:export_seo' %}">
+                        <i class="bi bi-download"></i> Exportar CSV
+                    </a>
+                    <a class="dropdown-item" href="{% url 'core_admin:export_data' %}">
+                        <i class="bi bi-file-earmark-excel"></i> Exportar Excel
+                    </a>
+                    <a class="dropdown-item" href="#" onclick="refreshMetrics()">
+                        <i class="bi bi-arrow-clockwise"></i> Atualizar Dados
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            {% if metrics %}
             <div class="table-responsive">
-                <table class="table align-items-center mb-0">
+                <table class="table table-bordered" id="seoTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>URL</th>
                             <th>Título</th>
-                            <th>H1</th>
-                            <th>H2</th>
-                            <th>H3</th>
-                            <th>Imagens</th>
-                            <th>Palavras</th>
-                            <th>Links Int.</th>
-                            <th>Links Ext.</th>
                             <th>Page Speed</th>
-                            <th>Mobile</th>
+                            <th>Mobile Friendly</th>
+                            <th>SEO Score</th>
+                            <th>Conteúdo</th>
+                            <th>Links</th>
                             <th>Última Verificação</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for metric in metrics %}
                         <tr>
-                            <td>{{ metric.url|truncatechars:30 }}</td>
-                            <td>{{ metric.title|truncatechars:30 }}</td>
-                            <td>{{ metric.h1_count }}</td>
-                            <td>{{ metric.h2_count }}</td>
-                            <td>{{ metric.h3_count }}</td>
-                            <td>{{ metric.image_count }}</td>
-                            <td>{{ metric.word_count }}</td>
-                            <td>{{ metric.internal_links }}</td>
-                            <td>{{ metric.external_links }}</td>
-                            <td>{{ metric.page_speed_score|floatformat:1 }}</td>
-                            <td>{{ metric.mobile_friendly_score|floatformat:1 }}</td>
-                            <td>{{ metric.last_checked|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-shape icon-sm bg-gradient-primary text-white rounded-circle me-3">
+                                        <i class="bi bi-link-45deg"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-weight-bold">
+                                            <a href="{{ metric.url }}" target="_blank" class="text-decoration-none">
+                                                {{ metric.url|truncatechars:40 }}
+                                            </a>
+                                        </div>
+                                        <div class="text-muted small">{{ metric.title|truncatechars:30 }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div class="font-weight-bold">{{ metric.title|truncatechars:40 }}</div>
+                                    <div class="text-muted">{{ metric.meta_description|truncatechars:50 }}</div>
+                                </div>
+                            </td>
+                            <td>
+                                {% if metric.page_speed_score >= 90 %}
+                                    <span class="badge bg-success">
+                                        <i class="bi bi-speedometer2"></i> {{ metric.page_speed_score|floatformat:1 }}
+                                    </span>
+                                {% elif metric.page_speed_score >= 70 %}
+                                    <span class="badge bg-info">
+                                        <i class="bi bi-speedometer2"></i> {{ metric.page_speed_score|floatformat:1 }}
+                                    </span>
+                                {% elif metric.page_speed_score >= 50 %}
+                                    <span class="badge bg-warning">
+                                        <i class="bi bi-speedometer2"></i> {{ metric.page_speed_score|floatformat:1 }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-danger">
+                                        <i class="bi bi-speedometer2"></i> {{ metric.page_speed_score|floatformat:1 }}
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if metric.mobile_friendly_score >= 90 %}
+                                    <span class="badge bg-success">
+                                        <i class="bi bi-phone"></i> {{ metric.mobile_friendly_score|floatformat:1 }}
+                                    </span>
+                                {% elif metric.mobile_friendly_score >= 70 %}
+                                    <span class="badge bg-info">
+                                        <i class="bi bi-phone"></i> {{ metric.mobile_friendly_score|floatformat:1 }}
+                                    </span>
+                                {% elif metric.mobile_friendly_score >= 50 %}
+                                    <span class="badge bg-warning">
+                                        <i class="bi bi-phone"></i> {{ metric.mobile_friendly_score|floatformat:1 }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-danger">
+                                        <i class="bi bi-phone"></i> {{ metric.mobile_friendly_score|floatformat:1 }}
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% with seo_score=metric.h1_count|add:metric.h2_count|add:metric.image_count|add:metric.word_count %}
+                                    {% if seo_score >= 100 %}
+                                        <span class="badge bg-success">
+                                            <i class="bi bi-search"></i> {{ seo_score }}
+                                        </span>
+                                    {% elif seo_score >= 50 %}
+                                        <span class="badge bg-info">
+                                            <i class="bi bi-search"></i> {{ seo_score }}
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-warning">
+                                            <i class="bi bi-search"></i> {{ seo_score }}
+                                        </span>
+                                    {% endif %}
+                                {% endwith %}
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div><strong>H1:</strong> {{ metric.h1_count }}</div>
+                                    <div><strong>H2:</strong> {{ metric.h2_count }}</div>
+                                    <div><strong>Imagens:</strong> {{ metric.image_count }}</div>
+                                    <div><strong>Palavras:</strong> {{ metric.word_count }}</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div><strong>Internos:</strong> {{ metric.internal_links }}</div>
+                                    <div><strong>Externos:</strong> {{ metric.external_links }}</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div class="font-weight-bold">{{ metric.last_checked|date:"d/m/Y" }}</div>
+                                    <div class="text-muted">{{ metric.last_checked|date:"H:i" }}</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ metric.url }}" target="_blank" class="btn btn-sm btn-outline-primary" 
+                                       data-bs-toggle="tooltip" title="Ver página">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-outline-info" 
+                                            data-bs-toggle="tooltip" title="Analisar SEO">
+                                        <i class="bi bi-graph-up"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-success" 
+                                            data-bs-toggle="tooltip" title="Otimizar">
+                                        <i class="bi bi-gear"></i>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
+            {% else %}
+            <div class="text-center py-4">
+                <i class="bi bi-graph-up fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Nenhuma métrica SEO encontrada</h5>
+                <p class="text-muted">As métricas de SEO aparecerão aqui quando as páginas forem analisadas.</p>
+                <button class="btn btn-primary" onclick="refreshMetrics()">
+                    <i class="bi bi-arrow-clockwise"></i> Analisar Páginas
+                </button>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Inicializar tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+});
+
+// Inicializar DataTable se disponível
+if (typeof $.fn.DataTable !== 'undefined') {
+    $('#seoTable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+        },
+        "pageLength": 25,
+        "order": [[7, "desc"]]
+    });
+}
+
+// Gráfico de Performance
+var ctx = document.getElementById('performanceChart').getContext('2d');
+var performanceChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+        datasets: [{
+            label: 'Page Speed Score',
+            data: [85, 87, 89, 91, 88, 92],
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }, {
+            label: 'Mobile Friendly Score',
+            data: [78, 82, 85, 88, 86, 90],
+            borderColor: 'rgb(255, 99, 132)',
+            tension: 0.1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100
+            }
+        }
+    }
+});
+
+// Gráfico de Distribuição
+var ctxPie = document.getElementById('scoreDistributionChart').getContext('2d');
+var scoreDistributionChart = new Chart(ctxPie, {
+    type: 'doughnut',
+    data: {
+        labels: ['Excelente', 'Bom', 'Regular', 'Ruim'],
+        datasets: [{
+            data: [3, 4, 2, 1],
+            backgroundColor: ['#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b']
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+
+function updateChart(type) {
+    // Função para atualizar gráficos
+    console.log('Atualizando gráfico:', type);
+}
+
+function refreshMetrics() {
+    // Função para atualizar métricas
+    console.log('Atualizando métricas SEO');
+    location.reload();
+}
+</script>
 {% endblock %} 

@@ -1,4 +1,4 @@
-{% extends "admin/base_site.html" %}
+{% extends "admin/base.html" %}
 {% load static %}
 
 {% block extrastyle %}
@@ -7,172 +7,309 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
     :root {
-        --primary-color: #2c3e50;
-        --secondary-color: #34495e;
-        --success-color: #27ae60;
-        --warning-color: #f39c12;
-        --danger-color: #c0392b;
-        --background-color: #ecf0f1;
+        --primary-color: #667eea;
+        --secondary-color: #764ba2;
+        --success-color: #11998e;
+        --warning-color: #f093fb;
+        --danger-color: #f5576c;
+        --info-color: #4facfe;
+        --background-color: #f8f9fa;
         --text-color: #2c3e50;
+        --border-color: #e9ecef;
     }
 
     body {
         background-color: var(--background-color);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    .dashboard-nav {
-        background-color: var(--primary-color);
-        padding: 1rem;
-        margin-bottom: 2rem;
-        border-radius: 0.5rem;
-    }
-
-    .dashboard-nav a {
-        color: white;
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        margin-right: 1rem;
-        border-radius: 0.25rem;
-        transition: background-color 0.3s;
-    }
-
-    .dashboard-nav a:hover {
-        background-color: var(--secondary-color);
-    }
-
-    .dashboard-nav a i {
-        margin-right: 0.5rem;
-    }
-
-    .card {
-        border: none;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        margin-bottom: 1rem;
-    }
-
-    .card-header {
-        background-color: white;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .icon-shape {
-        width: 48px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .bg-gradient-primary {
-        background: linear-gradient(45deg, #4e73df, #224abe);
-    }
-
-    .bg-gradient-success {
-        background: linear-gradient(45deg, #1cc88a, #13855c);
-    }
-
-    .bg-gradient-warning {
-        background: linear-gradient(45deg, #f6c23e, #dda20a);
-    }
-
-    .bg-gradient-info {
-        background: linear-gradient(45deg, #36b9cc, #258391);
-    }
-
-    .shadow-primary {
-        box-shadow: 0 0 10px rgba(78, 115, 223, 0.3);
-    }
-
-    .shadow-success {
-        box-shadow: 0 0 10px rgba(28, 200, 138, 0.3);
-    }
-
-    .shadow-warning {
-        box-shadow: 0 0 10px rgba(246, 194, 62, 0.3);
-    }
-
-    .shadow-info {
-        box-shadow: 0 0 10px rgba(54, 185, 204, 0.3);
-    }
-
-    .text-lg {
-        font-size: 1.5rem;
-    }
-
-    .table th {
-        font-size: 0.65rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .table td {
-        font-size: 0.875rem;
-        vertical-align: middle;
-    }
-
-    .table-responsive {
-        border-radius: 0.5rem;
-    }
-
-    .numbers h5 {
-        font-size: 1.5rem;
-        margin-bottom: 0;
-    }
-
-    .numbers p {
-        margin-bottom: 0;
-    }
-
-    .font-weight-bolder {
-        font-weight: 700 !important;
-    }
-
-    #content {
-        padding: 20px;
-    }
-
+    /* Header do Admin */
     #header {
-        background: var(--primary-color);
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
         color: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     #branding h1 {
         color: white;
+        font-weight: 700;
+        font-size: 1.8rem;
     }
 
     #branding h1 a {
         color: white;
+        text-decoration: none;
     }
 
+    #branding h1 a:hover {
+        color: rgba(255,255,255,0.9);
+    }
+
+    /* Breadcrumbs */
     div.breadcrumbs {
-        background: var(--secondary-color);
+        background: rgba(255,255,255,0.1);
         color: white;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
     }
 
     div.breadcrumbs a {
+        color: rgba(255,255,255,0.9);
+        text-decoration: none;
+    }
+
+    div.breadcrumbs a:hover {
         color: white;
     }
 
-    .module h2, .module caption, .inline-group h2 {
-        background: var(--primary-color);
+    /* Navegação do Dashboard */
+    .dashboard-nav {
+        background: white;
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        border: 1px solid var(--border-color);
     }
 
-    .button, input[type=submit], input[type=button], .submit-row input, a.button {
-        background: var(--primary-color);
+    .dashboard-nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
     }
 
-    .button:hover, input[type=submit]:hover, input[type=button]:hover {
+    .dashboard-nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .dashboard-nav-brand h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    .dashboard-nav-brand .brand-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+    }
+
+    .dashboard-nav-links {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .dashboard-nav a {
+        color: var(--text-color);
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border: 2px solid transparent;
+        background: var(--background-color);
+    }
+
+    .dashboard-nav a:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        text-decoration: none;
+    }
+
+    .dashboard-nav a.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+
+    .dashboard-nav a i {
+        font-size: 1.1rem;
+    }
+
+    /* Container Principal */
+    #content {
+        padding: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .dashboard-container {
+        background: transparent;
+    }
+
+    /* Cards e Componentes */
+    .card {
+        border: none;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+        background: white;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    /* Botões */
+    .btn {
+        border-radius: 0.75rem;
+        font-weight: 500;
+        padding: 0.5rem 1.5rem;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-color: var(--primary-color);
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, var(--success-color), #38ef7d);
+        border-color: var(--success-color);
+    }
+
+    .btn-success:hover {
+        background: linear-gradient(135deg, #38ef7d, var(--success-color));
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+    }
+
+    .btn-outline-primary {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    .btn-outline-primary:hover {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+
+    /* Tabelas */
+    .table {
+        border-radius: 0.75rem;
+        overflow: hidden;
+    }
+
+    .table th {
+        background: var(--background-color);
+        border: none;
+        font-weight: 600;
+        color: var(--text-color);
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+        padding: 1rem;
+    }
+
+    .table td {
+        border: none;
+        padding: 1rem;
+        vertical-align: middle;
+    }
+
+    .table tbody tr:hover {
+        background: rgba(102, 126, 234, 0.05);
+    }
+
+    /* Badges */
+    .badge {
+        border-radius: 0.5rem;
+        font-weight: 500;
+        padding: 0.5rem 0.75rem;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .dashboard-nav-container {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .dashboard-nav-links {
+            justify-content: center;
+        }
+
+        .dashboard-nav a {
+            flex: 1;
+            justify-content: center;
+            min-width: 120px;
+        }
+
+        #content {
+            padding: 1rem;
+        }
+    }
+
+    /* Animações */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .dashboard-container {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Scrollbar personalizada */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--background-color);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
         background: var(--secondary-color);
-    }
-
-    .button.default, input[type=submit].default, .submit-row input.default {
-        background: var(--success-color);
-    }
-
-    .button.default:hover, input[type=submit].default:hover {
-        background: var(--success-color);
-        opacity: 0.9;
     }
 </style>
 {% endblock %}
@@ -184,11 +321,36 @@
 
 {% block nav-global %}
 <div class="dashboard-nav">
-    <a href="{% url 'core_admin:admin_dashboard' %}"><i class="bi bi-speedometer2"></i>Dashboard</a>
-    <a href="{% url 'core_admin:cookie_list' %}"><i class="bi bi-cookie"></i>Cookies</a>
-    <a href="{% url 'core_admin:session_list' %}"><i class="bi bi-people"></i>Sessões</a>
-    <a href="{% url 'core_admin:seometrics_list' %}"><i class="bi bi-graph-up"></i>SEO</a>
-    <a href="{% url 'core_admin:analyticsexport_list' %}"><i class="bi bi-download"></i>Exportar</a>
+    <div class="dashboard-nav-container">
+        <div class="dashboard-nav-brand">
+            <div class="brand-icon">
+                <i class="bi bi-graph-up"></i>
+            </div>
+            <h2>HOZ TECH Analytics</h2>
+        </div>
+        <div class="dashboard-nav-links">
+            <a href="{% url 'core_admin:admin_dashboard' %}" class="{% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="{% url 'core_admin:cookie_list' %}" class="{% if request.resolver_match.url_name == 'cookie_list' %}active{% endif %}">
+                <i class="bi bi-cookie"></i>
+                <span>Cookies</span>
+            </a>
+            <a href="{% url 'core_admin:session_list' %}" class="{% if request.resolver_match.url_name == 'session_list' %}active{% endif %}">
+                <i class="bi bi-people"></i>
+                <span>Sessões</span>
+            </a>
+            <a href="{% url 'core_admin:seometrics_list' %}" class="{% if request.resolver_match.url_name == 'seometrics_list' %}active{% endif %}">
+                <i class="bi bi-graph-up"></i>
+                <span>SEO</span>
+            </a>
+            <a href="{% url 'core_admin:analyticsexport_list' %}" class="{% if request.resolver_match.url_name == 'analyticsexport_list' %}active{% endif %}">
+                <i class="bi bi-download"></i>
+                <span>Exportar</span>
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}
 

@@ -3,46 +3,300 @@
 
 {% block dashboard_content %}
 <div class="container-fluid">
-    <div class="card">
-        <div class="card-header">
-            <h6 class="mb-0">Exportações de Analytics</h6>
+    <!-- Header com estatísticas -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total de Exports
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ exports.count }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-download fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body p-0">
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Exports CSV
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ exports|length }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-file-earmark-text fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Exports Excel
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ exports|length }}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-file-earmark-excel fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Criar Export
+                            </div>
+                            <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#createExportModal">
+                                <i class="bi bi-plus-circle"></i> Novo
+                            </button>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-plus-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Exports -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="bi bi-download"></i> Histórico de Exportações de Analytics
+            </h6>
+            <div class="dropdown no-arrow">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in">
+                    <a class="dropdown-item" href="{% url 'core_admin:export_cookies' %}">
+                        <i class="bi bi-cookie"></i> Exportar Cookies
+                    </a>
+                    <a class="dropdown-item" href="{% url 'core_admin:export_sessions' %}">
+                        <i class="bi bi-people"></i> Exportar Sessões
+                    </a>
+                    <a class="dropdown-item" href="{% url 'core_admin:export_seo' %}">
+                        <i class="bi bi-graph-up"></i> Exportar SEO
+                    </a>
+                    <a class="dropdown-item" href="{% url 'core_admin:export_data' %}">
+                        <i class="bi bi-file-earmark-excel"></i> Exportar Completo
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            {% if exports %}
             <div class="table-responsive">
-                <table class="table align-items-center mb-0">
+                <table class="table table-bordered" id="exportsTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Nome</th>
+                            <th>Nome do Export</th>
                             <th>Formato</th>
-                            <th>Data Inicial</th>
-                            <th>Data Final</th>
-                            <th>Criado em</th>
-                            <th>Download</th>
+                            <th>Período</th>
+                            <th>Criado por</th>
+                            <th>Data de Criação</th>
+                            <th>Status</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for export in exports %}
                         <tr>
-                            <td>{{ export.name }}</td>
-                            <td>{{ export.format }}</td>
-                            <td>{{ export.date_range_start|date:"d/m/Y" }}</td>
-                            <td>{{ export.date_range_end|date:"d/m/Y" }}</td>
-                            <td>{{ export.created_at|date:"d/m/Y H:i" }}</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-shape icon-sm bg-gradient-primary text-white rounded-circle me-3">
+                                        {% if export.format == 'csv' %}
+                                            <i class="bi bi-file-earmark-text"></i>
+                                        {% elif export.format == 'xlsx' %}
+                                            <i class="bi bi-file-earmark-excel"></i>
+                                        {% elif export.format == 'json' %}
+                                            <i class="bi bi-file-earmark-code"></i>
+                                        {% else %}
+                                            <i class="bi bi-file-earmark"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <div class="font-weight-bold">{{ export.name }}</div>
+                                        <div class="text-muted small">{{ export.format|upper }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                {% if export.format == 'csv' %}
+                                    <span class="badge bg-primary">
+                                        <i class="bi bi-file-earmark-text"></i> CSV
+                                    </span>
+                                {% elif export.format == 'xlsx' %}
+                                    <span class="badge bg-success">
+                                        <i class="bi bi-file-earmark-excel"></i> Excel
+                                    </span>
+                                {% elif export.format == 'json' %}
+                                    <span class="badge bg-info">
+                                        <i class="bi bi-file-earmark-code"></i> JSON
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-secondary">{{ export.format|upper }}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div class="font-weight-bold">{{ export.date_range_start|date:"d/m/Y" }}</div>
+                                    <div class="text-muted">até {{ export.date_range_end|date:"d/m/Y" }}</div>
+                                </div>
+                            </td>
+                            <td>
+                                {% if export.user %}
+                                    <span class="badge bg-success">{{ export.user.username }}</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Sistema</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div class="font-weight-bold">{{ export.created_at|date:"d/m/Y" }}</div>
+                                    <div class="text-muted">{{ export.created_at|date:"H:i" }}</div>
+                                </div>
+                            </td>
                             <td>
                                 {% if export.file_path %}
-                                <a href="{{ export.file_path.url }}" class="btn btn-sm btn-primary">
-                                    <i class="bi bi-download"></i> Download
-                                </a>
+                                    <span class="badge bg-success">
+                                        <i class="bi bi-check-circle"></i> Disponível
+                                    </span>
                                 {% else %}
-                                -
+                                    <span class="badge bg-warning">
+                                        <i class="bi bi-clock"></i> Processando
+                                    </span>
                                 {% endif %}
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    {% if export.file_path %}
+                                        <a href="{{ export.file_path.url }}" class="btn btn-sm btn-success" 
+                                           data-bs-toggle="tooltip" title="Download">
+                                            <i class="bi bi-download"></i>
+                                        </a>
+                                    {% endif %}
+                                    <button type="button" class="btn btn-sm btn-outline-primary" 
+                                            data-bs-toggle="tooltip" title="Ver detalhes">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" 
+                                            data-bs-toggle="tooltip" title="Excluir">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
+            {% else %}
+            <div class="text-center py-4">
+                <i class="bi bi-download fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Nenhum export encontrado</h5>
+                <p class="text-muted">Crie seu primeiro export de analytics para começar a analisar os dados.</p>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createExportModal">
+                    <i class="bi bi-plus-circle"></i> Criar Primeiro Export
+                </button>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
+
+<!-- Modal para criar novo export -->
+<div class="modal fade" id="createExportModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-plus-circle"></i> Criar Novo Export
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Nome do Export</label>
+                        <input type="text" class="form-control" placeholder="Ex: Relatório Mensal - Janeiro 2024">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Formato</label>
+                        <select class="form-select">
+                            <option value="csv">CSV</option>
+                            <option value="xlsx">Excel (XLSX)</option>
+                            <option value="json">JSON</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Data Inicial</label>
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Data Final</label>
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">
+                    <i class="bi bi-download"></i> Criar Export
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Inicializar tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+});
+
+// Inicializar DataTable se disponível
+if (typeof $.fn.DataTable !== 'undefined') {
+    $('#exportsTable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+        },
+        "pageLength": 25,
+        "order": [[4, "desc"]]
+    });
+}
+</script>
 {% endblock %} 

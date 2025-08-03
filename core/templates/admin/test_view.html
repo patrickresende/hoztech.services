@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test View</title>
+</head>
+<body>
+    <h1>Test View</h1>
+    
+    <h2>Dados de Teste:</h2>
+    <p>{{ test_data }}</p>
+    
+    <h2>Sessões ({{ sessions.count }}):</h2>
+    <ul>
+    {% for session in sessions %}
+        <li>{{ session.session_key }} - {{ session.ip_address }}</li>
+    {% endfor %}
+    </ul>
+    
+    <h2>Exports ({{ exports.count }}):</h2>
+    <ul>
+    {% for export in exports %}
+        <li>{{ export.name }} - {{ export.format }}</li>
+    {% endfor %}
+    </ul>
+    
+    <h2>Métricas SEO ({{ metrics.count }}):</h2>
+    <ul>
+    {% for metric in metrics %}
+        <li>{{ metric.url }} - {{ metric.title }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html> 

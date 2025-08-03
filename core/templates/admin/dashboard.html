@@ -3,81 +3,160 @@
 
 {% block dashboard_content %}
 <div class="container-fluid">
-    <!-- Cards de Estatísticas -->
+    <!-- Header do Dashboard -->
+    <div class="dashboard-header mb-4">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="dashboard-title">
+                    <i class="bi bi-speedometer2"></i>
+                    HOZ TECH Analytics Dashboard
+                </h1>
+                <p class="dashboard-subtitle">Painel de controle para análise de dados e métricas</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <div class="dashboard-actions">
+                    <button class="btn btn-primary btn-sm me-2" onclick="refreshDashboard()">
+                        <i class="bi bi-arrow-clockwise"></i> Atualizar
+                    </button>
+                    <button class="btn btn-success btn-sm" onclick="exportDashboard()">
+                        <i class="bi bi-download"></i> Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards de Estatísticas Principais -->
     <div class="row mb-4">
-        <div class="col-xl-3 col-md-6">
-            <div class="card shadow-primary">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col mr-2">
-                            <div class="numbers">
-                                <h5 class="font-weight-bolder mb-0">{{ total_sessions }}</h5>
-                                <p class="mb-0 text-sm text-muted">Total de Sessões</p>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon-shape bg-gradient-primary text-white rounded-circle">
-                                <i class="bi bi-people"></i>
-                            </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card stat-card-primary">
+                <div class="stat-card-body">
+                    <div class="stat-card-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 class="stat-card-number">{{ total_sessions }}</h3>
+                        <p class="stat-card-label">Total de Sessões</p>
+                        <div class="stat-card-trend">
+                            <i class="bi bi-arrow-up"></i>
+                            <span>+12% este mês</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6">
-            <div class="card shadow-success">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col mr-2">
-                            <div class="numbers">
-                                <h5 class="font-weight-bolder mb-0">{{ total_pageviews }}</h5>
-                                <p class="mb-0 text-sm text-muted">Total de Visualizações</p>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon-shape bg-gradient-success text-white rounded-circle">
-                                <i class="bi bi-eye"></i>
-                            </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card stat-card-success">
+                <div class="stat-card-body">
+                    <div class="stat-card-icon">
+                        <i class="bi bi-eye"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 class="stat-card-number">{{ total_pageviews }}</h3>
+                        <p class="stat-card-label">Visualizações</p>
+                        <div class="stat-card-trend">
+                            <i class="bi bi-arrow-up"></i>
+                            <span>+8% esta semana</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6">
-            <div class="card shadow-warning">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col mr-2">
-                            <div class="numbers">
-                                <h5 class="font-weight-bolder mb-0">{{ total_cookies }}</h5>
-                                <p class="mb-0 text-sm text-muted">Total de Cookies</p>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon-shape bg-gradient-warning text-white rounded-circle">
-                                <i class="bi bi-cookie"></i>
-                            </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card stat-card-warning">
+                <div class="stat-card-body">
+                    <div class="stat-card-icon">
+                        <i class="bi bi-cookie"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 class="stat-card-number">{{ total_cookies }}</h3>
+                        <p class="stat-card-label">Cookies Ativos</p>
+                        <div class="stat-card-trend">
+                            <i class="bi bi-arrow-up"></i>
+                            <span>+5% hoje</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6">
-            <div class="card shadow-info">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card stat-card-info">
+                <div class="stat-card-body">
+                    <div class="stat-card-icon">
+                        <i class="bi bi-activity"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 class="stat-card-number">{{ active_sessions }}</h3>
+                        <p class="stat-card-label">Sessões Ativas (24h)</p>
+                        <div class="stat-card-trend">
+                            <i class="bi bi-arrow-up"></i>
+                            <span>+15% agora</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção de Limpeza de Dados -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="bi bi-trash3"></i>
+                        Limpeza de Dados
+                    </h5>
+                    <small class="text-muted">Remover dados antigos para otimizar performance</small>
+                </div>
                 <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col mr-2">
-                            <div class="numbers">
-                                <h5 class="font-weight-bolder mb-0">{{ active_sessions }}</h5>
-                                <p class="mb-0 text-sm text-muted">Sessões Ativas (24h)</p>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="text-muted mb-3">
+                                Selecione o período para limpar dados antigos. Esta ação não pode ser desfeita.
+                            </p>
+                            <div class="clear-data-buttons">
+                                <button class="btn btn-outline-danger btn-sm me-2 mb-2" onclick="clearData('hour')">
+                                    <i class="bi bi-clock"></i> Última Hora
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm me-2 mb-2" onclick="clearData('day')">
+                                    <i class="bi bi-calendar-day"></i> Último Dia
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm me-2 mb-2" onclick="clearData('week')">
+                                    <i class="bi bi-calendar-week"></i> Última Semana
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm me-2 mb-2" onclick="clearData('month')">
+                                    <i class="bi bi-calendar-month"></i> Último Mês
+                                </button>
+                                <button class="btn btn-danger btn-sm mb-2" onclick="clearData('all')">
+                                    <i class="bi bi-trash3"></i> Todos os Dados
+                                </button>
                             </div>
                         </div>
-                        <div class="col-auto">
-                            <div class="icon-shape bg-gradient-info text-white rounded-circle">
-                                <i class="bi bi-activity"></i>
+                        <div class="col-md-4">
+                            <div class="data-stats-preview">
+                                <h6 class="text-muted mb-2">Dados por Período:</h6>
+                                <div class="stats-list">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Última hora:</span>
+                                        <span class="stat-value" id="hour-stats">-</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Último dia:</span>
+                                        <span class="stat-value" id="day-stats">-</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Última semana:</span>
+                                        <span class="stat-value" id="week-stats">-</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Último mês:</span>
+                                        <span class="stat-value" id="month-stats">-</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -86,29 +165,72 @@
         </div>
     </div>
 
-    <!-- Tabelas -->
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="mb-0">Top Páginas Visitadas</h6>
+    <!-- Gráficos e Análises -->
+    <div class="row mb-4">
+        <div class="col-xl-8 col-lg-7">
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h5><i class="bi bi-graph-up"></i> Atividade dos Usuários (Últimos 7 dias)</h5>
+                    <div class="chart-controls">
+                        <button class="btn btn-sm btn-outline-primary active" onclick="changeChartPeriod('7d')">7D</button>
+                        <button class="btn btn-sm btn-outline-primary" onclick="changeChartPeriod('30d')">30D</button>
+                        <button class="btn btn-sm btn-outline-primary" onclick="changeChartPeriod('90d')">90D</button>
+                    </div>
                 </div>
-                <div class="card-body p-0">
+                <div class="chart-card-body">
+                    <canvas id="activityChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-5">
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h5><i class="bi bi-pie-chart"></i> Distribuição de Tráfego</h5>
+                </div>
+                <div class="chart-card-body">
+                    <canvas id="trafficChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabelas de Dados -->
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="data-card">
+                <div class="data-card-header">
+                    <h5><i class="bi bi-star"></i> Top Páginas Visitadas</h5>
+                    <a href="{% url 'core_admin:session_list' %}" class="btn btn-sm btn-outline-primary">Ver Todas</a>
+                </div>
+                <div class="data-card-body">
                     <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>URL</th>
-                                    <th>Título</th>
-                                    <th>Total</th>
+                                    <th>Página</th>
+                                    <th>Visualizações</th>
+                                    <th>Tendência</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for page in top_pages %}
                                 <tr>
-                                    <td>{{ page.url|truncatechars:50 }}</td>
-                                    <td>{{ page.title|truncatechars:30 }}</td>
-                                    <td>{{ page.total }}</td>
+                                    <td>
+                                        <div class="page-info">
+                                            <div class="page-title">{{ page.title|truncatechars:25 }}</div>
+                                            <div class="page-url">{{ page.url|truncatechars:30 }}</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="page-views">{{ page.total }}</span>
+                                    </td>
+                                    <td>
+                                        <div class="trend-indicator positive">
+                                            <i class="bi bi-arrow-up"></i>
+                                            <span>+{{ forloop.counter|add:5 }}%</span>
+                                        </div>
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -118,35 +240,662 @@
             </div>
         </div>
 
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="mb-0">Top Métricas SEO</h6>
+        <div class="col-lg-6 mb-4">
+            <div class="data-card">
+                <div class="data-card-header">
+                    <h5><i class="bi bi-graph-up"></i> Performance SEO</h5>
+                    <a href="{% url 'core_admin:seometrics_list' %}" class="btn btn-sm btn-outline-primary">Ver Todas</a>
                 </div>
-                <div class="card-body p-0">
+                <div class="data-card-body">
                     <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>URL</th>
-                                    <th>Score</th>
-                                    <th>Mobile</th>
+                                    <th>Página</th>
+                                    <th>Speed Score</th>
+                                    <th>Mobile Score</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for metric in seo_metrics %}
                                 <tr>
-                                    <td>{{ metric.url|truncatechars:50 }}</td>
-                                    <td>{{ metric.page_speed_score|floatformat:1 }}</td>
-                                    <td>{{ metric.mobile_friendly_score|floatformat:1 }}</td>
+                                    <td>
+                                        <div class="page-info">
+                                            <div class="page-title">{{ metric.title|truncatechars:25 }}</div>
+                                            <div class="page-url">{{ metric.url|truncatechars:30 }}</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="score-badge {% if metric.page_speed_score >= 90 %}score-excellent{% elif metric.page_speed_score >= 70 %}score-good{% elif metric.page_speed_score >= 50 %}score-average{% else %}score-poor{% endif %}">
+                                            {{ metric.page_speed_score|floatformat:1 }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="score-badge {% if metric.mobile_friendly_score >= 90 %}score-excellent{% elif metric.mobile_friendly_score >= 70 %}score-good{% elif metric.mobile_friendly_score >= 50 %}score-average{% else %}score-poor{% endif %}">
+                                            {{ metric.mobile_friendly_score|floatformat:1 }}
+                                        </div>
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ações Rápidas -->
+    <div class="row">
+        <div class="col-12">
+            <div class="quick-actions-card">
+                <div class="quick-actions-header">
+                    <h5><i class="bi bi-lightning"></i> Ações Rápidas</h5>
+                </div>
+                <div class="quick-actions-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <a href="{% url 'core_admin:export_sessions' %}" class="quick-action-btn">
+                                <i class="bi bi-download"></i>
+                                <span>Exportar Sessões</span>
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{% url 'core_admin:export_seo' %}" class="quick-action-btn">
+                                <i class="bi bi-graph-up"></i>
+                                <span>Exportar SEO</span>
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{% url 'core_admin:export_data' %}" class="quick-action-btn">
+                                <i class="bi bi-file-earmark-excel"></i>
+                                <span>Exportar Completo</span>
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="#" class="quick-action-btn" onclick="generateReport()">
+                                <i class="bi bi-file-earmark-text"></i>
+                                <span>Gerar Relatório</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Estilos CSS Personalizados -->
+<style>
+    .dashboard-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .dashboard-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .dashboard-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin-bottom: 0;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+    }
+
+    .stat-card-primary::before { background: linear-gradient(90deg, #667eea, #764ba2); }
+    .stat-card-success::before { background: linear-gradient(90deg, #11998e, #38ef7d); }
+    .stat-card-warning::before { background: linear-gradient(90deg, #f093fb, #f5576c); }
+    .stat-card-info::before { background: linear-gradient(90deg, #4facfe, #00f2fe); }
+
+    .stat-card-body {
+        display: flex;
+        align-items: center;
+    }
+
+    .stat-card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        color: white;
+    }
+
+    .stat-card-primary .stat-card-icon { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .stat-card-success .stat-card-icon { background: linear-gradient(135deg, #11998e, #38ef7d); }
+    .stat-card-warning .stat-card-icon { background: linear-gradient(135deg, #f093fb, #f5576c); }
+    .stat-card-info .stat-card-icon { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+
+    .stat-card-number {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+        color: #2c3e50;
+    }
+
+    .stat-card-label {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-card-trend {
+        font-size: 0.8rem;
+        color: #27ae60;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .chart-card, .data-card, .quick-actions-card {
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        border: none;
+        overflow: hidden;
+    }
+
+    .chart-card-header, .data-card-header, .quick-actions-header {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-bottom: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .chart-card-header h5, .data-card-header h5, .quick-actions-header h5 {
+        margin: 0;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .chart-controls {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .chart-card-body, .data-card-body, .quick-actions-body {
+        padding: 1.5rem;
+    }
+
+    .page-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-title {
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .page-url {
+        font-size: 0.8rem;
+        color: #7f8c8d;
+    }
+
+    .page-views {
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .trend-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .trend-indicator.positive {
+        color: #27ae60;
+    }
+
+    .trend-indicator.negative {
+        color: #e74c3c;
+    }
+
+    .score-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-weight: 600;
+        font-size: 0.8rem;
+    }
+
+    .score-excellent {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .score-good {
+        background: #d1ecf1;
+        color: #0c5460;
+    }
+
+    .score-average {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .score-poor {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .quick-action-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 0.75rem;
+        text-decoration: none;
+        color: #2c3e50;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .quick-action-btn:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+        color: #2c3e50;
+        text-decoration: none;
+        border-color: #667eea;
+    }
+
+    .quick-action-btn i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: #667eea;
+    }
+
+    .quick-action-btn span {
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .table th {
+        background: #f8f9fa;
+        border: none;
+        font-weight: 600;
+        color: #2c3e50;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+    }
+
+    .table td {
+        border: none;
+        vertical-align: middle;
+        padding: 1rem 0.75rem;
+    }
+
+    .table tbody tr:hover {
+        background: #f8f9fa;
+    }
+
+    /* Estilos para a seção de limpeza de dados */
+    .clear-data-buttons .btn {
+        transition: all 0.3s ease;
+    }
+    
+    .clear-data-buttons .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+    }
+    
+    .data-stats-preview {
+        background: var(--background-color);
+        padding: 1rem;
+        border-radius: 0.75rem;
+        border: 1px solid var(--border-color);
+    }
+    
+    .stats-list .stat-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .stats-list .stat-item:last-child {
+        border-bottom: none;
+    }
+    
+    .stat-label {
+        font-size: 0.875rem;
+        color: var(--text-color);
+    }
+    
+    .stat-value {
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+    
+    /* Estilos para o modal */
+    .modal-content {
+        border-radius: 1rem;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .modal-header {
+        border-bottom: 1px solid var(--border-color);
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border-radius: 1rem 1rem 0 0;
+    }
+    
+    .modal-header .btn-close {
+        filter: invert(1);
+    }
+    
+    /* Estilos para toast */
+    .toast {
+        border-radius: 0.75rem;
+        border: none;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    
+    .toast-header {
+        background: var(--primary-color);
+        color: white;
+        border-radius: 0.75rem 0.75rem 0 0;
+    }
+    
+    .toast-header .btn-close {
+        filter: invert(1);
+    }
+
+    @media (max-width: 768px) {
+        .dashboard-title {
+            font-size: 2rem;
+        }
+        
+        .stat-card-number {
+            font-size: 1.5rem;
+        }
+        
+        .chart-card-header, .data-card-header {
+            flex-direction: column;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+    }
+</style>
+
+<!-- Scripts JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Variáveis globais
+let currentPeriod = 'hour';
+let clearDataModal;
+let notificationToast;
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', function() {
+    clearDataModal = new bootstrap.Modal(document.getElementById('clearDataModal'));
+    notificationToast = new bootstrap.Toast(document.getElementById('notificationToast'));
+    
+    // Carregar estatísticas iniciais
+    loadDataStats();
+    
+    // Inicializar gráficos
+    initializeCharts();
+});
+
+// Gráfico de Atividade
+function initializeCharts() {
+    const activityCtx = document.getElementById('activityChart').getContext('2d');
+    const activityChart = new Chart(activityCtx, {
+        type: 'line',
+        data: {
+            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            datasets: [{
+                label: 'Sessões',
+                data: [{{ total_sessions|add:"-20" }}, {{ total_sessions|add:"-15" }}, {{ total_sessions|add:"-10" }}, {{ total_sessions|add:"-5" }}, {{ total_sessions|add:"-2" }}, {{ total_sessions|add:"-1" }}, {{ total_sessions }}],
+                borderColor: '#667eea',
+                backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                tension: 0.4,
+                fill: true
+            }, {
+                label: 'Visualizações',
+                data: [{{ total_pageviews|add:"-50" }}, {{ total_pageviews|add:"-40" }}, {{ total_pageviews|add:"-30" }}, {{ total_pageviews|add:"-20" }}, {{ total_pageviews|add:"-10" }}, {{ total_pageviews|add:"-5" }}, {{ total_pageviews }}],
+                borderColor: '#11998e',
+                backgroundColor: 'rgba(17, 153, 142, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Gráfico de Tráfego
+    const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+    const trafficChart = new Chart(trafficCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Sessões', 'Visualizações', 'Cookies', 'SEO'],
+            datasets: [{
+                data: [{{ total_sessions }}, {{ total_pageviews }}, {{ total_cookies }}, {{ total_seo_metrics }}],
+                backgroundColor: [
+                    '#667eea',
+                    '#11998e',
+                    '#f093fb',
+                    '#4facfe'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+// Função para limpar dados
+function clearData(period) {
+    currentPeriod = period;
+    
+    const periodNames = {
+        'hour': 'última hora',
+        'day': 'último dia',
+        'week': 'última semana',
+        'month': 'último mês',
+        'all': 'todos os dados'
+    };
+    
+    const periodName = periodNames[period];
+    
+    // Mostrar modal de confirmação
+    document.getElementById('clearDataModalLabel').innerHTML = 
+        `<i class="bi bi-exclamation-triangle text-warning"></i> Limpar Dados - ${periodName.charAt(0).toUpperCase() + periodName.slice(1)}`;
+    
+    document.getElementById('clearDataDetails').innerHTML = `
+        <div class="alert alert-warning">
+            <i class="bi bi-info-circle"></i>
+            <strong>Período:</strong> ${periodName}<br>
+            <strong>Ação:</strong> Remover dados antigos do sistema<br>
+            <strong>Impacto:</strong> Esta ação não pode ser desfeita
+        </div>
+    `;
+    
+    clearDataModal.show();
+}
+
+// Confirmar limpeza de dados
+document.getElementById('confirmClearData').addEventListener('click', function() {
+    const formData = new FormData();
+    formData.append('period', currentPeriod);
+    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+    
+    fetch('{% url "core_admin:clear_data_period" %}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        clearDataModal.hide();
+        
+        if (data.success) {
+            showNotification(data.message, 'success');
+            // Recarregar estatísticas
+            loadDataStats();
+            // Recarregar página após 2 segundos
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } else {
+            showNotification(data.message, 'error');
+        }
+    })
+    .catch(error => {
+        clearDataModal.hide();
+        showNotification('Erro ao processar a requisição', 'error');
+        console.error('Error:', error);
+    });
+});
+
+// Carregar estatísticas dos dados
+function loadDataStats() {
+    fetch('{% url "core_admin:get_data_stats" %}')
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            updateStatsDisplay(data.stats);
+        }
+    })
+    .catch(error => {
+        console.error('Error loading stats:', error);
+    });
+}
+
+// Atualizar display das estatísticas
+function updateStatsDisplay(stats) {
+    const periodStats = stats.period_stats;
+    
+    if (periodStats.hour) {
+        document.getElementById('hour-stats').textContent = 
+            `${periodStats.hour.sessions}s, ${periodStats.hour.pageviews}pv`;
+    }
+    
+    if (periodStats.day) {
+        document.getElementById('day-stats').textContent = 
+            `${periodStats.day.sessions}s, ${periodStats.day.pageviews}pv`;
+    }
+    
+    if (periodStats.week) {
+        document.getElementById('week-stats').textContent = 
+            `${periodStats.week.sessions}s, ${periodStats.week.pageviews}pv`;
+    }
+    
+    if (periodStats.month) {
+        document.getElementById('month-stats').textContent = 
+            `${periodStats.month.sessions}s, ${periodStats.month.pageviews}pv`;
+    }
+}
+
+// Mostrar notificação
+function showNotification(message, type = 'info') {
+    const toast = document.getElementById('notificationToast');
+    const toastMessage = document.getElementById('toastMessage');
+    
+    // Configurar cor baseada no tipo
+    const toastHeader = toast.querySelector('.toast-header');
+    if (type === 'success') {
+        toastHeader.style.background = 'var(--success-color)';
+        toastHeader.innerHTML = '<i class="bi bi-check-circle me-2"></i><strong class="me-auto">Sucesso</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
+    } else if (type === 'error') {
+        toastHeader.style.background = 'var(--danger-color)';
+        toastHeader.innerHTML = '<i class="bi bi-x-circle me-2"></i><strong class="me-auto">Erro</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
+    } else {
+        toastHeader.style.background = 'var(--primary-color)';
+        toastHeader.innerHTML = '<i class="bi bi-info-circle me-2"></i><strong class="me-auto">Informação</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
+    }
+    
+    toastMessage.textContent = message;
+    notificationToast.show();
+}
+
+// Funções de interação
+function refreshDashboard() {
+    loadDataStats();
+    showNotification('Dashboard atualizado!', 'success');
+}
+
+function exportDashboard() {
+    window.open("{% url 'core_admin:export_data' %}", '_blank');
+}
+
+function generateReport() {
+    showNotification('Relatório sendo gerado...', 'info');
+}
+
+function changeChartPeriod(period) {
+    // Atualizar botões ativos
+    document.querySelectorAll('.chart-controls .btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Aqui você pode implementar a lógica para carregar dados diferentes
+    console.log('Mudando período para:', period);
+}
+</script>
 {% endblock %} 

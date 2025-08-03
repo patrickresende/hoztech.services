@@ -21,11 +21,6 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from core.views import health_check
 
-# Configurações básicas do admin
-admin.site.site_header = "HOZ TECH Admin"
-admin.site.site_title = "HOZ TECH Admin Portal"
-admin.site.index_title = "Bem-vindo ao Portal Admin da HOZ TECH"
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),

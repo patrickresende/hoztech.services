@@ -142,20 +142,162 @@
 </div>
 
 <script>
+// Detector de Navegadores - Compatível com CSP
+class BrowserDetector {
+    constructor() {
+        this.browserInfo = this.detectBrowser();
+    }
+
+    detectBrowser() {
+        const userAgent = navigator.userAgent;
+        const isBrave = this.isBraveBrowser(userAgent);
+        const isFirefox = userAgent.includes('Firefox');
+        const isChrome = userAgent.includes('Chrome') && !userAgent.includes('Edg');
+        const isSafari = userAgent.includes('Safari') && !userAgent.includes('Chrome');
+        const isEdge = userAgent.includes('Edg');
+
+        return {
+            isBrave,
+            isFirefox,
+            isChrome,
+            isSafari,
+            isEdge,
+            userAgent,
+            isRestrictive: isBrave || (isFirefox && this.hasPrivacyProtection())
+        };
+    }
+
+    isBraveBrowser(userAgent) {
+        // Detectar Brave de várias formas
+        return (
+            userAgent.includes('Brave') ||
+            (navigator.brave && navigator.brave.isBrave()) ||
+            (window.chrome && window.chrome.webstore === undefined) ||
+            this.checkBraveFingerprint()
+        );
+    }
+
+    checkBraveFingerprint() {
+        // Verificar características específicas do Brave
+        try {
+            // Brave tem algumas características únicas
+            return (
+                navigator.plugins.length === 0 ||
+                (navigator.languages && navigator.languages.length === 0) ||
+                (window.chrome && !window.chrome.app)
+            );
+        } catch (e) {
+            return false;
+        }
+    }
+
+    hasPrivacyProtection() {
+        // Verificar se Firefox tem proteções de privacidade ativas
+        try {
+            return (
+                navigator.webdriver === false &&
+                (navigator.permissions || navigator.permissions.query)
+            );
+        } catch (e) {
+            return false;
+        }
+    }
+
+    getBrowserName() {
+        if (this.browserInfo.isBrave) return 'Brave';
+        if (this.browserInfo.isFirefox) return 'Firefox';
+        if (this.browserInfo.isChrome) return 'Chrome';
+        if (this.browserInfo.isSafari) return 'Safari';
+        if (this.browserInfo.isEdge) return 'Edge';
+        return 'Unknown';
+    }
+}
+
 // Cookie Consent Manager - Compatível com navegadores restritivos
 class CookieConsentManager {
     constructor() {
+        this.browserDetector = new BrowserDetector();
         this.cookieConsent = document.getElementById('cookieConsent');
         this.cookieSettings = document.getElementById('cookieSettings');
         this.performanceCookies = document.getElementById('performanceCookies');
         this.marketingCookies = document.getElementById('marketingCookies');
         this.essentialCookies = document.getElementById('essentialCookies');
         
+        // Configurações específicas por navegador
+        this.browserConfig = this.getBrowserConfig();
+        
         this.init();
     }
 
+    getBrowserConfig() {
+        const browserName = this.browserDetector.getBrowserName();
+        
+        // Usar configuração externa se disponível, senão usar padrão
+        if (window.getBrowserConfig) {
+            return window.getBrowserConfig(browserName);
+        }
+        
+        // Configuração padrão de fallback
+        const configs = {
+            'Brave': {
+                disableConsent: false, // Pode ser alterado para true se necessário
+                cspRelaxed: true,
+                autoAccept: false,
+                showDebugInfo: true,
+                sameSite: 'Lax',
+                cookieExpiry: 365
+            },
+            'Firefox': {
+                disableConsent: false,
+                cspRelaxed: false,
+                autoAccept: false,
+                showDebugInfo: false,
+                sameSite: 'Strict',
+                cookieExpiry: 365
+            },
+            'Chrome': {
+                disableConsent: false,
+                cspRelaxed: false,
+                autoAccept: false,
+                showDebugInfo: false,
+                sameSite: 'Strict',
+                cookieExpiry: 365
+            },
+            'Safari': {
+                disableConsent: false,
+                cspRelaxed: false,
+                autoAccept: false,
+                showDebugInfo: false,
+                sameSite: 'Strict',
+                cookieExpiry: 365
+            },
+            'Edge': {
+                disableConsent: false,
+                cspRelaxed: false,
+                autoAccept: false,
+                showDebugInfo: false,
+                sameSite: 'Strict',
+                cookieExpiry: 365
+            }
+        };
+
+        return configs[browserName] || configs['Chrome'];
+    }
+
     init() {
-        // Verificar se já aceitou os cookies
+        // Mostrar informações de debug se necessário
+        if (this.browserConfig.showDebugInfo) {
+            this.showDebugInfo();
+        }
+
+        // Verificar se deve desabilitar o consentimento
+        if (this.browserConfig.disableConsent) {
+            console.log('🍪 Cookie consent desabilitado para', this.browserDetector.getBrowserName());
+            this.autoAcceptCookies();
+            return;
+        }
+
+    // Verificar se já aceitou os cookies
         if (!this.getCookie('cookie-consent')) {
             this.showConsent();
         }
@@ -181,6 +323,24 @@ class CookieConsentManager {
         this.initializeCookieSettings();
     }
 
+    showDebugInfo() {
+        const debugInfo = `
+            🌐 Navegador: ${this.browserDetector.getBrowserName()}
+            🔒 Restritivo: ${this.browserDetector.browserInfo.isRestrictive}
+            🍪 Consentimento: ${this.browserConfig.disableConsent ? 'Desabilitado' : 'Habilitado'}
+            🛡️ CSP Relaxado: ${this.browserConfig.cspRelaxed ? 'Sim' : 'Não'}
+        `;
+        console.log('🍪 Debug Info:', debugInfo);
+    }
+
+    autoAcceptCookies() {
+        // Aceitar cookies automaticamente para navegadores restritivos
+        this.setCookie('cookie-consent', 'auto-accepted');
+        this.setCookie('performanceCookies', 'true');
+        this.setCookie('marketingCookies', 'true');
+        console.log('🍪 Cookies aceitos automaticamente para', this.browserDetector.getBrowserName());
+    }
+
     showConsent() {
         if (this.cookieConsent) {
             this.cookieConsent.classList.add('show', 'active');
@@ -193,11 +353,20 @@ class CookieConsentManager {
         }
     }
 
-    setCookie(name, value, days = 365) {
+    setCookie(name, value, days = null) {
         const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expiryDays = days || this.browserConfig.cookieExpiry || 365;
+        date.setTime(date.getTime() + (expiryDays * 24 * 60 * 60 * 1000));
         const expires = `expires=${date.toUTCString()}`;
-        document.cookie = `${name}=${value};${expires};path=/;SameSite=Lax`;
+        
+        // Configurações específicas para navegadores restritivos
+        let cookieString = `${name}=${value};${expires};path=/`;
+        
+        // Usar SameSite da configuração do navegador
+        const sameSite = this.browserConfig.sameSite || 'Lax';
+        cookieString += `;SameSite=${sameSite}`;
+        
+        document.cookie = cookieString;
     }
 
     getCookie(name) {
