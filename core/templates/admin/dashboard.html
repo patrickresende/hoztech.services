@@ -523,6 +523,9 @@
 <!-- Scripts JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+// Dados do Django para JavaScript
+const dashboardData = JSON.parse('{{ dashboard_data|escapejs }}');
+
 // Gráfico de Atividade
 const activityCtx = document.getElementById('activityChart').getContext('2d');
 const activityChart = new Chart(activityCtx, {
@@ -531,14 +534,30 @@ const activityChart = new Chart(activityCtx, {
         labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
         datasets: [{
             label: 'Sessões',
-            data: [{{ total_sessions|add:"-20" }}, {{ total_sessions|add:"-15" }}, {{ total_sessions|add:"-10" }}, {{ total_sessions|add:"-5" }}, {{ total_sessions|add:"-2" }}, {{ total_sessions|add:"-1" }}, {{ total_sessions }}],
+            data: [
+                (dashboardData.totalSessions || 0) - 20,
+                (dashboardData.totalSessions || 0) - 15,
+                (dashboardData.totalSessions || 0) - 10,
+                (dashboardData.totalSessions || 0) - 5,
+                (dashboardData.totalSessions || 0) - 2,
+                (dashboardData.totalSessions || 0) - 1,
+                dashboardData.totalSessions || 0
+            ],
             borderColor: '#667eea',
             backgroundColor: 'rgba(102, 126, 234, 0.1)',
             tension: 0.4,
             fill: true
         }, {
             label: 'Visualizações',
-            data: [{{ total_pageviews|add:"-50" }}, {{ total_pageviews|add:"-40" }}, {{ total_pageviews|add:"-30" }}, {{ total_pageviews|add:"-20" }}, {{ total_pageviews|add:"-10" }}, {{ total_pageviews|add:"-5" }}, {{ total_pageviews }}],
+            data: [
+                (dashboardData.totalPageviews || 0) - 50,
+                (dashboardData.totalPageviews || 0) - 40,
+                (dashboardData.totalPageviews || 0) - 30,
+                (dashboardData.totalPageviews || 0) - 20,
+                (dashboardData.totalPageviews || 0) - 10,
+                (dashboardData.totalPageviews || 0) - 5,
+                dashboardData.totalPageviews || 0
+            ],
             borderColor: '#11998e',
             backgroundColor: 'rgba(17, 153, 142, 0.1)',
             tension: 0.4,
@@ -550,7 +569,7 @@ const activityChart = new Chart(activityCtx, {
         maintainAspectRatio: false,
         plugins: {
             legend: {
-                position: 'top',
+                position: 'top'
             }
         },
         scales: {
@@ -568,7 +587,12 @@ const trafficChart = new Chart(trafficCtx, {
     data: {
         labels: ['Sessões', 'Visualizações', 'Cookies', 'SEO'],
         datasets: [{
-            data: [{{ total_sessions }}, {{ total_pageviews }}, {{ total_cookies }}, {{ total_seo_metrics }}],
+            data: [
+                dashboardData.totalSessions || 0,
+                dashboardData.totalPageviews || 0,
+                dashboardData.totalCookies || 0,
+                dashboardData.totalSeoMetrics || 0
+            ],
             backgroundColor: [
                 '#667eea',
                 '#11998e',
@@ -595,7 +619,7 @@ function refreshDashboard() {
 }
 
 function exportDashboard() {
-    window.open("{% url 'core_admin:export_data' %}", '_blank');
+    window.open(dashboardData.exportUrl || '/core_admin/export/data/', '_blank');
 }
 
 function generateReport() {

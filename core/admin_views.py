@@ -34,6 +34,16 @@ def admin_dashboard(request):
     # Métricas SEO
     seo_metrics = SEOMetrics.objects.order_by('-page_speed_score')[:5]
 
+    # Dados para JavaScript
+    dashboard_data = {
+        'totalSessions': total_sessions,
+        'totalPageviews': total_pageviews,
+        'totalCookies': total_cookies,
+        'totalSeoMetrics': total_seo_metrics,
+        'activeSessions': active_sessions,
+        'exportUrl': '/core_admin/export/data/'
+    }
+
     context = {
         'total_sessions': total_sessions,
         'total_pageviews': total_pageviews,
@@ -42,6 +52,7 @@ def admin_dashboard(request):
         'active_sessions': active_sessions,
         'top_pages': top_pages,
         'seo_metrics': seo_metrics,
+        'dashboard_data': json.dumps(dashboard_data),
         'title': 'Dashboard',
     }
 
