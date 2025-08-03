@@ -99,6 +99,11 @@
     <li>Se o problema persistir, entre em contato com o administrador do sistema</li>
   </ul>
   
-  <a href="{% url 'admin:login' %}" class="btn-return">Voltar para a página de login</a>
+  <div class="d-flex justify-content-center gap-3">
+    <a href="{% url 'admin:login' %}" class="btn-return">Voltar para a página de login</a>
+    {% if debug or username %}
+    <a href="{% url 'core_admin:auth_debug' %}" class="btn-return" style="background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);">Diagnóstico de Autenticação</a>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}

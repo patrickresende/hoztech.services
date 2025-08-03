@@ -27,7 +27,11 @@ load_dotenv()
 
 # Verificar ambiente
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
-DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'  # Corrigindo DEBUB para DEBUG
+# Forçar DEBUG como True em ambiente de desenvolvimento
+if ENVIRONMENT == 'development':
+    DEBUG = True
+else:
+    DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 print(f"Ambiente: {ENVIRONMENT}")
 print(f"DEBUG: {DEBUG}")
@@ -80,6 +84,9 @@ raw_origins = os.getenv('CSRF_TRUSTED_ORIGINS', ','.join(DEFAULT_CSRF_TRUSTED_OR
 CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in raw_origins.split(',')]
 print("CSRF_TRUSTED_ORIGINS:", CSRF_TRUSTED_ORIGINS)
 
+# Evitar duplicação da configuração CSRF_TRUSTED_ORIGINS em ambiente de produção
+if ENVIRONMENT != 'development' and not DEBUG:
+    pass  # As configurações específicas de CSRF_TRUSTED_ORIGINS para produção serão definidas mais abaixo
 
 # Application definition
 
@@ -111,6 +118,7 @@ MIDDLEWARE = [
     'core.admin_middleware.AdminErrorMiddleware',     # Middleware de erro do admin
     'core.admin_middleware.AdminPerformanceMiddleware', # Middleware de performance do admin
     'core.middleware.AdminLoginErrorMiddleware',      # Middleware para erros de login no admin
+    'core.auth_middleware.AdminLoginRedirectMiddleware', # Middleware para redirecionamento após login
 ]
 
 # Adicionar middleware CSP apenas em produção
@@ -186,10 +194,12 @@ if ENVIRONMENT == 'development' or DEBUG:
     SECURE_HSTS_SECONDS = 0
     SECURE_HSTS_INCLUDE_SUBDOMAINS = False
     SECURE_HSTS_PRELOAD = False
-    CSRF_TRUSTED_ORIGINS = [
-        'http://localhost:8000',
-        'http://127.0.0.1:8000',
-    ]
+    # Adicionar origens locais para CSRF
+    if 'http://localhost:8000' not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.extend([
+            'http://localhost:8000',
+            'http://127.0.0.1:8000',
+        ])
 else:
     # Configurações de Produção
     SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'True').lower() == 'true'
@@ -231,9 +241,15 @@ else:
     # Configurações específicas para cookies e localStorage
     CSP_SCRIPT_SRC_ATTR = ("'unsafe-inline'",)
     
-    # Processar CSRF_TRUSTED_ORIGINS corretamente
-    raw_origins = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://*.onrender.com,https://*.railway.app,https://hoztech.com.br,https://www.hoztech.com.br')
-    CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in raw_origins.split(',')]
+    # Não redefinir CSRF_TRUSTED_ORIGINS aqui, pois já foi definido acima
+    # Apenas adicionar origens específicas de produção se necessário
+    if 'https://*.onrender.com' not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.extend([
+            'https://*.onrender.com',
+            'https://*.railway.app',
+            'https://hoztech.com.br',
+            'https://www.hoztech.com.br'
+        ])
 
 # Configuração de CORS
 CORS_ALLOW_ALL_ORIGINS = DEBUG
@@ -393,6 +409,11 @@ ADMIN_URL = os.getenv('ADMIN_URL', 'admin/')
 ADMIN_SITE_HEADER = os.getenv('ADMIN_SITE_HEADER', 'HOZ TECH - Painel Administrativo')
 ADMIN_SITE_TITLE = os.getenv('ADMIN_SITE_TITLE', 'HOZ TECH Admin')
 ADMIN_INDEX_TITLE = os.getenv('ADMIN_INDEX_TITLE', 'Bem-vindo ao Painel Administrativo')
+
+# Configurações de autenticação
+LOGIN_REDIRECT_URL = '/admin/'
+LOGOUT_REDIRECT_URL = '/admin/login/'
+LOGIN_URL = '/admin/login/'
 
 # Logging Configuration
 class RailwayJSONFormatter(logging.Formatter):

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import admin_views
+from . import auth_views
 from django.contrib.admin.views.decorators import staff_member_required
 
 app_name = 'core_admin'
@@ -18,4 +19,7 @@ urlpatterns = [
     path('export/sessions/', staff_member_required(admin_views.export_sessions), name='export_sessions'),
     path('export/seo/', staff_member_required(admin_views.export_seo), name='export_seo'),
     path('export/', staff_member_required(admin_views.export_data), name='export_data'),
+    
+    # Auth debug URL
+    path('auth-debug/', staff_member_required(auth_views.auth_debug_view), name='auth_debug'),
 ]

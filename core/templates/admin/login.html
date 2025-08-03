@@ -187,6 +187,11 @@
     {% if password_reset_url %}
     <a href="{{ password_reset_url }}">{% translate 'Forgotten your password or username?' %}</a>
     {% endif %}
+    {% if user.is_staff %}
+    <div class="mt-2">
+      <a href="{% url 'core_admin:auth_debug' %}" class="text-muted"><small>Diagnóstico de autenticação</small></a>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
