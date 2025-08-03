@@ -1,9 +1,4 @@
-databases:
-  - name: hoztechsite-db
-    databaseName: hoztechsite
-    user: hoztechsite
-    plan: free
-    ipAllowList: []  # Apenas conexões internas
+# Não é necessário configuração de banco de dados para SQLite
 
 services:
   - type: redis
@@ -17,6 +12,7 @@ services:
     name: hoztechsite
     env: python
     plan: starter
+    region: oregon
     buildCommand: |
       echo "---> INICIANDO BUILD"
       pip install -r requirements.txt
@@ -53,10 +49,7 @@ services:
         generateValue: true
       - key: DJANGO_DEBUG
         value: false
-      - key: DATABASE_URL
-        fromDatabase:
-          name: hoztechsite-db
-          property: connectionString
+      # SQLite não requer DATABASE_URL
       - key: REDIS_URL
         fromService:
           name: hoztechsite-redis
@@ -210,4 +203,4 @@ preInstallCommand: |
     python3-dev \
     nodejs \
     npm \
-    nginx 
+    nginx

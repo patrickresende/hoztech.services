@@ -27,24 +27,23 @@ class AdminErrorMiddleware:
             return self.get_response(request)
         
         try:
-            # Testar conexão com banco antes de processar
-            if not connection.ensure_connection():
-                logger.error("Falha na conexão com banco de dados")
-                if settings.DEBUG:
-                    raise DatabaseError("Conexão com banco falhou")
-                else:
-                    return self._render_admin_error(
-                        request, 
-                        "Erro de conexão com banco de dados. Tente novamente em alguns instantes.",
-                        "Database Connection Error"
-                    )
-            
             response = self.get_response(request)
             return response
             
         except DatabaseError as e:
             logger.error(f"Erro de banco de dados no admin: {e}")
             logger.error(traceback.format_exc())
+            
+            # Em produção, tentar reconectar antes de mostrar erro
+            if not settings.DEBUG:
+                try:
+                    connection.close()
+                    connection.ensure_connection()
+                    # Se reconectou com sucesso, tentar novamente
+                    response = self.get_response(request)
+                    return response
+                except Exception:
+                    pass
             
             if settings.DEBUG:
                 raise
