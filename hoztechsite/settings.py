@@ -27,7 +27,12 @@ load_dotenv()
 
 # Verificar ambiente
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
-DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'  # Corrigindo DEBUB para DEBUG
+
+# Configuração de DEBUG baseada no ambiente
+if ENVIRONMENT == 'production':
+    DEBUG = False
+else:
+    DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
 print(f"Ambiente: {ENVIRONMENT}")
 print(f"DEBUG: {DEBUG}")
@@ -78,6 +83,11 @@ DEFAULT_CSRF_TRUSTED_ORIGINS = [
 # Processar CSRF_TRUSTED_ORIGINS corretamente
 raw_origins = os.getenv('CSRF_TRUSTED_ORIGINS', ','.join(DEFAULT_CSRF_TRUSTED_ORIGINS))
 CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in raw_origins.split(',')]
+
+# Garantir que CSRF_TRUSTED_ORIGINS não esteja vazio
+if not CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS = DEFAULT_CSRF_TRUSTED_ORIGINS
+
 print("CSRF_TRUSTED_ORIGINS:", CSRF_TRUSTED_ORIGINS)
 
 
@@ -183,10 +193,6 @@ if ENVIRONMENT == 'development' or DEBUG:
     SECURE_HSTS_SECONDS = 0
     SECURE_HSTS_INCLUDE_SUBDOMAINS = False
     SECURE_HSTS_PRELOAD = False
-    CSRF_TRUSTED_ORIGINS = [
-        'http://localhost:8000',
-        'http://127.0.0.1:8000',
-    ]
 else:
     # Configurações de Produção
     SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'True').lower() == 'true'
@@ -201,11 +207,11 @@ else:
     
     # Content Security Policy para produção - Compatível com Brave
     CSP_DEFAULT_SRC = ("'self'",)
-    CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
+    CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
     CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com")
     CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net")
-    CSP_IMG_SRC = ("'self'", "data:", "https:")
-    CSP_CONNECT_SRC = ("'self'",)
+    CSP_IMG_SRC = ("'self'", "data:", "https:", "blob:")
+    CSP_CONNECT_SRC = ("'self'", "https:")
     
     # Configurações adicionais de CSP
     CSP_OBJECT_SRC = ("'none'",)
@@ -222,7 +228,7 @@ else:
     CSP_UPGRADE_INSECURE_REQUESTS = True
     
     # Configurações específicas para compatibilidade com Brave
-    CSP_SCRIPT_SRC_ELEM = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
+    CSP_SCRIPT_SRC_ELEM = ("'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
     CSP_STYLE_SRC_ELEM = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com")
     
     # Configurações específicas para cookies e localStorage
@@ -272,6 +278,14 @@ if os.getenv("DATABASE_URL"):
             ssl_require=not DEBUG
         )
     }
+    # Configurações adicionais para PostgreSQL em produção
+    if ENVIRONMENT == 'production':
+        DATABASES['default']['OPTIONS'] = {
+            'sslmode': 'require',
+            'connect_timeout': 10,
+        }
+        DATABASES['default']['CONN_MAX_AGE'] = 600
+        DATABASES['default']['ATOMIC_REQUESTS'] = True
 else:
     DATABASES = {
         'default': {
@@ -339,6 +353,8 @@ else:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     WHITENOISE_USE_FINDERS = True  # Habilitar finders em produção
     WHITENOISE_KEEP_ONLY_HASHED_FILES = False  # Manter arquivos sem hash também
+    WHITENOISE_MANIFEST_STRICT = False  # Não falhar se arquivo não encontrado
+    WHITENOISE_AUTOREFRESH = False  # Desabilitar auto-refresh em produção
 
 # Debug info para arquivos estáticos
 print("=== Configuração de Arquivos Estáticos ===")
@@ -432,11 +448,15 @@ LOGGING = {
         'railway_json': {
             '()': RailwayJSONFormatter,
         },
+        'simple': {
+            'format': '[{levelname}] {asctime} {module} {message}',
+            'style': '{',
+        },
     },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'railway_json',
+            'formatter': 'railway_json' if ENVIRONMENT == 'production' else 'simple',
             'stream': sys.stdout,
         },
     },
@@ -453,6 +473,16 @@ LOGGING = {
         'core': {
             'handlers': ['console'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.security': {
+            'handlers': ['console'],
+            'level': 'ERROR',
             'propagate': False,
         },
     },
