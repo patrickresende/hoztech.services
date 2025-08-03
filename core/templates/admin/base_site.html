@@ -9,4 +9,254 @@
 </h1>
 {% endblock %}
 
-{% block nav-global %}{% endblock %} 
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    #branding h1 {
+        color: white;
+        font-weight: 700;
+        font-size: 1.8rem;
+    }
+
+    #branding h1 a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .dashboard-nav {
+        background: white;
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .dashboard-nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .dashboard-nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .dashboard-nav-brand h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+    .dashboard-nav-brand .brand-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+    }
+
+    .dashboard-nav-links {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .dashboard-nav-links a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: #f8f9fa;
+        color: #2c3e50;
+        text-decoration: none;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        border: 1px solid #e9ecef;
+    }
+
+    .dashboard-nav-links a:hover {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .dashboard-nav-links a.active {
+        background: #667eea;
+        color: white;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        border: 1px solid #e9ecef;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .stat-card-body {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .stat-card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .stat-card-content {
+        flex: 1;
+    }
+
+    .stat-card-number {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        color: #2c3e50;
+    }
+
+    .stat-card-label {
+        color: #6c757d;
+        margin: 0.25rem 0;
+        font-size: 0.9rem;
+    }
+
+    .chart-container {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        border: 1px solid #e9ecef;
+        margin-bottom: 2rem;
+    }
+
+    .chart-container h2 {
+        margin-bottom: 1rem;
+        color: #2c3e50;
+        font-weight: 600;
+    }
+
+    .table-container {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        border: 1px solid #e9ecef;
+        margin-bottom: 2rem;
+    }
+
+    .table-container h2 {
+        margin-bottom: 1rem;
+        color: #2c3e50;
+        font-weight: 600;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table th {
+        border-top: none;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .dashboard-container {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
+
+{% block nav-global %}
+<div class="dashboard-nav">
+    <div class="dashboard-nav-container">
+        <div class="dashboard-nav-brand">
+            <div class="brand-icon">
+                <i class="bi bi-graph-up"></i>
+            </div>
+            <h2>HOZ TECH Analytics</h2>
+        </div>
+        <div class="dashboard-nav-links">
+            <a href="{% url 'core_admin:admin_dashboard' %}" class="{% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="{% url 'core_admin:cookie_list' %}" class="{% if request.resolver_match.url_name == 'cookie_list' %}active{% endif %}">
+                <i class="bi bi-cookie"></i>
+                <span>Cookies</span>
+            </a>
+            <a href="{% url 'core_admin:session_list' %}" class="{% if request.resolver_match.url_name == 'session_list' %}active{% endif %}">
+                <i class="bi bi-people"></i>
+                <span>Sessões</span>
+            </a>
+            <a href="{% url 'core_admin:seometrics_list' %}" class="{% if request.resolver_match.url_name == 'seometrics_list' %}active{% endif %}">
+                <i class="bi bi-graph-up"></i>
+                <span>SEO</span>
+            </a>
+            <a href="{% url 'core_admin:analyticsexport_list' %}" class="{% if request.resolver_match.url_name == 'analyticsexport_list' %}active{% endif %}">
+                <i class="bi bi-download"></i>
+                <span>Exportar</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    {% block dashboard_content %}{% endblock %}
+</div>
+{% endblock %} 
