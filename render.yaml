@@ -21,21 +21,36 @@ services:
       echo "---> INICIANDO BUILD"
       pip install -r requirements.txt
       echo "---> PIP INSTALL CONCLUÍDO"
-      python manage.py collectstatic --noinput --clear
+      npm install
+      echo "---> NPM INSTALL CONCLUÍDO"
+      npm run build
+      echo "---> NPM BUILD CONCLUÍDO"
+      echo "---> LIMPANDO DIRETÓRIO STATICFILES"
+      rm -rf staticfiles/*
+      echo "---> COLETANDO ARQUIVOS ESTÁTICOS"
+      DJANGO_DEBUG=False python manage.py collectstatic --noinput --clear
       echo "---> COLLECTSTATIC CONCLUÍDO"
+      echo "---> VERIFICANDO ARQUIVOS ESTÁTICOS"
+      ls -la staticfiles/
+      echo "---> VERIFICANDO MANIFESTO"
+      cat staticfiles/staticfiles.json || echo "Manifesto não encontrado!"
       python manage.py migrate
       echo "---> MIGRATE CONCLUÍDO"
+      echo "---> INSTALANDO E CONFIGURANDO NGINX"
+      apt-get update && apt-get install -y nginx
+      cp nginx.conf /etc/nginx/sites-available/default
+      ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+      nginx -t && service nginx restart
       echo "---> BUILD FINALIZADO COM SUCESSO"
     startCommand: |
       echo "---> INICIANDO GUNICORN"
       echo "---> VERIFICANDO VARIÁVEIS DE AMBIENTE"
       env | grep -E "DJANGO_|STATIC_|WHITENOISE_"
-      gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60 --bind 0.0.0.0:$PORT --access-logfile - --error-logfile - --log-level info
+      service nginx start
+      newrelic-admin run-program gunicorn hoztechsite.wsgi:application --workers 2 --threads 2 --timeout 60 --bind 127.0.0.1:8000 --access-logfile logs/deploy/gunicorn_access.log --error-logfile logs/deploy/gunicorn_error.log --log-level debug
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true
-      - key: ENVIRONMENT
-        value: production
       - key: DJANGO_DEBUG
         value: false
       - key: DATABASE_URL
@@ -53,8 +68,6 @@ services:
         value: 2
       - key: DJANGO_ALLOWED_HOSTS
         value: ".onrender.com,hoztech.com.br,www.hoztech.com.br"
-      - key: CSRF_TRUSTED_ORIGINS
-        value: "https://*.onrender.com,https://hoztech.com.br,https://www.hoztech.com.br"
       - key: SECURE_SSL_REDIRECT
         value: true
       - key: SESSION_COOKIE_SECURE
@@ -110,7 +123,7 @@ services:
       - key: CSP_UPGRADE_INSECURE_REQUESTS
         value: true
       - key: WHITENOISE_MANIFEST_STRICT
-        value: false
+        value: true
       - key: WHITENOISE_ALLOW_ALL_ORIGINS
         value: true
       - key: WHITENOISE_MAX_AGE
@@ -127,7 +140,9 @@ services:
         value: true
       - key: SENTRY_DSN
         sync: false
-      # Configurações de E-mail
+      # Configurações de E-mail (CRÍTICO - FALTAVAM!)
+      - key: ENVIRONMENT
+        value: production
       - key: EMAIL_BACKEND
         value: django.core.mail.backends.smtp.EmailBackend
       - key: EMAIL_HOST
@@ -148,9 +163,15 @@ services:
         sync: false  # Adicionar manualmente no painel do Render
       - key: SITE_NAME
         value: "HOZ TECH"
-      # Configurações de logging
-      - key: DJANGO_LOG_LEVEL
-        value: INFO
+      # Novas variáveis para Nginx
+      - key: NGINX_WORKER_PROCESSES
+        value: auto
+      - key: NGINX_WORKER_CONNECTIONS
+        value: 1024
+      - key: NGINX_KEEPALIVE_TIMEOUT
+        value: 65
+      - key: NGINX_CLIENT_MAX_BODY_SIZE
+        value: 4M
     healthCheckPath: /health/
     autoDeploy: false  # Desabilitar deploy automático
     domains:
@@ -170,8 +191,6 @@ workers:
     envVars:
       - key: DJANGO_SECRET_KEY
         generateValue: true
-      - key: ENVIRONMENT
-        value: production
       - key: DJANGO_DEBUG
         value: false
       - key: DATABASE_URL
@@ -188,4 +207,7 @@ workers:
 preInstallCommand: |
   apt-get update && apt-get install -y \
     build-essential \
-    python3-dev 
+    python3-dev \
+    nodejs \
+    npm \
+    nginx 

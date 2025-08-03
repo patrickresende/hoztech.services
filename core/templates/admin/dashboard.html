@@ -101,70 +101,6 @@
         </div>
     </div>
 
-    <!-- Seção de Limpeza de Dados -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">
-                        <i class="bi bi-trash3"></i>
-                        Limpeza de Dados
-                    </h5>
-                    <small class="text-muted">Remover dados antigos para otimizar performance</small>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <p class="text-muted mb-3">
-                                Selecione o período para limpar dados antigos. Esta ação não pode ser desfeita.
-                            </p>
-                            <div class="clear-data-buttons">
-                                <button class="btn btn-outline-danger btn-sm me-2 mb-2" onclick="clearData('hour')">
-                                    <i class="bi bi-clock"></i> Última Hora
-                                </button>
-                                <button class="btn btn-outline-danger btn-sm me-2 mb-2" onclick="clearData('day')">
-                                    <i class="bi bi-calendar-day"></i> Último Dia
-                                </button>
-                                <button class="btn btn-outline-danger btn-sm me-2 mb-2" onclick="clearData('week')">
-                                    <i class="bi bi-calendar-week"></i> Última Semana
-                                </button>
-                                <button class="btn btn-outline-danger btn-sm me-2 mb-2" onclick="clearData('month')">
-                                    <i class="bi bi-calendar-month"></i> Último Mês
-                                </button>
-                                <button class="btn btn-danger btn-sm mb-2" onclick="clearData('all')">
-                                    <i class="bi bi-trash3"></i> Todos os Dados
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="data-stats-preview">
-                                <h6 class="text-muted mb-2">Dados por Período:</h6>
-                                <div class="stats-list">
-                                    <div class="stat-item">
-                                        <span class="stat-label">Última hora:</span>
-                                        <span class="stat-value" id="hour-stats">-</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Último dia:</span>
-                                        <span class="stat-value" id="day-stats">-</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Última semana:</span>
-                                        <span class="stat-value" id="week-stats">-</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Último mês:</span>
-                                        <span class="stat-value" id="month-stats">-</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Gráficos e Análises -->
     <div class="row mb-4">
         <div class="col-xl-8 col-lg-7">
@@ -567,80 +503,6 @@
         background: #f8f9fa;
     }
 
-    /* Estilos para a seção de limpeza de dados */
-    .clear-data-buttons .btn {
-        transition: all 0.3s ease;
-    }
-    
-    .clear-data-buttons .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
-    }
-    
-    .data-stats-preview {
-        background: var(--background-color);
-        padding: 1rem;
-        border-radius: 0.75rem;
-        border: 1px solid var(--border-color);
-    }
-    
-    .stats-list .stat-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid var(--border-color);
-    }
-    
-    .stats-list .stat-item:last-child {
-        border-bottom: none;
-    }
-    
-    .stat-label {
-        font-size: 0.875rem;
-        color: var(--text-color);
-    }
-    
-    .stat-value {
-        font-weight: 600;
-        color: var(--primary-color);
-    }
-    
-    /* Estilos para o modal */
-    .modal-content {
-        border-radius: 1rem;
-        border: none;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    
-    .modal-header {
-        border-bottom: 1px solid var(--border-color);
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-        color: white;
-        border-radius: 1rem 1rem 0 0;
-    }
-    
-    .modal-header .btn-close {
-        filter: invert(1);
-    }
-    
-    /* Estilos para toast */
-    .toast {
-        border-radius: 0.75rem;
-        border: none;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    }
-    
-    .toast-header {
-        background: var(--primary-color);
-        color: white;
-        border-radius: 0.75rem 0.75rem 0 0;
-    }
-    
-    .toast-header .btn-close {
-        filter: invert(1);
-    }
-
     @media (max-width: 768px) {
         .dashboard-title {
             font-size: 2rem;
@@ -661,222 +523,75 @@
 <!-- Scripts JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-// Variáveis globais
-let currentPeriod = 'hour';
-let clearDataModal;
-let notificationToast;
-
-// Inicialização
-document.addEventListener('DOMContentLoaded', function() {
-    clearDataModal = new bootstrap.Modal(document.getElementById('clearDataModal'));
-    notificationToast = new bootstrap.Toast(document.getElementById('notificationToast'));
-    
-    // Carregar estatísticas iniciais
-    loadDataStats();
-    
-    // Inicializar gráficos
-    initializeCharts();
-});
-
 // Gráfico de Atividade
-function initializeCharts() {
-    const activityCtx = document.getElementById('activityChart').getContext('2d');
-    const activityChart = new Chart(activityCtx, {
-        type: 'line',
-        data: {
-            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-            datasets: [{
-                label: 'Sessões',
-                data: [{{ total_sessions|add:"-20" }}, {{ total_sessions|add:"-15" }}, {{ total_sessions|add:"-10" }}, {{ total_sessions|add:"-5" }}, {{ total_sessions|add:"-2" }}, {{ total_sessions|add:"-1" }}, {{ total_sessions }}],
-                borderColor: '#667eea',
-                backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                tension: 0.4,
-                fill: true
-            }, {
-                label: 'Visualizações',
-                data: [{{ total_pageviews|add:"-50" }}, {{ total_pageviews|add:"-40" }}, {{ total_pageviews|add:"-30" }}, {{ total_pageviews|add:"-20" }}, {{ total_pageviews|add:"-10" }}, {{ total_pageviews|add:"-5" }}, {{ total_pageviews }}],
-                borderColor: '#11998e',
-                backgroundColor: 'rgba(17, 153, 142, 0.1)',
-                tension: 0.4,
-                fill: true
-            }]
+const activityCtx = document.getElementById('activityChart').getContext('2d');
+const activityChart = new Chart(activityCtx, {
+    type: 'line',
+    data: {
+        labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+        datasets: [{
+            label: 'Sessões',
+            data: [{{ total_sessions|add:"-20" }}, {{ total_sessions|add:"-15" }}, {{ total_sessions|add:"-10" }}, {{ total_sessions|add:"-5" }}, {{ total_sessions|add:"-2" }}, {{ total_sessions|add:"-1" }}, {{ total_sessions }}],
+            borderColor: '#667eea',
+            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+            tension: 0.4,
+            fill: true
+        }, {
+            label: 'Visualizações',
+            data: [{{ total_pageviews|add:"-50" }}, {{ total_pageviews|add:"-40" }}, {{ total_pageviews|add:"-30" }}, {{ total_pageviews|add:"-20" }}, {{ total_pageviews|add:"-10" }}, {{ total_pageviews|add:"-5" }}, {{ total_pageviews }}],
+            borderColor: '#11998e',
+            backgroundColor: 'rgba(17, 153, 142, 0.1)',
+            tension: 0.4,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            }
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'top',
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+        scales: {
+            y: {
+                beginAtZero: true
             }
         }
-    });
-
-    // Gráfico de Tráfego
-    const trafficCtx = document.getElementById('trafficChart').getContext('2d');
-    const trafficChart = new Chart(trafficCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Sessões', 'Visualizações', 'Cookies', 'SEO'],
-            datasets: [{
-                data: [{{ total_sessions }}, {{ total_pageviews }}, {{ total_cookies }}, {{ total_seo_metrics }}],
-                backgroundColor: [
-                    '#667eea',
-                    '#11998e',
-                    '#f093fb',
-                    '#4facfe'
-                ],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom'
-                }
-            }
-        }
-    });
-}
-
-// Função para limpar dados
-function clearData(period) {
-    currentPeriod = period;
-    
-    const periodNames = {
-        'hour': 'última hora',
-        'day': 'último dia',
-        'week': 'última semana',
-        'month': 'último mês',
-        'all': 'todos os dados'
-    };
-    
-    const periodName = periodNames[period];
-    
-    // Mostrar modal de confirmação
-    document.getElementById('clearDataModalLabel').innerHTML = 
-        `<i class="bi bi-exclamation-triangle text-warning"></i> Limpar Dados - ${periodName.charAt(0).toUpperCase() + periodName.slice(1)}`;
-    
-    document.getElementById('clearDataDetails').innerHTML = `
-        <div class="alert alert-warning">
-            <i class="bi bi-info-circle"></i>
-            <strong>Período:</strong> ${periodName}<br>
-            <strong>Ação:</strong> Remover dados antigos do sistema<br>
-            <strong>Impacto:</strong> Esta ação não pode ser desfeita
-        </div>
-    `;
-    
-    clearDataModal.show();
-}
-
-// Confirmar limpeza de dados
-document.getElementById('confirmClearData').addEventListener('click', function() {
-    const formData = new FormData();
-    formData.append('period', currentPeriod);
-    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
-    
-    fetch('{% url "core_admin:clear_data_period" %}', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        clearDataModal.hide();
-        
-        if (data.success) {
-            showNotification(data.message, 'success');
-            // Recarregar estatísticas
-            loadDataStats();
-            // Recarregar página após 2 segundos
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
-        } else {
-            showNotification(data.message, 'error');
-        }
-    })
-    .catch(error => {
-        clearDataModal.hide();
-        showNotification('Erro ao processar a requisição', 'error');
-        console.error('Error:', error);
-    });
+    }
 });
 
-// Carregar estatísticas dos dados
-function loadDataStats() {
-    fetch('{% url "core_admin:get_data_stats" %}')
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            updateStatsDisplay(data.stats);
+// Gráfico de Tráfego
+const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+const trafficChart = new Chart(trafficCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Sessões', 'Visualizações', 'Cookies', 'SEO'],
+        datasets: [{
+            data: [{{ total_sessions }}, {{ total_pageviews }}, {{ total_cookies }}, {{ total_seo_metrics }}],
+            backgroundColor: [
+                '#667eea',
+                '#11998e',
+                '#f093fb',
+                '#4facfe'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
         }
-    })
-    .catch(error => {
-        console.error('Error loading stats:', error);
-    });
-}
-
-// Atualizar display das estatísticas
-function updateStatsDisplay(stats) {
-    const periodStats = stats.period_stats;
-    
-    if (periodStats.hour) {
-        document.getElementById('hour-stats').textContent = 
-            `${periodStats.hour.sessions}s, ${periodStats.hour.pageviews}pv`;
     }
-    
-    if (periodStats.day) {
-        document.getElementById('day-stats').textContent = 
-            `${periodStats.day.sessions}s, ${periodStats.day.pageviews}pv`;
-    }
-    
-    if (periodStats.week) {
-        document.getElementById('week-stats').textContent = 
-            `${periodStats.week.sessions}s, ${periodStats.week.pageviews}pv`;
-    }
-    
-    if (periodStats.month) {
-        document.getElementById('month-stats').textContent = 
-            `${periodStats.month.sessions}s, ${periodStats.month.pageviews}pv`;
-    }
-}
-
-// Mostrar notificação
-function showNotification(message, type = 'info') {
-    const toast = document.getElementById('notificationToast');
-    const toastMessage = document.getElementById('toastMessage');
-    
-    // Configurar cor baseada no tipo
-    const toastHeader = toast.querySelector('.toast-header');
-    if (type === 'success') {
-        toastHeader.style.background = 'var(--success-color)';
-        toastHeader.innerHTML = '<i class="bi bi-check-circle me-2"></i><strong class="me-auto">Sucesso</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
-    } else if (type === 'error') {
-        toastHeader.style.background = 'var(--danger-color)';
-        toastHeader.innerHTML = '<i class="bi bi-x-circle me-2"></i><strong class="me-auto">Erro</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
-    } else {
-        toastHeader.style.background = 'var(--primary-color)';
-        toastHeader.innerHTML = '<i class="bi bi-info-circle me-2"></i><strong class="me-auto">Informação</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
-    }
-    
-    toastMessage.textContent = message;
-    notificationToast.show();
-}
+});
 
 // Funções de interação
 function refreshDashboard() {
-    loadDataStats();
-    showNotification('Dashboard atualizado!', 'success');
+    location.reload();
 }
 
 function exportDashboard() {
@@ -884,7 +599,7 @@ function exportDashboard() {
 }
 
 function generateReport() {
-    showNotification('Relatório sendo gerado...', 'info');
+    alert('Relatório sendo gerado...');
 }
 
 function changeChartPeriod(period) {

@@ -18,8 +18,4 @@ urlpatterns = [
     path('export/sessions/', staff_member_required(admin_views.export_sessions), name='export_sessions'),
     path('export/seo/', staff_member_required(admin_views.export_seo), name='export_seo'),
     path('export/', staff_member_required(admin_views.export_data), name='export_data'),
-    
-    # Data management URLs
-    path('clear-data/', staff_member_required(admin_views.clear_data_period), name='clear_data_period'),
-    path('get-stats/', staff_member_required(admin_views.get_data_stats), name='get_data_stats'),
 ]

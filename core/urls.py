@@ -13,7 +13,5 @@ urlpatterns = [
     path('termos/', views.terms, name='terms'),
     path('download-pdf/', views.download_pdf, name='download_pdf'),
     path('faq/', views.faq, name='faq'),
-    path('security-policy/', views.security_policy, name='security_policy'),
-    path('health/', views.health_check, name='health_check'),
-    path('track/', views.track_pageview, name='track_pageview'),
+    path('security-policy/', views.security_policy, name='security_policy')
 ] 
