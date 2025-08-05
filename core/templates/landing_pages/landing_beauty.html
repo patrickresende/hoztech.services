@@ -593,6 +593,515 @@
             grid-template-columns: 1fr;
         }
     }
+
+    /* Fontes personalizadas */
+    @font-face {
+        font-family: 'Melodrama Semibold';
+        src: url('{% static "core/fonts/Melodrama-Semibold.otf" %}') format('opentype');
+        font-weight: 600;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: 'Lucida Bright';
+        src: url('{% static "core/fonts/LBRITEI.TTF" %}') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .salon-name {
+        font-family: 'Melodrama Semibold', 'Playfair Display', serif;
+        font-size: 4.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: var(--spacing-sm);
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        letter-spacing: 3px;
+        position: relative;
+    }
+
+    .service-name {
+        font-family: 'Lucida Bright', serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--beauty-dark);
+        margin-bottom: var(--spacing-sm);
+        text-align: center;
+    }
+
+    .salon-name::after {
+        content: '✨';
+        position: absolute;
+        top: -20px;
+        right: -30px;
+        font-size: 2rem;
+        animation: sparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+        0%, 100% { opacity: 0.5; transform: scale(1) rotate(0deg); }
+        50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+    }
+
+    .salon-tagline {
+        font-size: 1.6rem;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: var(--spacing-xl);
+        font-style: italic;
+        font-weight: 300;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: var(--spacing-md);
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-beauty {
+        padding: 18px 40px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        border-radius: 35px;
+        transition: all 0.4s ease;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        min-width: 220px;
+        justify-content: center;
+        font-size: 0.95rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-beauty::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .btn-beauty:hover::before {
+        left: 100%;
+    }
+
+    .btn-primary-beauty {
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--beauty-primary);
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary-beauty:hover {
+        background: white;
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        color: var(--beauty-primary);
+    }
+
+    .btn-outline-beauty {
+        background: transparent;
+        border: 3px solid white;
+        color: white;
+    }
+
+    .btn-outline-beauty:hover {
+        background: white;
+        color: var(--beauty-primary);
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px rgba(255,255,255,0.3);
+    }
+
+    /* Services Section */
+    .services-section {
+        padding: var(--spacing-xxl) 0;
+        background: white;
+        position: relative;
+    }
+
+    .services-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: linear-gradient(to bottom, var(--beauty-gradient-soft), transparent);
+    }
+
+    .section-title-beauty {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        text-align: center;
+        color: var(--beauty-dark);
+        margin-bottom: var(--spacing-sm);
+        position: relative;
+    }
+
+    .section-title-beauty::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: var(--beauty-gradient);
+        border-radius: 2px;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: var(--beauty-dark);
+        opacity: 0.8;
+        margin-bottom: var(--spacing-xl);
+        font-size: 1.2rem;
+        font-style: italic;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-xl);
+    }
+
+    .service-card {
+        background: white;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        transition: all 0.4s ease;
+        position: relative;
+        border: 1px solid rgba(255, 107, 157, 0.1);
+    }
+
+    .service-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: var(--beauty-shadow);
+    }
+
+    .service-icon {
+        height: 200px;
+        background: var(--beauty-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 4.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-icon::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="servicePattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23servicePattern)"/></svg>');
+        opacity: 0.5;
+    }
+
+    .service-card:hover .service-icon {
+        animation: serviceIconPulse 1s ease-in-out;
+    }
+
+    @keyframes serviceIconPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    .service-content {
+        padding: var(--spacing-xl);
+    }
+
+    .service-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--beauty-dark);
+        margin-bottom: var(--spacing-sm);
+        text-align: center;
+    }
+
+    .service-description {
+        color: var(--beauty-dark);
+        opacity: 0.8;
+        line-height: 1.6;
+        margin-bottom: var(--spacing-lg);
+        text-align: center;
+    }
+
+    .service-price {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--beauty-primary);
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .service-features {
+        list-style: none;
+        padding: 0;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .service-features li {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-xs);
+        color: var(--beauty-dark);
+        opacity: 0.8;
+    }
+
+    .service-features i {
+        color: var(--beauty-primary);
+        font-size: 1.1rem;
+    }
+
+    .btn-book {
+        width: 100%;
+        background: var(--beauty-gradient);
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 15px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-book:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+        padding: var(--spacing-xxl) 0;
+        background: var(--beauty-gradient-soft);
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-xl);
+    }
+
+    .gallery-item {
+        aspect-ratio: 1;
+        background: var(--beauty-gradient);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .gallery-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.2);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover::before {
+        opacity: 1;
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.05);
+        box-shadow: var(--beauty-shadow);
+    }
+
+    /* Contact Section */
+    .contact-section {
+        padding: var(--spacing-xxl) 0;
+        background: var(--beauty-gradient);
+        color: white;
+        position: relative;
+    }
+
+    .contact-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="contactPattern" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M15,5 Q20,10 15,15 Q10,10 15,5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23contactPattern)"/></svg>');
+        opacity: 0.3;
+    }
+
+    .contact-content {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        margin-bottom: var(--spacing-lg);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .contact-description {
+        font-size: 1.3rem;
+        margin-bottom: var(--spacing-xl);
+        opacity: 0.95;
+        font-style: italic;
+    }
+
+    .contact-methods {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .contact-method {
+        background: rgba(255, 255, 255, 0.15);
+        padding: var(--spacing-xl);
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-method::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .contact-method:hover::before {
+        left: 100%;
+    }
+
+    .contact-method:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .contact-method i {
+        font-size: 3rem;
+        margin-bottom: var(--spacing-md);
+        display: block;
+    }
+
+    .contact-method h4 {
+        font-size: 1.4rem;
+        margin-bottom: var(--spacing-sm);
+        font-weight: 600;
+    }
+
+    .contact-method p {
+        opacity: 0.95;
+        margin: 0;
+        font-size: 1.1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .salon-name {
+            font-size: 3rem;
+        }
+
+        .salon-tagline {
+            font-size: 1.3rem;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn-beauty {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .section-title-beauty {
+            font-size: 2.5rem;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .contact-methods {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .salon-logo {
+            width: 120px;
+            height: 120px;
+        }
+
+        .salon-logo i {
+            font-size: 3rem;
+        }
+
+        .salon-name {
+            font-size: 2.2rem;
+        }
+
+        .section-title-beauty {
+            font-size: 2rem;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        .service-icon {
+            height: 150px;
+            font-size: 3.5rem;
+        }
+
+        .gallery-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 {% endblock %}
 
@@ -627,29 +1136,121 @@
         <p class="section-subtitle">Transformamos sua beleza com carinho e profissionalismo</p>
         
         <div class="services-grid">
-            {% for service in services %}
+            <!-- Coloração -->
             <div class="service-card">
                 <div class="service-icon">
-                    <i class="bi bi-{{ service.icon }}"></i>
+                    <img src="{% static 'core/images/hoztech_templates/salao/servicos/coloracao.webp' %}" alt="Coloração" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="service-content">
-                    <h3 class="service-name">{{ service.name }}</h3>
-                    <p class="service-description">{{ service.description }}</p>
-                    <div class="service-price">{{ service.price }}</div>
+                    <h3 class="service-name">Coloração</h3>
+                    <p class="service-description">Transforme seu visual com nossas técnicas avançadas de coloração</p>
+                    <div class="service-price">A partir de R$ 80</div>
                     <ul class="service-features">
-                        {% for feature in service.features %}
                         <li>
                             <i class="bi bi-check-circle"></i>
-                            {{ feature }}
+                            Produtos de alta qualidade
                         </li>
-                        {% endfor %}
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            Técnicas modernas
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            Resultado duradouro
+                        </li>
                     </ul>
-                    <button class="btn-book" onclick="bookService('{{ service.id }}')">
+                    <button class="btn-book" onclick="bookService('coloracao')">
                         Agendar Agora
                     </button>
                 </div>
             </div>
-            {% endfor %}
+
+            <!-- Escova -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="{% static 'core/images/hoztech_templates/salao/servicos/escova.webp' %}" alt="Escova" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="service-content">
+                    <h3 class="service-name">Escova</h3>
+                    <p class="service-description">Cabelos lisos e sedosos com nossa escova profissional</p>
+                    <div class="service-price">A partir de R$ 40</div>
+                    <ul class="service-features">
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            Resultado natural
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            Longa duração
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            Cabelos protegidos
+                        </li>
+                    </ul>
+                    <button class="btn-book" onclick="bookService('escova')">
+                        Agendar Agora
+                    </button>
+                </div>
+            </div>
+
+            <!-- Manicure -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="{% static 'core/images/hoztech_templates/salao/servicos/manicure.webp' %}" alt="Manicure" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="service-content">
+                    <h3 class="service-name">Manicure</h3>
+                    <p class="service-description">Unhas perfeitas e bem cuidadas com nosso serviço completo</p>
+                    <div class="service-price">A partir de R$ 25</div>
+                    <ul class="service-features">
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            Esmaltação perfeita
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            Cuidado completo
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            Produtos de qualidade
+                        </li>
+                    </ul>
+                    <button class="btn-book" onclick="bookService('manicure')">
+                        Agendar Agora
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tratamento Capilar -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="{% static 'core/images/hoztech_templates/salao/servicos/tratamento-capilar.webp' %}" alt="Tratamento Capilar" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="service-content">
+                    <h3 class="service-name">Tratamento Capilar</h3>
+                    <p class="service-description">Revitalize seus cabelos com nossos tratamentos especializados</p>
+                    <div class="service-price">A partir de R$ 60</div>
+                    <ul class="service-features">
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            Hidratação profunda
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            Nutrição completa
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            Cabelos saudáveis
+                        </li>
+                    </ul>
+                    <button class="btn-book" onclick="bookService('tratamento')">
+                        Agendar Agora
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -661,11 +1262,18 @@
         <p class="section-subtitle">Veja alguns dos nossos trabalhos mais recentes</p>
         
         <div class="gallery-grid">
-            {% for item in gallery_items %}
-            <div class="gallery-item" onclick="openGalleryModal('{{ item.id }}')">
-                <i class="bi bi-{{ item.icon }}"></i>
+            <div class="gallery-item" onclick="openGalleryModal('coloracao')">
+                <img src="{% static 'core/images/hoztech_templates/salao/servicos/coloracao.webp' %}" alt="Trabalho de Coloração" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
             </div>
-            {% endfor %}
+            <div class="gallery-item" onclick="openGalleryModal('escova')">
+                <img src="{% static 'core/images/hoztech_templates/salao/servicos/escova.webp' %}" alt="Trabalho de Escova" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+            </div>
+            <div class="gallery-item" onclick="openGalleryModal('manicure')">
+                <img src="{% static 'core/images/hoztech_templates/salao/servicos/manicure.webp' %}" alt="Trabalho de Manicure" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+            </div>
+            <div class="gallery-item" onclick="openGalleryModal('tratamento')">
+                <img src="{% static 'core/images/hoztech_templates/salao/servicos/tratamento-capilar.webp' %}" alt="Tratamento Capilar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+            </div>
         </div>
     </div>
 </section>

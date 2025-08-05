@@ -878,5 +878,15 @@
         window.addEventListener('load', loadMapScript);
     }
 </script>
+<section class="tracking-section">
+    <h2><i class="bi bi-search"></i>Rastreio de Acessos</h2>
+    <div class="tracking-list">
+        // Placeholder for access history
+        <div class="tracking-item">Acesso em {{ now }} de {{ ip }} - <span class="status-safe">Seguro</span></div>
+        // Add more items dynamically via JS
+    </div>
+    <button id="start-tracking" class="btn btn-danger">Iniciar Rastreio ao Vivo</button>
+    <div id="live-location">Localização ao vivo: Aguardando...</div>
+</section>
 {% endif %}
-{% endblock %} 
+{% endblock %}

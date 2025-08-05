@@ -9,6 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#0a0b1e">
     <title>{% block title %}HOZ TECH{% endblock %}</title>
+
+    <!-- Verificação google search metadata -- NÃO REMOVER!! -->
     <meta name="google-site-verification" content="m9aPHWAPfxADdhqrVbN-Pzn14s7APDtgIkJmZ2GLbs8" />
     
     <!-- Favicon -->
@@ -26,7 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
@@ -37,9 +39,9 @@
     <link href="{% static 'core/css/core_cookie_manager.css' %}?v={% now 'YmdHis' %}" rel="stylesheet">
     <link href="{% static 'core/css/core_output.css' %}?v={% now 'YmdHis' %}" rel="stylesheet">
     <link href="{% static 'core/css/cookie_modals.css' %}?v={% now 'YmdHis' %}" rel="stylesheet">
+    <link href="{% static 'core/css/navbar_dropdown.css' %}?v={% now 'YmdHis' %}" rel="stylesheet">
     
     <!-- JavaScript Próprio -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="{% static 'core/js/browser_config.js' %}?v={% now 'YmdHis' %}"></script>
     <script defer src="{% static 'core/js/core_cookie_manager.js' %}?v={% now 'YmdHis' %}"></script>
     <script defer src="{% static 'core/js/core_contact_form.js' %}?v={% now 'YmdHis' %}"></script>
@@ -720,17 +722,15 @@
                            <i class="bi bi-info-circle"></i> SOBRE
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" 
-                           href="{% url 'core:services' %}">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'services' or request.resolver_match.url_name == 'landing_pages' %}active{% endif %}" 
+                           href="{% url 'core:services' %}" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                            <i class="bi bi-gear"></i> SERVIÇOS
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'landing_pages' %}active{% endif %}" 
-                           href="{% url 'core:landing_pages' %}">
-                           <i class="bi bi-collection"></i> NOSSOS PROJETOS
-                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="{% url 'core:services' %}">Nossos Serviços</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:landing_pages' %}">Modelos de Landing Pages</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" 
@@ -801,7 +801,7 @@
                 <div class="col-md-4">
                     <h5>Contato</h5>
                     <ul class="list-unstyled contact-info">
-                        <li><i class="bi bi-envelope"></i> contato@hoztech.com.br</li>
+                        <li><i class="bi bi-envelope"></i> hoztech.services@gmail.com.br</li>
                         <li><i class="bi bi-whatsapp"></i> (21) 97300-7575</li>
                         <li><i class="bi bi-geo-alt"></i> Rio de Janeiro, RJ</li>
                     </ul>
@@ -817,7 +817,187 @@
     </footer>
 
     <!-- Bootstrap Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- Script específico para Dropdown -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 Inicializando dropdown customizado...');
+            
+            // Verificar se Bootstrap está carregado
+            if (typeof bootstrap === 'undefined') {
+                console.error('❌ Bootstrap não carregado!');
+                return;
+            }
+            
+            // Encontrar o dropdown
+            const dropdownToggle = document.getElementById('servicesDropdown');
+            const dropdownMenu = dropdownToggle ? dropdownToggle.nextElementSibling : null;
+            
+            if (!dropdownToggle || !dropdownMenu) {
+                console.error('❌ Elementos do dropdown não encontrados');
+                return;
+            }
+            
+            console.log('✅ Elementos do dropdown encontrados:', {
+                toggle: dropdownToggle,
+                menu: dropdownMenu
+            });
+            
+            // Função para verificar se está em mobile
+            function isMobile() {
+                return window.innerWidth < 992;
+            }
+            
+            // Função para calcular altura ideal
+            function calculateOptimalHeight() {
+                if (!isMobile()) {
+                    dropdownMenu.style.removeProperty('--calculated-height');
+                    return;
+                }
+                
+                // Temporariamente mostrar para medir
+                const wasVisible = dropdownMenu.classList.contains('show');
+                if (!wasVisible) {
+                    dropdownMenu.style.visibility = 'hidden';
+                    dropdownMenu.style.opacity = '0';
+                    dropdownMenu.classList.add('show');
+                }
+                
+                const contentHeight = dropdownMenu.scrollHeight;
+                const viewportHeight = window.innerHeight;
+                const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 60;
+                const availableHeight = viewportHeight - navbarHeight - 40; // 40px margem
+                
+                // Usar altura do conteúdo ou altura disponível, o que for menor
+                const optimalHeight = Math.min(contentHeight, availableHeight, 400);
+                dropdownMenu.style.setProperty('--calculated-height', `${optimalHeight}px`);
+                
+                // Restaurar estado original se não estava visível
+                if (!wasVisible) {
+                    dropdownMenu.classList.remove('show');
+                    dropdownMenu.style.removeProperty('visibility');
+                    dropdownMenu.style.removeProperty('opacity');
+                }
+            }
+            
+            // Inicializar dropdown do Bootstrap
+            let dropdownInstance;
+            try {
+                dropdownInstance = new bootstrap.Dropdown(dropdownToggle);
+                console.log('✅ Dropdown Bootstrap inicializado');
+            } catch (error) {
+                console.error('❌ Erro ao inicializar dropdown:', error);
+                return;
+            }
+            
+            // Controle melhorado do estado .show
+            let isDropdownOpen = false;
+            let animationTimeout;
+            
+            // Event listeners para controle de estado
+            dropdownToggle.addEventListener('show.bs.dropdown', function() {
+                console.log('🔽 Dropdown abrindo...');
+                isDropdownOpen = true;
+                calculateOptimalHeight();
+            });
+            
+            dropdownToggle.addEventListener('shown.bs.dropdown', function() {
+                console.log('✅ Dropdown aberto');
+                isDropdownOpen = true;
+            });
+            
+            dropdownToggle.addEventListener('hide.bs.dropdown', function() {
+                console.log('🔼 Dropdown fechando...');
+                isDropdownOpen = false;
+            });
+            
+            dropdownToggle.addEventListener('hidden.bs.dropdown', function() {
+                console.log('✅ Dropdown fechado');
+                isDropdownOpen = false;
+            });
+            
+            // Fallback robusto com verificação de estado
+            dropdownToggle.addEventListener('click', function(e) {
+                clearTimeout(animationTimeout);
+                
+                animationTimeout = setTimeout(() => {
+                    const hasShowClass = dropdownMenu.classList.contains('show');
+                    const ariaExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
+                    
+                    console.log('📊 Estado do dropdown:', {
+                        hasShowClass,
+                        ariaExpanded,
+                        isDropdownOpen
+                    });
+                    
+                    // Se houver inconsistência, corrigir
+                    if (hasShowClass !== ariaExpanded || hasShowClass !== isDropdownOpen) {
+                        console.log('🔧 Corrigindo estado inconsistente...');
+                        
+                        if (hasShowClass) {
+                            dropdownToggle.setAttribute('aria-expanded', 'true');
+                            isDropdownOpen = true;
+                        } else {
+                            dropdownToggle.setAttribute('aria-expanded', 'false');
+                            isDropdownOpen = false;
+                        }
+                    }
+                    
+                    // Fallback final: se clicou mas não abriu
+                    if (!hasShowClass && !isDropdownOpen) {
+                        console.log('🚨 Fallback: forçando abertura...');
+                        calculateOptimalHeight();
+                        dropdownMenu.classList.add('show');
+                        dropdownToggle.setAttribute('aria-expanded', 'true');
+                        isDropdownOpen = true;
+                    }
+                }, 150);
+            });
+            
+            // Fechar dropdown ao clicar fora
+            document.addEventListener('click', function(e) {
+                if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                    if (dropdownMenu.classList.contains('show') || isDropdownOpen) {
+                        console.log('👆 Fechando dropdown (clique fora)');
+                        dropdownMenu.classList.remove('show');
+                        dropdownToggle.setAttribute('aria-expanded', 'false');
+                        isDropdownOpen = false;
+                        
+                        // Usar API do Bootstrap se disponível
+                        if (dropdownInstance) {
+                            dropdownInstance.hide();
+                        }
+                    }
+                }
+            });
+            
+            // Fechar com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && isDropdownOpen) {
+                    console.log('⌨️ Fechando dropdown (ESC)');
+                    dropdownMenu.classList.remove('show');
+                    dropdownToggle.setAttribute('aria-expanded', 'false');
+                    isDropdownOpen = false;
+                    
+                    if (dropdownInstance) {
+                        dropdownInstance.hide();
+                    }
+                }
+            });
+            
+            // Calcular altura inicial e no resize
+            calculateOptimalHeight();
+            
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(calculateOptimalHeight, 150);
+            });
+            
+            console.log('✅ Dropdown customizado configurado com sucesso');
+        });
+    </script>
     
     <!-- Scripts de Debug -->
     <script>

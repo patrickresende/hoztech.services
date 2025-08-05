@@ -1034,7 +1034,7 @@ def landing_pages(request):
         'page_description': 'Escolha o modelo perfeito para seu negócio',
         'is_landing_page': True
     }
-    return render(request, 'landing_pages.html', context)
+    return render(request, 'landing_pages/landing_pages.html', context)
 
 @log_view_execution
 def landing_musico(request):
@@ -1079,7 +1079,7 @@ def landing_musico(request):
         ],
         'is_landing_page': True
     }
-    return render(request, 'landing_musician.html', context)
+    return render(request, 'landing_pages/landing_musician.html', context)
 
 @log_view_execution
 def landing_roupas(request):
@@ -1096,7 +1096,7 @@ def landing_roupas(request):
         ],
         'is_landing_page': True
     }
-    return render(request, 'landing_clothing.html', context)
+    return render(request, 'landing_pages/landing_clothing.html', context)
 
 @log_view_execution
 def landing_salao(request):
@@ -1114,7 +1114,7 @@ def landing_salao(request):
         ],
         'is_landing_page': True
     }
-    return render(request, 'landing_beauty.html', context)
+    return render(request, 'landing_pages/landing_beauty.html', context)
 
 @log_view_execution
 def landing_limpeza(request):
@@ -1133,4 +1133,4 @@ def landing_limpeza(request):
         ],
         'is_landing_page': True
     }
-    return render(request, 'landing_cleaning.html', context)
+    return render(request, 'landing_pages/landing_cleaning.html', context)
