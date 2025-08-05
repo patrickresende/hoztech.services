@@ -1,0 +1,538 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Modelos de Landing Pages - HOZ TECH{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Landing Pages Showcase Styles */
+    .landing-showcase {
+        min-height: 100vh;
+        background: var(--tech-dark);
+        position: relative;
+        overflow: hidden;
+        padding: var(--spacing-xl) 0;
+    }
+
+    .landing-showcase::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,247,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.2;
+        z-index: 0;
+    }
+
+    .showcase-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .showcase-header {
+        text-align: center;
+        margin-bottom: var(--spacing-xxl);
+    }
+
+    .showcase-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-huge);
+        line-height: 1.2;
+        font-weight: 700;
+        background: var(--gradient-tech);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .showcase-subtitle {
+        color: var(--tech-light);
+        opacity: 0.9;
+        font-size: var(--font-size-medium);
+        line-height: 1.5;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Cascade Grid */
+    .models-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-xl);
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .model-card {
+        background: var(--gradient-card);
+        border: 1px solid rgba(0, 247, 255, 0.2);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all var(--transition-normal);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        position: relative;
+        cursor: pointer;
+        transform: translateY(0);
+    }
+
+    /* Cascade Effect */
+    .model-card:nth-child(1) {
+        animation: cascadeIn 0.6s ease-out 0.1s both;
+    }
+
+    .model-card:nth-child(2) {
+        animation: cascadeIn 0.6s ease-out 0.3s both;
+    }
+
+    .model-card:nth-child(3) {
+        animation: cascadeIn 0.6s ease-out 0.5s both;
+    }
+
+    .model-card:nth-child(4) {
+        animation: cascadeIn 0.6s ease-out 0.7s both;
+    }
+
+    @keyframes cascadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .model-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        border-color: var(--tech-blue);
+        box-shadow: 0 20px 40px rgba(0, 247, 255, 0.2);
+    }
+
+    .model-preview {
+        position: relative;
+        height: 200px;
+        background: linear-gradient(135deg, rgba(0, 247, 255, 0.1) 0%, rgba(255, 0, 128, 0.1) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .model-preview::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--model-gradient, var(--gradient-tech));
+        opacity: 0.1;
+        z-index: 0;
+    }
+
+    .preview-icon {
+        font-size: 4rem;
+        color: var(--model-color, var(--tech-blue));
+        z-index: 1;
+        position: relative;
+        transition: all var(--transition-normal);
+    }
+
+    .model-card:hover .preview-icon {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .model-info {
+        padding: var(--spacing-lg);
+    }
+
+    .model-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-medium);
+        line-height: 1.3;
+        color: var(--tech-light);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .model-description {
+        color: var(--tech-light);
+        opacity: 0.8;
+        font-size: var(--font-size-small);
+        line-height: 1.5;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .model-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 var(--spacing-md) 0;
+    }
+
+    .model-features li {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        color: var(--tech-light);
+        font-size: var(--font-size-tiny);
+        margin-bottom: var(--spacing-xs);
+        opacity: 0.9;
+    }
+
+    .model-features i {
+        color: var(--model-color, var(--tech-blue));
+        font-size: 0.8rem;
+    }
+
+    .model-cta {
+        display: flex;
+        gap: var(--spacing-sm);
+    }
+
+    .btn-model {
+        flex: 1;
+        padding: var(--spacing-sm);
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-tiny);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-radius: 8px;
+        transition: all var(--transition-normal);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-xs);
+        text-decoration: none;
+    }
+
+    .btn-preview {
+        background: var(--model-gradient, var(--gradient-tech));
+        color: var(--tech-dark);
+        border: none;
+    }
+
+    .btn-preview:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 247, 255, 0.3);
+        color: var(--tech-dark);
+    }
+
+    .btn-info {
+        background: transparent;
+        border: 1px solid var(--model-color, var(--tech-blue));
+        color: var(--tech-light);
+    }
+
+    .btn-info:hover {
+        background: rgba(0, 247, 255, 0.1);
+        color: var(--tech-light);
+    }
+
+    /* Model-specific colors */
+    .model-musician {
+        --model-color: #ff6b6b;
+        --model-gradient: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    }
+
+    .model-clothing {
+        --model-color: #4ecdc4;
+        --model-gradient: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+    }
+
+    .model-beauty {
+        --model-color: #ff9ff3;
+        --model-gradient: linear-gradient(135deg, #ff9ff3 0%, #f368e0 100%);
+    }
+
+    .model-cleaning {
+        --model-color: #74b9ff;
+        --model-gradient: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .models-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        .showcase-title {
+            font-size: var(--font-size-xlarge);
+        }
+
+        .showcase-subtitle {
+            font-size: var(--font-size-base);
+        }
+
+        .model-preview {
+            height: 150px;
+        }
+
+        .preview-icon {
+            font-size: 3rem;
+        }
+
+        .model-info {
+            padding: var(--spacing-md);
+        }
+
+        .model-title {
+            font-size: var(--font-size-base);
+        }
+
+        .model-description {
+            font-size: var(--font-size-tiny);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .landing-showcase {
+            padding: var(--spacing-lg) 0;
+        }
+
+        .showcase-title {
+            font-size: var(--font-size-large);
+        }
+
+        .showcase-subtitle {
+            font-size: var(--font-size-small);
+        }
+
+        .model-preview {
+            height: 120px;
+        }
+
+        .preview-icon {
+            font-size: 2.5rem;
+        }
+
+        .model-cta {
+            flex-direction: column;
+        }
+
+        .btn-model {
+            font-size: var(--font-size-micro);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="landing-showcase">
+    <div class="container">
+        <div class="showcase-content">
+            <div class="showcase-header">
+                <h1 class="showcase-title">Modelos de Landing Pages</h1>
+                <p class="showcase-subtitle">
+                    Escolha o modelo perfeito para seu negócio. Cada template foi cuidadosamente desenvolvido 
+                    para maximizar conversões em segmentos específicos.
+                </p>
+            </div>
+
+            <div class="models-grid">
+                <!-- Modelo Músico/Artista -->
+                <div class="model-card model-musician">
+                    <div class="model-preview">
+                        <i class="bi bi-music-note-beamed preview-icon"></i>
+                    </div>
+                    <div class="model-info">
+                        <h3 class="model-title">Músico/Artista</h3>
+                        <p class="model-description">
+                            Template especializado para músicos, bandas e artistas que querem promover seu trabalho e conectar com fãs.
+                        </p>
+                        <ul class="model-features">
+                            <li><i class="bi bi-check-circle"></i> Player de música integrado</li>
+                            <li><i class="bi bi-check-circle"></i> Galeria de fotos e vídeos</li>
+                            <li><i class="bi bi-check-circle"></i> Agenda de shows</li>
+                            <li><i class="bi bi-check-circle"></i> Links para streaming</li>
+                        </ul>
+                        <div class="model-cta">
+                            <a href="{% url 'core:landing_musico' %}" class="btn-model btn-preview">
+                                <i class="bi bi-eye"></i> Ver Demo
+                            </a>
+                            <a href="#" class="btn-model btn-info" onclick="showModelInfo('musician')">
+                                <i class="bi bi-info-circle"></i> Detalhes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modelo Loja de Roupas -->
+                <div class="model-card model-clothing">
+                    <div class="model-preview">
+                        <i class="bi bi-bag-heart preview-icon"></i>
+                    </div>
+                    <div class="model-info">
+                        <h3 class="model-title">Loja de Roupas</h3>
+                        <p class="model-description">
+                            Design moderno e elegante para lojas de moda, boutiques e marcas de vestuário que querem vender online.
+                        </p>
+                        <ul class="model-features">
+                            <li><i class="bi bi-check-circle"></i> Catálogo de produtos</li>
+                            <li><i class="bi bi-check-circle"></i> Filtros por categoria</li>
+                            <li><i class="bi bi-check-circle"></i> Carrinho de compras</li>
+                            <li><i class="bi bi-check-circle"></i> Integração com WhatsApp</li>
+                        </ul>
+                        <div class="model-cta">
+                            <a href="{% url 'core:landing_roupas' %}" class="btn-model btn-preview">
+                                <i class="bi bi-eye"></i> Ver Demo
+                            </a>
+                            <a href="#" class="btn-model btn-info" onclick="showModelInfo('clothing')">
+                                <i class="bi bi-info-circle"></i> Detalhes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modelo Salão de Beleza -->
+                <div class="model-card model-beauty">
+                    <div class="model-preview">
+                        <i class="bi bi-scissors preview-icon"></i>
+                    </div>
+                    <div class="model-info">
+                        <h3 class="model-title">Salão de Beleza</h3>
+                        <p class="model-description">
+                            Template sofisticado para salões de beleza, spas e profissionais da área estética.
+                        </p>
+                        <ul class="model-features">
+                            <li><i class="bi bi-check-circle"></i> Galeria de trabalhos</li>
+                            <li><i class="bi bi-check-circle"></i> Lista de serviços</li>
+                            <li><i class="bi bi-check-circle"></i> Sistema de agendamento</li>
+                            <li><i class="bi bi-check-circle"></i> Depoimentos de clientes</li>
+                        </ul>
+                        <div class="model-cta">
+                            <a href="{% url 'core:landing_salao' %}" class="btn-model btn-preview">
+                                <i class="bi bi-eye"></i> Ver Demo
+                            </a>
+                            <a href="#" class="btn-model btn-info" onclick="showModelInfo('beauty')">
+                                <i class="bi bi-info-circle"></i> Detalhes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modelo Limpeza de Estofados -->
+                <div class="model-card model-cleaning">
+                    <div class="model-preview">
+                        <i class="bi bi-house-gear preview-icon"></i>
+                    </div>
+                    <div class="model-info">
+                        <h3 class="model-title">Limpeza de Estofados</h3>
+                        <p class="model-description">
+                            Landing page otimizada para empresas de limpeza, com foco em conversão e geração de leads.
+                        </p>
+                        <ul class="model-features">
+                            <li><i class="bi bi-check-circle"></i> Antes e depois</li>
+                            <li><i class="bi bi-check-circle"></i> Calculadora de preços</li>
+                            <li><i class="bi bi-check-circle"></i> Área de cobertura</li>
+                            <li><i class="bi bi-check-circle"></i> Formulário de orçamento</li>
+                        </ul>
+                        <div class="model-cta">
+                            <a href="{% url 'core:landing_limpeza' %}" class="btn-model btn-preview">
+                                <i class="bi bi-eye"></i> Ver Demo
+                            </a>
+                            <a href="#" class="btn-model btn-info" onclick="showModelInfo('cleaning')">
+                                <i class="bi bi-info-circle"></i> Detalhes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function showModelInfo(modelType) {
+    const modelData = {
+        musician: {
+            title: 'Landing Page para Músicos/Artistas',
+            description: 'Template completo para promover sua música e conectar com fãs',
+            features: [
+                'Player de música integrado com Spotify/SoundCloud',
+                'Galeria responsiva para fotos e vídeos',
+                'Calendário de shows e eventos',
+                'Links diretos para plataformas de streaming',
+                'Formulário de contato para contratações',
+                'Integração com redes sociais',
+                'Design moderno e musical'
+            ],
+            price: 'A partir de R$ 897',
+            delivery: '5-7 dias úteis'
+        },
+        clothing: {
+            title: 'Landing Page para Loja de Roupas',
+            description: 'E-commerce otimizado para vendas de moda e vestuário',
+            features: [
+                'Catálogo de produtos com filtros',
+                'Carrinho de compras integrado',
+                'Sistema de pagamento online',
+                'Integração com WhatsApp Business',
+                'Galeria de looks e combinações',
+                'Sistema de cupons de desconto',
+                'Design elegante e moderno'
+            ],
+            price: 'A partir de R$ 1.297',
+            delivery: '7-10 dias úteis'
+        },
+        beauty: {
+            title: 'Landing Page para Salão de Beleza',
+            description: 'Site profissional para salões, spas e estética',
+            features: [
+                'Galeria de trabalhos realizados',
+                'Lista completa de serviços e preços',
+                'Sistema de agendamento online',
+                'Depoimentos e avaliações',
+                'Localização e contato',
+                'Promoções e pacotes',
+                'Design sofisticado e feminino'
+            ],
+            price: 'A partir de R$ 997',
+            delivery: '5-7 dias úteis'
+        },
+        cleaning: {
+            title: 'Landing Page para Limpeza de Estofados',
+            description: 'Site focado em conversão para serviços de limpeza',
+            features: [
+                'Galeria antes e depois',
+                'Calculadora de preços automática',
+                'Mapa de área de cobertura',
+                'Formulário de orçamento rápido',
+                'Depoimentos de clientes',
+                'Certificações e garantias',
+                'Design profissional e confiável'
+            ],
+            price: 'A partir de R$ 797',
+            delivery: '3-5 dias úteis'
+        }
+    };
+
+    const model = modelData[modelType];
+    if (model) {
+        alert(`${model.title}\n\n${model.description}\n\nRecursos principais:\n${model.features.map(f => `• ${f}`).join('\n')}\n\n${model.price}\nPrazo de entrega: ${model.delivery}\n\nEntre em contato para mais informações!`);
+    }
+}
+
+// Adiciona efeitos de interação
+document.addEventListener('DOMContentLoaded', function() {
+    const modelCards = document.querySelectorAll('.model-card');
+    
+    modelCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.zIndex = '10';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.zIndex = '1';
+        });
+    });
+});
+</script>
+{% endblock %}

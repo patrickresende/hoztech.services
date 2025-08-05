@@ -988,4 +988,149 @@ def faq(request):
 
 def security_policy(request):
     """View for the security policy page."""
-    return render(request, 'security_policy.html') 
+    return render(request, 'security_policy.html')
+
+@log_view_execution
+def landing_pages(request):
+    """View para a página de seleção de landing pages"""
+    landing_pages_data = [
+        {
+            'id': 'musico',
+            'title': 'Músico/Artista',
+            'description': 'Landing page para músicos e artistas promoverem seus trabalhos',
+            'image': 'landing_musico_preview.jpg',
+            'url': 'core:landing_musico',
+            'features': ['Player de música', 'Galeria de fotos', 'Agenda de shows', 'Links para streaming']
+        },
+        {
+            'id': 'roupas',
+            'title': 'Comércio de Roupas',
+            'description': 'Loja virtual para venda de roupas e acessórios',
+            'image': 'landing_roupas_preview.jpg',
+            'url': 'core:landing_roupas',
+            'features': ['Catálogo de produtos', 'Carrinho de compras', 'Calculadora de frete', 'Guia de tamanhos']
+        },
+        {
+            'id': 'salao',
+            'title': 'Salão de Beleza',
+            'description': 'Site para salões de beleza com agendamento online',
+            'image': 'landing_salao_preview.jpg',
+            'url': 'core:landing_salao',
+            'features': ['Agendamento online', 'Galeria de trabalhos', 'Perfil da equipe', 'Lista de serviços']
+        },
+        {
+            'id': 'limpeza',
+            'title': 'Limpeza de Estofados',
+            'description': 'Serviço especializado em limpeza de estofados',
+            'image': 'landing_limpeza_preview.jpg',
+            'url': 'core:landing_limpeza',
+            'features': ['Orçamento online', 'Galeria antes/depois', 'Área de cobertura', 'Garantias']
+        }
+    ]
+    
+    context = {
+        'landing_pages': landing_pages_data,
+        'page_title': 'Modelos de Landing Pages',
+        'page_description': 'Escolha o modelo perfeito para seu negócio',
+        'is_landing_page': True
+    }
+    return render(request, 'landing_pages.html', context)
+
+@log_view_execution
+def landing_musico(request):
+    """Landing page para músicos/artistas"""
+    context = {
+        'page_title': 'Alex Harmony - Músico',
+        'page_description': 'Descubra a música que toca sua alma',
+        'artist_name': 'Alex Harmony',
+        'tagline': 'Música que conecta almas',
+        'genre': 'Pop/Rock',
+        'bio': 'Músico apaixonado por criar melodias que conectam corações e despertam emoções.',
+        'current_track': {
+            'title': 'Noites de Verão',
+            'duration': '3:45'
+        },
+        'spotify_link': 'https://open.spotify.com/artist/example',
+        'upcoming_shows': [
+            {
+                'date': '15 SET',
+                'venue': 'Teatro Municipal',
+                'location': 'Rio de Janeiro - RJ',
+                'ticket_link': 'https://example.com/tickets/1'
+            },
+            {
+                'date': '22 SET',
+                'venue': 'Sala São Paulo',
+                'location': 'São Paulo - SP',
+                'ticket_link': 'https://example.com/tickets/2'
+            },
+            {
+                'date': '05 OUT',
+                'venue': 'Centro Cultural',
+                'location': 'Belo Horizonte - MG',
+                'ticket_link': 'https://example.com/tickets/3'
+            },
+            {
+                'date': '12 OUT',
+                'venue': 'Arena da Baixada',
+                'location': 'Curitiba - PR',
+                'ticket_link': 'https://example.com/tickets/4'
+            }
+        ],
+        'is_landing_page': True
+    }
+    return render(request, 'landing_musician.html', context)
+
+@log_view_execution
+def landing_roupas(request):
+    """Landing page para comércio de roupas"""
+    context = {
+        'page_title': 'Bella Moda - Moda Feminina',
+        'page_description': 'Estilo único para mulheres modernas',
+        'store_name': 'Bella Moda',
+        'slogan': 'Sua personalidade, seu estilo',
+        'featured_products': [
+            {'name': 'Vestido Elegante', 'price': 'R$ 149,90', 'image': 'vestido1.jpg'},
+            {'name': 'Blusa Casual', 'price': 'R$ 79,90', 'image': 'blusa1.jpg'},
+            {'name': 'Calça Jeans', 'price': 'R$ 119,90', 'image': 'calca1.jpg'},
+        ],
+        'is_landing_page': True
+    }
+    return render(request, 'landing_clothing.html', context)
+
+@log_view_execution
+def landing_salao(request):
+    """Landing page para salão de beleza"""
+    context = {
+        'page_title': 'Glamour Studio - Salão de Beleza',
+        'page_description': 'Transforme sua beleza, eleve sua autoestima',
+        'salon_name': 'Glamour Studio',
+        'slogan': 'Onde a beleza encontra a perfeição',
+        'services': [
+            {'name': 'Corte e Escova', 'price': 'A partir de R$ 45', 'duration': '1h'},
+            {'name': 'Coloração', 'price': 'A partir de R$ 80', 'duration': '2h'},
+            {'name': 'Tratamentos', 'price': 'A partir de R$ 60', 'duration': '1h30'},
+            {'name': 'Manicure e Pedicure', 'price': 'A partir de R$ 35', 'duration': '45min'},
+        ],
+        'is_landing_page': True
+    }
+    return render(request, 'landing_beauty.html', context)
+
+@log_view_execution
+def landing_limpeza(request):
+    """Landing page para serviço de limpeza de estofados"""
+    context = {
+        'page_title': 'CleanMax - Limpeza de Estofados',
+        'page_description': 'Estofados como novos em poucas horas',
+        'company_name': 'CleanMax',
+        'slogan': 'Renovação que você pode ver e sentir',
+        'services': [
+            {'name': 'Sofá 2 lugares', 'price': 'A partir de R$ 80'},
+            {'name': 'Sofá 3 lugares', 'price': 'A partir de R$ 120'},
+            {'name': 'Poltrona', 'price': 'A partir de R$ 50'},
+            {'name': 'Colchão Solteiro', 'price': 'A partir de R$ 60'},
+            {'name': 'Colchão Casal', 'price': 'A partir de R$ 80'},
+        ],
+        'is_landing_page': True
+    }
+    return render(request, 'landing_cleaning.html', context)

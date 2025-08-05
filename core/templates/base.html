@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#0a0b1e">
     <title>{% block title %}HOZ TECH{% endblock %}</title>
+    <meta name="google-site-verification" content="m9aPHWAPfxADdhqrVbN-Pzn14s7APDtgIkJmZ2GLbs8" />
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{% static 'core/img/favicon.svg' %}">
@@ -726,6 +727,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'landing_pages' %}active{% endif %}" 
+                           href="{% url 'core:landing_pages' %}">
+                           <i class="bi bi-collection"></i> NOSSOS PROJETOS
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" 
                            href="{% url 'core:contact' %}">
                            <i class="bi bi-envelope"></i> CONTATO
@@ -750,8 +757,10 @@
     <!-- Include Cookie Modals -->
     {% include 'cookie_modals.html' %}
 
-    <!-- Include Promotional Footer Banner -->
-    {% include 'promo_navbar.html' %}
+    <!-- Include Promotional Footer Banner (not on landing pages) -->
+    {% if not is_landing_page %}
+        {% include 'promo_navbar.html' %}
+    {% endif %}
 
     <!-- Footer -->
     <footer class="footer">

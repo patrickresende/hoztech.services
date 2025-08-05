@@ -13,5 +13,11 @@ urlpatterns = [
     path('termos/', views.terms, name='terms'),
     path('download-pdf/', views.download_pdf, name='download_pdf'),
     path('faq/', views.faq, name='faq'),
-    path('security-policy/', views.security_policy, name='security_policy')
-] 
+    path('security-policy/', views.security_policy, name='security_policy'),
+    # Landing Pages
+    path('landingpages/', views.landing_pages, name='landing_pages'),
+    path('landing/musico/', views.landing_musico, name='landing_musico'),
+    path('landing/roupas/', views.landing_roupas, name='landing_roupas'),
+    path('landing/salao/', views.landing_salao, name='landing_salao'),
+    path('landing/limpeza/', views.landing_limpeza, name='landing_limpeza'),
+]

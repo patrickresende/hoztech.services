@@ -75,6 +75,265 @@
         color: transparent;
         margin-bottom: var(--spacing-md);
         text-transform: uppercase;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all var(--transition-normal);
+    }
+
+    /* Animação Hacker - Efeito de Glitch */
+    .hero-title.glitch {
+        animation: glitch-main 0.3s ease-in-out;
+    }
+
+    .hero-title::before,
+    .hero-title::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-tech);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .hero-title.glitch::before {
+        animation: glitch-red 0.3s ease-in-out;
+        text-shadow: 2px 0 #ff073a;
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    }
+
+    .hero-title.glitch::after {
+        animation: glitch-blue 0.3s ease-in-out;
+        text-shadow: -2px 0 #00f7ff;
+        clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    }
+
+    /* Keyframes para o efeito glitch */
+    @keyframes glitch-main {
+        0%, 100% { transform: translate(0); }
+        10% { transform: translate(-2px, -1px); }
+        20% { transform: translate(2px, 1px); }
+        30% { transform: translate(-1px, 2px); }
+        40% { transform: translate(1px, -2px); }
+        50% { transform: translate(-2px, 1px); }
+        60% { transform: translate(2px, -1px); }
+        70% { transform: translate(-1px, -2px); }
+        80% { transform: translate(1px, 2px); }
+        90% { transform: translate(-2px, -1px); }
+    }
+
+    @keyframes glitch-red {
+        0%, 100% { 
+            opacity: 0;
+            transform: translate(0);
+        }
+        10% { 
+            opacity: 1;
+            transform: translate(-3px, -2px);
+        }
+        20% { 
+            opacity: 0.8;
+            transform: translate(3px, 2px);
+        }
+        30% { 
+            opacity: 1;
+            transform: translate(-2px, 3px);
+        }
+        40% { 
+            opacity: 0.6;
+            transform: translate(2px, -3px);
+        }
+        50% { 
+            opacity: 1;
+            transform: translate(-3px, 2px);
+        }
+        60% { 
+            opacity: 0.4;
+            transform: translate(3px, -2px);
+        }
+        70% { 
+            opacity: 0.8;
+            transform: translate(-2px, -3px);
+        }
+        80% { 
+            opacity: 1;
+            transform: translate(2px, 3px);
+        }
+        90% { 
+            opacity: 0.6;
+            transform: translate(-3px, -2px);
+        }
+    }
+
+    @keyframes glitch-blue {
+        0%, 100% { 
+            opacity: 0;
+            transform: translate(0);
+        }
+        15% { 
+            opacity: 0.8;
+            transform: translate(2px, 3px);
+        }
+        25% { 
+            opacity: 1;
+            transform: translate(-2px, -3px);
+        }
+        35% { 
+            opacity: 0.6;
+            transform: translate(3px, 2px);
+        }
+        45% { 
+            opacity: 1;
+            transform: translate(-3px, -2px);
+        }
+        55% { 
+            opacity: 0.4;
+            transform: translate(2px, -3px);
+        }
+        65% { 
+            opacity: 0.8;
+            transform: translate(-2px, 3px);
+        }
+        75% { 
+            opacity: 1;
+            transform: translate(3px, -2px);
+        }
+        85% { 
+            opacity: 0.6;
+            transform: translate(-3px, 2px);
+        }
+        95% { 
+            opacity: 0.8;
+            transform: translate(2px, -3px);
+        }
+    }
+
+    /* Efeito de texto corrompido */
+    .hero-title.corrupted {
+        animation: text-corruption 0.5s ease-in-out;
+    }
+
+    @keyframes text-corruption {
+        0% { 
+            filter: blur(0px);
+            opacity: 1;
+        }
+        25% { 
+            filter: blur(2px) hue-rotate(90deg);
+            opacity: 0.8;
+            transform: scale(1.02);
+        }
+        50% { 
+            filter: blur(4px) hue-rotate(180deg) saturate(2);
+            opacity: 0.6;
+            transform: scale(0.98) skew(2deg);
+        }
+        75% { 
+            filter: blur(2px) hue-rotate(270deg);
+            opacity: 0.8;
+            transform: scale(1.01) skew(-1deg);
+        }
+        100% { 
+            filter: blur(0px);
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* Efeito de scan lines */
+    .hero-title::after {
+        background-image: 
+            linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(0, 247, 255, 0.1) 50%,
+                transparent 100%
+            );
+        background-size: 20px 100%;
+        animation: scan-lines 2s linear infinite;
+        opacity: 0;
+    }
+
+    .hero-title.glitch::after {
+        opacity: 0.3;
+    }
+
+    @keyframes scan-lines {
+        0% { background-position: -20px 0; }
+        100% { background-position: calc(100% + 20px) 0; }
+    }
+
+    /* Responsividade para dispositivos móveis */
+    @media (max-width: 768px) {
+        .hero-title::before,
+        .hero-title::after {
+            font-size: var(--font-size-huge);
+        }
+        
+        @keyframes glitch-main {
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(-1px, -0.5px); }
+            20% { transform: translate(1px, 0.5px); }
+            30% { transform: translate(-0.5px, 1px); }
+            40% { transform: translate(0.5px, -1px); }
+            50% { transform: translate(-1px, 0.5px); }
+            60% { transform: translate(1px, -0.5px); }
+            70% { transform: translate(-0.5px, -1px); }
+            80% { transform: translate(0.5px, 1px); }
+            90% { transform: translate(-1px, -0.5px); }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero-title::before,
+        .hero-title::after {
+            font-size: var(--font-size-xlarge);
+        }
+        
+        /* Reduz a intensidade da animação em telas muito pequenas */
+        @keyframes glitch-red {
+            0%, 100% { 
+                opacity: 0;
+                transform: translate(0);
+            }
+            25% { 
+                opacity: 0.6;
+                transform: translate(-1px, -1px);
+            }
+            50% { 
+                opacity: 0.8;
+                transform: translate(1px, 1px);
+            }
+            75% { 
+                opacity: 0.4;
+                transform: translate(-1px, 1px);
+            }
+        }
+        
+        @keyframes glitch-blue {
+            0%, 100% { 
+                opacity: 0;
+                transform: translate(0);
+            }
+            25% { 
+                opacity: 0.4;
+                transform: translate(1px, -1px);
+            }
+            50% { 
+                opacity: 0.6;
+                transform: translate(-1px, -1px);
+            }
+            75% { 
+                opacity: 0.8;
+                transform: translate(1px, 1px);
+            }
+        }
     }
 
     .hero-subtitle {
@@ -388,6 +647,177 @@
             font-size: var(--font-size-base);
         }
     }
+
+    /* Models Available Section */
+    .models-available-section {
+        padding: var(--spacing-xl) 0;
+        background: linear-gradient(135deg, rgba(0, 247, 255, 0.05) 0%, rgba(255, 0, 128, 0.05) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .models-available-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0,247,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.3;
+        z-index: 0;
+    }
+
+    .models-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .models-highlight {
+        background: var(--gradient-card);
+        border: 1px solid rgba(0, 247, 255, 0.3);
+        border-radius: 16px;
+        padding: var(--spacing-xl);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        box-shadow: 0 8px 32px rgba(0, 247, 255, 0.1);
+        transition: all var(--transition-normal);
+    }
+
+    .models-highlight:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0, 247, 255, 0.2);
+        border-color: var(--tech-blue);
+    }
+
+    .models-title {
+        font-family: var(--font-orbitron);
+        font-size: var(--font-size-large);
+        line-height: 1.3;
+        color: var(--tech-light);
+        margin-bottom: var(--spacing-md);
+        text-align: center;
+    }
+
+    .models-description {
+        color: var(--tech-light);
+        opacity: 0.9;
+        font-size: var(--font-size-base);
+        line-height: 1.6;
+        margin-bottom: var(--spacing-lg);
+        text-align: center;
+    }
+
+    .models-benefits {
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .benefit-item {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm);
+        background: rgba(0, 247, 255, 0.05);
+        border-radius: 8px;
+        margin-bottom: var(--spacing-sm);
+        transition: all var(--transition-normal);
+    }
+
+    .benefit-item:hover {
+        background: rgba(0, 247, 255, 0.1);
+        transform: translateX(5px);
+    }
+
+    .benefit-item i {
+        color: var(--tech-blue);
+        font-size: 1.2rem;
+        min-width: 20px;
+    }
+
+    .benefit-item span {
+        color: var(--tech-light);
+        font-weight: 500;
+        font-size: var(--font-size-small);
+    }
+
+    .models-cta {
+        text-align: center;
+        padding-top: var(--spacing-lg);
+        border-top: 1px solid rgba(0, 247, 255, 0.2);
+    }
+
+    .cta-text {
+        color: var(--tech-light);
+        font-size: var(--font-size-base);
+        line-height: 1.5;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .cta-text strong {
+        color: var(--tech-blue);
+        font-weight: 600;
+    }
+
+    .section-subtitle {
+        color: var(--tech-light);
+        opacity: 0.8;
+        font-size: var(--font-size-base);
+        margin-bottom: var(--spacing-xl);
+        text-align: center;
+    }
+
+    /* Responsive adjustments for models section */
+    @media (max-width: 768px) {
+        .models-highlight {
+            padding: var(--spacing-lg);
+        }
+
+        .models-title {
+            font-size: var(--font-size-medium);
+        }
+
+        .models-description {
+            font-size: var(--font-size-small);
+        }
+
+        .benefit-item span {
+            font-size: var(--font-size-tiny);
+        }
+
+        .cta-text {
+            font-size: var(--font-size-small);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .models-available-section {
+            padding: var(--spacing-lg) 0;
+        }
+
+        .models-highlight {
+            padding: var(--spacing-md);
+        }
+
+        .models-title {
+            font-size: var(--font-size-base);
+        }
+
+        .models-description {
+            font-size: var(--font-size-tiny);
+        }
+
+        .benefit-item {
+            padding: var(--spacing-xs);
+        }
+
+        .benefit-item span {
+            font-size: var(--font-size-micro);
+        }
+
+        .cta-text {
+            font-size: var(--font-size-tiny);
+        }
+    }
 </style>
 {% endblock %}
 
@@ -396,7 +826,7 @@
 <section class="hero-section">
     <div class="hero-content">
         <img src="{% static 'core/images/logo.png' %}" alt="HOZ TECH Logo" class="hero-logo">
-        <h1 class="hero-title">Transforme sua presença digital</h1>
+        <h1 class="hero-title" data-text="Transforme sua presença digital">Transforme sua presença digital</h1>
         <p class="hero-subtitle">Soluções tecnológicas inovadoras para impulsionar seu negócio ao próximo nível</p>
         <div class="hero-buttons">
             <a href="{% url 'core:services' %}" class="btn btn-hero btn-primary">
@@ -522,6 +952,81 @@
     </div>
 </section>
 
+<!-- Modelos Disponíveis Section -->
+<section class="models-available-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="section-title">
+                    <i class="bi bi-collection"></i>
+                    Modelos Disponíveis
+                </h2>
+                <p class="section-subtitle">
+                    Descubra nossos modelos de landing pages especializados para diferentes segmentos
+                </p>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="models-content">
+                    <div class="models-highlight">
+                        <h3 class="models-title">
+                            🚀 Acelere seu Negócio com Landing Pages Profissionais
+                        </h3>
+                        <p class="models-description">
+                            Não perca mais clientes! Uma landing page bem estruturada pode <strong>aumentar suas conversões em até 300%</strong>. 
+                            Nossos modelos foram desenvolvidos especificamente para diferentes nichos de mercado, garantindo que sua mensagem 
+                            chegue ao público certo da forma mais eficaz.
+                        </p>
+                        
+                        <div class="models-benefits">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="benefit-item">
+                                        <i class="bi bi-graph-up-arrow"></i>
+                                        <span>Aumento de Conversões</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="benefit-item">
+                                        <i class="bi bi-target"></i>
+                                        <span>Foco no seu Público</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="benefit-item">
+                                        <i class="bi bi-lightning-charge"></i>
+                                        <span>Carregamento Rápido</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="benefit-item">
+                                        <i class="bi bi-phone"></i>
+                                        <span>100% Responsivo</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="models-cta">
+                            <p class="cta-text">
+                                <strong>Seu concorrente já tem uma landing page?</strong><br>
+                                Não fique para trás! Escolha o modelo perfeito para seu negócio e comece a converter mais hoje mesmo.
+                            </p>
+                            
+                            <a href="{% url 'core:landing_pages' %}" class="btn btn-hero btn-primary btn-lg">
+                                <i class="bi bi-eye"></i>
+                                Ver Modelos Disponíveis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CTA Section -->
 <section class="cta-section">
     <div class="cta-content">
@@ -542,4 +1047,122 @@
 
 {% block extra_js %}
 <!-- Scripts específicos da página inicial -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const heroTitle = document.querySelector('.hero-title');
+    let isAnimating = false;
+    let animationTimeout;
+    
+    // Função para aplicar efeito glitch
+    function applyGlitchEffect() {
+        if (isAnimating) return;
+        
+        isAnimating = true;
+        heroTitle.classList.add('glitch');
+        
+        // Remove a classe após a animação
+        setTimeout(() => {
+            heroTitle.classList.remove('glitch');
+            isAnimating = false;
+        }, 300);
+    }
+    
+    // Função para aplicar efeito de corrupção
+    function applyCorruptionEffect() {
+        if (isAnimating) return;
+        
+        isAnimating = true;
+        heroTitle.classList.add('corrupted');
+        
+        // Remove a classe após a animação
+        setTimeout(() => {
+            heroTitle.classList.remove('corrupted');
+            isAnimating = false;
+        }, 500);
+    }
+    
+    // Função para escolher efeito aleatório
+    function triggerRandomEffect() {
+        const effects = [applyGlitchEffect, applyCorruptionEffect];
+        const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+        randomEffect();
+    }
+    
+    // Event listeners para mouse
+    heroTitle.addEventListener('mouseenter', function() {
+        // Cancela qualquer timeout anterior
+        clearTimeout(animationTimeout);
+        
+        // Aplica efeito imediatamente
+        triggerRandomEffect();
+        
+        // Aplica efeitos adicionais durante o hover
+        animationTimeout = setTimeout(() => {
+            if (heroTitle.matches(':hover') && !isAnimating) {
+                triggerRandomEffect();
+            }
+        }, 800);
+    });
+    
+    heroTitle.addEventListener('mouseleave', function() {
+        // Cancela timeouts quando o mouse sai
+        clearTimeout(animationTimeout);
+    });
+    
+    // Event listener para touch em dispositivos móveis
+    heroTitle.addEventListener('touchstart', function(e) {
+        e.preventDefault(); // Previne o comportamento padrão
+        triggerRandomEffect();
+    });
+    
+    // Efeito automático ocasional (opcional)
+    function randomGlitch() {
+        // Só executa se não estiver em hover e não estiver animando
+        if (!heroTitle.matches(':hover') && !isAnimating && Math.random() < 0.1) {
+            applyGlitchEffect();
+        }
+        
+        // Agenda próxima verificação
+        setTimeout(randomGlitch, 5000 + Math.random() * 10000);
+    }
+    
+    // Inicia o efeito automático após 10 segundos
+    setTimeout(randomGlitch, 10000);
+    
+    // Adiciona suporte para acessibilidade
+    heroTitle.addEventListener('focus', function() {
+        triggerRandomEffect();
+    });
+    
+    // Adiciona suporte para teclado
+    heroTitle.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            triggerRandomEffect();
+        }
+    });
+    
+    // Torna o elemento focável para acessibilidade
+    heroTitle.setAttribute('tabindex', '0');
+    heroTitle.setAttribute('role', 'button');
+    heroTitle.setAttribute('aria-label', 'Título principal com efeito visual interativo');
+    
+    // Detecta preferência de movimento reduzido
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+        // Desabilita animações automáticas para usuários que preferem movimento reduzido
+        heroTitle.style.setProperty('--animation-duration', '0.1s');
+        
+        // Substitui por um efeito mais sutil
+        heroTitle.addEventListener('mouseenter', function() {
+            this.style.textShadow = '0 0 10px rgba(0, 247, 255, 0.5)';
+        });
+        
+        heroTitle.addEventListener('mouseleave', function() {
+            this.style.textShadow = 'none';
+        });
+    }
+});
+</script>
 {% endblock %}

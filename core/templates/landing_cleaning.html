@@ -1,0 +1,1072 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }} - Landing Page Limpeza{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Cleaning Service Landing Page Styles */
+    :root {
+        --clean-primary: #27ae60;
+        --clean-secondary: #2ecc71;
+        --clean-accent: #58d68d;
+        --clean-blue: #3498db;
+        --clean-dark: #2c3e50;
+        --clean-light: #ecf0f1;
+        --clean-gradient: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        --clean-gradient-soft: linear-gradient(135deg, #e8f8f5 0%, #d5f4e6 100%);
+        --clean-shadow: 0 15px 35px rgba(39, 174, 96, 0.3);
+    }
+
+    body {
+        background: var(--clean-gradient-soft);
+        color: var(--clean-dark);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Hero Section */
+    .cleaning-hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background: var(--clean-gradient);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cleaning-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="cleanPattern" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="12" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><circle cx="5" cy="5" r="3" fill="rgba(255,255,255,0.08)"/><circle cx="35" cy="35" r="5" fill="rgba(255,255,255,0.06)"/></pattern></defs><rect width="100" height="100" fill="url(%23cleanPattern)"/></svg>');
+        opacity: 0.4;
+        animation: cleanFloat 25s ease-in-out infinite;
+    }
+
+    @keyframes cleanFloat {
+        0%, 100% { transform: translateX(0px) translateY(0px); }
+        25% { transform: translateX(20px) translateY(-15px); }
+        50% { transform: translateX(-15px) translateY(-25px); }
+        75% { transform: translateX(-20px) translateY(-10px); }
+    }
+
+    .hero-content {
+        text-align: center;
+        z-index: 2;
+        position: relative;
+        color: white;
+    }
+
+    .company-logo {
+        width: 160px;
+        height: 160px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-lg);
+        backdrop-filter: blur(15px);
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        animation: logoClean 5s ease-in-out infinite;
+        position: relative;
+    }
+
+    @keyframes logoClean {
+        0%, 100% { 
+            transform: scale(1) rotate(0deg); 
+            box-shadow: 0 0 30px rgba(255,255,255,0.4); 
+        }
+        25% { 
+            transform: scale(1.05) rotate(2deg); 
+            box-shadow: 0 0 40px rgba(255,255,255,0.5); 
+        }
+        50% { 
+            transform: scale(1.1) rotate(0deg); 
+            box-shadow: 0 0 50px rgba(255,255,255,0.6); 
+        }
+        75% { 
+            transform: scale(1.05) rotate(-2deg); 
+            box-shadow: 0 0 40px rgba(255,255,255,0.5); 
+        }
+    }
+
+    .company-logo::before {
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        right: -15px;
+        bottom: -15px;
+        border: 3px dashed rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        animation: logoBorder 10s linear infinite;
+    }
+
+    @keyframes logoBorder {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .company-logo i {
+        font-size: 4rem;
+        color: white;
+        z-index: 1;
+    }
+
+    .company-name {
+        font-family: 'Roboto', sans-serif;
+        font-size: 4rem;
+        font-weight: 900;
+        color: white;
+        margin-bottom: var(--spacing-sm);
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .company-tagline {
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: var(--spacing-xl);
+        font-weight: 400;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-xl);
+        margin-bottom: var(--spacing-xl);
+        flex-wrap: wrap;
+    }
+
+    .stat-item {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.1);
+        padding: var(--spacing-md);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        min-width: 120px;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        display: block;
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: var(--spacing-md);
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-cleaning {
+        padding: 18px 40px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        border-radius: 35px;
+        transition: all 0.4s ease;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        min-width: 220px;
+        justify-content: center;
+        font-size: 0.95rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-cleaning::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .btn-cleaning:hover::before {
+        left: 100%;
+    }
+
+    .btn-primary-cleaning {
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--clean-primary);
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary-cleaning:hover {
+        background: white;
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        color: var(--clean-primary);
+    }
+
+    .btn-outline-cleaning {
+        background: transparent;
+        border: 3px solid white;
+        color: white;
+    }
+
+    .btn-outline-cleaning:hover {
+        background: white;
+        color: var(--clean-primary);
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px rgba(255,255,255,0.3);
+    }
+
+    /* Services Section */
+    .services-section {
+        padding: var(--spacing-xxl) 0;
+        background: white;
+        position: relative;
+    }
+
+    .services-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: linear-gradient(to bottom, var(--clean-gradient-soft), transparent);
+    }
+
+    .section-title-cleaning {
+        font-family: 'Roboto', sans-serif;
+        font-size: 3.5rem;
+        text-align: center;
+        color: var(--clean-dark);
+        margin-bottom: var(--spacing-sm);
+        position: relative;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    .section-title-cleaning::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 5px;
+        background: var(--clean-gradient);
+        border-radius: 3px;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: var(--clean-dark);
+        opacity: 0.8;
+        margin-bottom: var(--spacing-xl);
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-xl);
+    }
+
+    .service-card {
+        background: white;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        transition: all 0.4s ease;
+        position: relative;
+        border: 2px solid rgba(39, 174, 96, 0.1);
+    }
+
+    .service-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: var(--clean-shadow);
+        border-color: var(--clean-primary);
+    }
+
+    .service-header {
+        height: 180px;
+        background: var(--clean-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 4rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="serviceCleanPattern" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="3" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23serviceCleanPattern)"/></svg>');
+        opacity: 0.5;
+    }
+
+    .service-card:hover .service-header {
+        animation: serviceHeaderPulse 1s ease-in-out;
+    }
+
+    @keyframes serviceHeaderPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    .service-content {
+        padding: var(--spacing-xl);
+    }
+
+    .service-name {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--clean-dark);
+        margin-bottom: var(--spacing-sm);
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .service-description {
+        color: var(--clean-dark);
+        opacity: 0.8;
+        line-height: 1.7;
+        margin-bottom: var(--spacing-lg);
+        text-align: center;
+        font-size: 1.05rem;
+    }
+
+    .service-features {
+        list-style: none;
+        padding: 0;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .service-features li {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
+        color: var(--clean-dark);
+        opacity: 0.8;
+        font-weight: 500;
+    }
+
+    .service-features i {
+        color: var(--clean-primary);
+        font-size: 1.2rem;
+        min-width: 20px;
+    }
+
+    .service-price {
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .price-label {
+        font-size: 0.9rem;
+        color: var(--clean-dark);
+        opacity: 0.7;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .price-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--clean-primary);
+    }
+
+    .btn-quote {
+        width: 100%;
+        background: var(--clean-gradient);
+        color: white;
+        border: none;
+        padding: 16px;
+        border-radius: 15px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn-quote:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(39, 174, 96, 0.4);
+    }
+
+    /* Process Section */
+    .process-section {
+        padding: var(--spacing-xxl) 0;
+        background: var(--clean-gradient-soft);
+    }
+
+    .process-steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-xl);
+    }
+
+    .process-step {
+        text-align: center;
+        position: relative;
+    }
+
+    .step-number {
+        width: 80px;
+        height: 80px;
+        background: var(--clean-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 auto var(--spacing-md);
+        box-shadow: 0 10px 25px rgba(39, 174, 96, 0.3);
+        position: relative;
+    }
+
+    .step-number::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 2px solid var(--clean-accent);
+        border-radius: 50%;
+        opacity: 0.5;
+        animation: stepPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes stepPulse {
+        0%, 100% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .step-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--clean-dark);
+        margin-bottom: var(--spacing-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .step-description {
+        color: var(--clean-dark);
+        opacity: 0.8;
+        line-height: 1.6;
+    }
+
+    /* Contact Section */
+    .contact-section {
+        padding: var(--spacing-xxl) 0;
+        background: var(--clean-gradient);
+        color: white;
+        position: relative;
+    }
+
+    .contact-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="contactCleanPattern" width="50" height="50" patternUnits="userSpaceOnUse"><rect x="20" y="20" width="10" height="10" fill="rgba(255,255,255,0.1)" rx="2"/><circle cx="10" cy="40" r="3" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23contactCleanPattern)"/></svg>');
+        opacity: 0.3;
+    }
+
+    .contact-content {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-title {
+        font-family: 'Roboto', sans-serif;
+        font-size: 3.5rem;
+        margin-bottom: var(--spacing-lg);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    .contact-description {
+        font-size: 1.3rem;
+        margin-bottom: var(--spacing-xl);
+        opacity: 0.95;
+        font-weight: 500;
+    }
+
+    .contact-methods {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .contact-method {
+        background: rgba(255, 255, 255, 0.15);
+        padding: var(--spacing-xl);
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-method::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .contact-method:hover::before {
+        left: 100%;
+    }
+
+    .contact-method:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .contact-method i {
+        font-size: 3rem;
+        margin-bottom: var(--spacing-md);
+        display: block;
+    }
+
+    .contact-method h4 {
+        font-size: 1.4rem;
+        margin-bottom: var(--spacing-sm);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .contact-method p {
+        opacity: 0.95;
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .company-name {
+            font-size: 2.8rem;
+        }
+
+        .company-tagline {
+            font-size: 1.2rem;
+        }
+
+        .hero-stats {
+            gap: var(--spacing-md);
+        }
+
+        .stat-item {
+            min-width: 100px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn-cleaning {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .section-title-cleaning {
+            font-size: 2.5rem;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .process-steps {
+            grid-template-columns: 1fr;
+        }
+
+        .contact-methods {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .company-logo {
+            width: 140px;
+            height: 140px;
+        }
+
+        .company-logo i {
+            font-size: 3.5rem;
+        }
+
+        .company-name {
+            font-size: 2.2rem;
+        }
+
+        .section-title-cleaning {
+            font-size: 2rem;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        .service-header {
+            height: 150px;
+            font-size: 3.5rem;
+        }
+
+        .hero-stats {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-item {
+            width: 100%;
+            max-width: 200px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="cleaning-hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="company-logo">
+                <i class="bi bi-droplet"></i>
+            </div>
+            <h1 class="company-name">{{ company_name }}</h1>
+            <p class="company-tagline">{{ tagline }}</p>
+            
+            <div class="hero-stats">
+                {% for stat in stats %}
+                <div class="stat-item">
+                    <span class="stat-number">{{ stat.number }}</span>
+                    <span class="stat-label">{{ stat.label }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="#services" class="btn-cleaning btn-primary-cleaning">
+                    <i class="bi bi-calendar-check"></i>
+                    Solicitar Orçamento
+                </a>
+                <a href="#process" class="btn-cleaning btn-outline-cleaning">
+                    <i class="bi bi-gear"></i>
+                    Como Funciona
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="services-section">
+    <div class="container">
+        <h2 class="section-title-cleaning">Nossos Serviços</h2>
+        <p class="section-subtitle">Limpeza profissional que transforma seus estofados</p>
+        
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card">
+                <div class="service-header">
+                    <i class="bi bi-{{ service.icon }}"></i>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-name">{{ service.name }}</h3>
+                    <p class="service-description">{{ service.description }}</p>
+                    <ul class="service-features">
+                        {% for feature in service.features %}
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            {{ feature }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="service-price">
+                        <div class="price-label">A partir de</div>
+                        <div class="price-value">{{ service.price }}</div>
+                    </div>
+                    <button class="btn-quote" onclick="requestQuote('{{ service.id }}')">
+                        <i class="bi bi-calculator"></i>
+                        Solicitar Orçamento
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Process Section -->
+<section id="process" class="process-section">
+    <div class="container">
+        <h2 class="section-title-cleaning">Como Funciona</h2>
+        <p class="section-subtitle">Processo simples e eficiente para garantir os melhores resultados</p>
+        
+        <div class="process-steps">
+            {% for step in process_steps %}
+            <div class="process-step">
+                <div class="step-number">{{ forloop.counter }}</div>
+                <h3 class="step-title">{{ step.title }}</h3>
+                <p class="step-description">{{ step.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-content">
+            <h2 class="contact-title">Solicite Seu Orçamento</h2>
+            <p class="contact-description">
+                Entre em contato conosco e transforme seus estofados
+            </p>
+            
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <i class="bi bi-whatsapp"></i>
+                    <h4>WhatsApp</h4>
+                    <p>{{ whatsapp }}</p>
+                </div>
+                <div class="contact-method">
+                    <i class="bi bi-telephone"></i>
+                    <h4>Telefone</h4>
+                    <p>{{ phone }}</p>
+                </div>
+                <div class="contact-method">
+                    <i class="bi bi-clock"></i>
+                    <h4>Horário</h4>
+                    <p>{{ schedule }}</p>
+                </div>
+                <div class="contact-method">
+                    <i class="bi bi-geo-alt"></i>
+                    <h4>Atendimento</h4>
+                    <p>{{ coverage_area }}</p>
+                </div>
+            </div>
+            
+            <a href="https://api.whatsapp.com/send/?phone={{ whatsapp_number }}&text=Olá! Gostaria de solicitar um orçamento para limpeza de estofados." 
+               class="btn-cleaning btn-primary-cleaning" 
+               target="_blank">
+                <i class="bi bi-whatsapp"></i>
+                Solicitar Orçamento Grátis
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let quotes = [];
+
+function requestQuote(serviceId) {
+    const serviceName = event.target.closest('.service-card').querySelector('.service-name').textContent;
+    
+    showCleaningNotification(`Redirecionando para orçamento: ${serviceName}`, 'success');
+    
+    // Simulate quote process
+    setTimeout(() => {
+        const whatsappNumber = '{{ whatsapp_number }}';
+        const message = `Olá! Gostaria de solicitar um orçamento para: ${serviceName}`;
+        const whatsappUrl = `https://api.whatsapp.com/send/?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    }, 1000);
+    
+    // Add to quotes tracking
+    quotes.push({
+        serviceId: serviceId,
+        serviceName: serviceName,
+        timestamp: new Date()
+    });
+    
+    updateQuoteCount();
+}
+
+function updateQuoteCount() {
+    console.log(`Orçamentos solicitados: ${quotes.length}`);
+    
+    // In a real implementation, this could update a counter in the UI
+    if (quotes.length > 0) {
+        localStorage.setItem('cleaningQuotes', JSON.stringify(quotes));
+    }
+}
+
+function showCleaningNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `cleaning-notification cleaning-notification-${type}`;
+    notification.innerHTML = `
+        <i class="bi bi-${type === 'success' ? 'check-circle' : type === 'error' ? 'x-circle' : 'info-circle'}"></i>
+        <span>${message}</span>
+    `;
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? 'var(--clean-primary)' : type === 'error' ? '#e74c3c' : '#3498db'};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        animation: slideInRight 0.3s ease;
+        backdrop-filter: blur(10px);
+        font-weight: 600;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => {
+            if (document.body.contains(notification)) {
+                document.body.removeChild(notification);
+            }
+        }, 300);
+    }, 4000);
+}
+
+// Add CSS animations
+const cleaningStyle = document.createElement('style');
+cleaningStyle.textContent = `
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+`;
+document.head.appendChild(cleaningStyle);
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Intersection Observer for animations
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.service-card, .process-step, .contact-method').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+});
+
+// Counter animation for stats
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.textContent);
+        const increment = target / 100;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                counter.textContent = target + (counter.textContent.includes('+') ? '+' : '');
+                clearInterval(timer);
+            } else {
+                counter.textContent = Math.floor(current);
+            }
+        }, 20);
+    });
+}
+
+// Trigger counter animation when hero section is visible
+const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounters();
+            heroObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+const heroSection = document.querySelector('.cleaning-hero');
+if (heroSection) {
+    heroObserver.observe(heroSection);
+}
+
+// Add floating bubbles effect
+function createBubble() {
+    const bubble = document.createElement('div');
+    bubble.innerHTML = '💧';
+    bubble.style.cssText = `
+        position: fixed;
+        font-size: 1.5rem;
+        pointer-events: none;
+        z-index: 1000;
+        animation: floatBubble 4s ease-out forwards;
+        left: ${Math.random() * window.innerWidth}px;
+        top: ${window.innerHeight}px;
+        opacity: 0.7;
+    `;
+    
+    document.body.appendChild(bubble);
+    
+    setTimeout(() => {
+        if (document.body.contains(bubble)) {
+            document.body.removeChild(bubble);
+        }
+    }, 4000);
+}
+
+// Add floating bubble animation
+const bubbleStyle = document.createElement('style');
+bubbleStyle.textContent = `
+    @keyframes floatBubble {
+        0% {
+            opacity: 0;
+            transform: translateY(0) scale(0.5);
+        }
+        10% {
+            opacity: 0.7;
+            transform: translateY(-20px) scale(1);
+        }
+        90% {
+            opacity: 0.7;
+            transform: translateY(-80vh) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-100vh) scale(0.5);
+        }
+    }
+`;
+document.head.appendChild(bubbleStyle);
+
+// Create bubbles periodically
+setInterval(() => {
+    if (Math.random() > 0.7) {
+        createBubble();
+    }
+}, 2000);
+
+// Load saved quotes on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const savedQuotes = localStorage.getItem('cleaningQuotes');
+    if (savedQuotes) {
+        quotes = JSON.parse(savedQuotes);
+        updateQuoteCount();
+    }
+});
+</script>
+{% endblock %}

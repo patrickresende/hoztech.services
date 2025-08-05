@@ -1,0 +1,842 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }} - Landing Page Moda{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Clothing Store Landing Page Styles */
+    :root {
+        --fashion-primary: #4ecdc4;
+        --fashion-secondary: #44a08d;
+        --fashion-accent: #96ceb4;
+        --fashion-dark: #2c3e50;
+        --fashion-light: #ecf0f1;
+        --fashion-rose: #f8b5c1;
+        --fashion-gradient: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+        --fashion-shadow: 0 15px 35px rgba(78, 205, 196, 0.3);
+    }
+
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        color: var(--fashion-dark);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Hero Section */
+    .fashion-hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(rgba(78, 205, 196, 0.9), rgba(68, 160, 141, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="fashionPattern" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="30" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="1000" height="1000" fill="url(%23fashionPattern)"/></svg>');
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .fashion-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="fashionIcons" width="80" height="80" patternUnits="userSpaceOnUse"><text x="40" y="40" font-family="Arial" font-size="25" fill="rgba(255,255,255,0.1)" text-anchor="middle">👗</text></pattern></defs><rect width="100" height="100" fill="url(%23fashionIcons)"/></svg>');
+        opacity: 0.2;
+        animation: fashionFloat 25s ease-in-out infinite;
+    }
+
+    @keyframes fashionFloat {
+        0%, 100% { transform: translateX(0px) translateY(0px); }
+        25% { transform: translateX(10px) translateY(-10px); }
+        50% { transform: translateX(-5px) translateY(-15px); }
+        75% { transform: translateX(-10px) translateY(-5px); }
+    }
+
+    .hero-content {
+        text-align: center;
+        z-index: 2;
+        position: relative;
+        color: white;
+    }
+
+    .brand-logo {
+        width: 120px;
+        height: 120px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-lg);
+        backdrop-filter: blur(10px);
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        animation: brandPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes brandPulse {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.5); }
+    }
+
+    .brand-logo i {
+        font-size: 3rem;
+        color: white;
+    }
+
+    .brand-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 4rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: var(--spacing-sm);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        letter-spacing: 2px;
+    }
+
+    .brand-tagline {
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: var(--spacing-xl);
+        font-style: italic;
+        font-weight: 300;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: var(--spacing-md);
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-fashion {
+        padding: 15px 35px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        min-width: 200px;
+        justify-content: center;
+        font-size: 0.9rem;
+    }
+
+    .btn-primary-fashion {
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--fashion-primary);
+        border: none;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary-fashion:hover {
+        background: white;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        color: var(--fashion-primary);
+    }
+
+    .btn-outline-fashion {
+        background: transparent;
+        border: 2px solid white;
+        color: white;
+    }
+
+    .btn-outline-fashion:hover {
+        background: white;
+        color: var(--fashion-primary);
+        transform: translateY(-3px);
+    }
+
+    /* Products Section */
+    .products-section {
+        padding: var(--spacing-xxl) 0;
+        background: white;
+    }
+
+    .section-title-fashion {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        text-align: center;
+        color: var(--fashion-dark);
+        margin-bottom: var(--spacing-sm);
+        position: relative;
+    }
+
+    .section-title-fashion::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: var(--fashion-gradient);
+        border-radius: 2px;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: var(--fashion-dark);
+        opacity: 0.7;
+        margin-bottom: var(--spacing-xl);
+        font-size: 1.1rem;
+    }
+
+    .product-filters {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-xl);
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        padding: 10px 25px;
+        background: transparent;
+        border: 2px solid var(--fashion-primary);
+        color: var(--fashion-primary);
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+        background: var(--fashion-primary);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-xl);
+    }
+
+    .product-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--fashion-shadow);
+    }
+
+    .product-image {
+        height: 300px;
+        background: var(--fashion-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 4rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .product-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.1);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .product-card:hover .product-image::before {
+        opacity: 1;
+    }
+
+    .product-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: var(--fashion-rose);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .product-info {
+        padding: var(--spacing-lg);
+    }
+
+    .product-name {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--fashion-dark);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .product-category {
+        color: var(--fashion-primary);
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .product-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--fashion-dark);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .product-price .old-price {
+        font-size: 1rem;
+        color: #999;
+        text-decoration: line-through;
+        margin-right: var(--spacing-xs);
+    }
+
+    .product-actions {
+        display: flex;
+        gap: var(--spacing-sm);
+    }
+
+    .btn-cart {
+        flex: 1;
+        background: var(--fashion-gradient);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-cart:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+    }
+
+    .btn-wishlist {
+        background: transparent;
+        border: 2px solid var(--fashion-primary);
+        color: var(--fashion-primary);
+        padding: 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-wishlist:hover {
+        background: var(--fashion-primary);
+        color: white;
+    }
+
+    /* About Section */
+    .about-section {
+        padding: var(--spacing-xxl) 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-xxl);
+        align-items: center;
+    }
+
+    .about-text {
+        padding: var(--spacing-xl);
+    }
+
+    .about-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        color: var(--fashion-dark);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .about-description {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--fashion-dark);
+        opacity: 0.8;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .about-features {
+        list-style: none;
+        padding: 0;
+    }
+
+    .about-features li {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
+        color: var(--fashion-dark);
+    }
+
+    .about-features i {
+        color: var(--fashion-primary);
+        font-size: 1.2rem;
+    }
+
+    .about-image {
+        height: 400px;
+        background: var(--fashion-gradient);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 5rem;
+    }
+
+    /* Contact Section */
+    .contact-section {
+        padding: var(--spacing-xxl) 0;
+        background: var(--fashion-gradient);
+        color: white;
+    }
+
+    .contact-content {
+        text-align: center;
+    }
+
+    .contact-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .contact-description {
+        font-size: 1.2rem;
+        margin-bottom: var(--spacing-xl);
+        opacity: 0.9;
+    }
+
+    .contact-methods {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .contact-method {
+        background: rgba(255, 255, 255, 0.1);
+        padding: var(--spacing-lg);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .contact-method:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px);
+    }
+
+    .contact-method i {
+        font-size: 2.5rem;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .contact-method h4 {
+        font-size: 1.3rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .contact-method p {
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .brand-name {
+            font-size: 2.5rem;
+        }
+
+        .brand-tagline {
+            font-size: 1.2rem;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn-fashion {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .section-title-fashion {
+            font-size: 2.2rem;
+        }
+
+        .product-filters {
+            justify-content: flex-start;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .products-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .about-content {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        .contact-methods {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .brand-logo {
+            width: 100px;
+            height: 100px;
+        }
+
+        .brand-logo i {
+            font-size: 2.5rem;
+        }
+
+        .brand-name {
+            font-size: 2rem;
+        }
+
+        .section-title-fashion {
+            font-size: 1.8rem;
+        }
+
+        .products-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .product-image {
+            height: 250px;
+            font-size: 3rem;
+        }
+
+        .about-image {
+            height: 300px;
+            font-size: 4rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="fashion-hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="brand-logo">
+                <i class="bi bi-bag-heart"></i>
+            </div>
+            <h1 class="brand-name">{{ brand_name }}</h1>
+            <p class="brand-tagline">{{ tagline }}</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn-fashion btn-primary-fashion">
+                    <i class="bi bi-bag-check"></i>
+                    Ver Coleção
+                </a>
+                <a href="#about" class="btn-fashion btn-outline-fashion">
+                    <i class="bi bi-heart"></i>
+                    Nossa História
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Products Section -->
+<section id="products" class="products-section">
+    <div class="container">
+        <h2 class="section-title-fashion">Nossa Coleção</h2>
+        <p class="section-subtitle">Descubra peças únicas que combinam estilo e conforto</p>
+        
+        <div class="product-filters">
+            <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('vestidos')">Vestidos</button>
+            <button class="filter-btn" onclick="filterProducts('blusas')">Blusas</button>
+            <button class="filter-btn" onclick="filterProducts('calcas')">Calças</button>
+            <button class="filter-btn" onclick="filterProducts('acessorios')">Acessórios</button>
+        </div>
+
+        <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card" data-category="{{ product.category }}">
+                <div class="product-image">
+                    <i class="bi bi-{{ product.icon }}"></i>
+                    {% if product.badge %}
+                    <div class="product-badge">{{ product.badge }}</div>
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <div class="product-category">{{ product.category }}</div>
+                    <h3 class="product-name">{{ product.name }}</h3>
+                    <div class="product-price">
+                        {% if product.old_price %}
+                        <span class="old-price">R$ {{ product.old_price }}</span>
+                        {% endif %}
+                        R$ {{ product.price }}
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-cart" onclick="addToCart('{{ product.id }}')">
+                            <i class="bi bi-cart-plus"></i>
+                            Adicionar
+                        </button>
+                        <button class="btn-wishlist" onclick="addToWishlist('{{ product.id }}')">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2 class="about-title">Nossa História</h2>
+                <p class="about-description">
+                    {{ about_description }}
+                </p>
+                <ul class="about-features">
+                    {% for feature in about_features %}
+                    <li>
+                        <i class="bi bi-check-circle"></i>
+                        {{ feature }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="about-image">
+                <i class="bi bi-shop"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-content">
+            <h2 class="contact-title">Entre em Contato</h2>
+            <p class="contact-description">
+                Estamos aqui para ajudar você a encontrar o look perfeito
+            </p>
+            
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <i class="bi bi-whatsapp"></i>
+                    <h4>WhatsApp</h4>
+                    <p>{{ whatsapp }}</p>
+                </div>
+                <div class="contact-method">
+                    <i class="bi bi-instagram"></i>
+                    <h4>Instagram</h4>
+                    <p>{{ instagram }}</p>
+                </div>
+                <div class="contact-method">
+                    <i class="bi bi-geo-alt"></i>
+                    <h4>Localização</h4>
+                    <p>{{ location }}</p>
+                </div>
+            </div>
+            
+            <a href="https://api.whatsapp.com/send/?phone={{ whatsapp_number }}&text=Olá! Tenho interesse em conhecer a coleção." 
+               class="btn-fashion btn-primary-fashion" 
+               target="_blank">
+                <i class="bi bi-whatsapp"></i>
+                Falar no WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let cart = [];
+let wishlist = [];
+
+function filterProducts(category) {
+    const products = document.querySelectorAll('.product-card');
+    const buttons = document.querySelectorAll('.filter-btn');
+    
+    // Update active button
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Filter products
+    products.forEach(product => {
+        const productCategory = product.dataset.category;
+        if (category === 'all' || productCategory === category) {
+            product.style.display = 'block';
+            product.style.animation = 'fadeInUp 0.5s ease';
+        } else {
+            product.style.display = 'none';
+        }
+    });
+}
+
+function addToCart(productId) {
+    cart.push(productId);
+    updateCartCount();
+    showNotification('Produto adicionado ao carrinho!', 'success');
+}
+
+function addToWishlist(productId) {
+    if (!wishlist.includes(productId)) {
+        wishlist.push(productId);
+        showNotification('Produto adicionado aos favoritos!', 'success');
+        
+        // Update heart icon
+        const heartIcon = event.target.querySelector('i');
+        heartIcon.className = 'bi bi-heart-fill';
+        event.target.style.background = 'var(--fashion-primary)';
+        event.target.style.color = 'white';
+    } else {
+        showNotification('Produto já está nos favoritos!', 'info');
+    }
+}
+
+function updateCartCount() {
+    // In a real implementation, this would update a cart counter in the UI
+    console.log(`Carrinho: ${cart.length} itens`);
+}
+
+function showNotification(message, type) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--fashion-primary);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        z-index: 1000;
+        animation: slideInRight 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Remove notification after 3 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// Add CSS animations
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Intersection Observer for animations
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.product-card, .contact-method').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+});
+</script>
+{% endblock %}

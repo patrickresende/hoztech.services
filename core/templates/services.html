@@ -1067,13 +1067,41 @@
 document.addEventListener('DOMContentLoaded', function() {
     const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
+    // Conta o número de slides disponíveis
+    const totalSlides = document.querySelectorAll('.swiper-slide').length;
+    
+    // Função para determinar se o loop deve ser habilitado
+    function shouldEnableLoop(slidesPerView, totalSlides) {
+        // Loop só é habilitado se tivermos pelo menos o dobro de slides visíveis
+        return totalSlides >= (slidesPerView * 2);
+    }
+    
+    // Configuração dinâmica baseada no viewport
+    function getOptimalConfig() {
+        const width = window.innerWidth;
+        let slidesPerView = 1;
+        
+        if (width >= 1280) slidesPerView = 3;
+        else if (width >= 768) slidesPerView = 2;
+        else slidesPerView = 1;
+        
+        const enableLoop = shouldEnableLoop(slidesPerView, totalSlides);
+        
+        return {
+            slidesPerView: slidesPerView,
+            enableLoop: enableLoop
+        };
+    }
+    
+    const config = getOptimalConfig();
+    
     // Inicialização do Swiper com configurações otimizadas
     const swiper = new Swiper('.swiper', {
         // Configuração Base
         slidesPerView: 'auto',
-        initialSlide: 1,
+        initialSlide: config.enableLoop ? 1 : 0,
         centeredSlides: true,
-        loop: true,
+        loop: config.enableLoop,
         speed: isReducedMotion ? 0 : 600,
         grabCursor: true,
         effect: 'coverflow',
@@ -1085,34 +1113,41 @@ document.addEventListener('DOMContentLoaded', function() {
             slideShadows: false,
         },
         
-        // Configurações de loop otimizadas
-        loopedSlides: 6,
-        loopAdditionalSlides: 2,
-        loopFillGroupWithBlank: false,
-        loopPreventsSlide: true,
+        // Configurações de loop otimizadas (só aplicadas se loop estiver habilitado)
+        ...(config.enableLoop && {
+            loopedSlides: totalSlides,
+            loopAdditionalSlides: 1,
+            loopFillGroupWithBlank: false,
+            loopPreventsSlide: false,
+        }),
         
-        // Breakpoints otimizados
+        // Breakpoints otimizados com verificação de loop dinâmica
         breakpoints: {
             320: {
                 slidesPerView: 1,
                 spaceBetween: 10,
-                centeredSlides: true
+                centeredSlides: true,
+                loop: shouldEnableLoop(1, totalSlides)
             },
             480: {
                 slidesPerView: 1,
-                spaceBetween: 15
+                spaceBetween: 15,
+                loop: shouldEnableLoop(1, totalSlides)
             },
             768: {
                 slidesPerView: 2,
-                spaceBetween: 20
+                spaceBetween: 20,
+                loop: shouldEnableLoop(2, totalSlides)
             },
             1024: {
                 slidesPerView: 2,
-                spaceBetween: 25
+                spaceBetween: 25,
+                loop: shouldEnableLoop(2, totalSlides)
             },
             1280: {
                 slidesPerView: 3,
-                spaceBetween: 30
+                spaceBetween: 30,
+                loop: shouldEnableLoop(3, totalSlides)
             }
         },
         
@@ -1130,9 +1165,9 @@ document.addEventListener('DOMContentLoaded', function() {
             el: '.swiper-pagination',
             clickable: true,
             dynamicBullets: true,
-            dynamicMainBullets: 3,
+            dynamicMainBullets: Math.min(3, totalSlides),
             renderBullet: function (index, className) {
-                return '<span class="' + className + '"></span>';
+                return '<span class="' + className + '" aria-label="Ir para slide ' + (index + 1) + '"></span>';
             }
         },
         
@@ -1158,10 +1193,14 @@ document.addEventListener('DOMContentLoaded', function() {
         resistance: true,
         resistanceRatio: 0.85,
         
+        // Configuração de rewind para quando loop está desabilitado
+        rewind: !config.enableLoop,
+        
         on: {
             init: function() {
                 updateSlideStyles(this);
                 setupCardClickHandlers(this);
+                console.log(`Swiper inicializado: ${totalSlides} slides, loop: ${this.params.loop}`);
             },
             slideChange: function() {
                 updateSlideStyles(this);
@@ -1170,6 +1209,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelectorAll('.service-card').forEach(card => {
                     card.style.transition = 'all 0.3s ease';
                 });
+            },
+            breakpoint: function(swiper, breakpointParams) {
+                // Atualiza configurações quando breakpoint muda
+                const currentSlidesPerView = breakpointParams.slidesPerView || 1;
+                const shouldLoop = shouldEnableLoop(currentSlidesPerView, totalSlides);
+                
+                if (swiper.params.loop !== shouldLoop) {
+                    swiper.params.loop = shouldLoop;
+                    swiper.params.rewind = !shouldLoop;
+                    swiper.loopDestroy();
+                    if (shouldLoop) {
+                        swiper.loopCreate();
+                    }
+                    swiper.update();
+                }
             }
         }
     });
@@ -1187,21 +1241,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 const slide = this.closest('.swiper-slide');
                 if (!slide) return;
 
-                // Calcula a direção do movimento
-                const currentIndex = swiper.activeIndex;
-                const targetIndex = Array.from(swiper.slides).indexOf(slide);
-                const direction = targetIndex > currentIndex ? 'next' : 'prev';
+                // Calcula o índice do slide
+                const slides = Array.from(swiper.slides);
+                let targetIndex = slides.indexOf(slide);
+                
+                // Se estiver em modo loop, ajusta o índice
+                if (swiper.params.loop) {
+                    const realIndex = slide.getAttribute('data-swiper-slide-index');
+                    if (realIndex !== null) {
+                        targetIndex = parseInt(realIndex);
+                    }
+                }
 
                 // Adiciona classe de animação
                 this.classList.add('card-clicked');
 
                 // Move o slide para o centro
-                swiper.slideTo(targetIndex, 400, function() {
-                    // Remove a classe após a animação
-                    setTimeout(() => {
-                        card.classList.remove('card-clicked');
-                    }, 400);
-                });
+                swiper.slideTo(targetIndex, 400);
+                
+                // Remove a classe após a animação
+                setTimeout(() => {
+                    this.classList.remove('card-clicked');
+                }, 400);
             });
         });
     }
@@ -1215,12 +1276,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (slide.classList.contains('swiper-slide-active')) {
                     card.style.transform = 'scale(1)';
                     card.style.opacity = '1';
+                    card.style.zIndex = '10';
                 } else {
-                    const offset = Math.abs(swiper.activeIndex - index);
-                    const scale = Math.max(0.85, 1 - (offset * 0.1));
-                    const opacity = Math.max(0.5, 1 - (offset * 0.3));
+                    let offset;
+                    if (swiper.params.loop) {
+                        // Em modo loop, calcula offset baseado no realIndex
+                        const realIndex = parseInt(slide.getAttribute('data-swiper-slide-index')) || 0;
+                        const activeRealIndex = parseInt(swiper.slides[swiper.activeIndex]?.getAttribute('data-swiper-slide-index')) || 0;
+                        offset = Math.abs(activeRealIndex - realIndex);
+                    } else {
+                        offset = Math.abs(swiper.activeIndex - index);
+                    }
+                    
+                    const scale = Math.max(0.85, 1 - (offset * 0.08));
+                    const opacity = Math.max(0.6, 1 - (offset * 0.2));
                     card.style.transform = `scale(${scale})`;
                     card.style.opacity = opacity;
+                    card.style.zIndex = Math.max(1, 10 - offset);
                 }
             }
         });
@@ -1283,9 +1355,47 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
+            const newConfig = getOptimalConfig();
+            
+            // Verifica se precisa atualizar o loop
+            if (swiper.params.loop !== newConfig.enableLoop) {
+                swiper.params.loop = newConfig.enableLoop;
+                swiper.params.rewind = !newConfig.enableLoop;
+                
+                if (newConfig.enableLoop) {
+                    swiper.loopCreate();
+                } else {
+                    swiper.loopDestroy();
+                }
+            }
+            
             swiper.update();
             updateSlideStyles(swiper);
         }, 250);
+    });
+    
+    // Adiciona suporte para navegação por teclado
+    document.addEventListener('keydown', function(e) {
+        if (document.activeElement.closest('.swiper')) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    swiper.slidePrev();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    swiper.slideNext();
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    swiper.slideTo(0);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    swiper.slideTo(totalSlides - 1);
+                    break;
+            }
+        }
     });
 });
 </script>

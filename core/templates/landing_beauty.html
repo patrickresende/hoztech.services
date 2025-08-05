@@ -1,0 +1,988 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }} - Landing Page Beleza{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Beauty Salon Landing Page Styles */
+    :root {
+        --beauty-primary: #ff6b9d;
+        --beauty-secondary: #c44569;
+        --beauty-accent: #f8b5c1;
+        --beauty-gold: #f39c12;
+        --beauty-dark: #2c2c54;
+        --beauty-light: #f8f9fa;
+        --beauty-gradient: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+        --beauty-gradient-soft: linear-gradient(135deg, #ffeef4 0%, #ffe0e6 100%);
+        --beauty-shadow: 0 15px 35px rgba(255, 107, 157, 0.3);
+    }
+
+    body {
+        background: var(--beauty-gradient-soft);
+        color: var(--beauty-dark);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Hero Section */
+    .beauty-hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background: var(--beauty-gradient);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .beauty-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="beautyPattern" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="15" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="10" r="5" fill="rgba(255,255,255,0.05)"/><circle cx="40" cy="40" r="8" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23beautyPattern)"/></svg>');
+        opacity: 0.3;
+        animation: beautyFloat 20s ease-in-out infinite;
+    }
+
+    @keyframes beautyFloat {
+        0%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+        25% { transform: translateX(15px) translateY(-10px) rotate(1deg); }
+        50% { transform: translateX(-10px) translateY(-20px) rotate(-1deg); }
+        75% { transform: translateX(-15px) translateY(-5px) rotate(0.5deg); }
+    }
+
+    .hero-content {
+        text-align: center;
+        z-index: 2;
+        position: relative;
+        color: white;
+    }
+
+    .salon-logo {
+        width: 140px;
+        height: 140px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-lg);
+        backdrop-filter: blur(15px);
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        animation: salonGlow 4s ease-in-out infinite;
+        position: relative;
+    }
+
+    @keyframes salonGlow {
+        0%, 100% { 
+            transform: scale(1); 
+            box-shadow: 0 0 30px rgba(255,255,255,0.4), inset 0 0 20px rgba(255,255,255,0.1); 
+        }
+        50% { 
+            transform: scale(1.08); 
+            box-shadow: 0 0 50px rgba(255,255,255,0.6), inset 0 0 30px rgba(255,255,255,0.2); 
+        }
+    }
+
+    .salon-logo::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        animation: logoRotate 15s linear infinite;
+    }
+
+    @keyframes logoRotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .salon-logo i {
+        font-size: 3.5rem;
+        color: white;
+        z-index: 1;
+    }
+
+    .salon-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 4.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: var(--spacing-sm);
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        letter-spacing: 3px;
+        position: relative;
+    }
+
+    .salon-name::after {
+        content: '✨';
+        position: absolute;
+        top: -20px;
+        right: -30px;
+        font-size: 2rem;
+        animation: sparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+        0%, 100% { opacity: 0.5; transform: scale(1) rotate(0deg); }
+        50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+    }
+
+    .salon-tagline {
+        font-size: 1.6rem;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: var(--spacing-xl);
+        font-style: italic;
+        font-weight: 300;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: var(--spacing-md);
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-beauty {
+        padding: 18px 40px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        border-radius: 35px;
+        transition: all 0.4s ease;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        min-width: 220px;
+        justify-content: center;
+        font-size: 0.95rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-beauty::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .btn-beauty:hover::before {
+        left: 100%;
+    }
+
+    .btn-primary-beauty {
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--beauty-primary);
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary-beauty:hover {
+        background: white;
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        color: var(--beauty-primary);
+    }
+
+    .btn-outline-beauty {
+        background: transparent;
+        border: 3px solid white;
+        color: white;
+    }
+
+    .btn-outline-beauty:hover {
+        background: white;
+        color: var(--beauty-primary);
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px rgba(255,255,255,0.3);
+    }
+
+    /* Services Section */
+    .services-section {
+        padding: var(--spacing-xxl) 0;
+        background: white;
+        position: relative;
+    }
+
+    .services-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: linear-gradient(to bottom, var(--beauty-gradient-soft), transparent);
+    }
+
+    .section-title-beauty {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        text-align: center;
+        color: var(--beauty-dark);
+        margin-bottom: var(--spacing-sm);
+        position: relative;
+    }
+
+    .section-title-beauty::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: var(--beauty-gradient);
+        border-radius: 2px;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: var(--beauty-dark);
+        opacity: 0.8;
+        margin-bottom: var(--spacing-xl);
+        font-size: 1.2rem;
+        font-style: italic;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-xl);
+    }
+
+    .service-card {
+        background: white;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        transition: all 0.4s ease;
+        position: relative;
+        border: 1px solid rgba(255, 107, 157, 0.1);
+    }
+
+    .service-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: var(--beauty-shadow);
+    }
+
+    .service-icon {
+        height: 200px;
+        background: var(--beauty-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 4.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-icon::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="servicePattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23servicePattern)"/></svg>');
+        opacity: 0.5;
+    }
+
+    .service-card:hover .service-icon {
+        animation: serviceIconPulse 1s ease-in-out;
+    }
+
+    @keyframes serviceIconPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    .service-content {
+        padding: var(--spacing-xl);
+    }
+
+    .service-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--beauty-dark);
+        margin-bottom: var(--spacing-sm);
+        text-align: center;
+    }
+
+    .service-description {
+        color: var(--beauty-dark);
+        opacity: 0.8;
+        line-height: 1.6;
+        margin-bottom: var(--spacing-lg);
+        text-align: center;
+    }
+
+    .service-price {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--beauty-primary);
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .service-features {
+        list-style: none;
+        padding: 0;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .service-features li {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-xs);
+        color: var(--beauty-dark);
+        opacity: 0.8;
+    }
+
+    .service-features i {
+        color: var(--beauty-primary);
+        font-size: 1.1rem;
+    }
+
+    .btn-book {
+        width: 100%;
+        background: var(--beauty-gradient);
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 15px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-book:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+        padding: var(--spacing-xxl) 0;
+        background: var(--beauty-gradient-soft);
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-xl);
+    }
+
+    .gallery-item {
+        aspect-ratio: 1;
+        background: var(--beauty-gradient);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .gallery-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.2);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover::before {
+        opacity: 1;
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.05);
+        box-shadow: var(--beauty-shadow);
+    }
+
+    /* Contact Section */
+    .contact-section {
+        padding: var(--spacing-xxl) 0;
+        background: var(--beauty-gradient);
+        color: white;
+        position: relative;
+    }
+
+    .contact-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="contactPattern" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M15,5 Q20,10 15,15 Q10,10 15,5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23contactPattern)"/></svg>');
+        opacity: 0.3;
+    }
+
+    .contact-content {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        margin-bottom: var(--spacing-lg);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .contact-description {
+        font-size: 1.3rem;
+        margin-bottom: var(--spacing-xl);
+        opacity: 0.95;
+        font-style: italic;
+    }
+
+    .contact-methods {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .contact-method {
+        background: rgba(255, 255, 255, 0.15);
+        padding: var(--spacing-xl);
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-method::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .contact-method:hover::before {
+        left: 100%;
+    }
+
+    .contact-method:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .contact-method i {
+        font-size: 3rem;
+        margin-bottom: var(--spacing-md);
+        display: block;
+    }
+
+    .contact-method h4 {
+        font-size: 1.4rem;
+        margin-bottom: var(--spacing-sm);
+        font-weight: 600;
+    }
+
+    .contact-method p {
+        opacity: 0.95;
+        margin: 0;
+        font-size: 1.1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .salon-name {
+            font-size: 3rem;
+        }
+
+        .salon-tagline {
+            font-size: 1.3rem;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn-beauty {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .section-title-beauty {
+            font-size: 2.5rem;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .contact-methods {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .salon-logo {
+            width: 120px;
+            height: 120px;
+        }
+
+        .salon-logo i {
+            font-size: 3rem;
+        }
+
+        .salon-name {
+            font-size: 2.2rem;
+        }
+
+        .section-title-beauty {
+            font-size: 2rem;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        .service-icon {
+            height: 150px;
+            font-size: 3.5rem;
+        }
+
+        .gallery-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="beauty-hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="salon-logo">
+                <i class="bi bi-scissors"></i>
+            </div>
+            <h1 class="salon-name">{{ salon_name }}</h1>
+            <p class="salon-tagline">{{ tagline }}</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn-beauty btn-primary-beauty">
+                    <i class="bi bi-calendar-check"></i>
+                    Agendar Horário
+                </a>
+                <a href="#gallery" class="btn-beauty btn-outline-beauty">
+                    <i class="bi bi-images"></i>
+                    Ver Trabalhos
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="services-section">
+    <div class="container">
+        <h2 class="section-title-beauty">Nossos Serviços</h2>
+        <p class="section-subtitle">Transformamos sua beleza com carinho e profissionalismo</p>
+        
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="bi bi-{{ service.icon }}"></i>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-name">{{ service.name }}</h3>
+                    <p class="service-description">{{ service.description }}</p>
+                    <div class="service-price">{{ service.price }}</div>
+                    <ul class="service-features">
+                        {% for feature in service.features %}
+                        <li>
+                            <i class="bi bi-check-circle"></i>
+                            {{ feature }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <button class="btn-book" onclick="bookService('{{ service.id }}')">
+                        Agendar Agora
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" class="gallery-section">
+    <div class="container">
+        <h2 class="section-title-beauty">Galeria de Trabalhos</h2>
+        <p class="section-subtitle">Veja alguns dos nossos trabalhos mais recentes</p>
+        
+        <div class="gallery-grid">
+            {% for item in gallery_items %}
+            <div class="gallery-item" onclick="openGalleryModal('{{ item.id }}')">
+                <i class="bi bi-{{ item.icon }}"></i>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-content">
+            <h2 class="contact-title">Agende Seu Horário</h2>
+            <p class="contact-description">
+                Estamos prontas para cuidar da sua beleza com todo carinho
+            </p>
+            
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <i class="bi bi-whatsapp"></i>
+                    <h4>WhatsApp</h4>
+                    <p>{{ whatsapp }}</p>
+                </div>
+                <div class="contact-method">
+                    <i class="bi bi-instagram"></i>
+                    <h4>Instagram</h4>
+                    <p>{{ instagram }}</p>
+                </div>
+                <div class="contact-method">
+                    <i class="bi bi-clock"></i>
+                    <h4>Horário</h4>
+                    <p>{{ schedule }}</p>
+                </div>
+                <div class="contact-method">
+                    <i class="bi bi-geo-alt"></i>
+                    <h4>Localização</h4>
+                    <p>{{ location }}</p>
+                </div>
+            </div>
+            
+            <a href="https://api.whatsapp.com/send/?phone={{ whatsapp_number }}&text=Olá! Gostaria de agendar um horário no salão." 
+               class="btn-beauty btn-primary-beauty" 
+               target="_blank">
+                <i class="bi bi-whatsapp"></i>
+                Agendar pelo WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let appointments = [];
+
+function bookService(serviceId) {
+    // In a real implementation, this would open a booking modal or redirect to booking page
+    const serviceName = event.target.closest('.service-card').querySelector('.service-name').textContent;
+    
+    showBeautyNotification(`Redirecionando para agendamento: ${serviceName}`, 'success');
+    
+    // Simulate booking process
+    setTimeout(() => {
+        const whatsappNumber = '{{ whatsapp_number }}';
+        const message = `Olá! Gostaria de agendar o serviço: ${serviceName}`;
+        const whatsappUrl = `https://api.whatsapp.com/send/?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    }, 1000);
+}
+
+function openGalleryModal(itemId) {
+    // In a real implementation, this would open a modal with the full image
+    showBeautyNotification('Abrindo galeria...', 'info');
+    
+    // Create a simple modal effect
+    const modal = document.createElement('div');
+    modal.className = 'gallery-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Trabalho Realizado</h3>
+                <button onclick="closeGalleryModal()" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <i class="bi bi-image" style="font-size: 5rem; color: var(--beauty-primary);"></i>
+                    <p>Imagem do trabalho #${itemId}</p>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
+    `;
+    
+    modal.querySelector('.modal-content').style.cssText = `
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        animation: slideInUp 0.3s ease;
+    `;
+    
+    modal.querySelector('.close-btn').style.cssText = `
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        color: var(--beauty-primary);
+        float: right;
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeGalleryModal();
+        }
+    });
+}
+
+function closeGalleryModal() {
+    const modal = document.querySelector('.gallery-modal');
+    if (modal) {
+        modal.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => {
+            document.body.removeChild(modal);
+        }, 300);
+    }
+}
+
+function showBeautyNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `beauty-notification beauty-notification-${type}`;
+    notification.innerHTML = `
+        <i class="bi bi-${type === 'success' ? 'check-circle' : type === 'error' ? 'x-circle' : 'info-circle'}"></i>
+        <span>${message}</span>
+    `;
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? 'var(--beauty-primary)' : type === 'error' ? '#e74c3c' : '#3498db'};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        animation: slideInRight 0.3s ease;
+        backdrop-filter: blur(10px);
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => {
+            if (document.body.contains(notification)) {
+                document.body.removeChild(notification);
+            }
+        }, 300);
+    }, 4000);
+}
+
+// Add CSS animations
+const beautyStyle = document.createElement('style');
+beautyStyle.textContent = `
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+    
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+    }
+`;
+document.head.appendChild(beautyStyle);
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Intersection Observer for animations
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.service-card, .gallery-item, .contact-method').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+});
+
+// Add sparkle effect on scroll
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const sparkles = document.querySelectorAll('.salon-name::after');
+    
+    // Create floating sparkles
+    if (Math.random() > 0.98) {
+        createSparkle();
+    }
+});
+
+function createSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.innerHTML = '✨';
+    sparkle.style.cssText = `
+        position: fixed;
+        font-size: 1.5rem;
+        pointer-events: none;
+        z-index: 1000;
+        animation: floatSparkle 3s ease-out forwards;
+        left: ${Math.random() * window.innerWidth}px;
+        top: ${window.innerHeight}px;
+    `;
+    
+    document.body.appendChild(sparkle);
+    
+    setTimeout(() => {
+        if (document.body.contains(sparkle)) {
+            document.body.removeChild(sparkle);
+        }
+    }, 3000);
+}
+
+// Add floating sparkle animation
+const sparkleStyle = document.createElement('style');
+sparkleStyle.textContent = `
+    @keyframes floatSparkle {
+        0% {
+            opacity: 0;
+            transform: translateY(0) rotate(0deg);
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-100vh) rotate(360deg);
+        }
+    }
+`;
+document.head.appendChild(sparkleStyle);
+</script>
+{% endblock %}
