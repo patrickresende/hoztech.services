@@ -415,6 +415,13 @@ LOGIN_REDIRECT_URL = '/admin/'
 LOGOUT_REDIRECT_URL = '/admin/login/'
 LOGIN_URL = '/admin/login/'
 
+
+# WhatsApp Business API Settings
+WHATSAPP_ACCESS_TOKEN = os.getenv('WHATSAPP_ACCESS_TOKEN')
+WHATSAPP_PHONE_NUMBER_ID = os.getenv('WHATSAPP_PHONE_NUMBER_ID')
+WHATSAPP_BUSINESS_ACCOUNT_ID = os.getenv('WHATSAPP_BUSINESS_ACCOUNT_ID')
+WHATSAPP_APP_SECRET = os.getenv('WHATSAPP_APP_SECRET')
+
 # Logging Configuration
 class RailwayJSONFormatter(logging.Formatter):
     def format(self, record):

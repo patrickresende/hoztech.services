@@ -33,7 +33,7 @@ python manage.py whatsapp_chatbot status
 ## 🌐 Endpoints Disponíveis
 
 ### Webhook do WhatsApp
-- **URL**: `/chatbot/webhook/`
+- **URL**: `http://127.0.0.1:8000//chatbot/webhook/`
 - **Métodos**: GET (verificação), POST (receber mensagens)
 - **Uso**: Configurar no WhatsApp Business API
 
