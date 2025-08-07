@@ -196,6 +196,131 @@
             box-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
         }
 
+        /* === NAVBAR MOBILE OPTIMIZATIONS === */
+        @media (max-width: 991.98px) {
+            .navbar {
+                padding: 8px 15px;
+            }
+            
+            .navbar-brand {
+                padding: 5px 0;
+            }
+            
+            .navbar-toggler {
+                padding: 6px 8px;
+                border: 2px solid rgba(0, 247, 255, 0.3);
+                border-radius: 8px;
+                background: rgba(0, 247, 255, 0.05);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .navbar-toggler:focus {
+                box-shadow: 0 0 0 3px rgba(0, 247, 255, 0.3);
+                outline: none;
+            }
+            
+            .navbar-toggler:hover,
+            .navbar-toggler:active {
+                background: rgba(0, 247, 255, 0.1);
+                border-color: rgba(0, 247, 255, 0.5);
+                transform: scale(1.05);
+            }
+            
+            .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%280, 247, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+                transition: all 0.3s ease;
+                width: 24px;
+                height: 24px;
+            }
+            
+            .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%280, 247, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M6 6l18 18M6 24L24 6'/%3E%3C/svg%3E");
+                transform: rotate(90deg);
+            }
+            
+            .navbar-collapse {
+                background: rgba(10, 11, 30, 0.98);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                border-radius: 12px;
+                margin-top: 15px;
+                padding: 20px 15px;
+                border: 1px solid rgba(0, 247, 255, 0.2);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+                max-height: 80vh;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .navbar-nav {
+                gap: 8px;
+            }
+            
+            .navbar-nav .nav-link {
+                padding: 12px 16px !important;
+                margin: 4px 0;
+                border-radius: 8px;
+                background: rgba(0, 247, 255, 0.05);
+                border: 1px solid rgba(0, 247, 255, 0.1);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                min-height: 48px; /* Melhor área de toque */
+            }
+            
+            .navbar-nav .nav-link:hover,
+            .navbar-nav .nav-link:focus {
+                background: rgba(255, 7, 58, 0.15);
+                border-color: rgba(255, 7, 58, 0.3);
+                transform: translateX(8px);
+                color: var(--tech-light) !important;
+            }
+            
+            .navbar-nav .nav-link:active {
+                transform: translateX(5px) scale(0.98);
+                background: rgba(255, 7, 58, 0.2);
+            }
+            
+            .navbar-nav .nav-link i {
+                margin-right: 8px;
+                font-size: 16px;
+            }
+        }
+        
+        /* === PERFORMANCE OPTIMIZATIONS === */
+        .navbar-toggler,
+        .navbar-collapse,
+        .navbar-nav .nav-link {
+            will-change: transform, background-color, border-color;
+        }
+        
+        /* === ACCESSIBILITY IMPROVEMENTS === */
+        @media (prefers-reduced-motion: reduce) {
+            .navbar-toggler,
+            .navbar-toggler-icon,
+            .navbar-collapse,
+            .navbar-nav .nav-link {
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+        
+        /* === TOUCH IMPROVEMENTS === */
+        @media (hover: none) and (pointer: coarse) {
+            .navbar-nav .nav-link {
+                min-height: 52px; /* Área de toque maior em dispositivos touch */
+                font-size: 16px; /* Evitar zoom no iOS */
+            }
+            
+            .navbar-toggler {
+                min-width: 48px;
+                min-height: 48px;
+            }
+        }
+
         .navbar-brand {
             padding: 0;
             margin-right: 1rem;
@@ -796,6 +921,7 @@
                         <li><a href="{% url 'core:terms' %}">Termos de Uso</a></li>
                         <li><a href="{% url 'core:minha_seguranca' %}">Minha Segurança</a></li>
                         <li><a href="{% url 'core:security_policy' %}">Políticas de Segurança</a></li>
+                        <li><a href="{% url 'core:exclusao_dados' %}">Exclusão de Dados</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -819,183 +945,258 @@
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
-    <!-- Script específico para Dropdown -->
+    <!-- Script específico para Navbar Mobile e Dropdown -->
     <script>
+        // ===== NAVBAR MOBILE & DROPDOWN - OPTIMIZED =====
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🔧 Inicializando dropdown customizado...');
-            
-            // Verificar se Bootstrap está carregado
-            if (typeof bootstrap === 'undefined') {
-                console.error('❌ Bootstrap não carregado!');
-                return;
-            }
-            
-            // Encontrar o dropdown
+            // Elementos principais
+            const navbar = document.querySelector('.navbar');
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
             const dropdownToggle = document.getElementById('servicesDropdown');
-            const dropdownMenu = dropdownToggle ? dropdownToggle.nextElementSibling : null;
+            const dropdownMenu = dropdownToggle?.nextElementSibling;
             
-            if (!dropdownToggle || !dropdownMenu) {
-                console.error('❌ Elementos do dropdown não encontrados');
-                return;
-            }
+            // Detectar tipo de dispositivo
+            const isMobile = () => window.innerWidth < 992;
+            const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
             
-            console.log('✅ Elementos do dropdown encontrados:', {
-                toggle: dropdownToggle,
-                menu: dropdownMenu
-            });
-            
-            // Função para verificar se está em mobile
-            function isMobile() {
-                return window.innerWidth < 992;
-            }
-            
-            // Função para calcular altura ideal
-            function calculateOptimalHeight() {
-                if (!isMobile()) {
-                    dropdownMenu.style.removeProperty('--calculated-height');
-                    return;
-                }
+            // ===== NAVBAR COLLAPSE BEHAVIOR =====
+            if (navbarToggler && navbarCollapse) {
+                let collapseInstance;
                 
-                // Temporariamente mostrar para medir
-                const wasVisible = dropdownMenu.classList.contains('show');
-                if (!wasVisible) {
-                    dropdownMenu.style.visibility = 'hidden';
-                    dropdownMenu.style.opacity = '0';
-                    dropdownMenu.classList.add('show');
-                }
-                
-                const contentHeight = dropdownMenu.scrollHeight;
-                const viewportHeight = window.innerHeight;
-                const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 60;
-                const availableHeight = viewportHeight - navbarHeight - 40; // 40px margem
-                
-                // Usar altura do conteúdo ou altura disponível, o que for menor
-                const optimalHeight = Math.min(contentHeight, availableHeight, 400);
-                dropdownMenu.style.setProperty('--calculated-height', `${optimalHeight}px`);
-                
-                // Restaurar estado original se não estava visível
-                if (!wasVisible) {
-                    dropdownMenu.classList.remove('show');
-                    dropdownMenu.style.removeProperty('visibility');
-                    dropdownMenu.style.removeProperty('opacity');
-                }
-            }
-            
-            // Inicializar dropdown do Bootstrap
-            let dropdownInstance;
-            try {
-                dropdownInstance = new bootstrap.Dropdown(dropdownToggle);
-                console.log('✅ Dropdown Bootstrap inicializado');
-            } catch (error) {
-                console.error('❌ Erro ao inicializar dropdown:', error);
-                return;
-            }
-            
-            // Controle melhorado do estado .show
-            let isDropdownOpen = false;
-            let animationTimeout;
-            
-            // Event listeners para controle de estado
-            dropdownToggle.addEventListener('show.bs.dropdown', function() {
-                console.log('🔽 Dropdown abrindo...');
-                isDropdownOpen = true;
-                calculateOptimalHeight();
-            });
-            
-            dropdownToggle.addEventListener('shown.bs.dropdown', function() {
-                console.log('✅ Dropdown aberto');
-                isDropdownOpen = true;
-            });
-            
-            dropdownToggle.addEventListener('hide.bs.dropdown', function() {
-                console.log('🔼 Dropdown fechando...');
-                isDropdownOpen = false;
-            });
-            
-            dropdownToggle.addEventListener('hidden.bs.dropdown', function() {
-                console.log('✅ Dropdown fechado');
-                isDropdownOpen = false;
-            });
-            
-            // Fallback robusto com verificação de estado
-            dropdownToggle.addEventListener('click', function(e) {
-                clearTimeout(animationTimeout);
-                
-                animationTimeout = setTimeout(() => {
-                    const hasShowClass = dropdownMenu.classList.contains('show');
-                    const ariaExpanded = dropdownToggle.getAttribute('aria-expanded') === 'true';
-                    
-                    console.log('📊 Estado do dropdown:', {
-                        hasShowClass,
-                        ariaExpanded,
-                        isDropdownOpen
+                try {
+                    collapseInstance = new bootstrap.Collapse(navbarCollapse, {
+                        toggle: false
                     });
+                } catch (error) {
+                    console.warn('Bootstrap Collapse não pôde ser inicializado:', error);
+                }
+                
+                // Melhorar comportamento do toggler
+                navbarToggler.addEventListener('click', function(e) {
+                    e.preventDefault();
                     
-                    // Se houver inconsistência, corrigir
-                    if (hasShowClass !== ariaExpanded || hasShowClass !== isDropdownOpen) {
-                        console.log('🔧 Corrigindo estado inconsistente...');
-                        
-                        if (hasShowClass) {
-                            dropdownToggle.setAttribute('aria-expanded', 'true');
-                            isDropdownOpen = true;
-                        } else {
-                            dropdownToggle.setAttribute('aria-expanded', 'false');
-                            isDropdownOpen = false;
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    
+                    if (isExpanded) {
+                        collapseInstance?.hide();
+                        this.classList.add('collapsed');
+                        this.setAttribute('aria-expanded', 'false');
+                    } else {
+                        collapseInstance?.show();
+                        this.classList.remove('collapsed');
+                        this.setAttribute('aria-expanded', 'true');
+                    }
+                });
+                
+                // Fechar navbar ao clicar em links (mobile)
+                if (isMobile()) {
+                    const navLinks = navbarCollapse.querySelectorAll('.nav-link:not(.dropdown-toggle)');
+                    navLinks.forEach(link => {
+                        link.addEventListener('click', () => {
+                            if (navbarCollapse.classList.contains('show')) {
+                                collapseInstance?.hide();
+                                navbarToggler.classList.add('collapsed');
+                                navbarToggler.setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                    });
+                }
+                
+                // Fechar navbar ao clicar fora (mobile)
+                document.addEventListener('click', function(e) {
+                    if (isMobile() && navbarCollapse.classList.contains('show')) {
+                        if (!navbar.contains(e.target)) {
+                            collapseInstance?.hide();
+                            navbarToggler.classList.add('collapsed');
+                            navbarToggler.setAttribute('aria-expanded', 'false');
                         }
                     }
+                });
+            }
+            
+            // ===== DROPDOWN BEHAVIOR =====
+            if (dropdownToggle && dropdownMenu) {
+                let dropdownInstance;
+                let isDropdownOpen = false;
+                
+                // Configuração do dropdown baseada no dispositivo
+                const dropdownConfig = {
+                    autoClose: isMobile() ? 'outside' : true,
+                    boundary: isMobile() ? 'viewport' : 'clippingParents',
+                    display: isMobile() ? 'static' : 'dynamic'
+                };
+                
+                try {
+                    dropdownInstance = new bootstrap.Dropdown(dropdownToggle, dropdownConfig);
+                } catch (error) {
+                    console.warn('Bootstrap Dropdown não pôde ser inicializado:', error);
+                }
+                
+                // Função para calcular altura ideal do dropdown (mobile)
+                function calculateOptimalHeight() {
+                    if (!isMobile()) return;
                     
-                    // Fallback final: se clicou mas não abriu
-                    if (!hasShowClass && !isDropdownOpen) {
-                        console.log('🚨 Fallback: forçando abertura...');
-                        calculateOptimalHeight();
+                    const viewportHeight = window.innerHeight;
+                    const navbarHeight = navbar?.offsetHeight || 0;
+                    const toggleRect = dropdownToggle.getBoundingClientRect();
+                    const availableSpace = viewportHeight - toggleRect.bottom - 40; // 40px de margem
+                    
+                    const maxHeight = Math.min(Math.max(availableSpace, 150), 300); // Entre 150px e 300px
+                    dropdownMenu.style.setProperty('--calculated-height', `${maxHeight}px`);
+                }
+                
+                // Event listeners do dropdown
+                dropdownToggle.addEventListener('show.bs.dropdown', function(e) {
+                    isDropdownOpen = true;
+                    calculateOptimalHeight();
+                    
+                    // Adicionar classe para animação
+                    dropdownMenu.classList.add('dropdown-opening');
+                    
+                    // Garantir visibilidade
+                    setTimeout(() => {
+                        dropdownMenu.classList.remove('dropdown-opening');
                         dropdownMenu.classList.add('show');
-                        dropdownToggle.setAttribute('aria-expanded', 'true');
-                        isDropdownOpen = true;
+                    }, 50);
+                });
+                
+                dropdownToggle.addEventListener('shown.bs.dropdown', function() {
+                    // Focar no primeiro item para acessibilidade
+                    const firstItem = dropdownMenu.querySelector('.dropdown-item');
+                    if (firstItem && !isTouchDevice()) {
+                        firstItem.focus();
                     }
-                }, 150);
-            });
-            
-            // Fechar dropdown ao clicar fora
-            document.addEventListener('click', function(e) {
-                if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
-                    if (dropdownMenu.classList.contains('show') || isDropdownOpen) {
-                        console.log('👆 Fechando dropdown (clique fora)');
-                        dropdownMenu.classList.remove('show');
-                        dropdownToggle.setAttribute('aria-expanded', 'false');
-                        isDropdownOpen = false;
-                        
-                        // Usar API do Bootstrap se disponível
-                        if (dropdownInstance) {
-                            dropdownInstance.hide();
-                        }
-                    }
-                }
-            });
-            
-            // Fechar com ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && isDropdownOpen) {
-                    console.log('⌨️ Fechando dropdown (ESC)');
-                    dropdownMenu.classList.remove('show');
-                    dropdownToggle.setAttribute('aria-expanded', 'false');
+                });
+                
+                dropdownToggle.addEventListener('hide.bs.dropdown', function() {
                     isDropdownOpen = false;
+                    dropdownMenu.classList.remove('show');
+                    dropdownMenu.classList.add('dropdown-closing');
                     
-                    if (dropdownInstance) {
-                        dropdownInstance.hide();
+                    setTimeout(() => {
+                        dropdownMenu.classList.remove('dropdown-closing');
+                    }, 300);
+                });
+                
+                // Comportamento específico para dispositivos touch
+                if (isTouchDevice()) {
+                    let touchStartTime = 0;
+                    
+                    dropdownToggle.addEventListener('touchstart', function(e) {
+                        touchStartTime = Date.now();
+                    }, { passive: true });
+                    
+                    dropdownToggle.addEventListener('touchend', function(e) {
+                        const touchDuration = Date.now() - touchStartTime;
+                        
+                        // Apenas processar toques rápidos (não scrolls)
+                        if (touchDuration < 200) {
+                            e.preventDefault();
+                            
+                            if (isDropdownOpen) {
+                                dropdownInstance?.hide();
+                            } else {
+                                dropdownInstance?.show();
+                            }
+                        }
+                    }, { passive: false });
+                    
+                    // Melhorar feedback visual em touch
+                    dropdownToggle.addEventListener('touchstart', function() {
+                        this.classList.add('touching');
+                    }, { passive: true });
+                    
+                    dropdownToggle.addEventListener('touchend', function() {
+                        setTimeout(() => {
+                            this.classList.remove('touching');
+                        }, 150);
+                    }, { passive: true });
+                }
+                
+                // Navegação por teclado no dropdown
+                dropdownMenu.addEventListener('keydown', function(e) {
+                    const items = Array.from(this.querySelectorAll('.dropdown-item'));
+                    const currentIndex = items.indexOf(document.activeElement);
+                    
+                    switch (e.key) {
+                        case 'ArrowDown':
+                            e.preventDefault();
+                            const nextIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
+                            items[nextIndex]?.focus();
+                            break;
+                        case 'ArrowUp':
+                            e.preventDefault();
+                            const prevIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
+                            items[prevIndex]?.focus();
+                            break;
+                        case 'Escape':
+                            e.preventDefault();
+                            dropdownInstance?.hide();
+                            dropdownToggle.focus();
+                            break;
+                        case 'Enter':
+                        case ' ':
+                            if (document.activeElement.classList.contains('dropdown-item')) {
+                                e.preventDefault();
+                                document.activeElement.click();
+                            }
+                            break;
+                    }
+                });
+                
+                // Recalcular altura ao redimensionar
+                let resizeTimeout;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        if (isDropdownOpen) {
+                            calculateOptimalHeight();
+                        }
+                    }, 100);
+                });
+                
+                // Fechar dropdown com ESC
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && isDropdownOpen) {
+                        dropdownInstance?.hide();
+                        dropdownToggle.focus();
+                    }
+                });
+            }
+            
+            // ===== PERFORMANCE OPTIMIZATIONS =====
+            
+            // Throttle para eventos de scroll/resize
+            function throttle(func, limit) {
+                let inThrottle;
+                return function() {
+                    const args = arguments;
+                    const context = this;
+                    if (!inThrottle) {
+                        func.apply(context, args);
+                        inThrottle = true;
+                        setTimeout(() => inThrottle = false, limit);
                     }
                 }
-            });
+            }
             
-            // Calcular altura inicial e no resize
-            calculateOptimalHeight();
+            // Otimizar reflows/repaints
+            const optimizeNavbar = throttle(function() {
+                if (isMobile() && dropdownMenu && isDropdownOpen) {
+                    calculateOptimalHeight();
+                }
+            }, 100);
             
-            let resizeTimeout;
-            window.addEventListener('resize', function() {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(calculateOptimalHeight, 150);
-            });
+            window.addEventListener('scroll', optimizeNavbar, { passive: true });
+            window.addEventListener('orientationchange', optimizeNavbar);
             
-            console.log('✅ Dropdown customizado configurado com sucesso');
+            // Debug info (apenas em desenvolvimento)
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log('🚀 Navbar Mobile & Dropdown inicializados');
+                console.log('📱 Mobile:', isMobile());
+                console.log('👆 Touch Device:', isTouchDevice());
+            }
         });
     </script>
     

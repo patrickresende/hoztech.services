@@ -1,9 +1,14 @@
-/* ===== DROPDOWN NAVBAR - MOBILE FIRST ===== */
+/* ===== NAVBAR DROPDOWN STYLES - MOBILE OPTIMIZED ===== */
 
 /* === Toggle com seta personalizada === */
 .navbar .dropdown-toggle {
     position: relative;
     padding-right: 2rem !important;
+    /* Melhorar área de toque em mobile */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navbar .dropdown-toggle::after {
@@ -20,7 +25,7 @@
     width: 14px !important;
     height: 14px !important;
     background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.75 9.75L12 15L17.25 9.75' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain !important;
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     z-index: 10 !important;
     /* Resetar propriedades que podem vir do nav-link */
     left: auto !important;
@@ -29,19 +34,30 @@
     border-radius: 0 !important;
 }
 
-/* Hover da seta - muda cor para azul */
-.navbar .dropdown-toggle:hover::before {
-    background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.75 9.75L12 15L17.25 9.75' stroke='%2300f7ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain !important;
+/* Estados de interação para touch */
+.navbar .dropdown-toggle.touching {
+    background-color: rgba(0, 247, 255, 0.1);
+    transform: scale(0.98);
+}
+
+/* Hover da seta - muda cor para azul (apenas desktop) */
+@media (hover: hover) {
+    .navbar .dropdown-toggle:hover::before {
+        background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.75 9.75L12 15L17.25 9.75' stroke='%2300f7ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain !important;
+    }
 }
 
 /* Rotação quando aberto */
 .navbar .dropdown-toggle[aria-expanded="true"]::before {
     transform: translateY(-50%) rotate(180deg) !important;
+    background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.75 9.75L12 15L17.25 9.75' stroke='%2300f7ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain !important;
 }
 
-/* Hover quando aberto - mantém cor azul */
-.navbar .dropdown-toggle[aria-expanded="true"]:hover::before {
-    background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.75 9.75L12 15L17.25 9.75' stroke='%2300f7ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain !important;
+/* Hover quando aberto - apenas desktop */
+@media (hover: hover) {
+    .navbar .dropdown-toggle[aria-expanded="true"]:hover::before {
+        background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.75 9.75L12 15L17.25 9.75' stroke='%2300f7ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain !important;
+    }
 }
 
 /* === Dropdown Menu - Mobile === */
@@ -64,8 +80,7 @@
     position: static;
     opacity: 0;
     max-height: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     transition:
@@ -73,6 +88,8 @@
         max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
         transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateY(-10px) scale(0.98);
+    /* Melhorar comportamento em mobile */
+    -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
 }
 
@@ -80,6 +97,7 @@
     opacity: 1;
     max-height: var(--calculated-height, min(60vh, 300px));
     transform: translateY(0) scale(1);
+    overflow-y: auto;
 }
 
 /* === Dropdown Items === */
@@ -97,6 +115,19 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 8px;
     margin: 0.25rem 0.75rem;
+    /* Melhorar área de toque */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    /* Remover outline padrão e adicionar focus visível */
+    outline: none;
+    text-decoration: none;
+}
+
+/* Focus visível para acessibilidade */
+.navbar .dropdown-item:focus {
+    outline: 2px solid var(--tech-blue, #00f7ff);
+    outline-offset: 2px;
 }
 
 /* Efeito de brilho sutil no item */
@@ -117,7 +148,42 @@
     pointer-events: none;
 }
 
-.navbar .dropdown-item:hover,
+/* Estados de interação - separar hover de touch */
+@media (hover: hover) {
+    .navbar .dropdown-item:hover {
+        color: var(--tech-blue, #00f7ff);
+        background: linear-gradient(135deg, 
+            rgba(0, 247, 255, 0.15) 0%, 
+            rgba(0, 247, 255, 0.08) 50%, 
+            rgba(255, 7, 58, 0.08) 100%);
+        border-left-color: var(--tech-blue, #00f7ff);
+        text-decoration: none;
+        transform: translateX(8px) scale(1.02);
+        box-shadow: 
+            0 4px 16px rgba(0, 247, 255, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar .dropdown-item:hover::before {
+        opacity: 1;
+    }
+}
+
+/* Estados para dispositivos touch */
+@media (hover: none) {
+    .navbar .dropdown-item:active {
+        color: var(--tech-blue, #00f7ff);
+        background: linear-gradient(135deg, 
+            rgba(0, 247, 255, 0.15) 0%, 
+            rgba(0, 247, 255, 0.08) 50%, 
+            rgba(255, 7, 58, 0.08) 100%);
+        border-left-color: var(--tech-blue, #00f7ff);
+        text-decoration: none;
+        transform: translateX(4px) scale(1.01);
+    }
+}
+
+/* Estado focus para todos os dispositivos */
 .navbar .dropdown-item:focus {
     color: var(--tech-blue, #00f7ff);
     background: linear-gradient(135deg, 
@@ -126,17 +192,13 @@
         rgba(255, 7, 58, 0.08) 100%);
     border-left-color: var(--tech-blue, #00f7ff);
     text-decoration: none;
-    transform: translateX(8px) scale(1.02);
-    box-shadow: 
-        0 4px 16px rgba(0, 247, 255, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.navbar .dropdown-item:hover::before,
 .navbar .dropdown-item:focus::before {
     opacity: 1;
 }
 
+/* Estado active geral */
 .navbar .dropdown-item:active {
     background: linear-gradient(135deg, 
         rgba(0, 247, 255, 0.25) 0%, 
@@ -146,8 +208,11 @@
     transform: translateX(6px) scale(1.01);
 }
 
-.navbar .dropdown-toggle:hover {
-    color: var(--tech-blue, #00f7ff) !important;
+/* Hover do toggle - apenas desktop */
+@media (hover: hover) {
+    .navbar .dropdown-toggle:hover {
+        color: var(--tech-blue, #00f7ff) !important;
+    }
 }
 
 /* === Scrollbar personalizada === */
@@ -188,8 +253,10 @@
     background-size: calc(100% - 3rem) 1px;
 }
 
-.navbar .dropdown-item:hover:not(:last-child) {
-    background-image: none;
+@media (hover: hover) {
+    .navbar .dropdown-item:hover:not(:last-child) {
+        background-image: none;
+    }
 }
 
 /* ===== DESKTOP STYLES (≥ 992px) ===== */
@@ -198,16 +265,6 @@
         right: 0.5rem !important;
         width: 16px !important;
         height: 16px !important;
-    }
-    
-    /* Hover desktop - seta azul */
-    .navbar .dropdown-toggle:hover::before {
-        background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.75 9.75L12 15L17.25 9.75' stroke='%2300f7ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain !important;
-    }
-    
-    /* Hover quando aberto - desktop */
-    .navbar .dropdown-toggle[aria-expanded="true"]:hover::before {
-        background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.75 9.75L12 15L17.25 9.75' stroke='%2300f7ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain !important;
     }
 
     .navbar .dropdown-menu {
@@ -280,23 +337,25 @@
         pointer-events: none;
     }
 
-    .navbar .dropdown-item:hover,
-    .navbar .dropdown-item:focus {
-        background: linear-gradient(135deg, 
-            rgba(0, 247, 255, 0.18) 0%, 
-            rgba(0, 247, 255, 0.12) 30%, 
-            rgba(255, 7, 58, 0.08) 70%, 
-            rgba(255, 7, 58, 0.12) 100%);
-        transform: translateX(8px) scale(1.03);
-        box-shadow: 
-            0 8px 24px rgba(0, 247, 255, 0.25),
-            0 4px 12px rgba(255, 7, 58, 0.15),
-            inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    }
+    @media (hover: hover) {
+        .navbar .dropdown-item:hover,
+        .navbar .dropdown-item:focus {
+            background: linear-gradient(135deg, 
+                rgba(0, 247, 255, 0.18) 0%, 
+                rgba(0, 247, 255, 0.12) 30%, 
+                rgba(255, 7, 58, 0.08) 70%, 
+                rgba(255, 7, 58, 0.12) 100%);
+            transform: translateX(8px) scale(1.03);
+            box-shadow: 
+                0 8px 24px rgba(0, 247, 255, 0.25),
+                0 4px 12px rgba(255, 7, 58, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
 
-    .navbar .dropdown-item:hover::after,
-    .navbar .dropdown-item:focus::after {
-        opacity: 1;
+        .navbar .dropdown-item:hover::after,
+        .navbar .dropdown-item:focus::after {
+            opacity: 1;
+        }
     }
 
     .navbar .dropdown-item:active {
@@ -321,8 +380,10 @@
         background-size: calc(100% - 3.5rem) 1px;
     }
 
-    .navbar .dropdown-item:hover:not(:last-child) {
-        background-image: none;
+    @media (hover: hover) {
+        .navbar .dropdown-item:hover:not(:last-child) {
+            background-image: none;
+        }
     }
 }
 

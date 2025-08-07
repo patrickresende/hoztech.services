@@ -990,6 +990,10 @@ def security_policy(request):
     """View for the security policy page."""
     return render(request, 'security_policy.html')
 
+def exclusao_dados(request):
+    """View for the data deletion page."""
+    return render(request, 'exclusao_dados.html')
+
 @log_view_execution
 def landing_pages(request):
     """View para a página de seleção de landing pages"""

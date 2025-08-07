@@ -19,6 +19,7 @@ urlpatterns = [
     path('download-pdf/', views.download_pdf, name='download_pdf'),
     path('faq/', views.faq, name='faq'),
     path('security-policy/', views.security_policy, name='security_policy'),
+    path('exclusao-de-dados/', views.exclusao_dados, name='exclusao_dados'),
     # Landing Pages
     path('landingpages/', views.landing_pages, name='landing_pages'),
     path('landing/musico/', views.landing_musico, name='landing_musico'),

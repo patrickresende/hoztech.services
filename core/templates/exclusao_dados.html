@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Exclusão de Dados - HOZ TECH{% endblock %}
+
+{% block meta_description %}Solicite a exclusão dos seus dados pessoais de acordo com a LGPD. Processo simples e transparente para garantir seus direitos de privacidade.{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold text-primary mb-3">
+                    <i class="bi bi-shield-x me-3"></i>
+                    Exclusão de Dados
+                </h1>
+                <p class="lead text-muted">
+                    Solicite a exclusão dos seus dados pessoais de forma simples e transparente
+                </p>
+            </div>
+
+            <!-- Informações Gerais -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Seus Direitos de Privacidade
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">
+                        De acordo com a <strong>Lei Geral de Proteção de Dados (LGPD)</strong>, você tem o direito de solicitar a exclusão dos seus dados pessoais que estão em nosso sistema.
+                    </p>
+                    <div class="alert alert-info">
+                        <i class="bi bi-lightbulb me-2"></i>
+                        <strong>Importante:</strong> A exclusão dos dados é irreversível e pode afetar o acesso a alguns de nossos serviços.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Processo de Exclusão -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-list-check me-2"></i>
+                        Como Solicitar a Exclusão
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="step-item">
+                                <div class="step-number bg-primary text-white">1</div>
+                                <div class="step-content">
+                                    <h5>Envie um E-mail</h5>
+                                    <p class="text-muted">Envie sua solicitação para nosso e-mail oficial</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="step-item">
+                                <div class="step-number bg-primary text-white">2</div>
+                                <div class="step-content">
+                                    <h5>Confirmação de Identidade</h5>
+                                    <p class="text-muted">Confirmaremos sua identidade para segurança</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="step-item">
+                                <div class="step-number bg-primary text-white">3</div>
+                                <div class="step-content">
+                                    <h5>Processamento</h5>
+                                    <p class="text-muted">Processaremos sua solicitação em até 15 dias úteis</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="step-item">
+                                <div class="step-number bg-primary text-white">4</div>
+                                <div class="step-content">
+                                    <h5>Confirmação</h5>
+                                    <p class="text-muted">Você receberá uma confirmação da exclusão</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informações de Contato -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-envelope me-2"></i>
+                        Informações Necessárias
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">Para processar sua solicitação, inclua as seguintes informações no seu e-mail:</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-check-circle text-success me-3"></i>
+                            <strong>Nome completo</strong> conforme cadastrado
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-check-circle text-success me-3"></i>
+                            <strong>E-mail</strong> utilizado no cadastro
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-check-circle text-success me-3"></i>
+                            <strong>Telefone</strong> (se fornecido anteriormente)
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-check-circle text-success me-3"></i>
+                            <strong>Motivo</strong> da solicitação de exclusão
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-check-circle text-success me-3"></i>
+                            <strong>Documento de identidade</strong> (para verificação)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Botão de Contato -->
+            <div class="text-center mb-4">
+                <a href="mailto:hoztech.services@gmail.com?subject=Solicitação de Exclusão de Dados - LGPD&body=Olá,%0D%0A%0D%0ASolicito a exclusão dos meus dados pessoais de acordo com a LGPD.%0D%0A%0D%0AInformações:%0D%0ANome completo: %0D%0AE-mail: %0D%0ATelefone: %0D%0AMotivo: %0D%0A%0D%0AAnexarei documento de identidade para verificação.%0D%0A%0D%0AAtenciosamente," 
+                   class="btn btn-primary btn-lg">
+                    <i class="bi bi-envelope me-2"></i>
+                    Enviar Solicitação por E-mail
+                </a>
+            </div>
+
+            <!-- Informações Adicionais -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-question-circle me-2"></i>
+                        Informações Importantes
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5><i class="bi bi-clock text-primary me-2"></i>Prazo de Resposta</h5>
+                            <p class="text-muted">Até 15 dias úteis conforme a LGPD</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="bi bi-shield-check text-success me-2"></i>Segurança</h5>
+                            <p class="text-muted">Processo seguro e confidencial</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="bi bi-file-text text-info me-2"></i>Documentação</h5>
+                            <p class="text-muted">Mantenha cópia da solicitação</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="bi bi-telephone text-warning me-2"></i>Suporte</h5>
+                            <p class="text-muted">Dúvidas? Entre em contato conosco</p>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        <strong>Atenção:</strong> Após a exclusão dos dados, não será possível recuperá-los. Certifique-se de que realmente deseja prosseguir com a solicitação.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Links Relacionados -->
+            <div class="text-center mt-4">
+                <p class="text-muted">
+                    Consulte também nossa 
+                    <a href="{% url 'core:privacy' %}" class="text-decoration-none">Política de Privacidade</a>
+                    e nossos 
+                    <a href="{% url 'core:terms' %}" class="text-decoration-none">Termos de Uso</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.step-content h5 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+    border: none;
+}
+
+.btn-lg {
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .step-item {
+        margin-bottom: 20px;
+    }
+    
+    .btn-lg {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+</style>
+{% endblock %}
