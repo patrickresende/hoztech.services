@@ -10,8 +10,13 @@
     <meta name="theme-color" content="#0a0b1e">
     <title>{% block title %}HOZ TECH{% endblock %}</title>
 
+
+
+
     <!-- Verificação google search metadata -- NÃO REMOVER!! -->
     <meta name="google-site-verification" content="m9aPHWAPfxADdhqrVbN-Pzn14s7APDtgIkJmZ2GLbs8" />
+
+
 
     <!-- Meta Pixel Code -->
 <script>
@@ -30,6 +35,8 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=643199878801617&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+
+
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{% static 'core/img/favicon.svg' %}">
@@ -876,6 +883,12 @@ src="https://www.facebook.com/tr?id=643199878801617&ev=PageView&noscript=1"
                         </ul>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'shop_index' or request.resolver_match.url_name == 'shop_redirect' %}active{% endif %}" 
+                           href="{% url 'core:shop_index' %}">
+                           <i class="bi bi-shop"></i> SHOP
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" 
                            href="{% url 'core:contact' %}">
                            <i class="bi bi-envelope"></i> CONTATO
@@ -940,6 +953,7 @@ src="https://www.facebook.com/tr?id=643199878801617&ev=PageView&noscript=1"
                         <li><a href="{% url 'core:minha_seguranca' %}">Minha Segurança</a></li>
                         <li><a href="{% url 'core:security_policy' %}">Políticas de Segurança</a></li>
                         <li><a href="{% url 'core:exclusao_dados' %}">Exclusão de Dados</a></li>
+                        <li><a href="{% url 'core:shop_index' %}">Loja Online</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">

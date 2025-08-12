@@ -1,0 +1,559 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Produtos - HOZ TECH Shop{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="Explore nossos produtos digitais: templates, plugins, ferramentas e serviços para seu negócio.">
+<meta name="keywords" content="produtos digitais, templates, plugins, ferramentas, HOZ TECH">
+<meta property="og:title" content="Produtos - HOZ TECH Shop">
+<meta property="og:description" content="Explore nossos produtos digitais para seu negócio.">
+<meta property="og:url" content="https://shop.hoztech.com.br/products">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{% static 'core/images/logo.png' %}">
+<link rel="canonical" href="https://shop.hoztech.com.br/products">
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* === PRODUCTS PAGE STYLES === */
+    .products-hero {
+        background: linear-gradient(135deg, #0a0b1e 0%, #1a1a2e 50%, #16213e 100%);
+        padding: 60px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .products-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%2300f7ff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        animation: gridMove 20s linear infinite;
+    }
+    
+    @keyframes gridMove {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(10px, 10px); }
+    }
+    
+    .products-hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .products-hero h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: var(--tech-light);
+        margin-bottom: 15px;
+        background: linear-gradient(45deg, var(--tech-cyan), var(--tech-pink));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .products-hero p {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .products-grid {
+        padding: 60px 0;
+        background: var(--tech-dark);
+    }
+    
+    .product-filters {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--tech-light);
+        border: 1px solid rgba(0, 247, 255, 0.3);
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+        background: linear-gradient(45deg, var(--tech-cyan), var(--tech-pink));
+        color: white;
+        text-decoration: none;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 247, 255, 0.3);
+    }
+    
+    .products-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+    
+    .product-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 247, 255, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(0, 247, 255, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 247, 255, 0.2);
+    }
+    
+    .product-image {
+        height: 200px;
+        background: linear-gradient(45deg, rgba(0, 247, 255, 0.1), rgba(255, 7, 58, 0.1));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: var(--tech-cyan);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .product-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%2300f7ff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        animation: dotsMove 10s linear infinite;
+    }
+    
+    .product-content {
+        padding: 25px;
+    }
+    
+    .product-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--tech-light);
+        margin-bottom: 10px;
+    }
+    
+    .product-description {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+    
+    .product-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--tech-cyan);
+        margin-bottom: 15px;
+    }
+    
+    .product-tags {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .product-tag {
+        padding: 4px 12px;
+        background: rgba(0, 247, 255, 0.1);
+        color: var(--tech-cyan);
+        border-radius: 15px;
+        font-size: 0.8rem;
+        border: 1px solid rgba(0, 247, 255, 0.2);
+    }
+    
+    .product-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: linear-gradient(45deg, var(--tech-cyan), var(--tech-pink));
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .product-btn:hover {
+        transform: scale(1.05);
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 8px 20px rgba(0, 247, 255, 0.3);
+    }
+    
+    .coming-soon-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 7, 58, 0.9);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        z-index: 3;
+    }
+    
+    .redirect-section {
+        padding: 60px 0;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        text-align: center;
+    }
+    
+    .redirect-content {
+        max-width: 600px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border-radius: 25px;
+        padding: 40px 30px;
+        border: 1px solid rgba(0, 247, 255, 0.2);
+    }
+    
+    .redirect-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--tech-light);
+        margin-bottom: 15px;
+        background: linear-gradient(45deg, var(--tech-cyan), var(--tech-pink));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .redirect-desc {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 25px;
+        line-height: 1.6;
+    }
+    
+    .redirect-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 15px 30px;
+        background: linear-gradient(45deg, var(--tech-cyan), var(--tech-pink));
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 247, 255, 0.3);
+    }
+    
+    .redirect-btn:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(0, 247, 255, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+    
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+        .products-hero h1 {
+            font-size: 2.2rem;
+        }
+        
+        .products-hero p {
+            font-size: 1rem;
+        }
+        
+        .products-container {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .product-filters {
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        .redirect-content {
+            margin: 0 20px;
+            padding: 30px 20px;
+        }
+        
+        .redirect-title {
+            font-size: 1.6rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Products Hero -->
+<section class="products-hero">
+    <div class="products-hero-content">
+        <div class="container">
+            <h1>Nossos Produtos</h1>
+            <p>
+                Descubra soluções digitais inovadoras para impulsionar seu negócio
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Products Grid -->
+<section class="products-grid">
+    <div class="container">
+        <!-- Filters -->
+        <div class="product-filters">
+            <a href="#" class="filter-btn active" data-filter="all">Todos</a>
+            <a href="#" class="filter-btn" data-filter="templates">Templates</a>
+            <a href="#" class="filter-btn" data-filter="plugins">Plugins</a>
+            <a href="#" class="filter-btn" data-filter="services">Serviços</a>
+            <a href="#" class="filter-btn" data-filter="tools">Ferramentas</a>
+        </div>
+        
+        <!-- Products Container -->
+        <div class="products-container">
+            <!-- Template Products -->
+            <div class="product-card" data-category="templates">
+                <div class="product-image">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Template E-commerce Pro</h3>
+                    <p class="product-description">
+                        Template completo para loja virtual com design moderno e responsivo.
+                    </p>
+                    <div class="product-price">R$ 299,00</div>
+                    <div class="product-tags">
+                        <span class="product-tag">E-commerce</span>
+                        <span class="product-tag">Responsivo</span>
+                        <span class="product-tag">SEO</span>
+                    </div>
+                    <a href="https://shop.hoztech.com.br/template-ecommerce-pro" class="product-btn" target="_blank">
+                        <i class="fas fa-external-link-alt"></i>
+                        Ver Produto
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Plugin Products -->
+            <div class="product-card" data-category="plugins">
+                <div class="product-image">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Plugin WhatsApp Business</h3>
+                    <p class="product-description">
+                        Integração completa do WhatsApp Business API para seu site.
+                    </p>
+                    <div class="product-price">R$ 199,00</div>
+                    <div class="product-tags">
+                        <span class="product-tag">WhatsApp</span>
+                        <span class="product-tag">API</span>
+                        <span class="product-tag">Chatbot</span>
+                    </div>
+                    <a href="https://shop.hoztech.com.br/plugin-whatsapp-business" class="product-btn" target="_blank">
+                        <i class="fas fa-external-link-alt"></i>
+                        Ver Produto
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Service Products -->
+            <div class="product-card" data-category="services">
+                <div class="product-image">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Desenvolvimento Personalizado</h3>
+                    <p class="product-description">
+                        Desenvolvimento de aplicações web sob medida para seu negócio.
+                    </p>
+                    <div class="product-price">A partir de R$ 2.500</div>
+                    <div class="product-tags">
+                        <span class="product-tag">Custom</span>
+                        <span class="product-tag">Full-Stack</span>
+                        <span class="product-tag">Suporte</span>
+                    </div>
+                    <a href="https://shop.hoztech.com.br/desenvolvimento-personalizado" class="product-btn" target="_blank">
+                        <i class="fas fa-external-link-alt"></i>
+                        Ver Serviço
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Coming Soon Products -->
+            <div class="product-card" data-category="tools">
+                <div class="coming-soon-badge">Em Breve</div>
+                <div class="product-image">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">HOZ Analytics Pro</h3>
+                    <p class="product-description">
+                        Ferramenta avançada de analytics e métricas para seu site.
+                    </p>
+                    <div class="product-price">R$ 99,00/mês</div>
+                    <div class="product-tags">
+                        <span class="product-tag">Analytics</span>
+                        <span class="product-tag">Dashboard</span>
+                        <span class="product-tag">Real-time</span>
+                    </div>
+                    <a href="#" class="product-btn" style="opacity: 0.6; cursor: not-allowed;">
+                        <i class="fas fa-clock"></i>
+                        Em Desenvolvimento
+                    </a>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="templates">
+                <div class="coming-soon-badge">Em Breve</div>
+                <div class="product-image">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Template App Mobile</h3>
+                    <p class="product-description">
+                        Template para aplicativos móveis com React Native.
+                    </p>
+                    <div class="product-price">R$ 399,00</div>
+                    <div class="product-tags">
+                        <span class="product-tag">React Native</span>
+                        <span class="product-tag">iOS</span>
+                        <span class="product-tag">Android</span>
+                    </div>
+                    <a href="#" class="product-btn" style="opacity: 0.6; cursor: not-allowed;">
+                        <i class="fas fa-clock"></i>
+                        Em Desenvolvimento
+                    </a>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="services">
+                <div class="coming-soon-badge">Em Breve</div>
+                <div class="product-image">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Mentoria Técnica</h3>
+                    <p class="product-description">
+                        Mentoria personalizada em desenvolvimento web e tecnologia.
+                    </p>
+                    <div class="product-price">R$ 150,00/hora</div>
+                    <div class="product-tags">
+                        <span class="product-tag">Mentoria</span>
+                        <span class="product-tag">1:1</span>
+                        <span class="product-tag">Online</span>
+                    </div>
+                    <a href="#" class="product-btn" style="opacity: 0.6; cursor: not-allowed;">
+                        <i class="fas fa-clock"></i>
+                        Em Breve
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Redirect Section -->
+<section class="redirect-section">
+    <div class="container">
+        <div class="redirect-content">
+            <h2 class="redirect-title">Visite Nossa Loja Completa</h2>
+            <p class="redirect-desc">
+                Acesse nossa loja online para ver todos os produtos, fazer pedidos e acompanhar suas compras.
+            </p>
+            <a href="https://shop.hoztech.com.br" class="redirect-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i>
+                Acessar Loja Online
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+// Product filtering
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            const filter = this.getAttribute('data-filter');
+            
+            productCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'block';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+    });
+    
+    // Animate cards on load
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    productCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(card);
+    });
+});
+</script>
+{% endblock %}

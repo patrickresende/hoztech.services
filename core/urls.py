@@ -27,6 +27,10 @@ urlpatterns = [
     path('landing/salao/', views.landing_salao, name='landing_salao'),
     path('landing/limpeza/', views.landing_limpeza, name='landing_limpeza'),
     
+    # Shop URLs
+    path('shop/', views.shop_index, name='shop_index'),
+    path('loja/', views.shop_redirect, name='shop_redirect'),
+    
     # WhatsApp Chatbot URLs (Backend apenas - sem renderização pública)
     path('chatbot/webhook/', WhatsAppWebhookView.as_view(), name='whatsapp_webhook'),
     path('chatbot/dashboard/', WhatsAppDashboardView.as_view(), name='whatsapp_dashboard'),

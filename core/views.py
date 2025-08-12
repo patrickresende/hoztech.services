@@ -1138,3 +1138,69 @@ def landing_limpeza(request):
         'is_landing_page': True
     }
     return render(request, 'landing_pages/landing_cleaning.html', context)
+
+# === SHOP VIEWS ===
+
+@log_view_execution
+def shop_index(request):
+    """Página principal da loja com redirecionamento para shop.hoztech.com.br"""
+    context = {
+        'page_title': 'HOZ TECH Shop - Produtos e Serviços Digitais',
+        'page_description': 'Explore nossa coleção de produtos e serviços digitais. Templates, plugins, cursos e soluções tecnológicas para seu negócio.',
+        'shop_url': 'https://shop.hoztech.com.br',
+        'categories': [
+            {
+                'name': 'Templates & Temas',
+                'description': 'Templates profissionais para sites, landing pages e aplicações web.',
+                'icon': 'fas fa-palette',
+                'url': 'https://shop.hoztech.com.br/templates',
+                'available': True
+            },
+            {
+                'name': 'Plugins & Extensões',
+                'description': 'Plugins e extensões para WordPress, Shopify e outras plataformas.',
+                'icon': 'fas fa-puzzle-piece',
+                'url': 'https://shop.hoztech.com.br/plugins',
+                'available': True
+            },
+            {
+                'name': 'Serviços Digitais',
+                'description': 'Desenvolvimento personalizado, consultoria e suporte técnico.',
+                'icon': 'fas fa-cogs',
+                'url': 'https://shop.hoztech.com.br/services',
+                'available': True
+            },
+            {
+                'name': 'Cursos Online',
+                'description': 'Cursos completos de programação, design e marketing digital.',
+                'icon': 'fas fa-graduation-cap',
+                'url': '#',
+                'available': False
+            },
+            {
+                'name': 'Ferramentas Digitais',
+                'description': 'Ferramentas e softwares para produtividade, design e desenvolvimento.',
+                'icon': 'fas fa-tools',
+                'url': '#',
+                'available': False
+            },
+            {
+                'name': 'E-books & Guias',
+                'description': 'Guias completos, e-books e materiais educativos sobre tecnologia.',
+                'icon': 'fas fa-book',
+                'url': '#',
+                'available': False
+            }
+        ]
+    }
+    return render(request, 'shop/index.html', context)
+
+@log_view_execution
+def shop_redirect(request):
+    """View simples para redirecionamento direto para a loja"""
+    context = {
+        'page_title': 'Redirecionando para HOZ TECH Shop',
+        'page_description': 'Você será redirecionado para nossa loja online.',
+        'shop_url': 'https://shop.hoztech.com.br'
+    }
+    return render(request, 'shop/shop.html', context)
