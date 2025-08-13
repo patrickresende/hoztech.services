@@ -28,6 +28,8 @@ import xlsxwriter
 from io import BytesIO
 import zipfile
 import redis
+import stripe
+from django.urls import reverse
 from django.db import connection
 
 logger = logging.getLogger('core')
@@ -1143,31 +1145,47 @@ def landing_limpeza(request):
 
 @log_view_execution
 def shop_index(request):
-    """Página principal da loja com redirecionamento para shop.hoztech.com.br"""
+    """Página principal da loja com redirecionamento dinâmico baseado no ambiente"""
+    
+    # Detectar ambiente e ajustar URLs
+    if settings.DEBUG:
+        # Em desenvolvimento, usar URLs relativas
+        shop_base_url = request.build_absolute_uri('/')[:-1]  # Remove a barra final
+        templates_url = reverse('core:landing_page_product')
+        plugins_url = reverse('core:landing_page_product')
+        services_url = reverse('core:landing_page_product')
+    else:
+        # Em produção, usar o domínio correto
+        shop_base_url = 'https://shop.hoztech.com.br'
+        templates_url = f'{shop_base_url}/templates'
+        plugins_url = f'{shop_base_url}/plugins'
+        services_url = f'{shop_base_url}/services'
+    
     context = {
         'page_title': 'HOZ TECH Shop - Produtos e Serviços Digitais',
         'page_description': 'Explore nossa coleção de produtos e serviços digitais. Templates, plugins, cursos e soluções tecnológicas para seu negócio.',
-        'shop_url': 'https://shop.hoztech.com.br',
+        'shop_url': shop_base_url,
+        'stripe_public_key': getattr(settings, 'STRIPE_PUBLISHABLE_KEY', None),
         'categories': [
             {
                 'name': 'Templates & Temas',
                 'description': 'Templates profissionais para sites, landing pages e aplicações web.',
                 'icon': 'fas fa-palette',
-                'url': 'https://shop.hoztech.com.br/templates',
+                'url': templates_url,
                 'available': True
             },
             {
                 'name': 'Plugins & Extensões',
                 'description': 'Plugins e extensões para WordPress, Shopify e outras plataformas.',
                 'icon': 'fas fa-puzzle-piece',
-                'url': 'https://shop.hoztech.com.br/plugins',
+                'url': plugins_url,
                 'available': True
             },
             {
                 'name': 'Serviços Digitais',
                 'description': 'Desenvolvimento personalizado, consultoria e suporte técnico.',
                 'icon': 'fas fa-cogs',
-                'url': 'https://shop.hoztech.com.br/services',
+                'url': services_url,
                 'available': True
             },
             {
@@ -1197,10 +1215,271 @@ def shop_index(request):
 
 @log_view_execution
 def shop_redirect(request):
-    """View simples para redirecionamento direto para a loja"""
+    """View simples para redirecionamento dinâmico baseado no ambiente"""
+    if settings.DEBUG:
+        # Em desenvolvimento, redirecionar para a landing page do produto
+        shop_url = request.build_absolute_uri(reverse('core:landing_page_product'))
+    else:
+        # Em produção, usar o domínio correto
+        shop_url = 'https://shop.hoztech.com.br'
+    
     context = {
         'page_title': 'Redirecionando para HOZ TECH Shop',
         'page_description': 'Você será redirecionado para nossa loja online.',
-        'shop_url': 'https://shop.hoztech.com.br'
+        'shop_url': shop_url
     }
     return render(request, 'shop/shop.html', context)
+
+@log_view_execution
+def shop_coming_soon(request):
+    """Página Coming Soon para shop.hoztech.com.br"""
+    context = {
+        'page_title': 'HOZ TECH Shop - Em Breve',
+        'page_description': 'Nossa loja online está chegando! Aguarde novidades incríveis da HOZ TECH.',
+        'launch_date': '2024-02-15',  # Data de lançamento estimada
+    }
+    return render(request, 'shop/coming_soon.html', context)
+
+@log_view_execution
+def landing_page_product(request):
+    """Landing page dedicada para o produto Landing Page Otimizada"""
+    context = {
+        'page_title': 'Landing Page Otimizada - HOZ TECH',
+        'page_description': 'Transforme visitantes em clientes com uma landing page profissional que converte. 12x de R$ 49,90.',
+        'stripe_public_key': getattr(settings, 'STRIPE_PUBLISHABLE_KEY', 'pk_test_demo'),
+        'product_price': 'R$ 598,80',
+        'product_installments': '12x de R$ 49,90',
+        'product_features': [
+            'Design responsivo e moderno',
+            'Otimizada para SEO e conversão',
+            'Mobile First',
+            'Carregamento ultra-rápido',
+            '30 dias de suporte técnico',
+            'Garantia de 30 dias'
+        ]
+    }
+    return render(request, 'shop/landing_page_product.html', context)
+
+# === STRIPE PAYMENT VIEWS ===
+
+# Configurar Stripe (adicione suas chaves no settings.py)
+# stripe.api_key = getattr(settings, 'STRIPE_SECRET_KEY', 'sk_test_...')
+# Para produção, use: stripe.api_key = settings.STRIPE_SECRET_KEY
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def create_checkout_session(request):
+    """Criar sessão de checkout do Stripe para Landing Page Otimizada"""
+    try:
+        data = json.loads(request.body)
+        product_id = data.get('product_id')
+        
+        if product_id != 'landing_page_otimizada':
+            return JsonResponse({'error': 'Produto não encontrado'}, status=400)
+        
+        # Configuração do produto
+        product_config = {
+            'landing_page_otimizada': {
+                'name': 'Landing Page Otimizada',
+                'description': 'Landing page profissional otimizada para conversão - Transforme visitantes em clientes',
+                'price': 59880,  # R$ 598,80 em centavos (12x de R$ 49,90)
+                'features': [
+                    'Design responsivo e moderno',
+                    'Otimizada para SEO e conversão',
+                    'Mobile First',
+                    'Carregamento ultra-rápido',
+                    '30 dias de suporte técnico',
+                    'Garantia de 30 dias'
+                ]
+            }
+        }
+        
+        product = product_config.get(product_id)
+        if not product:
+            return JsonResponse({'error': 'Produto não encontrado'}, status=400)
+        
+        # Verificar se as chaves do Stripe estão configuradas
+        stripe_secret_key = getattr(settings, 'STRIPE_SECRET_KEY', None)
+        
+        if not stripe_secret_key:
+            # Modo demonstração - redirecionar para página de sucesso
+            return JsonResponse({
+                'id': 'cs_demo_session',
+                'url': request.build_absolute_uri(reverse('payment_success')),
+                'demo_mode': True,
+                'message': 'Modo demonstração - Stripe não configurado'
+            })
+        
+        # Configurar chave do Stripe
+        stripe.api_key = stripe_secret_key
+        
+        try:
+            # Criar sessão do Stripe
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[{
+                    'price_data': {
+                        'currency': 'brl',
+                        'product_data': {
+                            'name': product['name'],
+                            'description': product['description'],
+                            'metadata': {
+                                'features': ', '.join(product['features'])
+                            }
+                        },
+                        'unit_amount': product['price'],
+                    },
+                    'quantity': 1,
+                }],
+                mode='payment',
+                success_url=request.build_absolute_uri(reverse('payment_success')) + '?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=request.build_absolute_uri(reverse('payment_cancel')),
+                metadata={
+                    'product_id': product_id,
+                    'customer_email': request.user.email if request.user.is_authenticated else '',
+                    'site_origin': 'hoztech_shop'
+                },
+                billing_address_collection='required',
+                shipping_address_collection={
+                    'allowed_countries': ['BR'],
+                },
+                phone_number_collection={
+                    'enabled': True,
+                },
+                customer_email=request.user.email if request.user.is_authenticated else None,
+            )
+            
+            return JsonResponse({'id': checkout_session.id, 'url': checkout_session.url})
+            
+        except stripe.error.StripeError as e:
+            print(f"Erro Stripe: {e}")
+            return JsonResponse({'error': str(e)}, status=400)
+            
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'JSON inválido'}, status=400)
+    except Exception as e:
+        print(f"Erro ao criar sessão: {e}")
+        return JsonResponse({'error': 'Erro interno'}, status=500)
+
+@log_view_execution
+def payment_success(request):
+    """Página de sucesso após pagamento via Stripe"""
+    session_id = request.GET.get('session_id')
+    
+    if session_id and session_id != 'cs_demo_session':
+        try:
+            stripe_secret_key = getattr(settings, 'STRIPE_SECRET_KEY', None)
+            if stripe_secret_key:
+                stripe.api_key = stripe_secret_key
+                session = stripe.checkout.Session.retrieve(session_id)
+                # Aqui você pode processar os dados da sessão
+                print(f"Pagamento bem-sucedido: {session.id}")
+        except Exception as e:
+            print(f"Erro ao recuperar sessão: {e}")
+    
+    context = {
+        'page_title': 'Pagamento Realizado com Sucesso - HOZ TECH',
+        'page_description': 'Seu pagamento foi processado com sucesso. Em breve você receberá mais informações sobre seu produto.',
+        'session_id': session_id,
+    }
+    return render(request, 'shop/payment_success.html', context)
+
+@log_view_execution
+def payment_cancel(request):
+    """Página de cancelamento de pagamento"""
+    context = {
+        'page_title': 'Pagamento Cancelado - HOZ TECH',
+        'page_description': 'Seu pagamento foi cancelado. Você pode tentar novamente quando estiver pronto.',
+    }
+    return render(request, 'shop/payment_cancel.html', context)
+
+# === STRIPE WEBHOOK VIEW ===
+
+import stripe
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+
+@csrf_exempt
+def stripe_webhook(request):
+    """
+    Endpoint para receber webhooks do Stripe
+    Processa eventos como pagamentos concluídos, falhas, etc.
+    """
+    if request.method != 'POST':
+        return HttpResponse(status=405)
+    
+    payload = request.body
+    sig_header = request.headers.get('Stripe-Signature')
+    endpoint_secret = getattr(settings, 'STRIPE_WEBHOOK_SECRET', None)
+    
+    if not endpoint_secret:
+        print("⚠️ STRIPE_WEBHOOK_SECRET não configurado")
+        return HttpResponse(status=400)
+    
+    try:
+        # Construir evento do webhook
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Erro no JSON
+        print("❌ Erro no corpo do webhook:", e)
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Assinatura inválida
+        print("❌ Assinatura inválida:", e)
+        return HttpResponse(status=400)
+    
+    # Processar eventos do Stripe
+    event_type = event['type']
+    
+    try:
+        if event_type == 'checkout.session.completed':
+            session = event['data']['object']
+            print("✅ Checkout concluído:", session.get('id'))
+            
+            # Lógica: liberar produto, criar pedido no banco, etc.
+            # Aqui você pode adicionar a lógica de negócio
+            product_id = session.get('metadata', {}).get('product_id')
+            customer_email = session.get('customer_details', {}).get('email')
+            
+            print(f"Produto: {product_id}, Cliente: {customer_email}")
+            
+            # TODO: Adicionar lógica para processar pedido
+            # Ex: criar registro no banco, enviar email, etc.
+            
+        elif event_type == 'checkout.session.async_payment_succeeded':
+            session = event['data']['object']
+            print("✅ Pagamento assíncrono concluído:", session.get('id'))
+            
+            # Lógica: confirmar pagamento de boleto/Pix
+            print("Pagamento via boleto/Pix confirmado")
+            
+        elif event_type == 'checkout.session.expired':
+            session = event['data']['object']
+            print("⚠️ Sessão de checkout expirada:", session.get('id'))
+            
+        elif event_type == 'invoice.payment_succeeded':
+            invoice = event['data']['object']
+            print("✅ Assinatura paga:", invoice.get('id'))
+            
+            # Lógica: renovar assinatura
+            customer_id = invoice.get('customer')
+            print(f"Renovando assinatura do cliente: {customer_id}")
+            
+        elif event_type == 'invoice.payment_failed':
+            invoice = event['data']['object']
+            print("❌ Pagamento de assinatura falhou:", invoice.get('id'))
+            
+            # Lógica: notificar cliente
+            customer_id = invoice.get('customer')
+            print(f"Notificando cliente sobre falha de pagamento: {customer_id}")
+            
+        else:
+            print(f"ℹ️ Evento recebido: {event_type}")
+            
+    except Exception as e:
+        print(f"❌ Erro ao processar evento {event_type}: {e}")
+        return HttpResponse(status=500)
+    
+    return HttpResponse(status=200)

@@ -1,0 +1,419 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Landing Page Otimizada - HOZ TECH{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --primary-color: #00d4ff;
+        --secondary-color: #0099cc;
+        --accent-color: #ff6b35;
+        --dark-bg: #0a0a0a;
+        --card-bg: #1a1a1a;
+        --text-light: #ffffff;
+        --text-muted: #cccccc;
+        --success-color: #00ff88;
+        --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+        --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    }
+
+    body {
+        background: var(--gradient-dark);
+        color: var(--text-light);
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+    }
+
+    .hero-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding: 2rem 0;
+    }
+
+    .hero-content {
+        z-index: 2;
+        position: relative;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+        font-weight: 300;
+    }
+
+    .price-section {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 2rem 0;
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+    }
+
+    .price-original {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        text-decoration: line-through;
+        margin-bottom: 0.5rem;
+    }
+
+    .price-current {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--success-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .price-installments {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+
+    .feature-card {
+        background: var(--card-bg);
+        border-radius: 15px;
+        padding: 2rem;
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary-color);
+        box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+    }
+
+    .feature-icon {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .feature-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-light);
+    }
+
+    .feature-description {
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .cta-button {
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        padding: 1.5rem 3rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    }
+
+    .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+    .testimonials {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 3rem;
+        margin: 3rem 0;
+    }
+
+    .testimonial-card {
+        background: var(--dark-bg);
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 1rem 0;
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .guarantee-section {
+        background: var(--gradient-primary);
+        color: white;
+        border-radius: 20px;
+        padding: 3rem;
+        text-align: center;
+        margin: 3rem 0;
+    }
+
+    .floating-particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .particle {
+        position: absolute;
+        background: var(--primary-color);
+        border-radius: 50%;
+        opacity: 0.1;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+        }
+        
+        .price-current {
+            font-size: 2.5rem;
+        }
+        
+        .price-installments {
+            font-size: 1.2rem;
+        }
+        
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .cta-button {
+            padding: 1.2rem 2rem;
+            font-size: 1.1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="floating-particles" id="particles"></div>
+
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="hero-title">Landing Page Otimizada</h1>
+                    <p class="hero-subtitle">Transforme visitantes em clientes com uma landing page profissional que converte</p>
+                    
+                    <div class="price-section">
+                        <div class="price-original">De R$ 1.200,00 por:</div>
+                        <div class="price-current">R$ 598,80</div>
+                        <div class="price-installments">ou 12x de R$ 49,90</div>
+                    </div>
+                    
+                    <button class="cta-button" onclick="initStripePayment()">
+                        🚀 Comprar Agora
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="text-center">
+                    <i class="fas fa-rocket" style="font-size: 15rem; color: var(--primary-color); opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container my-5">
+    <h2 class="text-center mb-5" style="color: var(--primary-color); font-size: 2.5rem; font-weight: 700;">O que você vai receber</h2>
+    
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-paint-brush"></i>
+            </div>
+            <h3 class="feature-title">Design Profissional</h3>
+            <p class="feature-description">Layout moderno e responsivo que funciona perfeitamente em todos os dispositivos</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="feature-title">Otimizada para Conversão</h3>
+            <p class="feature-description">Elementos estrategicamente posicionados para maximizar suas vendas</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3 class="feature-title">Mobile First</h3>
+            <p class="feature-description">Desenvolvida pensando primeiro na experiência mobile</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <h3 class="feature-title">Carregamento Rápido</h3>
+            <p class="feature-description">Otimizada para velocidade e performance superior</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3 class="feature-title">SEO Otimizada</h3>
+            <p class="feature-description">Configurada para aparecer bem nos resultados de busca</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h3 class="feature-title">Suporte Incluso</h3>
+            <p class="feature-description">30 dias de suporte técnico para ajustes e dúvidas</p>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials container">
+    <h2 class="text-center mb-5" style="color: var(--primary-color); font-size: 2.5rem; font-weight: 700;">O que nossos clientes dizem</h2>
+    
+    <div class="testimonial-card">
+        <p>"Minha landing page aumentou as conversões em 300%. Investimento que se paga sozinho!"</p>
+        <strong>- Maria Silva, Consultora</strong>
+    </div>
+    
+    <div class="testimonial-card">
+        <p>"Design incrível e suporte excepcional. Recomendo para qualquer empreendedor."</p>
+        <strong>- João Santos, Coach</strong>
+    </div>
+    
+    <div class="testimonial-card">
+        <p>"Profissionalismo e qualidade que superaram minhas expectativas."</p>
+        <strong>- Ana Costa, Terapeuta</strong>
+    </div>
+</section>
+
+<section class="guarantee-section container">
+    <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">🛡️ Garantia de 30 dias</h2>
+    <p style="font-size: 1.3rem;">Se não ficar satisfeito, devolvemos 100% do seu dinheiro. Sem perguntas, sem complicações.</p>
+</section>
+
+<section class="text-center my-5">
+    <h2 style="color: var(--primary-color); font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem;">Pronto para decolar suas vendas?</h2>
+    <button class="cta-button" onclick="initStripePayment()">
+        💳 Comprar Agora - R$ 598,80
+    </button>
+    <p style="color: var(--text-muted); margin-top: 1rem;">Pagamento 100% seguro via Stripe</p>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    // Configuração do Stripe
+    const stripePublicKey = '{{ stripe_public_key|default:"pk_test_51234567890" }}';
+    const stripe = Stripe(stripePublicKey);
+    
+    function initStripePayment() {
+        // Fazer requisição para criar sessão de checkout
+        fetch('/shop/create-checkout-session/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: JSON.stringify({
+                'product': 'landing_page_otimizada'
+            })
+        })
+        .then(response => response.json())
+        .then(session => {
+            if (session.demo_mode || !stripe) {
+                // Modo demonstração - redirecionar para URL de demonstração
+                window.location.href = session.url;
+            } else {
+                // Modo produção - usar Stripe
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            }
+        })
+        .then(result => {
+            if (result && result.error) {
+                alert('Erro: ' + result.error.message);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao processar pagamento. Tente novamente.');
+        });
+    }
+    
+    // Animação de partículas
+    function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            
+            particlesContainer.appendChild(particle);
+        }
+    }
+    
+    // Inicializar partículas quando a página carregar
+    document.addEventListener('DOMContentLoaded', createParticles);
+    
+    // Adicionar token CSRF se não existir
+    if (!document.querySelector('[name=csrfmiddlewaretoken]')) {
+        const csrfToken = document.createElement('input');
+        csrfToken.type = 'hidden';
+        csrfToken.name = 'csrfmiddlewaretoken';
+        csrfToken.value = '{{ csrf_token }}';
+        document.body.appendChild(csrfToken);
+    }
+</script>
+{% endblock %}

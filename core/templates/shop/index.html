@@ -8,10 +8,10 @@
 <meta name="keywords" content="produtos digitais, templates, plugins, cursos online, serviços tecnológicos, HOZ TECH">
 <meta property="og:title" content="HOZ TECH Shop - Produtos e Serviços Digitais">
 <meta property="og:description" content="Explore nossa coleção de produtos e serviços digitais.">
-<meta property="og:url" content="https://shop.hoztech.com.br">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="website">
 <meta property="og:image" content="{% static 'core/images/logo.png' %}">
-<link rel="canonical" href="https://shop.hoztech.com.br">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
 {% endblock %}
 
 {% block extra_css %}
@@ -86,6 +86,46 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
+    }
+    
+    .featured-product {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.2));
+        border: 2px solid #ffd700;
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    }
+    
+    .featured-product::before {
+        content: 'DESTAQUE';
+        position: absolute;
+        top: 10px;
+        right: -30px;
+        background: #ffd700;
+        color: #000;
+        padding: 5px 40px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        transform: rotate(45deg);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .product-price {
+        margin: 1rem 0;
+    }
+    
+    .price {
+        display: block;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #ffd700;
+        margin-bottom: 0.5rem;
+    }
+    
+    .installments {
+        display: block;
+        font-size: 0.9rem;
+        color: #a8e6cf;
+        font-style: italic;
     }
     
     .category-card::before {
@@ -260,6 +300,238 @@
         left: 100%;
     }
     
+    .product-detail-section {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        padding: 5rem 0;
+        color: white;
+    }
+    
+    .product-badge {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+    
+    .product-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #ffd700;
+    }
+    
+    .product-subtitle {
+        font-size: 1.2rem;
+        color: #bdc3c7;
+        margin-bottom: 2rem;
+    }
+    
+    .price-section {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .main-price {
+        display: flex;
+        align-items: baseline;
+        margin-bottom: 0.5rem;
+    }
+    
+    .currency {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ffd700;
+    }
+    
+    .amount {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #ffd700;
+        margin-left: 0.2rem;
+    }
+    
+    .installment-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .installments {
+        color: #a8e6cf;
+        font-style: italic;
+    }
+    
+    .payment-methods i {
+        font-size: 1.5rem;
+        margin: 0 0.3rem;
+        color: #ecf0f1;
+    }
+    
+    .features-list {
+        margin-bottom: 2rem;
+    }
+    
+    .features-list h4 {
+        color: #ffd700;
+        margin-bottom: 1rem;
+    }
+    
+    .features-list ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .features-list li {
+        padding: 0.5rem 0;
+        color: #ecf0f1;
+    }
+    
+    .features-list li i {
+        color: #27ae60;
+        margin-right: 0.5rem;
+    }
+    
+    .buy-now-btn {
+        background: linear-gradient(45deg, #27ae60, #2ecc71);
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .buy-now-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+    }
+    
+    .security-badges {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .security-badges span {
+        color: #95a5a6;
+        font-size: 0.9rem;
+    }
+    
+    .security-badges i {
+        color: #27ae60;
+        margin-right: 0.3rem;
+    }
+    
+    .preview-container {
+        perspective: 1000px;
+    }
+    
+    .preview-screen {
+        background: #ecf0f1;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        transform: rotateY(-5deg) rotateX(5deg);
+        transition: transform 0.3s ease;
+    }
+    
+    .preview-screen:hover {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+    
+    .preview-header {
+        background: #34495e;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .preview-dots {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .preview-dots span {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #e74c3c;
+    }
+    
+    .preview-dots span:nth-child(2) {
+        background: #f39c12;
+    }
+    
+    .preview-dots span:nth-child(3) {
+        background: #27ae60;
+    }
+    
+    .preview-content {
+        padding: 2rem;
+        color: #2c3e50;
+    }
+    
+    .preview-section h3 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+    
+    .preview-section p {
+        color: #7f8c8d;
+        margin-bottom: 1.5rem;
+    }
+    
+    .preview-form {
+        margin-bottom: 1.5rem;
+    }
+    
+    .preview-form input {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid #bdc3c7;
+        border-radius: 5px;
+        font-size: 0.9rem;
+    }
+    
+    .preview-form button {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    .preview-gallery {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .gallery-item {
+        flex: 1;
+        height: 60px;
+        background: linear-gradient(45deg, #3498db, #2ecc71);
+        border-radius: 5px;
+    }
+    
     /* === RESPONSIVE === */
     @media (max-width: 768px) {
         .shop-header h1 {
@@ -320,19 +592,23 @@
         </div>
         
         <div class="categories-grid">
-            <!-- Templates & Themes -->
-            <div class="category-card">
+            <!-- Landing Page Otimizada - Produto em Destaque -->
+            <div class="category-card featured-product">
                 <div class="category-icon">
-                    <i class="fas fa-palette"></i>
+                    <i class="fas fa-rocket"></i>
                 </div>
-                <h3 class="category-title">Templates & Temas</h3>
+                <h3 class="category-title">Landing Page Otimizada</h3>
                 <p class="category-desc">
-                    Templates profissionais para sites, landing pages e aplicações web. 
-                    Designs modernos e responsivos.
+                    Landing Page profissional completa com todas as funcionalidades para seu negócio.
+                    Design responsivo e otimizado para conversões.
                 </p>
-                <a href="https://shop.hoztech.com.br/templates" class="category-btn" target="_blank">
-                    <i class="fas fa-external-link-alt"></i>
-                    Ver Templates
+                <div class="product-price">
+                    <span class="price">R$ 598,80</span>
+                    <span class="installments">12x de R$ 49,90</span>
+                </div>
+                <a href="{% url 'core:landing_page_product' %}" class="category-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    Comprar Agora
                 </a>
             </div>
             
@@ -419,6 +695,95 @@
     </div>
 </section>
 
+<!-- Landing Page Product Detail Section -->
+<section id="landing-page-product" class="product-detail-section">
+    <div class="container">
+        <div class="product-detail-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="product-info">
+                        <span class="product-badge">MAIS VENDIDO</span>
+                        <h2 class="product-title">
+                            <i class="fas fa-rocket"></i>
+                            Landing Page Otimizada
+                        </h2>
+                        <p class="product-subtitle">Solução completa para seu negócio online</p>
+                        
+                        <div class="price-section">
+                            <div class="main-price">
+                                <span class="currency">R$</span>
+                                <span class="amount">59,90</span>
+                            </div>
+                            <div class="installment-info">
+                                <span class="installments">ou 12x de R$ 4,99 sem juros</span>
+                                <span class="payment-methods">
+                                    <i class="fab fa-cc-visa"></i>
+                                    <i class="fab fa-cc-mastercard"></i>
+                                    <i class="fab fa-cc-amex"></i>
+                                    <i class="fas fa-credit-card"></i>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="features-list">
+                            <h4><i class="fas fa-check-circle"></i> O que está incluído:</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Página estática responsiva</li>
+                                <li><i class="fas fa-check"></i> Formulário para E-mail & Redirecionador WhatsApp</li>
+                                <li><i class="fas fa-check"></i> Páginas "FAQ" & "Sobre Nós"</li>
+                                <li><i class="fas fa-check"></i> Galeria de Vídeos e Fotos</li>
+                                <li><i class="fas fa-check"></i> Integração Google Analytics</li>
+                                <li><i class="fas fa-check"></i> Suporte técnico 24h</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="cta-section">
+                            <a href="{% url 'core:landing_page_product' %}" class="buy-now-btn" style="text-decoration: none; display: inline-block;">
+                                <i class="fas fa-shopping-cart"></i>
+                                Comprar Agora
+                            </a>
+                            <div class="security-badges">
+                                <span><i class="fas fa-shield-alt"></i> Pagamento Seguro</span>
+                                <span><i class="fas fa-lock"></i> SSL Certificado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="product-preview">
+                        <div class="preview-container">
+                            <div class="preview-screen">
+                                <div class="preview-header">
+                                    <div class="preview-dots">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                                <div class="preview-content">
+                                    <div class="preview-section">
+                                        <h3>Seu Negócio Online</h3>
+                                        <p>Landing page profissional</p>
+                                    </div>
+                                    <div class="preview-form">
+                                        <input type="text" placeholder="Seu nome" readonly>
+                                        <input type="email" placeholder="Seu e-mail" readonly>
+                                        <button>Entrar em Contato</button>
+                                    </div>
+                                    <div class="preview-gallery">
+                                        <div class="gallery-item"></div>
+                                        <div class="gallery-item"></div>
+                                        <div class="gallery-item"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Shop Redirect Section -->
 <section class="shop-redirect-section">
     <div class="container">
@@ -439,11 +804,114 @@
     </div>
 </section>
 
+<script src="https://js.stripe.com/v3/"></script>
 <script>
-// Adicionar efeitos de animação aos cards
+// Stripe Configuration
+// Nota: Em produção, passe a chave pública via contexto do Django
+const stripePublicKey = '{{ stripe_public_key|default:"pk_test_demo" }}';
+const stripe = stripePublicKey !== 'pk_test_demo' ? Stripe(stripePublicKey) : null;
+
+// Função para inicializar pagamento Stripe
+async function initStripePayment() {
+    const button = document.querySelector('.buy-now-btn');
+    const originalText = button.innerHTML;
+    
+    try {
+        // Mostrar loading
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
+        button.disabled = true;
+        
+        // Criar sessão de checkout
+        const response = await fetch('/create-checkout-session/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                product_id: 'landing_page_otimizada',
+                price: 5990, // Preço em centavos (R$ 59,90)
+                quantity: 1
+            })
+        });
+        
+        const session = await response.json();
+        
+        if (response.ok) {
+            // Verificar se é modo demonstração
+            if (session.demo_mode || !stripe) {
+                // Modo demonstração - redirecionar diretamente
+                window.location.href = session.url;
+            } else {
+                // Modo produção - usar Stripe Checkout
+                const result = await stripe.redirectToCheckout({
+                    sessionId: session.id
+                });
+                
+                if (result.error) {
+                    throw new Error(result.error.message);
+                }
+            }
+        } else {
+            throw new Error(session.error || 'Erro ao criar sessão de pagamento.');
+        }
+        
+    } catch (error) {
+        console.error('Erro no pagamento:', error);
+        alert('Erro ao processar pagamento. Tente novamente.');
+        
+        // Restaurar botão
+        button.innerHTML = originalText;
+        button.disabled = false;
+    }
+}
+
+// Função para obter CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Card hover animations
 document.addEventListener('DOMContentLoaded', function() {
     const cards = document.querySelectorAll('.category-card');
     
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('featured-product')) {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('featured-product')) {
+                this.style.transform = 'translateY(0) scale(1)';
+            }
+        });
+    });
+    
+    // Smooth scroll para o produto
+    const productLink = document.querySelector('a[href="#landing-page-product"]');
+    if (productLink) {
+        productLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('landing-page-product').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    // Animação de entrada para elementos
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -458,12 +926,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
+    // Observar cards para animação
     cards.forEach((card, index) => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
         observer.observe(card);
     });
+    
+    // Observar elementos da seção de produto para animação
+    const animatedElements = document.querySelectorAll('.product-detail-section .col-lg-6');
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
 });
+
+// Animação do preview da landing page
+function animatePreview() {
+    const previewScreen = document.querySelector('.preview-screen');
+    if (previewScreen) {
+        setInterval(() => {
+            previewScreen.style.transform = 'rotateY(-5deg) rotateX(5deg) scale(1.02)';
+            setTimeout(() => {
+                previewScreen.style.transform = 'rotateY(-5deg) rotateX(5deg) scale(1)';
+            }, 1000);
+        }, 3000);
+    }
+}
+
+// Inicializar animações
+document.addEventListener('DOMContentLoaded', animatePreview);
 </script>
 {% endblock %}

@@ -422,6 +422,14 @@ WHATSAPP_PHONE_NUMBER_ID = os.getenv('WHATSAPP_PHONE_NUMBER_ID')
 WHATSAPP_BUSINESS_ACCOUNT_ID = os.getenv('WHATSAPP_BUSINESS_ACCOUNT_ID')
 WHATSAPP_APP_SECRET = os.getenv('WHATSAPP_APP_SECRET')
 
+# Stripe Payment Settings
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY', 'pk_test_demo')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', 'sk_test_demo')
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET', 'whsec_demo')
+STRIPE_CURRENCY = 'brl'  # Brazilian Real
+STRIPE_SUCCESS_URL = os.getenv('STRIPE_SUCCESS_URL', '/payment/success/')
+STRIPE_CANCEL_URL = os.getenv('STRIPE_CANCEL_URL', '/payment/cancel/')
+
 # Logging Configuration
 class RailwayJSONFormatter(logging.Formatter):
     def format(self, record):

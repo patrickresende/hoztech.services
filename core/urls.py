@@ -30,6 +30,14 @@ urlpatterns = [
     # Shop URLs
     path('shop/', views.shop_index, name='shop_index'),
     path('loja/', views.shop_redirect, name='shop_redirect'),
+    path('coming-soon/', views.shop_coming_soon, name='shop_coming_soon'),
+    path('shop/landing-page-otimizada/', views.landing_page_product, name='landing_page_product'),
+    
+    # Stripe Payment URLs
+    path('create-checkout-session/', views.create_checkout_session, name='create_checkout_session'),
+    path('shop/success/', views.payment_success, name='payment_success'),
+    path('shop/cancel/', views.payment_cancel, name='payment_cancel'),
+    path('webhook/stripe/', views.stripe_webhook, name='stripe_webhook'),
     
     # WhatsApp Chatbot URLs (Backend apenas - sem renderização pública)
     path('chatbot/webhook/', WhatsAppWebhookView.as_view(), name='whatsapp_webhook'),

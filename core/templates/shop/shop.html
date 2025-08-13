@@ -8,13 +8,13 @@
 <meta name="keywords" content="loja online, produtos digitais, serviços tecnológicos, HOZ TECH, e-commerce">
 <meta property="og:title" content="HOZ TECH - Loja Online">
 <meta property="og:description" content="Acesse nossa loja online com produtos e serviços digitais exclusivos da HOZ TECH.">
-<meta property="og:url" content="https://shop.hoztech.com.br">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:type" content="website">
 <meta property="og:image" content="{% static 'core/images/logo.png' %}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="HOZ TECH - Loja Online">
 <meta name="twitter:description" content="Acesse nossa loja online com produtos e serviços digitais exclusivos da HOZ TECH.">
-<link rel="canonical" href="https://shop.hoztech.com.br">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
 {% endblock %}
 
 {% block extra_css %}
@@ -225,7 +225,7 @@
             Sua jornada tecnológica começa aqui!
         </p>
         
-        <a href="https://shop.hoztech.com.br" class="shop-redirect-btn" target="_blank" rel="noopener noreferrer">
+        <a href="{{ shop_url }}" class="shop-redirect-btn" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-external-link-alt"></i>
             Acessar Loja Online
         </a>

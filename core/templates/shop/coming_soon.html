@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOZ TECH Shop - Em Breve</title>
+    <meta name="description" content="Nossa loja online está chegando! Aguarde novidades incríveis da HOZ TECH.">
+    <meta name="keywords" content="HOZ TECH, loja online, em breve, desenvolvimento web">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shop.hoztech.com.br">
+    <meta property="og:title" content="HOZ TECH Shop - Em Breve">
+    <meta property="og:description" content="Nossa loja online está chegando! Aguarde novidades incríveis da HOZ TECH.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://shop.hoztech.com.br">
+    <meta property="twitter:title" content="HOZ TECH Shop - Em Breve">
+    <meta property="twitter:description" content="Nossa loja online está chegando! Aguarde novidades incríveis da HOZ TECH.">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .coming-soon-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+        }
+        
+        .content-wrapper {
+            text-align: center;
+            color: white;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 80px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+        
+        .repair-scene {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 300px;
+            z-index: 1;
+        }
+        
+        .screen {
+            width: 300px;
+            height: 200px;
+            background: #2c3e50;
+            border-radius: 10px;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            border: 8px solid #34495e;
+            overflow: hidden;
+        }
+        
+        .screen::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            border-radius: 5px;
+            animation: screenFlicker 3s infinite;
+        }
+        
+        .character {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+        }
+        
+        .character1 {
+            top: 180px;
+            left: 20px;
+            animation: work1 4s infinite;
+        }
+        
+        .character2 {
+            top: 180px;
+            right: 20px;
+            animation: work2 4s infinite 2s;
+        }
+        
+        .character-body {
+            width: 30px;
+            height: 40px;
+            background: #e74c3c;
+            border-radius: 15px 15px 5px 5px;
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        .character-head {
+            width: 25px;
+            height: 25px;
+            background: #f39c12;
+            border-radius: 50%;
+            position: absolute;
+            top: -20px;
+            left: 2.5px;
+        }
+        
+        .character-arms {
+            position: absolute;
+            top: 5px;
+            width: 15px;
+            height: 3px;
+            background: #f39c12;
+            border-radius: 2px;
+        }
+        
+        .arm-left {
+            left: -10px;
+            transform-origin: right center;
+            animation: armMove 2s infinite;
+        }
+        
+        .arm-right {
+            right: -10px;
+            transform-origin: left center;
+            animation: armMove 2s infinite 1s;
+        }
+        
+        .character-legs {
+            position: absolute;
+            bottom: -15px;
+            width: 8px;
+            height: 15px;
+            background: #3498db;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .leg-left {
+            left: 6px;
+        }
+        
+        .leg-right {
+            right: 6px;
+        }
+        
+        .tools {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            right: 0;
+        }
+        
+        .tool {
+            position: absolute;
+            font-size: 20px;
+            color: #f39c12;
+            animation: toolFloat 3s infinite;
+        }
+        
+        .tool:nth-child(1) { left: 10px; animation-delay: 0s; }
+        .tool:nth-child(2) { right: 10px; animation-delay: 1s; }
+        .tool:nth-child(3) { left: 50%; animation-delay: 2s; }
+        
+        .sparks {
+            position: absolute;
+            top: 120px;
+            left: 150px;
+        }
+        
+        .spark {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #f1c40f;
+            border-radius: 50%;
+            animation: sparkFly 1.5s infinite;
+        }
+        
+        .spark:nth-child(1) { animation-delay: 0s; }
+        .spark:nth-child(2) { animation-delay: 0.3s; }
+        .spark:nth-child(3) { animation-delay: 0.6s; }
+        .spark:nth-child(4) { animation-delay: 0.9s; }
+        .spark:nth-child(5) { animation-delay: 1.2s; }
+        
+        .notify-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-top: 2rem;
+        }
+        
+        .notify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .floating-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: particleFloat 6s infinite linear;
+        }
+        
+        @keyframes screenFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes work1 {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(-5px) rotate(5deg); }
+        }
+        
+        @keyframes work2 {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-8px) rotate(3deg); }
+            75% { transform: translateY(-12px) rotate(-3deg); }
+        }
+        
+        @keyframes armMove {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-30deg); }
+        }
+        
+        @keyframes toolFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+        
+        @keyframes sparkFly {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--random-x, 20px), var(--random-y, -30px)) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .repair-scene {
+                width: 300px;
+                height: 250px;
+            }
+            
+            .screen {
+                width: 200px;
+                height: 150px;
+                left: 50px;
+            }
+            
+            .countdown {
+                gap: 10px;
+            }
+            
+            .countdown-item {
+                padding: 15px;
+                min-width: 60px;
+            }
+            
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles" id="particles"></div>
+    
+    <div class="coming-soon-container">
+        <div class="repair-scene">
+            <div class="screen"></div>
+            
+            <div class="character character1">
+                <div class="character-head"></div>
+                <div class="character-body">
+                    <div class="character-arms arm-left"></div>
+                    <div class="character-arms arm-right"></div>
+                </div>
+                <div class="character-legs leg-left"></div>
+                <div class="character-legs leg-right"></div>
+            </div>
+            
+            <div class="character character2">
+                <div class="character-head"></div>
+                <div class="character-body">
+                    <div class="character-arms arm-left"></div>
+                    <div class="character-arms arm-right"></div>
+                </div>
+                <div class="character-legs leg-left"></div>
+                <div class="character-legs leg-right"></div>
+            </div>
+            
+            <div class="tools">
+                <div class="tool"><i class="fas fa-wrench"></i></div>
+                <div class="tool"><i class="fas fa-screwdriver"></i></div>
+                <div class="tool"><i class="fas fa-hammer"></i></div>
+            </div>
+            
+            <div class="sparks">
+                <div class="spark"></div>
+                <div class="spark"></div>
+                <div class="spark"></div>
+                <div class="spark"></div>
+                <div class="spark"></div>
+            </div>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="logo">
+                <i class="fas fa-code"></i> HOZ TECH
+            </div>
+            
+            <h1 class="main-title">Em Breve</h1>
+            <p class="subtitle">Nossa loja online está sendo preparada com muito carinho!</p>
+            
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Dias</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+            
+            <p class="mb-4">Enquanto isso, conheça nossos serviços no site principal:</p>
+            
+            <a href="https://hoztech.com.br" class="notify-btn">
+                <i class="fas fa-globe"></i> Visitar HOZ TECH
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const launchDate = new Date();
+            launchDate.setDate(launchDate.getDate() + 30); // 30 dias a partir de hoje
+            
+            const now = new Date().getTime();
+            const distance = launchDate.getTime() - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Floating Particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 5 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.getElementById('particles').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 6000);
+        }
+        
+        // Random spark positions
+        function randomizeSparks() {
+            const sparks = document.querySelectorAll('.spark');
+            sparks.forEach(spark => {
+                const randomX = (Math.random() - 0.5) * 60;
+                const randomY = (Math.random() - 0.5) * 60;
+                spark.style.setProperty('--random-x', randomX + 'px');
+                spark.style.setProperty('--random-y', randomY + 'px');
+            });
+        }
+        
+        // Initialize
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        setInterval(createParticle, 300);
+        setInterval(randomizeSparks, 1500);
+        
+        // Initial spark randomization
+        randomizeSparks();
+    </script>
+</body>
+</html>

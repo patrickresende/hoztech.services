@@ -1,0 +1,380 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+{% block description %}{{ page_description }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .cancel-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        color: white;
+        padding: 2rem 0;
+    }
+    
+    .cancel-content {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 3rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .cancel-icon {
+        font-size: 4rem;
+        color: #ffd700;
+        margin-bottom: 1.5rem;
+        animation: cancelShake 2s infinite;
+    }
+    
+    .cancel-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #ffd700;
+    }
+    
+    .cancel-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+    
+    .reasons-section {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: left;
+    }
+    
+    .reasons-section h4 {
+        color: #ffd700;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .reason-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .reason-item:last-child {
+        border-bottom: none;
+    }
+    
+    .reason-item i {
+        color: #ffd700;
+        margin-right: 1rem;
+        width: 20px;
+        text-align: center;
+    }
+    
+    .help-section {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+    }
+    
+    .help-section h4 {
+        color: #27ae60;
+        margin-bottom: 1rem;
+    }
+    
+    .help-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .help-option {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .help-option:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+    
+    .help-option i {
+        font-size: 2rem;
+        color: #27ae60;
+        margin-bottom: 1rem;
+    }
+    
+    .help-option h5 {
+        margin-bottom: 0.5rem;
+        color: #ffd700;
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(45deg, #3498db, #2980b9);
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-secondary {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-success {
+        background: linear-gradient(45deg, #27ae60, #2ecc71);
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .contact-info {
+        background: rgba(255, 215, 0, 0.1);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .contact-info h5 {
+        color: #ffd700;
+        margin-bottom: 1rem;
+    }
+    
+    @keyframes cancelShake {
+        0%, 100% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-5deg);
+        }
+        75% {
+            transform: rotate(5deg);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .cancel-content {
+            padding: 2rem 1rem;
+            margin: 0 1rem;
+        }
+        
+        .cancel-title {
+            font-size: 2rem;
+        }
+        
+        .help-options {
+            grid-template-columns: 1fr;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .btn-primary,
+        .btn-secondary,
+        .btn-success {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="cancel-container">
+    <div class="cancel-content">
+        <div class="cancel-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        
+        <h1 class="cancel-title">Pagamento Cancelado</h1>
+        <p class="cancel-subtitle">
+            Não se preocupe! Seu pagamento foi cancelado com segurança.
+        </p>
+        
+        <div class="reasons-section">
+            <h4><i class="fas fa-question-circle"></i> Possíveis Motivos</h4>
+            <div class="reason-item">
+                <i class="fas fa-user-times"></i>
+                <span>Você cancelou o pagamento voluntariamente</span>
+            </div>
+            <div class="reason-item">
+                <i class="fas fa-credit-card"></i>
+                <span>Problema com os dados do cartão</span>
+            </div>
+            <div class="reason-item">
+                <i class="fas fa-wifi"></i>
+                <span>Instabilidade na conexão com a internet</span>
+            </div>
+            <div class="reason-item">
+                <i class="fas fa-clock"></i>
+                <span>Tempo limite da sessão expirou</span>
+            </div>
+        </div>
+        
+        <div class="help-section">
+            <h4><i class="fas fa-hands-helping"></i> Como Podemos Te Ajudar?</h4>
+            <div class="help-options">
+                <div class="help-option">
+                    <i class="fas fa-redo"></i>
+                    <h5>Tentar Novamente</h5>
+                    <p>Refaça o processo de compra com segurança</p>
+                </div>
+                <div class="help-option">
+                    <i class="fas fa-comments"></i>
+                    <h5>Falar Conosco</h5>
+                    <p>Nossa equipe está pronta para te ajudar</p>
+                </div>
+                <div class="help-option">
+                    <i class="fas fa-info-circle"></i>
+                    <h5>Mais Informações</h5>
+                    <p>Saiba mais sobre nossos produtos</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-info">
+            <h5><i class="fas fa-headset"></i> Suporte Especializado</h5>
+            <p>
+                Precisa de ajuda com o pagamento? Fale conosco!
+                <br>
+                <strong>WhatsApp:</strong> (11) 99999-9999
+                <br>
+                <strong>E-mail:</strong> vendas@hoztech.com.br
+                <br>
+                <strong>Horário:</strong> 24 horas por dia, 7 dias por semana
+            </p>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="/shop/" class="btn-success">
+                <i class="fas fa-shopping-cart"></i>
+                Tentar Novamente
+            </a>
+            <a href="/" class="btn-primary">
+                <i class="fas fa-home"></i>
+                Voltar ao Início
+            </a>
+            <a href="https://wa.me/5511999999999?text=Olá! Tive problemas com o pagamento da Landing Page Otimizada. Podem me ajudar?" target="_blank" class="btn-secondary">
+                <i class="fab fa-whatsapp"></i>
+                Falar no WhatsApp
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+// Floating particles animation
+function createFloatingParticles() {
+    const colors = ['rgba(255, 255, 255, 0.3)', 'rgba(255, 215, 0, 0.3)', 'rgba(52, 152, 219, 0.3)'];
+    
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.top = Math.random() * 100 + 'vh';
+        particle.style.width = Math.random() * 6 + 4 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '1';
+        particle.style.animation = `floatParticle ${Math.random() * 10 + 5}s linear infinite`;
+        
+        document.body.appendChild(particle);
+    }
+}
+
+// CSS for floating particles
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes floatParticle {
+        0% {
+            transform: translateY(0px) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// Start floating particles
+document.addEventListener('DOMContentLoaded', function() {
+    createFloatingParticles();
+    
+    // Recreate particles every 10 seconds
+    setInterval(createFloatingParticles, 10000);
+});
+</script>
+{% endblock %}
