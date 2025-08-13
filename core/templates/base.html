@@ -1048,9 +1048,10 @@ src="https://www.facebook.com/tr?id=643199878801617&ev=PageView&noscript=1"
             }
             
             // ===== DROPDOWN BEHAVIOR =====
+            let dropdownInstance;
+            let isDropdownOpen = false;
+            
             if (dropdownToggle && dropdownMenu) {
-                let dropdownInstance;
-                let isDropdownOpen = false;
                 
                 // Configuração do dropdown baseada no dispositivo
                 const dropdownConfig = {

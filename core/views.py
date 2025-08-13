@@ -1259,6 +1259,23 @@ def landing_page_product(request):
     }
     return render(request, 'shop/landing_page_product.html', context)
 
+@log_view_execution
+def produto_teste(request):
+    """Página do produto de teste de R$ 1,00"""
+    context = {
+        'page_title': 'Produto Teste - R$ 1,00 - HOZ TECH',
+        'page_description': 'Produto de teste para validação do sistema de pagamento - Apenas R$ 1,00',
+        'stripe_public_key': getattr(settings, 'STRIPE_PUBLISHABLE_KEY', 'pk_test_demo'),
+        'product_price': 'R$ 1,00',
+        'product_features': [
+            'Produto para testes',
+            'Sistema de pagamento funcional',
+            'Redirecionamento automático',
+            'Integração com Stripe'
+        ]
+    }
+    return render(request, 'shop/produto_teste.html', context)
+
 # === STRIPE PAYMENT VIEWS ===
 
 # Configurar Stripe (adicione suas chaves no settings.py)
@@ -1273,10 +1290,7 @@ def create_checkout_session(request):
         data = json.loads(request.body)
         product_id = data.get('product_id')
         
-        if product_id != 'landing_page_otimizada':
-            return JsonResponse({'error': 'Produto não encontrado'}, status=400)
-        
-        # Configuração do produto
+        # Configuração dos produtos
         product_config = {
             'landing_page_otimizada': {
                 'name': 'Landing Page Otimizada',
@@ -1289,6 +1303,17 @@ def create_checkout_session(request):
                     'Carregamento ultra-rápido',
                     '30 dias de suporte técnico',
                     'Garantia de 30 dias'
+                ]
+            },
+            'produto_teste': {
+                'name': 'Produto Teste',
+                'description': 'Produto de teste para validação do sistema de pagamento',
+                'price': 100,  # R$ 1,00 em centavos
+                'features': [
+                    'Produto para testes',
+                    'Sistema de pagamento funcional',
+                    'Redirecionamento automático',
+                    'Integração com Stripe'
                 ]
             }
         }
@@ -1304,7 +1329,7 @@ def create_checkout_session(request):
             # Modo demonstração - redirecionar para página de sucesso
             return JsonResponse({
                 'id': 'cs_demo_session',
-                'url': request.build_absolute_uri(reverse('payment_success')),
+                'url': request.build_absolute_uri(reverse('core:payment_success')),
                 'demo_mode': True,
                 'message': 'Modo demonstração - Stripe não configurado'
             })
@@ -1332,8 +1357,8 @@ def create_checkout_session(request):
                     'quantity': 1,
                 }],
                 mode='payment',
-                success_url=request.build_absolute_uri(reverse('payment_success')) + '?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=request.build_absolute_uri(reverse('payment_cancel')),
+                success_url=request.build_absolute_uri(reverse('core:payment_success')) + '?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=request.build_absolute_uri(reverse('core:payment_cancel')),
                 metadata={
                     'product_id': product_id,
                     'customer_email': request.user.email if request.user.is_authenticated else '',

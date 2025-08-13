@@ -6,42 +6,42 @@
 
 {% block extra_css %}
 <style>
-    .cancel-container {
+    .retention-container {
         min-height: 80vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
         color: white;
         padding: 2rem 0;
     }
     
-    .cancel-content {
+    .retention-content {
         text-align: center;
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
         border-radius: 20px;
         padding: 3rem;
         border: 1px solid rgba(255, 255, 255, 0.2);
-        max-width: 600px;
+        max-width: 700px;
         margin: 0 auto;
     }
     
-    .cancel-icon {
+    .retention-icon {
         font-size: 4rem;
         color: #ffd700;
         margin-bottom: 1.5rem;
-        animation: cancelShake 2s infinite;
+        animation: retentionPulse 2s infinite;
     }
     
-    .cancel-title {
+    .retention-title {
         font-size: 2.5rem;
         font-weight: bold;
         margin-bottom: 1rem;
         color: #ffd700;
     }
     
-    .cancel-subtitle {
+    .retention-subtitle {
         font-size: 1.2rem;
         margin-bottom: 2rem;
         opacity: 0.9;
@@ -194,6 +194,50 @@
         text-decoration: none;
     }
     
+    .urgency-timer {
+        background: rgba(255, 0, 0, 0.1);
+        border: 2px solid rgba(255, 0, 0, 0.3);
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: center;
+    }
+    
+    .urgency-timer h4 {
+        color: #ff4757;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+    }
+    
+    .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .time-unit {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 1rem;
+        min-width: 80px;
+        text-align: center;
+    }
+    
+    .time-unit span {
+        display: block;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #ffd700;
+        margin-bottom: 0.5rem;
+    }
+    
+    .time-unit label {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        text-transform: uppercase;
+    }
+    
     .contact-info {
         background: rgba(255, 215, 0, 0.1);
         border: 1px solid rgba(255, 215, 0, 0.3);
@@ -207,25 +251,24 @@
         margin-bottom: 1rem;
     }
     
-    @keyframes cancelShake {
+    @keyframes retentionPulse {
         0%, 100% {
-            transform: rotate(0deg);
+            transform: scale(1);
+            opacity: 1;
         }
-        25% {
-            transform: rotate(-5deg);
-        }
-        75% {
-            transform: rotate(5deg);
+        50% {
+            transform: scale(1.1);
+            opacity: 0.8;
         }
     }
     
     @media (max-width: 768px) {
-        .cancel-content {
+        .retention-content {
             padding: 2rem 1rem;
             margin: 0 1rem;
         }
         
-        .cancel-title {
+        .retention-title {
             font-size: 2rem;
         }
         
@@ -249,83 +292,101 @@
 {% endblock %}
 
 {% block content %}
-<div class="cancel-container">
-    <div class="cancel-content">
-        <div class="cancel-icon">
-            <i class="fas fa-exclamation-triangle"></i>
+<div class="retention-container">
+    <div class="retention-content">
+        <div class="retention-icon">
+            <i class="fas fa-pause-circle"></i>
         </div>
         
-        <h1 class="cancel-title">Pagamento Cancelado</h1>
-        <p class="cancel-subtitle">
-            Não se preocupe! Seu pagamento foi cancelado com segurança.
+        <h1 class="retention-title">Aguarde! Não Perca Esta Oportunidade</h1>
+        <p class="retention-subtitle">
+            Você está a apenas um clique de transformar seu negócio! Sua sessão ainda está ativa.
         </p>
         
+        <div class="urgency-timer">
+            <h4><i class="fas fa-clock"></i> Oferta Expira Em:</h4>
+            <div class="countdown">
+                <div class="time-unit">
+                    <span id="hours">00</span>
+                    <label>Horas</label>
+                </div>
+                <div class="time-unit">
+                    <span id="minutes">15</span>
+                    <label>Minutos</label>
+                </div>
+                <div class="time-unit">
+                    <span id="seconds">00</span>
+                    <label>Segundos</label>
+                </div>
+            </div>
+        </div>
+        
         <div class="reasons-section">
-            <h4><i class="fas fa-question-circle"></i> Possíveis Motivos</h4>
+            <h4><i class="fas fa-star"></i> Por Que Você Não Pode Perder Esta Oferta</h4>
             <div class="reason-item">
-                <i class="fas fa-user-times"></i>
-                <span>Você cancelou o pagamento voluntariamente</span>
-            </div>
-            <div class="reason-item">
-                <i class="fas fa-credit-card"></i>
-                <span>Problema com os dados do cartão</span>
-            </div>
-            <div class="reason-item">
-                <i class="fas fa-wifi"></i>
-                <span>Instabilidade na conexão com a internet</span>
+                <i class="fas fa-rocket"></i>
+                <span>Aumento de até 300% nas conversões comprovado</span>
             </div>
             <div class="reason-item">
                 <i class="fas fa-clock"></i>
-                <span>Tempo limite da sessão expirou</span>
+                <span>Oferta por tempo limitado - apenas hoje</span>
+            </div>
+            <div class="reason-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Garantia de 30 dias ou seu dinheiro de volta</span>
+            </div>
+            <div class="reason-item">
+                <i class="fas fa-users"></i>
+                <span>Mais de 1.000 clientes satisfeitos</span>
             </div>
         </div>
         
         <div class="help-section">
-            <h4><i class="fas fa-hands-helping"></i> Como Podemos Te Ajudar?</h4>
+            <h4><i class="fas fa-gift"></i> Oferta Especial Só Para Você!</h4>
             <div class="help-options">
                 <div class="help-option">
-                    <i class="fas fa-redo"></i>
-                    <h5>Tentar Novamente</h5>
-                    <p>Refaça o processo de compra com segurança</p>
+                    <i class="fas fa-percentage"></i>
+                    <h5>Desconto Exclusivo</h5>
+                    <p>10% OFF adicional se finalizar agora</p>
                 </div>
                 <div class="help-option">
-                    <i class="fas fa-comments"></i>
-                    <h5>Falar Conosco</h5>
-                    <p>Nossa equipe está pronta para te ajudar</p>
+                    <i class="fas fa-headset"></i>
+                    <h5>Suporte Premium</h5>
+                    <p>Implementação gratuita inclusa</p>
                 </div>
                 <div class="help-option">
-                    <i class="fas fa-info-circle"></i>
-                    <h5>Mais Informações</h5>
-                    <p>Saiba mais sobre nossos produtos</p>
+                    <i class="fas fa-trophy"></i>
+                    <h5>Bônus Exclusivos</h5>
+                    <p>Templates extras + consultoria</p>
                 </div>
             </div>
         </div>
         
         <div class="contact-info">
-            <h5><i class="fas fa-headset"></i> Suporte Especializado</h5>
+            <h5><i class="fas fa-fire"></i> Últimas Horas da Promoção!</h5>
             <p>
-                Precisa de ajuda com o pagamento? Fale conosco!
+                <strong>⏰ ATENÇÃO:</strong> Esta oferta especial expira em breve!
                 <br>
-                <strong>WhatsApp:</strong> (11) 99999-9999
+                <strong>🎯 Garantia:</strong> 30 dias para testar sem riscos
                 <br>
-                <strong>E-mail:</strong> vendas@hoztech.com.br
+                <strong>🚀 Resultados:</strong> Primeiros resultados em 24h
                 <br>
-                <strong>Horário:</strong> 24 horas por dia, 7 dias por semana
+                <strong>💬 Suporte:</strong> WhatsApp (11) 99999-9999 - 24h
             </p>
         </div>
         
         <div class="action-buttons">
-            <a href="/shop/" class="btn-success">
-                <i class="fas fa-shopping-cart"></i>
-                Tentar Novamente
+            <a href="/shop/landing-page-otimizada/" class="btn-success">
+                <i class="fas fa-bolt"></i>
+                FINALIZAR COMPRA AGORA
             </a>
-            <a href="/" class="btn-primary">
+            <a href="https://wa.me/5511999999999?text=Olá! Quero finalizar minha compra da Landing Page Otimizada com desconto especial!" target="_blank" class="btn-primary">
+                <i class="fab fa-whatsapp"></i>
+                Comprar via WhatsApp
+            </a>
+            <a href="/" class="btn-secondary">
                 <i class="fas fa-home"></i>
                 Voltar ao Início
-            </a>
-            <a href="https://wa.me/5511999999999?text=Olá! Tive problemas com o pagamento da Landing Page Otimizada. Podem me ajudar?" target="_blank" class="btn-secondary">
-                <i class="fab fa-whatsapp"></i>
-                Falar no WhatsApp
             </a>
         </div>
     </div>
@@ -369,12 +430,62 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Countdown Timer
+function startCountdown() {
+    // Set countdown to 15 minutes from now
+    const countdownTime = new Date().getTime() + (15 * 60 * 1000);
+    
+    const timer = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countdownTime - now;
+        
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+        
+        if (distance < 0) {
+            clearInterval(timer);
+            document.getElementById('hours').innerHTML = '00';
+            document.getElementById('minutes').innerHTML = '00';
+            document.getElementById('seconds').innerHTML = '00';
+            
+            // Show expired message
+            document.querySelector('.urgency-timer h4').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Oferta Expirada!';
+            document.querySelector('.urgency-timer h4').style.color = '#ff4757';
+        }
+    }, 1000);
+}
+
 // Start floating particles
 document.addEventListener('DOMContentLoaded', function() {
     createFloatingParticles();
+    startCountdown();
     
     // Recreate particles every 10 seconds
     setInterval(createFloatingParticles, 10000);
+    
+    // Add urgency effects
+    setTimeout(function() {
+        const buttons = document.querySelectorAll('.btn-success');
+        buttons.forEach(button => {
+            button.style.animation = 'pulse 1s infinite';
+        });
+    }, 5000);
 });
+
+// Add pulse animation for buttons
+const pulseStyle = document.createElement('style');
+pulseStyle.textContent += `
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+`;
+document.head.appendChild(pulseStyle);
 </script>
 {% endblock %}

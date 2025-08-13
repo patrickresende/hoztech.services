@@ -1,0 +1,422 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Produto Teste - R$ 1,00 - HOZ TECH{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="Produto de teste para validação do sistema de pagamento - Apenas R$ 1,00">
+<meta name="keywords" content="produto teste, pagamento, stripe, hoztech">
+<meta property="og:title" content="Produto Teste - R$ 1,00 - HOZ TECH">
+<meta property="og:description" content="Produto de teste para validação do sistema de pagamento - Apenas R$ 1,00">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:type" content="product">
+<meta property="og:image" content="{% static 'core/images/logo.png' %}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Produto Teste - R$ 1,00">
+<meta name="twitter:description" content="Produto de teste para validação do sistema de pagamento">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --primary-color: #00d4ff;
+        --secondary-color: #ff6b6b;
+        --success-color: #51cf66;
+        --warning-color: #ffd43b;
+        --danger-color: #ff6b6b;
+        --dark-bg: #0a0b1e;
+        --card-bg: rgba(255, 255, 255, 0.05);
+        --text-light: #ffffff;
+        --text-muted: rgba(255, 255, 255, 0.7);
+        --border-color: rgba(0, 212, 255, 0.2);
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 1.5rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 3rem;
+    }
+
+    body {
+        background: var(--dark-bg);
+        color: var(--text-light);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg, #0a0b1e 0%, #1a1a2e 50%, #16213e 100%);
+        padding: 4rem 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%2300f7ff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .price-box {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 2rem 0;
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .price-current {
+        font-size: 4rem;
+        font-weight: 800;
+        color: var(--success-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .price-description {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+
+    .feature-card {
+        background: var(--card-bg);
+        border-radius: 15px;
+        padding: 2rem;
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary-color);
+        box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+    }
+
+    .feature-icon {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .feature-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-light);
+    }
+
+    .feature-description {
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 18px 36px;
+        background: linear-gradient(45deg, var(--success-color), #40c057);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 25px rgba(81, 207, 102, 0.4);
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .cta-button:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(81, 207, 102, 0.6);
+        color: white;
+        text-decoration: none;
+    }
+
+    .cta-button:hover::before {
+        left: 100%;
+    }
+
+    .cta-button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .guarantee-section {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 3rem;
+        margin: 3rem 0;
+        text-align: center;
+        border: 1px solid var(--border-color);
+    }
+
+    .guarantee-icon {
+        font-size: 4rem;
+        color: var(--success-color);
+        margin-bottom: 1rem;
+    }
+
+    .guarantee-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-light);
+    }
+
+    .guarantee-description {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+        
+        .price-current {
+            font-size: 3rem;
+        }
+        
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .cta-button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="hero-content">
+        <div class="container">
+            <h1 class="hero-title">🧪 Produto Teste</h1>
+            <p class="hero-subtitle">
+                Produto especial para testar nosso sistema de pagamento integrado com Stripe. 
+                Funcionalidade completa por apenas R$ 1,00!
+            </p>
+            
+            <div class="price-box">
+                <div class="price-current">R$ 1,00</div>
+                <p class="price-description">Pagamento único • Teste completo</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container my-5">
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-credit-card"></i>
+            </div>
+            <h3 class="feature-title">Sistema de Pagamento</h3>
+            <p class="feature-description">
+                Teste completo da integração com Stripe, processamento seguro de pagamentos e redirecionamentos automáticos.
+            </p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="feature-title">Segurança Garantida</h3>
+            <p class="feature-description">
+                Todos os dados são processados de forma segura através da plataforma Stripe, líder mundial em pagamentos online.
+            </p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <h3 class="feature-title">Redirecionamento Automático</h3>
+            <p class="feature-description">
+                Após o pagamento, você será redirecionado automaticamente para a página de sucesso ou cancelamento.
+            </p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3 class="feature-title">Mobile First</h3>
+            <p class="feature-description">
+                Interface totalmente responsiva, otimizada para funcionar perfeitamente em dispositivos móveis.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="guarantee-section container">
+    <div class="guarantee-icon">
+        <i class="fas fa-check-circle"></i>
+    </div>
+    <h2 class="guarantee-title">Teste Sem Riscos</h2>
+    <p class="guarantee-description">
+        Este é um produto de teste com valor simbólico. Você pode testar todo o fluxo de pagamento 
+        e verificar como funciona nossa integração com o Stripe.
+    </p>
+</section>
+
+<section class="text-center my-5">
+    <h2 style="color: var(--primary-color); font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem;">Pronto para testar?</h2>
+    <button class="cta-button" onclick="initStripePayment()">
+        💳 Comprar Agora - R$ 1,00
+    </button>
+    <p style="color: var(--text-muted); margin-top: 1rem;">Pagamento 100% seguro via Stripe</p>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    // Configuração do Stripe
+    const stripePublicKey = '{{ stripe_public_key|default:"pk_test_51234567890" }}';
+    const stripe = Stripe(stripePublicKey);
+    
+    function initStripePayment() {
+        const button = document.querySelector('.cta-button');
+        const originalText = button.innerHTML;
+        
+        // Mostrar loading
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
+        button.disabled = true;
+        
+        // Fazer requisição para criar sessão de checkout
+        const csrfEl = document.querySelector('[name=csrfmiddlewaretoken]');
+        const headers = { 'Content-Type': 'application/json' };
+        if (csrfEl && csrfEl.value) {
+            headers['X-CSRFToken'] = csrfEl.value;
+        }
+        
+        fetch('{% url "core:create_checkout_session" %}', {    
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({
+                product_id: 'produto_teste'
+            })
+        })
+        .then(async (response) => {
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) {
+                throw new Error(data.error || 'Erro ao processar pagamento');
+            }
+            return data;
+        })
+        .then((data) => {
+            if (data.demo_mode || !stripe) {
+                // Modo demonstração - redirecionar diretamente
+                window.location.href = data.url;
+            } else {
+                // Redirecionar para o Stripe Checkout
+                return stripe.redirectToCheckout({ sessionId: data.id });
+            }
+        })
+        .then((result) => {
+            if (result && result.error) {
+                throw new Error(result.error.message);
+            }
+        })
+        .catch((error) => {
+            console.error('Erro:', error);
+            alert('Erro ao processar pagamento: ' + error.message);
+        })
+        .finally(() => {
+            // Restaurar botão
+            button.innerHTML = originalText;
+            button.disabled = false;
+        });
+    }
+    
+    // Função para obter cookie CSRF
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+{% endblock %}

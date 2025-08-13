@@ -350,36 +350,50 @@
     
     function initStripePayment() {
         // Fazer requisição para criar sessão de checkout
-        fetch('/shop/create-checkout-session/', {
-            method: 'POST',
-            headers: {
+        const csrfEl = document.querySelector('[name=csrfmiddlewaretoken]');
+        const headers = { 'Content-Type': 'application/json' };
+        if (csrfEl && csrfEl.value) {
+            headers['X-CSRFToken'] = csrfEl.value;
+        }
+         fetch('{% url "core:create_checkout_session" %}', {    
+             method: 'POST',
+             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-            },
-            body: JSON.stringify({
-                'product': 'landing_page_otimizada'
-            })
+                'X-CSRFToken': csrfEl.value
+             },
+             body: JSON.stringify({
+                 product_id: 'landing_page_otimizada'
+             })
+         })
+        .then(async (response) => {
+           const data = await response.json().catch(() => ({}));
+           if (!response.ok) {
+               const msg = data && data.error ? data.error : 'Falha ao criar sessão de checkout';
+               throw new Error(msg);
+           }
+           return data;
         })
-        .then(response => response.json())
-        .then(session => {
-            if (session.demo_mode || !stripe) {
-                // Modo demonstração - redirecionar para URL de demonstração
-                window.location.href = session.url;
-            } else {
-                // Modo produção - usar Stripe
-                return stripe.redirectToCheckout({ sessionId: session.id });
-            }
-        })
-        .then(result => {
-            if (result && result.error) {
-                alert('Erro: ' + result.error.message);
-            }
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert('Erro ao processar pagamento. Tente novamente.');
-        });
-    }
+
+         .then(session => {
+             if (session.demo_mode || !stripe) {
+                 // Modo demonstração - redirecionar para URL de demonstração
+                 window.location.href = session.url;
+             } else {
+                 // Modo produção - usar Stripe
+                 return stripe.redirectToCheckout({ sessionId: session.id });
+             }
+         })
+         .then(result => {
+             if (result && result.error) {
+                 alert('Erro: ' + result.error.message);
+             }
+         })
+         .catch(error => {
+             console.error('Erro:', error);
+-            alert('Erro ao processar pagamento. Tente novamente.');
++            alert('Erro ao processar pagamento: ' + (error && error.message ? error.message : 'Tente novamente.'));
+         });
+     }
     
     // Animação de partículas
     function createParticles() {

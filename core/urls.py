@@ -32,6 +32,7 @@ urlpatterns = [
     path('loja/', views.shop_redirect, name='shop_redirect'),
     path('coming-soon/', views.shop_coming_soon, name='shop_coming_soon'),
     path('shop/landing-page-otimizada/', views.landing_page_product, name='landing_page_product'),
+    path('shop/produto-teste/', views.produto_teste, name='produto_teste'),
     
     # Stripe Payment URLs
     path('create-checkout-session/', views.create_checkout_session, name='create_checkout_session'),
