@@ -28,7 +28,6 @@ import xlsxwriter
 from io import BytesIO
 import zipfile
 import redis
-import stripe
 from django.urls import reverse
 from django.db import connection
 
@@ -1311,6 +1310,7 @@ def create_checkout_session(request):
             })
         
         # Configurar chave do Stripe
+        import stripe
         stripe.api_key = stripe_secret_key
         
         try:
@@ -1351,9 +1351,14 @@ def create_checkout_session(request):
             
             return JsonResponse({'id': checkout_session.id, 'url': checkout_session.url})
             
-        except stripe.error.StripeError as e:
-            print(f"Erro Stripe: {e}")
-            return JsonResponse({'error': str(e)}, status=400)
+        except Exception as e:
+            import stripe
+            if hasattr(stripe, 'error') and isinstance(e, stripe.error.StripeError):
+                print(f"Erro Stripe: {e}")
+                return JsonResponse({'error': str(e)}, status=400)
+            else:
+                print(f"Erro: {e}")
+                return JsonResponse({'error': str(e)}, status=400)
             
     except json.JSONDecodeError:
         return JsonResponse({'error': 'JSON inválido'}, status=400)
@@ -1370,6 +1375,7 @@ def payment_success(request):
         try:
             stripe_secret_key = getattr(settings, 'STRIPE_SECRET_KEY', None)
             if stripe_secret_key:
+                import stripe
                 stripe.api_key = stripe_secret_key
                 session = stripe.checkout.Session.retrieve(session_id)
                 # Aqui você pode processar os dados da sessão
@@ -1395,7 +1401,6 @@ def payment_cancel(request):
 
 # === STRIPE WEBHOOK VIEW ===
 
-import stripe
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
@@ -1418,6 +1423,7 @@ def stripe_webhook(request):
     
     try:
         # Construir evento do webhook
+        import stripe
         event = stripe.Webhook.construct_event(
             payload, sig_header, endpoint_secret
         )
@@ -1425,10 +1431,15 @@ def stripe_webhook(request):
         # Erro no JSON
         print("❌ Erro no corpo do webhook:", e)
         return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
-        # Assinatura inválida
-        print("❌ Assinatura inválida:", e)
-        return HttpResponse(status=400)
+    except Exception as e:
+        import stripe
+        if hasattr(stripe, 'error') and isinstance(e, stripe.error.SignatureVerificationError):
+            # Assinatura inválida
+            print("❌ Assinatura inválida:", e)
+            return HttpResponse(status=400)
+        else:
+            print("❌ Erro no webhook:", e)
+            return HttpResponse(status=400)
     
     # Processar eventos do Stripe
     event_type = event['type']

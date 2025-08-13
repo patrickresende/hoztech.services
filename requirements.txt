@@ -51,3 +51,6 @@ urllib3==2.4.0
 
 # Excel export
 XlsxWriter==3.1.9
+
+# Stripe
+stripe==11.6.0
