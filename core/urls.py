@@ -40,6 +40,17 @@ urlpatterns = [
     path('shop/cancel/', views.payment_cancel, name='payment_cancel'),
     path('webhook/stripe/', views.stripe_webhook, name='stripe_webhook'),
     
+    # Mercado Pago Payment URLs
+    path('mercado-pago/create-preference/', views.create_mercado_pago_preference, name='create_mercado_pago_preference'),
+    path('mercado-pago/success/', views.mercado_pago_success, name='mercado_pago_success'),
+    path('mercado-pago/failure/', views.mercado_pago_failure, name='mercado_pago_failure'),
+    path('mercado-pago/pending/', views.mercado_pago_pending, name='mercado_pago_pending'),
+    path('webhook/mercado-pago/', views.mercado_pago_webhook, name='mercado_pago_webhook'),
+    
+    # Mercado Pago Checkout Transparente URLs
+    path('mercado-pago/process-payment/', views.process_mercado_pago_payment, name='process_mercado_pago_payment'),
+    path('mercado-pago/check-payment/<str:payment_id>/', views.check_mercado_pago_payment, name='check_mercado_pago_payment'),
+    
     # WhatsApp Chatbot URLs (Backend apenas - sem renderização pública)
     path('chatbot/webhook/', WhatsAppWebhookView.as_view(), name='whatsapp_webhook'),
     path('chatbot/dashboard/', WhatsAppDashboardView.as_view(), name='whatsapp_dashboard'),

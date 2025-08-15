@@ -214,11 +214,11 @@ else:
     
     # Content Security Policy para produção - Compatível com Brave
     CSP_DEFAULT_SRC = ("'self'",)
-    CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
+    CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com", "https://sdk.mercadopago.com")
     CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com")
     CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net")
     CSP_IMG_SRC = ("'self'", "data:", "https:")
-    CSP_CONNECT_SRC = ("'self'",)
+    CSP_CONNECT_SRC = ("'self'", "https://api.mercadopago.com", "https://www.mercadopago.com")
     
     # Configurações adicionais de CSP
     CSP_OBJECT_SRC = ("'none'",)
@@ -235,7 +235,7 @@ else:
     CSP_UPGRADE_INSECURE_REQUESTS = True
     
     # Configurações específicas para compatibilidade com Brave
-    CSP_SCRIPT_SRC_ELEM = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com")
+    CSP_SCRIPT_SRC_ELEM = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com", "https://sdk.mercadopago.com")
     CSP_STYLE_SRC_ELEM = ("'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com")
     
     # Configurações específicas para cookies e localStorage
@@ -429,6 +429,27 @@ STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET', 'whsec_demo')
 STRIPE_CURRENCY = 'brl'  # Brazilian Real
 STRIPE_SUCCESS_URL = os.getenv('STRIPE_SUCCESS_URL', '/payment/success/')
 STRIPE_CANCEL_URL = os.getenv('STRIPE_CANCEL_URL', '/payment/cancel/')
+
+# Mercado Pago Payment Settings
+# Usar chaves de teste em desenvolvimento
+if ENVIRONMENT == 'development' or DEBUG:
+    MERCADO_PAGO_ACCESS_TOKEN = os.getenv('MERCADO_PAGO_ACCESS_TOKEN_TEST', '')
+    MERCADO_PAGO_PUBLIC_KEY = os.getenv('MERCADO_PAGO_PUBLIC_KEY_TEST', '')
+else:
+    MERCADO_PAGO_ACCESS_TOKEN = os.getenv('MERCADO_PAGO_ACCESS_TOKEN', '')
+    MERCADO_PAGO_PUBLIC_KEY = os.getenv('MERCADO_PAGO_PUBLIC_KEY', '')
+
+MERCADO_PAGO_WEBHOOK_SECRET = os.getenv('MERCADO_PAGO_WEBHOOK_SECRET', '')
+MERCADO_PAGO_CURRENCY = 'BRL'  # Brazilian Real
+MERCADO_PAGO_SUCCESS_URL = os.getenv('MERCADO_PAGO_SUCCESS_URL', '/mercado-pago/success/')
+MERCADO_PAGO_FAILURE_URL = os.getenv('MERCADO_PAGO_FAILURE_URL', '/mercado-pago/failure/')
+MERCADO_PAGO_PENDING_URL = os.getenv('MERCADO_PAGO_PENDING_URL', '/mercado-pago/pending/')
+MERCADO_PAGO_NOTIFICATION_URL = os.getenv('MERCADO_PAGO_NOTIFICATION_URL', '/webhook/mercado-pago/')
+
+# Configurações específicas do Mercado Pago
+MERCADO_PAGO_SANDBOX = os.getenv('MERCADO_PAGO_SANDBOX', 'True').lower() == 'true'
+MERCADO_PAGO_STATEMENT_DESCRIPTOR = os.getenv('MERCADO_PAGO_STATEMENT_DESCRIPTOR', 'HOZ TECH')
+MERCADO_PAGO_EXTERNAL_REFERENCE_PREFIX = os.getenv('MERCADO_PAGO_EXTERNAL_REFERENCE_PREFIX', 'HOZTECH')
 
 # Logging Configuration
 class RailwayJSONFormatter(logging.Formatter):

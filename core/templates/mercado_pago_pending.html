@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Pagamento Pendente - HOZ TECH{% endblock %}
+
+{% block extra_css %}
+<style>
+    .pending-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+    }
+    
+    .pending-card {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        max-width: 500px;
+        width: 90%;
+    }
+    
+    .pending-icon {
+        width: 80px;
+        height: 80px;
+        background: #ffc107;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        animation: rotate 2s linear infinite;
+    }
+    
+    .pending-icon i {
+        color: white;
+        font-size: 2.5rem;
+    }
+    
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    
+    .pending-title {
+        color: #ffc107;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    
+    .pending-message {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+    
+    .pending-info {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        text-align: left;
+    }
+    
+    .pending-info h4 {
+        color: #ffc107;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+    
+    .pending-info ul {
+        margin: 0;
+        padding-left: 1.5rem;
+    }
+    
+    .pending-info li {
+        margin-bottom: 0.5rem;
+        color: #666;
+    }
+    
+    .payment-details {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        text-align: left;
+    }
+    
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #ffeaa7;
+    }
+    
+    .detail-row:last-child {
+        border-bottom: none;
+        font-weight: bold;
+        color: #856404;
+    }
+    
+    .btn-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .btn-contact {
+        background: #28a745;
+        border: none;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        transition: transform 0.3s ease;
+    }
+    
+    .btn-status {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        transition: transform 0.3s ease;
+    }
+    
+    .btn-contact:hover,
+    .btn-status:hover {
+        transform: translateY(-2px);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-home {
+        background: #6c757d;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        transition: transform 0.3s ease;
+        margin-top: 1rem;
+    }
+    
+    .btn-home:hover {
+        transform: translateY(-2px);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .alert-info {
+        background: #d1ecf1;
+        border: 1px solid #bee5eb;
+        color: #0c5460;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="pending-container">
+    <div class="pending-card">
+        <div class="pending-icon">
+            <i class="fas fa-clock"></i>
+        </div>
+        
+        <h1 class="pending-title">Pagamento Pendente</h1>
+        
+        <p class="pending-message">
+            Seu pagamento está sendo processado. Aguarde a confirmação do banco ou finalize o pagamento conforme as instruções.
+        </p>
+        
+        <div class="alert-info">
+            <strong>Atenção:</strong> Se você escolheu PIX ou boleto, finalize o pagamento para que possamos processar seu pedido.
+        </div>
+        
+        {% if payment_data %}
+        <div class="payment-details">
+            <div class="detail-row">
+                <span>Serviço:</span>
+                <span>{{ payment_data.service_name }}</span>
+            </div>
+            <div class="detail-row">
+                <span>ID do Pagamento:</span>
+                <span>{{ payment_data.payment_id }}</span>
+            </div>
+            <div class="detail-row">
+                <span>Status:</span>
+                <span>{{ payment_data.status }}</span>
+            </div>
+            <div class="detail-row">
+                <span>Valor:</span>
+                <span>R$ {{ payment_data.amount }}</span>
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="pending-info">
+            <h4>O que fazer agora:</h4>
+            <ul>
+                <li><strong>PIX:</strong> Escaneie o QR Code ou copie o código PIX</li>
+                <li><strong>Boleto:</strong> Pague o boleto até a data de vencimento</li>
+                <li><strong>Cartão:</strong> Aguarde a confirmação do banco</li>
+                <li>Você receberá um e-mail com a confirmação</li>
+                <li>Em caso de dúvidas, entre em contato conosco</li>
+            </ul>
+        </div>
+        
+        <div class="btn-group">
+            <a href="#" class="btn-status" onclick="checkPaymentStatus()">
+                <i class="fas fa-sync me-2"></i>
+                Verificar Status
+            </a>
+            
+            <a href="{% url 'core:contact' %}" class="btn-contact">
+                <i class="fas fa-comments me-2"></i>
+                Falar Conosco
+            </a>
+        </div>
+        
+        <a href="{% url 'core:home' %}" class="btn-home">
+            <i class="fas fa-home me-2"></i>
+            Voltar ao Início
+        </a>
+    </div>
+</div>
+
+<script>
+function checkPaymentStatus() {
+    // Recarregar a página para verificar o status
+    window.location.reload();
+}
+</script>
+{% endblock %}

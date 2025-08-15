@@ -49,6 +49,10 @@ django-filter==25.1
 requests==2.31.0
 urllib3==2.4.0
 
+# Payment Gateways
+stripe>=7.0.0
+mercadopago>=2.2.0
+
 # Excel export
 XlsxWriter==3.1.9
 

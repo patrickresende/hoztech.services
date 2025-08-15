@@ -248,7 +248,14 @@ def services(request):
             ]
         }
     ]
-    return render(request, 'services.html', {'title': 'Serviços - Hoz Tech', 'services': services_data})
+    
+    context = {
+        'title': 'Serviços - Hoz Tech',
+        'services': services_data,
+        'MERCADO_PAGO_PUBLIC_KEY': settings.MERCADO_PAGO_PUBLIC_KEY
+    }
+    
+    return render(request, 'services.html', context)
 
 @log_view_execution
 def minha_seguranca(request):
@@ -1516,6 +1523,285 @@ def stripe_webhook(request):
             
     except Exception as e:
         print(f"❌ Erro ao processar evento {event_type}: {e}")
+        return HttpResponse(status=500)
+    
+    return HttpResponse(status=200)
+
+@csrf_exempt
+@require_POST
+def process_mercado_pago_payment(request):
+    """Processa pagamento transparente do Mercado Pago (cartão e PIX)"""
+    try:
+        data = json.loads(request.body)
+        payment_data = data.get('payment_data')
+        service_type = data.get('service_type')
+        
+        # Configurar SDK do Mercado Pago
+        sdk = mercadopago.SDK(settings.MERCADO_PAGO_ACCESS_TOKEN)
+        
+        # Adicionar external_reference e notification_url
+        payment_data['external_reference'] = f"{service_type}_{int(time.time())}"
+        payment_data['notification_url'] = request.build_absolute_uri(reverse('mercado_pago_webhook'))
+        
+        # Criar pagamento
+        payment_response = sdk.payment().create(payment_data)
+        payment = payment_response["response"]
+        
+        if payment_response["status"] == 201:
+            response_data = {
+                'success': True,
+                'payment_id': payment['id'],
+                'status': payment['status'],
+                'status_detail': payment.get('status_detail', '')
+            }
+            
+            # Se for PIX, incluir QR Code
+            if payment_data.get('payment_method_id') == 'pix':
+                qr_code = payment.get('point_of_interaction', {}).get('transaction_data', {}).get('qr_code', '')
+                if qr_code:
+                    # Gerar QR Code em base64
+                    qr_img = qrcode.make(qr_code)
+                    buffer = BytesIO()
+                    qr_img.save(buffer, format='PNG')
+                    qr_code_base64 = base64.b64encode(buffer.getvalue()).decode()
+                    
+                    response_data.update({
+                        'qr_code': qr_code,
+                        'qr_code_base64': qr_code_base64
+                    })
+            
+            logger.info(f"Pagamento criado: {payment['id']}, Status: {payment['status']}")
+            return JsonResponse(response_data)
+        else:
+            logger.error(f"Erro ao criar pagamento: {payment_response}")
+            return JsonResponse({
+                'success': False,
+                'error': 'Erro ao processar pagamento'
+            })
+            
+    except Exception as e:
+        logger.error(f"Erro ao processar pagamento Mercado Pago: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'error': 'Erro interno do servidor'
+        })
+
+@log_view_execution
+def check_mercado_pago_payment(request, payment_id):
+    """Verifica o status de um pagamento no Mercado Pago"""
+    try:
+        # Configurar SDK do Mercado Pago
+        sdk = mercadopago.SDK(settings.MERCADO_PAGO_ACCESS_TOKEN)
+        
+        # Buscar pagamento
+        payment_response = sdk.payment().get(payment_id)
+        
+        if payment_response["status"] == 200:
+            payment = payment_response["response"]
+            return JsonResponse({
+                'success': True,
+                'status': payment['status'],
+                'status_detail': payment.get('status_detail', ''),
+                'payment_method': payment.get('payment_method_id', ''),
+                'transaction_amount': payment.get('transaction_amount', 0)
+            })
+        else:
+            return JsonResponse({
+                'success': False,
+                'error': 'Pagamento não encontrado'
+            })
+            
+    except Exception as e:
+        logger.error(f"Erro ao verificar pagamento Mercado Pago: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'error': 'Erro interno do servidor'
+        })
+
+# Mercado Pago Integration
+import mercadopago
+from django.conf import settings
+import qrcode
+import base64
+from io import BytesIO
+
+@csrf_exempt
+@require_POST
+def create_mercado_pago_preference(request):
+    """Cria uma preferência de pagamento no Mercado Pago"""
+    try:
+        data = json.loads(request.body)
+        service_type = data.get('service_type')
+        title = data.get('title')
+        price = float(data.get('price', 0))
+        installments = int(data.get('installments', 1))
+        
+        # Configurar SDK do Mercado Pago
+        sdk = mercadopago.SDK(settings.MERCADO_PAGO_ACCESS_TOKEN)
+        
+        # Criar item da preferência
+        preference_data = {
+            "items": [
+                {
+                    "title": title,
+                    "quantity": 1,
+                    "unit_price": price,
+                    "currency_id": "BRL"
+                }
+            ],
+            "payment_methods": {
+                "excluded_payment_methods": [],
+                "excluded_payment_types": [],
+                "installments": installments
+            },
+            "back_urls": {
+                "success": request.build_absolute_uri(reverse('mercado_pago_success')),
+                "failure": request.build_absolute_uri(reverse('mercado_pago_failure')),
+                "pending": request.build_absolute_uri(reverse('mercado_pago_pending'))
+            },
+            "auto_return": "approved",
+            "notification_url": request.build_absolute_uri(reverse('mercado_pago_webhook')),
+            "external_reference": f"{service_type}_{int(time.time())}",
+            "metadata": {
+                "service_type": service_type,
+                "user_ip": ContactFormHandler.get_client_ip(request)
+            }
+        }
+        
+        # Criar preferência
+        preference_response = sdk.preference().create(preference_data)
+        preference = preference_response["response"]
+        
+        if preference_response["status"] == 201:
+            return JsonResponse({
+                'success': True,
+                'preference_id': preference['id'],
+                'init_point': preference['init_point'],
+                'sandbox_init_point': preference['sandbox_init_point']
+            })
+        else:
+            return JsonResponse({
+                'success': False,
+                'error': 'Erro ao criar preferência de pagamento'
+            })
+            
+    except Exception as e:
+        logger.error(f"Erro ao criar preferência Mercado Pago: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'error': 'Erro interno do servidor'
+        })
+
+@log_view_execution
+def mercado_pago_success(request):
+    """Página de sucesso do Mercado Pago"""
+    payment_id = request.GET.get('payment_id')
+    status = request.GET.get('status')
+    external_reference = request.GET.get('external_reference')
+    
+    context = {
+        'payment_id': payment_id,
+        'status': status,
+        'external_reference': external_reference,
+        'title': 'Pagamento Aprovado!',
+        'message': 'Seu pagamento foi processado com sucesso. Em breve entraremos em contato para dar início ao seu projeto.',
+        'whatsapp_link': 'https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Acabei de realizar um pagamento e gostaria de confirmar o início do meu projeto.'
+    }
+    
+    return render(request, 'core/payment_result.html', context)
+
+@log_view_execution
+def mercado_pago_failure(request):
+    """Página de falha do Mercado Pago"""
+    payment_id = request.GET.get('payment_id')
+    status = request.GET.get('status')
+    external_reference = request.GET.get('external_reference')
+    
+    context = {
+        'payment_id': payment_id,
+        'status': status,
+        'external_reference': external_reference,
+        'title': 'Pagamento Não Aprovado',
+        'message': 'Houve um problema com seu pagamento. Tente novamente ou entre em contato conosco.',
+        'whatsapp_link': 'https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tive problemas com meu pagamento e preciso de ajuda.',
+        'is_error': True
+    }
+    
+    return render(request, 'core/payment_result.html', context)
+
+@log_view_execution
+def mercado_pago_pending(request):
+    """Página de pagamento pendente do Mercado Pago"""
+    payment_id = request.GET.get('payment_id')
+    status = request.GET.get('status')
+    external_reference = request.GET.get('external_reference')
+    
+    context = {
+        'payment_id': payment_id,
+        'status': status,
+        'external_reference': external_reference,
+        'title': 'Pagamento Pendente',
+        'message': 'Seu pagamento está sendo processado. Você receberá uma confirmação em breve.',
+        'whatsapp_link': 'https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Meu pagamento está pendente e gostaria de mais informações.',
+        'is_pending': True
+    }
+    
+    return render(request, 'core/payment_result.html', context)
+
+@csrf_exempt
+def mercado_pago_webhook(request):
+    """Webhook para receber notificações do Mercado Pago"""
+    try:
+        if request.method == 'POST':
+            # Obter dados do webhook
+            data = json.loads(request.body)
+            
+            # Log da notificação
+            logger.info(f"Mercado Pago webhook recebido: {data}")
+            
+            # Verificar se é uma notificação de pagamento
+            if data.get('type') == 'payment':
+                payment_id = data.get('data', {}).get('id')
+                
+                if payment_id:
+                    # Configurar SDK do Mercado Pago
+                    sdk = mercadopago.SDK(settings.MERCADO_PAGO_ACCESS_TOKEN)
+                    
+                    # Obter informações do pagamento
+                    payment_response = sdk.payment().get(payment_id)
+                    payment_info = payment_response["response"]
+                    
+                    if payment_response["status"] == 200:
+                        # Processar informações do pagamento
+                        status = payment_info.get('status')
+                        external_reference = payment_info.get('external_reference')
+                        amount = payment_info.get('transaction_amount')
+                        payer_email = payment_info.get('payer', {}).get('email')
+                        
+                        # Log do status do pagamento
+                        logger.info(f"Pagamento {payment_id}: Status {status}, Referência {external_reference}, Valor {amount}")
+                        
+                        # Aqui você pode adicionar lógica para:
+                        # - Atualizar status do pedido no banco de dados
+                        # - Enviar email de confirmação
+                        # - Notificar equipe de vendas
+                        
+                        if status == 'approved':
+                            # Pagamento aprovado - implementar lógica de sucesso
+                            logger.info(f"Pagamento aprovado: {payment_id}")
+                            
+                        elif status == 'rejected':
+                            # Pagamento rejeitado - implementar lógica de falha
+                            logger.warning(f"Pagamento rejeitado: {payment_id}")
+                            
+                        elif status == 'pending':
+                            # Pagamento pendente - implementar lógica de pendência
+                            logger.info(f"Pagamento pendente: {payment_id}")
+            
+            return HttpResponse(status=200)
+            
+    except Exception as e:
+        logger.error(f"Erro no webhook Mercado Pago: {str(e)}")
         return HttpResponse(status=500)
     
     return HttpResponse(status=200)

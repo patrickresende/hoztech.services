@@ -73,16 +73,16 @@
         --transition-normal: 0.3s ease;
         --transition-slow: 0.5s ease;
 
-        /* Tipografia Responsiva Base */
-        --font-size-micro: clamp(0.625rem, 0.5vw + 0.5rem, 0.75rem);    /* 10-12px */
-        --font-size-tiny: clamp(0.75rem, 0.75vw + 0.5rem, 0.875rem);    /* 12-14px */
-        --font-size-small: clamp(0.875rem, 1vw + 0.5rem, 1rem);         /* 14-16px */
-        --font-size-base: clamp(1rem, 1.25vw + 0.5rem, 1.125rem);       /* 16-18px */
-        --font-size-medium: clamp(1.125rem, 1.5vw + 0.5rem, 1.25rem);   /* 18-20px */
-        --font-size-large: clamp(1.25rem, 2vw + 0.5rem, 1.5rem);        /* 20-24px */
-        --font-size-xlarge: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);        /* 24-32px */
-        --font-size-huge: clamp(2rem, 3vw + 0.5rem, 2.5rem);            /* 32-40px */
-        --font-size-giant: clamp(2.5rem, 4vw + 0.5rem, 3rem);           /* 40-48px */
+        /* Tipografia Responsiva Base - Aumentada +2px para melhor acessibilidade */
+        --font-size-micro: clamp(0.75rem, 0.6vw + 0.6rem, 0.875rem);    /* 12-14px */
+        --font-size-tiny: clamp(0.875rem, 0.85vw + 0.6rem, 1rem);       /* 14-16px */
+        --font-size-small: clamp(1rem, 1.1vw + 0.6rem, 1.125rem);       /* 16-18px */
+        --font-size-base: clamp(1.125rem, 1.35vw + 0.6rem, 1.25rem);    /* 18-20px */
+        --font-size-medium: clamp(1.25rem, 1.6vw + 0.6rem, 1.375rem);   /* 20-22px */
+        --font-size-large: clamp(1.375rem, 2.1vw + 0.6rem, 1.625rem);   /* 22-26px */
+        --font-size-xlarge: clamp(1.625rem, 2.6vw + 0.6rem, 2.125rem);  /* 26-34px */
+        --font-size-huge: clamp(2.125rem, 3.1vw + 0.6rem, 2.625rem);    /* 34-42px */
+        --font-size-giant: clamp(2.625rem, 4.1vw + 0.6rem, 3.125rem);   /* 42-50px */
         
         /* Line Heights */
         --line-height-tight: 1.2;
@@ -101,6 +101,53 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+    }
+
+    /* Melhorias de Acessibilidade e Renderização */
+    html {
+        font-size: 16px; /* Base para rem */
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    body {
+        font-family: var(--font-tech);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        font-feature-settings: "kern" 1;
+        font-variant-ligatures: common-ligatures;
+        line-height: var(--line-height-normal);
+    }
+
+    /* Melhorias para dispositivos móveis */
+    @media (max-width: 768px) {
+        html {
+            font-size: 18px; /* Base maior para mobile */
+        }
+        
+        body {
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+    }
+
+    /* Suporte para usuários com deficiência visual */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+    /* Alto contraste para acessibilidade */
+    @media (prefers-contrast: high) {
+        :root {
+            --tech-light: #ffffff;
+            --tech-dark: #000000;
+        }
     }
 
     /* Estilos do Home incorporados */
@@ -219,26 +266,34 @@
         position: relative;
         padding: var(--spacing-md) 0;
         overflow: visible !important;
+        height: 700px; /* Altura aumentada para efeito cards */
     }
 
     .swiper {
         width: 100%;
+        max-width: 400px; /* Largura máxima para cards */
+        margin: 0 auto;
         padding: var(--spacing-md);
+        height: 100%;
     }
 
     .swiper-wrapper {
-        align-items: stretch;
+        align-items: center;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        height: 600px; /* Altura aumentada para cards */
     }
 
-    /* Slides */
+    /* Slides com efeito cards */
     .swiper-slide {
-        height: auto;
-        opacity: 0.4;
-        transform: scale(0.85);
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 580px; /* Altura aumentada dos cards */
+        width: 300px;
+        border-radius: 18px;
         display: flex;
+        align-items: center;
         justify-content: center;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
     }
 
     .swiper-slide-active {
@@ -248,20 +303,75 @@
 
     .swiper-slide-prev,
     .swiper-slide-next {
-        opacity: 0.6;
-        transform: scale(0.9);
+        opacity: 0.8;
+        transform: scale(0.95);
+    }
+
+    /* Mobile-first ajustes */
+    @media (max-width: 480px) {
+        .swiper-container {
+            height: 920px; /* Aumentado +100px */
+        }
+        .swiper {
+            max-width: 100%;
+            padding: var(--spacing-sm);
+        }
+        .swiper-wrapper {
+            height: 860px; 
+        }
+        .swiper-slide {
+            height: 820px; /* Corrigido para medida ideal */
+            width: 86%;
+        }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+        .swiper-container {
+            height: 980px; /* Proporção relativa +60px */
+        }
+        .swiper-wrapper {
+            height: 920px; /* Proporção relativa +60px */
+        }
+        .swiper-slide {
+            height: 880px; /* Proporção relativa +60px */
+            width: 75%;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .swiper-container {
+            height: 1040px; /* Proporção relativa +60px */
+        }
+        .swiper-wrapper {
+            height: 980px; /* Proporção relativa +60px */
+        }
+        .swiper-slide {
+            height: 940px; /* Proporção relativa +60px */
+            width: 65%;
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .swiper-container {
+            height: 1100px; /* Proporção relativa +60px */
+        }
+        .swiper-wrapper {
+            height: 1040px; /* Proporção relativa +60px */
+        }
+        .swiper-slide {
+            height: 1000px; /* Proporção relativa +60px */
+            width: 420px;
+        }
     }
 
     /* Card Styles */
     .service-card {
         background: linear-gradient(165deg, 
-            rgba(0, 247, 255, 0.05) 0%,
-            rgba(255, 7, 58, 0.05) 100%);
-        border: 1px solid rgba(0, 247, 255, 0.15);
+            #1a1a1a 0%,
+            #000000 100%);
+        border: 1px solid rgba(0, 247, 255, 0.4);
         border-radius: var(--card-radius);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         position: relative;
         overflow: hidden;
         width: 100%;
@@ -270,6 +380,7 @@
         transform: translateY(0);
         box-shadow: 0 4px 6px -1px rgba(0, 247, 255, 0.1),
                     0 2px 4px -1px rgba(0, 247, 255, 0.06);
+        will-change: transform, opacity, filter;
     }
 
     .service-card::before {
@@ -339,21 +450,18 @@
         letter-spacing: var(--letter-spacing-wide);
         font-weight: 600;
         text-align: center;
-        background: linear-gradient(135deg, var(--tech-blue), var(--tech-red));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        color: var(--tech-blue); /* Azul Escuro tech */
         margin: 0;
         width: 100%;
-        text-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
+        text-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
     }
 
     .service-description {
         font-family: var(--font-tech);
         font-size: var(--font-size-small);
         line-height: 1.4;
-        color: var(--tech-light);
-        opacity: 0.9;
+        color: #e0fbfc; /* Branco */
+        opacity: 0.95;
         text-align: center;
         width: 100%;
         margin: 0;
@@ -380,7 +488,7 @@
         align-items: center;
         justify-content: center;
         gap: var(--spacing-xs);
-        color: var(--tech-light);
+        color: #a8a8a8; /* Cinza */
         font-family: var(--font-tech);
         font-size: var(--font-size-tiny);
         line-height: 1.3;
@@ -391,17 +499,17 @@
 
     .feature-item:hover {
         transform: translateX(5px);
-        color: var(--tech-blue);
+        color: #6a0dad; /* Roxo Escuro tech */
     }
 
     .feature-icon {
-        color: var(--tech-blue);
+        color: #ff073a; /* Vermelho */
         font-size: var(--font-size-lg);
         display: flex;
         align-items: center;
         justify-content: center;
         min-width: 24px;
-        text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+        text-shadow: 0 0 10px rgba(255, 7, 58, 0.3);
     }
 
     .feature-item span:last-child {
@@ -428,8 +536,8 @@
     }
 
     .price-original {
-        color: var(--tech-light);
-        opacity: 0.7;
+        color: #a8a8a8; /* Cinza */
+        opacity: 0.8;
         text-decoration: line-through;
         font-family: var(--font-tech);
         font-size: var(--font-size-tiny);
@@ -441,17 +549,14 @@
         font-weight: 700;
         line-height: 1.2;
         letter-spacing: var(--letter-spacing-tight);
-        background: linear-gradient(135deg, var(--tech-blue), var(--tech-red));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        color: #e0fbfc; /* Branco */
         margin: calc(var(--spacing-xs) * 0.75) 0;
-        text-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
+        text-shadow: 0 0 20px rgba(224, 251, 252, 0.3);
     }
 
     .price-info {
-        color: var(--tech-light);
-        opacity: 0.8;
+        color: #a8a8a8; /* Cinza */
+        opacity: 0.9;
         font-family: var(--font-tech);
         font-size: var(--font-size-micro);
         line-height: var(--line-height-normal);
@@ -459,20 +564,20 @@
     }
 
     .price-bonus {
-        color: var(--tech-blue);
+        color: #6a0dad; /* Roxo Escuro tech */
         font-family: var(--font-tech);
         font-size: var(--font-size-micro);
         margin-top: 0.25rem;
-        text-shadow: 0 0 10px rgba(0, 247, 255, 0.2);
+        text-shadow: 0 0 10px rgba(106, 13, 173, 0.3);
     }
 
     /* CTA Button */
     .btn-cta {
-        background: linear-gradient(135deg, var(--tech-blue), var(--tech-red));
+        background: linear-gradient(135deg, #6a0dad, #ff073a); /* Roxo Escuro tech para Vermelho */
         border: none;
         border-radius: 10px;
         padding: clamp(0.5rem, 1.5vw, 1rem) clamp(1.25rem, 2.5vw, 2rem);
-        color: var(--tech-dark);
+        color: #e0fbfc; /* Branco */
         font-family: var(--font-orbitron);
         font-size: var(--font-size-tiny);
         line-height: var(--line-height-normal);
@@ -490,7 +595,7 @@
         width: 100%;
         max-width: 250px;
         margin: 0 auto;
-        box-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
+        box-shadow: 0 0 20px rgba(106, 13, 173, 0.3);
     }
 
     .btn-cta::before {
@@ -511,8 +616,8 @@
 
     .btn-cta:hover {
         transform: translateY(-2px);
-        box-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
-        color: var(--tech-dark);
+        box-shadow: 0 0 30px rgba(106, 13, 173, 0.4);
+        color: #e0fbfc; /* Branco */
     }
 
     .btn-cta:hover::before {
@@ -680,24 +785,32 @@
     .service-card.featured {
         border: 2px solid var(--tech-blue);
         position: relative;
-        overflow: hidden;
+        overflow: visible;
         animation: neonPulse 2s infinite;
+        z-index: 10;
+        transform: scale(1.05) translateY(-10px);
+        box-shadow: 0 15px 35px rgba(135, 206, 235, 0.3),
+                    0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
     .featured-badge {
         position: absolute;
-        top: 20px;
-        right: -35px;
-        background: linear-gradient(135deg, var(--tech-blue), var(--tech-red));
-        color: var(--tech-dark);
-        padding: 0.5rem 2.5rem;
+        top: 15px;
+        right: -30px;
+        background: #87CEEB; /* Azul celeste */
+        color: #000;
+        padding: 0.6rem 2.8rem;
         transform: rotate(45deg);
         font-family: var(--font-orbitron);
-        font-size: var(--font-size-tiny);
-        font-weight: 600;
-        z-index: 2;
-        box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
-        animation: badgePulse 1.5s infinite;
+        font-size: var(--font-size-small);
+        font-weight: 700;
+        z-index: 15; /* Sobreposto */
+        box-shadow: 0 4px 15px rgba(135, 206, 235, 0.6),
+                    0 0 25px rgba(135, 206, 235, 0.4);
+        animation: badgeBlink 1s infinite;
+        border: 2px solid #5F9EA0;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        letter-spacing: 0.5px;
     }
 
     .featured .price-current {
@@ -745,6 +858,27 @@
         100% { opacity: 1; box-shadow: 0 0 15px rgba(0, 247, 255, 0.3); }
     }
 
+    @keyframes badgeBlink {
+        0% { 
+            opacity: 1; 
+            background: #87CEEB;
+            box-shadow: 0 4px 15px rgba(135, 206, 235, 0.6),
+                        0 0 25px rgba(135, 206, 235, 0.4);
+        }
+        50% { 
+            opacity: 0.3; 
+            background: #B0E0E6;
+            box-shadow: 0 2px 8px rgba(135, 206, 235, 0.3),
+                        0 0 15px rgba(135, 206, 235, 0.2);
+        }
+        100% { 
+            opacity: 1; 
+            background: #87CEEB;
+            box-shadow: 0 4px 15px rgba(135, 206, 235, 0.6),
+                        0 0 25px rgba(135, 206, 235, 0.4);
+        }
+    }
+
     /* Melhorias na lista de features */
     .features-list {
         gap: 0.8rem;
@@ -779,272 +913,275 @@
     <div class="container">
         <div class="section-header">
             <h1 class="section-title">Nossos Planos</h1>
-            <p class="section-subtitle">Escolha o plano ideal para sua presença digital</p>
+            <p class="section-subtitle">Da ideia ao impacto: escolha o plano que transforma seu negócio online.</p>
     </div>
 
         <div class="swiper-container">
             <div class="swiper">
                 <div class="swiper-navigation-area"></div>
                 <div class="swiper-wrapper">
-                    <!-- Landing Page -->
-                    <div class="swiper-slide">
-                    <div class="service-card">
-                            <div class="service-card-inner">
-                        <div class="service-icon">
-                                    <i class="bi bi-file-earmark-code"></i>
-                                </div>
-                                <h3 class="service-title">Landing Page</h3>
-                                <p class="service-description">Alta Conversão - Ideal para campanhas, produtos específicos ou captura de leads.</p>
-                                <ul class="features-list">
-                                    <li class="feature-item">
-                                        <span class="feature-icon">✨</span>
-                                        <span>Design moderno focado em conversão</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">📱</span>
-                                        <span>Design 100% Responsivo</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">📝</span>
-                                        <span>Formulário de Contato/Captura</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">💬</span>
-                                        <span>Integração WhatsApp</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">🔍</span>
-                                        <span>Otimização SEO Básica</span>
-                                    </li>
-                                </ul>
-                                <div class="price-box">
-                                    <span class="price-original">R$ 497,90</span>
-                                    <div class="price-current">R$ 247,90</div>
-                                    <span class="price-info">Pagamento único</span>
-                                    <div class="price-bonus">
-                                        BÔNUS: Domínio + 1 Ano de Hospedagem
-                                    </div>
-                                </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na Landing Page. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-whatsapp"></i> Solicitar Orçamento
-                                </a>
-                            </div>
-                        </div>
-                        </div>
-
-                    <!-- Site Institucional -->
-                    <div class="swiper-slide">
-                        <div class="service-card featured">
-                            <div class="featured-badge">DESTAQUE</div>
-                            <div class="service-card-inner">
-                                <div class="service-icon">
-                                    <i class="bi bi-building"></i>
-                                </div>
-                                <h3 class="service-title">Site Institucional</h3>
-                                <p class="service-description">A melhor porta de entrada para a presença digital completa da sua empresa.</p>
-                                <ul class="features-list">
-                                    <li class="feature-item">
-                                        <span class="feature-icon">🎨</span>
-                                        <span>Design profissional personalizado</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">📄</span>
-                                        <span>Até 5 páginas</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">🔍</span>
-                                        <span>Otimização SEO on-page</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">⚡</span>
-                                        <span>Painel de gerenciamento básico</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">💬</span>
-                                        <span>Integração WhatsApp</span>
-                                    </li>
-                                </ul>
-                                <div class="price-box">
-                                    <span class="price-original">R$ 797,90</span>
-                                    <div class="price-current">R$ 397,90</div>
-                                    <span class="price-info">Melhor custo-benefício</span>
-                                </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Institucional. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-whatsapp"></i> Solicitar Orçamento
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Site Profissional -->
+                    <!-- Portfólio Profissional - Item 0 -->
                     <div class="swiper-slide">
                         <div class="service-card">
                             <div class="service-card-inner">
                                 <div class="service-icon">
-                                    <i class="bi bi-gear"></i>
+                                    <i class="bi bi-person-badge"></i>
                                 </div>
-                                <h3 class="service-title">Site Profissional</h3>
-                                <p class="service-description">Para negócios que precisam de mais conteúdo e funcionalidades.</p>
+                                <h3 class="service-title">Portfólio Profissional</h3>
+                                <p class="service-description">"Apareça no Google e conquiste clientes antes mesmo de falar com eles."</p>
                                 <ul class="features-list">
                                     <li class="feature-item">
-                                        <span class="feature-icon">📄</span>
-                                        <span>Até 10 páginas</span>
+                                        <span class="feature-icon">🔍</span>
+                                        <span>Presença garantida no Google</span>
                                     </li>
                                     <li class="feature-item">
-                                        <span class="feature-icon">📝</span>
-                                        <span>Blog completo</span>
+                                        <span class="feature-icon">📢</span>
+                                        <span>Anúncios levando direto ao seu WhatsApp</span>
                                     </li>
                                     <li class="feature-item">
-                                        <span class="feature-icon">📊</span>
-                                        <span>Google Analytics</span>
+                                        <span class="feature-icon">👀</span>
+                                        <span>Clientes conhecem seu trabalho sem precisar perguntar</span>
                                     </li>
                                     <li class="feature-item">
-                                        <span class="feature-icon">🖼️</span>
-                                        <span>Galeria de fotos</span>
+                                        <span class="feature-icon">📅</span>
+                                        <span>Agendamento de serviços via formulário online</span>
                                     </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">⚡</span>
-                                        <span>Funcionalidades adicionais</span>
-                                    </li>
-                        </ul>
+                                </ul>
                                 <div class="price-box">
-                                    <div class="price-current">R$ 697,90</div>
-                                    <span class="price-info">em até 12x no cartão</span>
+                                    <span class="price-original">R$ 399,00</span>
+                                    <div class="price-current">R$ 249,90</div>
+                                    <span class="price-info">37% OFF / 3x sem juros</span>
                                 </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Profissional. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-whatsapp"></i> Solicitar Orçamento
-                                </a>
+                                <button class="btn-cta" onclick="createMercadoPagoCheckout('portfolio')">
+                                    <i class="bi bi-credit-card"></i> Contratar Agora
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Site Empresarial -->
+                    <!-- Consultoria Estratégica - Item 1 -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="service-card-inner">
+                                <div class="service-icon">
+                                    <i class="bi bi-lightbulb"></i>
+                                </div>
+                                <h3 class="service-title">Consultoria Estratégica</h3>
+                                <p class="service-description">"Se sua empresa não está no digital, ela já está ficando para trás."</p>
+                                <ul class="features-list">
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🔍</span>
+                                        <span>Diagnóstico completo do seu negócio</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🎯</span>
+                                        <span>Estratégias sob medida para o mercado digital</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📊</span>
+                                        <span>Análise de concorrentes e posicionamento</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">💡</span>
+                                        <span>Ideias práticas para aumentar conversões imediatamente</span>
+                                    </li>
+                                </ul>
+                                <div class="price-box">
+                                    <span class="price-original">R$ 297,00</span>
+                                    <div class="price-current">R$ 150,00</div>
+                                    <span class="price-info">49% OFF / até 2x de R$ 75,00</span>
+                                    <div class="price-bonus">
+                                        Bônus: e-book "Hoztech - Alpinista 4.0"
+                                    </div>
+                                </div>
+                                <button class="btn-cta" onclick="createMercadoPagoCheckout('consultoria')">
+                                    <i class="bi bi-credit-card"></i> Contratar Agora
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Landing Page de Alta Conversão - Item 2 -->
+                    <div class="swiper-slide">
+                        <div class="service-card featured">
+                            <div class="featured-badge">MAIS VENDIDO</div>
+                            <div class="service-card-inner">
+                                <div class="service-icon">
+                                    <i class="bi bi-file-earmark-code"></i>
+                                </div>
+                                <h3 class="service-title">Landing Page de Alta Conversão</h3>
+                                <p class="service-description">"Transforme cliques em clientes de forma rápida e inteligente."</p>
+                                <ul class="features-list">
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🎨</span>
+                                        <span>Layout moderno focado em vendas</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📱</span>
+                                        <span>100% responsivo para celular e desktop</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📝</span>
+                                        <span>Captura de leads com formulário integrado</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">💬</span>
+                                        <span>Integração com WhatsApp</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🔍</span>
+                                        <span>SEO básico para ser encontrado</span>
+                                    </li>
+                                </ul>
+                                <div class="price-box">
+                                    <span class="price-original">R$ 699,00</span>
+                                    <div class="price-current">R$ 379,90</div>
+                                    <span class="price-info">46% OFF / até 4x de R$ 94,98</span>
+                                    <div class="price-bonus">
+                                        Bônus: e-book "Hoztech - Alpinista 4.0"
+                                    </div>
+                                </div>
+                                <button class="btn-cta" onclick="createMercadoPagoCheckout('landing')">
+                                    <i class="bi bi-credit-card"></i> Contratar Agora
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Site Institucional Premium - Item 3 -->
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="service-card-inner">
+                                <div class="service-icon">
+                                    <i class="bi bi-building"></i>
+                                </div>
+                                <h3 class="service-title">Site Institucional Premium</h3>
+                                <p class="service-description">"Sua marca com credibilidade e profissionalismo no digital."</p>
+                                <ul class="features-list">
+                                    <li class="feature-item">
+                                        <span class="feature-icon">✨</span>
+                                        <span>Todas as funções da Landing Page +</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📄</span>
+                                        <span>Até 5 páginas navegáveis</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">🔍</span>
+                                        <span>SEO on-page otimizado</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">⚡</span>
+                                        <span>Painel para gerenciamento simples</span>
+                                    </li>
+                                </ul>
+                                <div class="price-box">
+                                    <span class="price-original">R$ 997,00</span>
+                                    <div class="price-current">R$ 649,90</div>
+                                    <span class="price-info">35% OFF / até 5x de R$ 129,98</span>
+                                    <div class="price-bonus">
+                                        Bônus: e-book "Hoztech - Alpinista 4.0"
+                                    </div>
+                                </div>
+                                <button class="btn-cta" onclick="createMercadoPagoCheckout('institucional')">
+                                    <i class="bi bi-credit-card"></i> Contratar Agora
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Site Empresarial Avançado - Item 4 -->
                     <div class="swiper-slide">
                         <div class="service-card">
                             <div class="service-card-inner">
                                 <div class="service-icon">
                                     <i class="bi bi-building-check"></i>
                                 </div>
-                                <h3 class="service-title">Site Empresarial</h3>
-                                <p class="service-description">Soluções robustas para empresas estabelecidas.</p>
+                                <h3 class="service-title">Site Empresarial Avançado</h3>
+                                <p class="service-description">"Aumente autoridade e domine seu mercado online."</p>
                                 <ul class="features-list">
                                     <li class="feature-item">
+                                        <span class="feature-icon">✨</span>
+                                        <span>Tudo do Site Institucional +</span>
+                                    </li>
+                                    <li class="feature-item">
                                         <span class="feature-icon">📄</span>
-                                        <span>Até 15 páginas</span>
+                                        <span>Até 15 páginas navegáveis</span>
+                                    </li>
+                                    <li class="feature-item">
+                                        <span class="feature-icon">📝</span>
+                                        <span>Blog completo com Google Analytics</span>
                                     </li>
                                     <li class="feature-item">
                                         <span class="feature-icon">🔄</span>
-                                        <span>Integrações específicas</span>
+                                        <span>Integrações específicas para seu negócio</span>
                                     </li>
                                     <li class="feature-item">
                                         <span class="feature-icon">👥</span>
-                                        <span>Área de membros simples</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">📊</span>
-                                        <span>CRM básico</span>
+                                        <span>Área de membros e CRM integrado</span>
                                     </li>
                                     <li class="feature-item">
                                         <span class="feature-icon">🚀</span>
-                                        <span>Otimizações avançadas</span>
+                                        <span>Otimizações avançadas para performance</span>
                                     </li>
                                 </ul>
                                 <div class="price-box">
-                                    <div class="price-current">R$ 1.197,90</div>
-                                    <span class="price-info">em até 12x no cartão</span>
+                                    <span class="price-original">R$ 1.497,00</span>
+                                    <div class="price-current">R$ 847,00</div>
+                                    <span class="price-info">33% OFF / até 12x de R$ 70,58</span>
+                                    <div class="price-bonus">
+                                        Bônus: e-book "Hoztech - Alpinista 4.0"
+                                    </div>
                                 </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Empresarial. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-whatsapp"></i> Solicitar Orçamento
-                                </a>
+                                <button class="btn-cta" onclick="createMercadoPagoCheckout('empresarial')">
+                                    <i class="bi bi-credit-card"></i> Contratar Agora
+                                </button>
                             </div>
                         </div>
-                        </div>
+                    </div>
 
-                    <!-- Loja Virtual -->
+                    <!-- Loja Virtual Própria - Item 5 -->
                     <div class="swiper-slide">
                         <div class="service-card">
                             <div class="service-card-inner">
                                 <div class="service-icon">
                                     <i class="bi bi-cart4"></i>
                                 </div>
-                                <h3 class="service-title">Loja Virtual</h3>
-                                <p class="service-description">Comece a vender online de forma profissional</p>
+                                <h3 class="service-title">Loja Virtual Própria</h3>
+                                <p class="service-description">"Venda sem pagar comissão para marketplaces e aumente seu lucro."</p>
                                 <ul class="features-list">
                                     <li class="feature-item">
+                                        <span class="feature-icon">🎨</span>
+                                        <span>Design moderno e vendedor</span>
+                                    </li>
+                                    <li class="feature-item">
                                         <span class="feature-icon">🛍️</span>
-                                        <span>Até 20 produtos iniciais</span>
+                                        <span>Cadastro inicial de 20 produtos</span>
                                     </li>
                                     <li class="feature-item">
                                         <span class="feature-icon">💳</span>
-                                        <span>PagSeguro e Mercado Pago</span>
+                                        <span>Sistema de pagamento integrado com segurança bancária</span>
                                     </li>
                                     <li class="feature-item">
                                         <span class="feature-icon">🚚</span>
-                                        <span>Cálculo de frete</span>
+                                        <span>Cálculo de frete automático</span>
                                     </li>
                                     <li class="feature-item">
                                         <span class="feature-icon">⚡</span>
-                                        <span>Painel administrativo</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">📱</span>
-                                        <span>Design responsivo</span>
+                                        <span>Controle de vendas no seu painel administrativo</span>
                                     </li>
                                 </ul>
                                 <div class="price-box">
-                                    <div class="price-current">R$ 997,90</div>
-                                    <span class="price-info">Taxa de configuração e design</span>
+                                    <span class="price-original">R$ 2.197,00</span>
+                                    <div class="price-current">R$ 1.297,00</div>
+                                    <span class="price-info">32% OFF / até 12x de R$ 108,08</span>
                                     <div class="price-bonus">
-                                        *Custos de plataforma não inclusos
+                                        Bônus: e-book "Hoztech - Alpinista 4.0"
                                     </div>
                                 </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na Loja Virtual. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-shield-check text-xl"></i>
-                                    <span>Solicitar Proposta</span>
-                                </a>
-                        </div>
-                        </div>
-                    </div>
-
-                    <!-- Premium -->
-                    <div class="swiper-slide">
-                        <div class="service-card">
-                            <div class="service-card-inner">
-                                <div class="service-icon">
-                                    <i class="bi bi-star-fill"></i>
-                                </div>
-                                <h3 class="service-title">Premium</h3>
-                                <p class="service-description">Soluções personalizadas para projetos complexos</p>
-                                <ul class="features-list">
-                                    <li class="feature-item">
-                                        <span class="feature-icon">🎯</span>
-                                        <span>Projetos sob medida</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">🔄</span>
-                                        <span>Integrações avançadas</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">💻</span>
-                                        <span>Sistemas web</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">📊</span>
-                                        <span>Consultoria especializada</span>
-                                    </li>
-                                    <li class="feature-item">
-                                        <span class="feature-icon">🚀</span>
-                                        <span>Soluções escaláveis</span>
-                                    </li>
-                                </ul>
-                                <div class="price-box">
-                                    <div class="price-current">Consulte</div>
-                                    <span class="price-info">Orçamento personalizado</span>
-                                </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Gostaria de um orçamento para um projeto Premium personalizado." class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-shield-check text-xl"></i>
-                                    <span>Solicitar Proposta</span>
-                                </a>
+                                <button class="btn-cta" onclick="createMercadoPagoCheckout('loja')">
+                                    <i class="bi bi-credit-card"></i> Contratar Agora
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -1072,8 +1209,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Função para determinar se o loop deve ser habilitado
     function shouldEnableLoop(slidesPerView, totalSlides) {
-        // Loop só é habilitado se tivermos pelo menos o dobro de slides visíveis
-        return totalSlides >= (slidesPerView * 2);
+        // Loop só é habilitado se tivermos pelo menos 3 slides e mais que o dobro de slides visíveis
+        return totalSlides >= 3 && totalSlides >= (slidesPerView * 2);
     }
     
     // Configuração dinâmica baseada no viewport
@@ -1098,19 +1235,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicialização do Swiper com configurações otimizadas
     const swiper = new Swiper('.swiper', {
         // Configuração Base
-        slidesPerView: 'auto',
-        initialSlide: config.enableLoop ? 1 : 0,
+        slidesPerView: 1,
+        initialSlide: 0, // Sempre inicia no item 0 (Portfólio)
         centeredSlides: true,
         loop: config.enableLoop,
-        speed: isReducedMotion ? 0 : 600,
+        speed: isReducedMotion ? 0 : 500, // Velocidade mais suave
         grabCursor: true,
-        effect: 'coverflow',
-        coverflowEffect: {
-            rotate: 0,
-            stretch: 0,
-            depth: 100,
-            modifier: 2,
-            slideShadows: false,
+        effect: 'cards',
+        cardsEffect: {
+            slideShadows: true,
+            transformEl: null,
+            rotate: true,
+            perSlideOffset: 8,
+            perSlideRotate: 2,
         },
         
         // Configurações de loop otimizadas (só aplicadas se loop estiver habilitado)
@@ -1121,33 +1258,53 @@ document.addEventListener('DOMContentLoaded', function() {
             loopPreventsSlide: false,
         }),
         
-        // Breakpoints otimizados com verificação de loop dinâmica
+        // Breakpoints otimizados para efeito cards - mantém 1 slide sempre
         breakpoints: {
             320: {
                 slidesPerView: 1,
-                spaceBetween: 10,
+                spaceBetween: 20,
                 centeredSlides: true,
-                loop: shouldEnableLoop(1, totalSlides)
+                loop: shouldEnableLoop(1, totalSlides),
+                cardsEffect: {
+                    perSlideOffset: 6,
+                    perSlideRotate: 1.5,
+                }
             },
             480: {
                 slidesPerView: 1,
-                spaceBetween: 15,
-                loop: shouldEnableLoop(1, totalSlides)
+                spaceBetween: 25,
+                loop: shouldEnableLoop(1, totalSlides),
+                cardsEffect: {
+                    perSlideOffset: 7,
+                    perSlideRotate: 1.8,
+                }
             },
             768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-                loop: shouldEnableLoop(2, totalSlides)
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: shouldEnableLoop(1, totalSlides),
+                cardsEffect: {
+                    perSlideOffset: 8,
+                    perSlideRotate: 2,
+                }
             },
             1024: {
-                slidesPerView: 2,
-                spaceBetween: 25,
-                loop: shouldEnableLoop(2, totalSlides)
+                slidesPerView: 1,
+                spaceBetween: 35,
+                loop: shouldEnableLoop(1, totalSlides),
+                cardsEffect: {
+                    perSlideOffset: 9,
+                    perSlideRotate: 2.2,
+                }
             },
             1280: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-                loop: shouldEnableLoop(3, totalSlides)
+                slidesPerView: 1,
+                spaceBetween: 40,
+                loop: shouldEnableLoop(1, totalSlides),
+                cardsEffect: {
+                    perSlideOffset: 10,
+                    perSlideRotate: 2.5,
+                }
             }
         },
         
@@ -1182,16 +1339,23 @@ document.addEventListener('DOMContentLoaded', function() {
             notificationClass: 'swiper-notification'
         },
         
-        // Otimizações de performance
+        // Otimizações de performance e suavidade
         observer: true,
         observeParents: true,
         watchSlidesProgress: true,
-        preventInteractionOnTransition: true,
-        touchRatio: 1,
+        preventInteractionOnTransition: false, // Permite interação durante transição
+        touchRatio: 1.2, // Mais sensível ao toque
         touchAngle: 45,
         simulateTouch: true,
         resistance: true,
-        resistanceRatio: 0.85,
+        resistanceRatio: 0.7, // Menos resistência para movimento mais fluido
+        freeMode: false,
+        freeModeSticky: true,
+        freeModeMomentum: true,
+        freeModeMomentumRatio: 1,
+        freeModeMomentumBounce: false,
+        slidesOffsetBefore: 0,
+        slidesOffsetAfter: 0,
         
         // Configuração de rewind para quando loop está desabilitado
         rewind: !config.enableLoop,
@@ -1209,6 +1373,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelectorAll('.service-card').forEach(card => {
                     card.style.transition = 'all 0.3s ease';
                 });
+
+// Verificar se o SDK do Mercado Pago foi carregado
+window.addEventListener('load', function() {
+    console.log('Página carregada. Verificando SDK do Mercado Pago...');
+    if (typeof MercadoPago === 'undefined') {
+        console.error('SDK do Mercado Pago não foi carregado');
+    } else {
+        console.log('SDK do Mercado Pago disponível');
+    }
+});
             },
             breakpoint: function(swiper, breakpointParams) {
                 // Atualiza configurações quando breakpoint muda
@@ -1267,16 +1441,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Função para atualizar estilos dos slides
+    // Função para atualizar estilos dos slides com transições suaves
     function updateSlideStyles(swiper) {
         const slides = swiper.slides;
         slides.forEach((slide, index) => {
             const card = slide.querySelector('.service-card');
             if (card) {
+                // Adiciona transição suave
+                card.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                
                 if (slide.classList.contains('swiper-slide-active')) {
-                    card.style.transform = 'scale(1)';
+                    card.style.transform = 'scale(1) translateY(0)';
                     card.style.opacity = '1';
                     card.style.zIndex = '10';
+                    card.style.filter = 'brightness(1)';
                 } else {
                     let offset;
                     if (swiper.params.loop) {
@@ -1288,11 +1466,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         offset = Math.abs(swiper.activeIndex - index);
                     }
                     
-                    const scale = Math.max(0.85, 1 - (offset * 0.08));
-                    const opacity = Math.max(0.6, 1 - (offset * 0.2));
-                    card.style.transform = `scale(${scale})`;
+                    const scale = Math.max(0.88, 1 - (offset * 0.06)); // Escala mais suave
+                    const opacity = Math.max(0.7, 1 - (offset * 0.15)); // Opacidade mais suave
+                    const translateY = offset * 5; // Leve deslocamento vertical
+                    const brightness = Math.max(0.8, 1 - (offset * 0.1)); // Efeito de brilho
+                    
+                    card.style.transform = `scale(${scale}) translateY(${translateY}px)`;
                     card.style.opacity = opacity;
                     card.style.zIndex = Math.max(1, 10 - offset);
+                    card.style.filter = `brightness(${brightness})`;
                 }
             }
         });
@@ -1397,6 +1579,1151 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // Mercado Pago Checkout Transparente Integration
+    window.mp = null;
+    window.cardForm = null;
+    window.pixForm = null;
+    
+    // Configuração dos serviços
+    window.services = {
+        consultoria: {
+            title: 'Consultoria Estratégica',
+            price: 150.00,
+            original_price: 297.00,
+            installments: 2
+        },
+        portfolio: {
+            title: 'Portfólio Profissional',
+            price: 249.90,
+            original_price: 399.00,
+            installments: 3
+        },
+        landing: {
+            title: 'Landing Page de Alta Conversão',
+            price: 379.90,
+            original_price: 699.00,
+            installments: 4
+        },
+        institucional: {
+            title: 'Site Institucional Premium',
+            price: 649.90,
+            original_price: 997.00,
+            installments: 5
+        },
+        empresarial: {
+            title: 'Site Empresarial Avançado',
+            price: 847.00,
+            original_price: 1497.00,
+            installments: 12
+        },
+        loja: {
+            title: 'Loja Virtual Própria',
+            price: 1297.00,
+            original_price: 2197.00,
+            installments: 12
+        }
+    };
+    
+    // Função initMercadoPago movida para escopo global
+
+    // Função para abrir modal de checkout transparente
+    window.createMercadoPagoCheckout = function(serviceType) {
+        const service = window.services[serviceType];
+        if (!service) {
+            alert('Serviço não encontrado!');
+            return;
+        }
+        
+        // Armazenar serviço selecionado
+        window.selectedService = {
+            type: serviceType,
+            ...service
+        };
+        
+        // Mostrar modal de checkout
+        showCheckoutModal(service);
+    };
+    
+    // Função para mostrar modal de checkout
+    function showCheckoutModal(service) {
+        const modal = document.getElementById('checkoutModal');
+        const serviceTitle = document.getElementById('modalServiceTitle');
+        const servicePrice = document.getElementById('modalServicePrice');
+        const installmentInfo = document.getElementById('modalInstallmentInfo');
+        
+        // Armazenar dados do serviço globalmente
+        window.selectedService = service;
+        
+        // Limpar mensagens anteriores
+        clearMessages();
+        
+        serviceTitle.textContent = service.title;
+        servicePrice.textContent = `R$ ${service.price.toFixed(2).replace('.', ',')}`;
+        installmentInfo.textContent = `ou em até ${service.installments}x de R$ ${(service.price / service.installments).toFixed(2).replace('.', ',')}`;
+        
+        modal.style.display = 'block';
+        
+        // Verificar se o SDK do Mercado Pago está carregado
+        if (typeof MercadoPago === 'undefined') {
+            showMessage('Erro: SDK do Mercado Pago não carregado. Recarregue a página.', 'error');
+            return;
+        }
+        
+        // Inicializar formas de pagamento
+        initPaymentMethods();
+    }
+    
+    // Função para inicializar métodos de pagamento
+    function initPaymentMethods() {
+        // Limpar formulários anteriores
+        document.getElementById('cardFormContainer').innerHTML = '';
+        document.getElementById('pixFormContainer').innerHTML = '';
+        
+        // Mostrar cartão por padrão
+        showPaymentMethod('card');
+    }
+    
+    // Funções para exibir mensagens (escopo global)
+    window.showMessage = function(message, type = 'info', duration = 5000) {
+        const messagesContainer = document.getElementById('modalMessages');
+        const messageId = 'msg_' + Date.now();
+        
+        const icons = {
+            success: 'fas fa-check-circle',
+            error: 'fas fa-exclamation-circle',
+            warning: 'fas fa-exclamation-triangle',
+            info: 'fas fa-info-circle'
+        };
+        
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${type}`;
+        messageElement.id = messageId;
+        messageElement.innerHTML = `
+            <i class="${icons[type]}"></i>
+            <span>${message}</span>
+        `;
+        
+        messagesContainer.appendChild(messageElement);
+        
+        // Auto-remover mensagem após duração especificada
+        if (duration > 0) {
+            setTimeout(() => {
+                const element = document.getElementById(messageId);
+                if (element) {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(-10px)';
+                    setTimeout(() => element.remove(), 300);
+                }
+            }, duration);
+        }
+    }
+    
+    window.clearMessages = function() {
+        const messagesContainer = document.getElementById('modalMessages');
+        messagesContainer.innerHTML = '';
+    }
+    
+    window.showLoading = function(buttonId, text = 'Processando...') {
+        const button = document.getElementById(buttonId) || document.querySelector('.btn-pay');
+        if (button) {
+            button.disabled = true;
+            button.innerHTML = `<span class="loading-spinner"></span> ${text}`;
+        }
+    }
+    
+    window.hideLoading = function(buttonId, originalText = 'Finalizar Pagamento') {
+        const button = document.getElementById(buttonId) || document.querySelector('.btn-pay');
+        if (button) {
+            button.disabled = false;
+            button.innerHTML = originalText;
+        }
+    }
+
+    // Função para alternar entre métodos de pagamento (escopo global)
+    window.showPaymentMethod = function(method) {
+        const cardTab = document.getElementById('cardTab');
+        const pixTab = document.getElementById('pixTab');
+        const cardContainer = document.getElementById('cardFormContainer');
+        const pixContainer = document.getElementById('pixFormContainer');
+        
+        // Limpar mensagens ao trocar de método
+        clearMessages();
+        
+        // Reset tabs
+        cardTab.classList.remove('active');
+        pixTab.classList.remove('active');
+        cardContainer.style.display = 'none';
+        pixContainer.style.display = 'none';
+        
+        if (method === 'card') {
+            cardTab.classList.add('active');
+            cardContainer.style.display = 'block';
+            initCardForm();
+        } else if (method === 'pix') {
+            pixTab.classList.add('active');
+            pixContainer.style.display = 'block';
+            initPixForm();
+        }
+    }
+    
+    // Função para inicializar formulário de cartão (escopo global)
+    window.initCardForm = function() {
+        // Aguardar carregamento do MP se necessário
+        if (!window.mp) {
+            showMessage('Carregando SDK do Mercado Pago...', 'info');
+            setTimeout(() => {
+                if (window.mp) {
+                    clearMessages();
+                    initCardForm();
+                } else {
+                    showMessage('Erro: SDK do Mercado Pago não pôde ser carregado. Recarregue a página.', 'error');
+                }
+            }, 1000);
+            return;
+        }
+        
+        const cardFormContainer = document.getElementById('cardFormContainer');
+        
+        cardFormContainer.innerHTML = `
+            <form id="cardPaymentForm">
+                <div class="form-group">
+                    <label for="cardNumber">Número do Cartão</label>
+                    <div id="form-checkout__cardNumber" class="mp-input"></div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expirationDate">Vencimento</label>
+                        <div id="form-checkout__expirationDate" class="mp-input"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="securityCode">CVV</label>
+                        <div id="form-checkout__securityCode" class="mp-input"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cardholderName">Nome do Titular</label>
+                    <input type="text" id="form-checkout__cardholderName" class="form-control" placeholder="Nome como está no cartão" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="issuer">Banco Emissor</label>
+                    <select id="form-checkout__issuer" class="form-control"></select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="installments">Parcelas</label>
+                    <select id="form-checkout__installments" class="form-control"></select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="identificationType">Tipo de Documento</label>
+                    <select id="form-checkout__identificationType" class="form-control"></select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="identificationNumber">Número do Documento</label>
+                    <input type="text" id="form-checkout__identificationNumber" class="form-control" placeholder="CPF" required>
+                </div>
+                
+                <button type="submit" class="btn-pay">Pagar com Cartão</button>
+            </form>
+        `;
+        
+        // Aguardar um pouco para garantir que o DOM esteja pronto
+        setTimeout(() => {
+            // Verificar se já existe uma instância do CardForm
+            if (window.cardForm) {
+                console.log('CardForm já existe, destruindo instância anterior...');
+                try {
+                    window.cardForm.unmount();
+                } catch (e) {
+                    console.log('Erro ao destruir CardForm anterior:', e);
+                }
+                window.cardForm = null;
+            }
+            
+            // Inicializar CardForm do Mercado Pago
+            console.log('Inicializando CardForm com amount:', window.selectedService.price.toString());
+            window.cardForm = window.mp.cardForm({
+                amount: window.selectedService.price.toString(),
+                autoMount: true,
+                form: {
+                    id: "cardPaymentForm",
+                    cardNumber: {
+                        id: "form-checkout__cardNumber",
+                        placeholder: "Número do cartão",
+                    },
+                    expirationDate: {
+                        id: "form-checkout__expirationDate",
+                        placeholder: "MM/YY",
+                    },
+                    securityCode: {
+                        id: "form-checkout__securityCode",
+                        placeholder: "CVV",
+                    },
+                    cardholderName: {
+                        id: "form-checkout__cardholderName",
+                        placeholder: "Titular do cartão",
+                    },
+                    issuer: {
+                        id: "form-checkout__issuer",
+                        placeholder: "Banco emissor",
+                    },
+                    installments: {
+                        id: "form-checkout__installments",
+                        placeholder: "Parcelas",
+                    },
+                    identificationType: {
+                        id: "form-checkout__identificationType",
+                        placeholder: "Tipo de documento",
+                    },
+                    identificationNumber: {
+                        id: "form-checkout__identificationNumber",
+                        placeholder: "Número do documento",
+                    },
+                },
+                callbacks: {
+                    onFormMounted: error => {
+                        if (error) {
+                            console.warn("Form Mounted handling error: ", error);
+                            showMessage('Erro ao carregar formulário de cartão', 'error');
+                        } else {
+                            console.log('Formulário de cartão carregado com sucesso');
+                            // Verificar se os campos foram criados com retry
+                            let retryCount = 0;
+                            const maxRetries = 10;
+                            
+                            const checkFields = () => {
+                                const cardNumberField = document.querySelector('#form-checkout__cardNumber input');
+                                const expirationField = document.querySelector('#form-checkout__expirationDate input');
+                                const securityCodeField = document.querySelector('#form-checkout__securityCode input');
+                                
+                                console.log(`=== DEBUG CAMPOS DO CARTÃO (Tentativa ${retryCount + 1}) ===`);
+                                console.log('Campo Número encontrado:', !!cardNumberField);
+                                console.log('Campo Vencimento encontrado:', !!expirationField);
+                                console.log('Campo CVV encontrado:', !!securityCodeField);
+                                
+                                if (cardNumberField && expirationField && securityCodeField) {
+                                    console.log('✅ Todos os campos do cartão foram criados com sucesso');
+                                    
+                                    // Forçar habilitação dos campos
+                                    [cardNumberField, expirationField, securityCodeField].forEach(field => {
+                                        field.disabled = false;
+                                        field.readOnly = false;
+                                        field.style.pointerEvents = 'auto';
+                                        field.style.userSelect = 'text';
+                                        field.removeAttribute('disabled');
+                                        field.removeAttribute('readonly');
+                                    });
+                                    
+                                    console.log('✅ Campos habilitados para digitação');
+                                    return true;
+                                } else if (retryCount < maxRetries) {
+                                    retryCount++;
+                                    console.log(`⏳ Tentando novamente em 500ms... (${retryCount}/${maxRetries})`);
+                                    setTimeout(checkFields, 500);
+                                    return false;
+                                } else {
+                                    console.warn('❌ Alguns campos do cartão não foram criados após todas as tentativas:', {
+                                        cardNumber: !!cardNumberField,
+                                        expiration: !!expirationField,
+                                        securityCode: !!securityCodeField
+                                    });
+                                    return false;
+                                }
+                            };
+                            
+                            setTimeout(checkFields, 500);
+                        }
+                    },
+                    onSubmit: event => {
+                        event.preventDefault();
+                        window.processCardPayment();
+                    },
+                    onFetching: (resource) => {
+                        console.log("Fetching resource: ", resource);
+                    },
+                    onCardTokenReceived: (error, token) => {
+                        if (error) {
+                            console.error('Erro ao obter token do cartão:', error);
+                        } else {
+                            console.log('Token do cartão recebido:', token);
+                        }
+                    }
+                },
+            });
+        }, 100);
+    }
+    
+    // Função para inicializar formulário PIX (escopo global)
+    window.initPixForm = function() {
+        const pixFormContainer = document.getElementById('pixFormContainer');
+        
+        pixFormContainer.innerHTML = `
+            <form id="pixPaymentForm">
+                <div class="pix-info">
+                    <div class="pix-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h3>Pagamento via PIX</h3>
+                    <p>Após confirmar, você receberá um QR Code para realizar o pagamento instantaneamente.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pixEmail">E-mail</label>
+                    <input type="email" id="pixEmail" class="form-control" placeholder="seu@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pixDocument">CPF</label>
+                    <input type="text" id="pixDocument" class="form-control" placeholder="000.000.000-00" required>
+                </div>
+                
+                <button type="submit" class="btn-pay">Gerar PIX</button>
+            </form>
+        `;
+        
+        // Event listener para formulário PIX
+        setTimeout(() => {
+            const pixForm = document.getElementById('pixPaymentForm');
+            if (pixForm) {
+                pixForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    window.processPixPayment();
+                });
+                console.log('✅ Event listener PIX adicionado com sucesso');
+            } else {
+                console.error('❌ Formulário PIX não encontrado');
+            }
+        }, 100);
+    }
+    
+    // Função para processar pagamento com cartão
+    window.processCardPayment = async function() {
+        try {
+            clearMessages();
+            showLoading(null, 'Processando pagamento...');
+            
+            // Validar se o cardForm está inicializado
+            if (!window.cardForm) {
+                throw new Error('Formulário de cartão não inicializado');
+            }
+            
+            const formData = window.cardForm.getCardFormData();
+            
+            // Validações básicas
+            if (!formData.token) {
+                throw new Error('Dados do cartão inválidos');
+            }
+            
+            const paymentData = {
+                transaction_amount: window.selectedService.price,
+                token: formData.token,
+                description: window.selectedService.title,
+                installments: parseInt(formData.installments),
+                payment_method_id: formData.payment_method_id,
+                issuer_id: formData.issuer_id,
+                payer: {
+                    email: formData.payer.email || 'test@test.com',
+                    identification: {
+                        type: formData.payer.identification.type,
+                        number: formData.payer.identification.number
+                    }
+                }
+            };
+            
+            const response = await fetch('/mercado-pago/process-payment/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    payment_data: paymentData,
+                    service_type: window.selectedService.type
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Erro HTTP: ${response.status}`);
+            }
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showMessage('Pagamento processado com sucesso!', 'success');
+                setTimeout(() => {
+                    if (result.status === 'approved') {
+                        window.location.href = '/mercado-pago/success/?payment_id=' + result.payment_id;
+                    } else if (result.status === 'pending') {
+                        window.location.href = '/mercado-pago/pending/?payment_id=' + result.payment_id;
+                    } else {
+                        window.location.href = '/mercado-pago/failure/?payment_id=' + result.payment_id;
+                    }
+                }, 1500);
+            } else {
+                throw new Error(result.error || 'Erro desconhecido no pagamento');
+            }
+        } catch (error) {
+            console.error('Erro no pagamento:', error);
+            hideLoading(null, 'Pagar com Cartão');
+            showMessage(error.message || 'Erro ao processar pagamento. Tente novamente.', 'error');
+        }
+    }
+    
+    // Função para processar pagamento PIX
+    window.processPixPayment = async function() {
+        try {
+            clearMessages();
+            showLoading(null, 'Gerando PIX...');
+            
+            const email = document.getElementById('pixEmail').value;
+            const pixDocument = document.getElementById('pixDocument').value;
+            
+            // Validações
+            if (!email || !email.includes('@')) {
+                throw new Error('E-mail inválido');
+            }
+            
+            if (!pixDocument || pixDocument.replace(/\D/g, '').length !== 11) {
+                throw new Error('CPF deve ter 11 dígitos');
+            }
+            
+            const paymentData = {
+                transaction_amount: window.selectedService.price,
+                description: window.selectedService.title,
+                payment_method_id: 'pix',
+                payer: {
+                    email: email,
+                    identification: {
+                        type: 'CPF',
+                        number: pixDocument.replace(/\D/g, '')
+                    }
+                }
+            };
+            
+            const response = await fetch('/mercado-pago/process-payment/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    payment_data: paymentData,
+                    service_type: window.selectedService.type
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Erro HTTP: ${response.status}`);
+            }
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                hideLoading(null, 'Gerar PIX');
+                showMessage('PIX gerado com sucesso!', 'success');
+                showPixQRCode(result.qr_code, result.qr_code_base64, result.payment_id);
+            } else {
+                throw new Error(result.error || 'Erro desconhecido ao gerar PIX');
+            }
+        } catch (error) {
+            console.error('Erro no PIX:', error);
+            hideLoading(null, 'Gerar PIX');
+            showMessage(error.message || 'Erro ao processar pagamento PIX. Tente novamente.', 'error');
+        }
+    }
+    
+    // Função para mostrar QR Code do PIX
+    window.showPixQRCode = function(qrCode, qrCodeBase64, paymentId) {
+        const pixContainer = document.getElementById('pixFormContainer');
+        
+        pixContainer.innerHTML = `
+            <div class="pix-qr-container">
+                <h3>PIX Gerado com Sucesso!</h3>
+                <div class="qr-code">
+                    <img src="data:image/png;base64,${qrCodeBase64}" alt="QR Code PIX">
+                </div>
+                <div class="pix-code">
+                    <label>Código PIX (Copia e Cola):</label>
+                    <div class="code-container">
+                        <input type="text" id="pixCode" value="${qrCode}" readonly>
+                        <button onclick="copyPixCode()" class="btn-copy">Copiar</button>
+                    </div>
+                </div>
+                <div class="pix-instructions">
+                    <p><strong>Como pagar:</strong></p>
+                    <ol>
+                        <li>Abra o app do seu banco</li>
+                        <li>Escolha a opção PIX</li>
+                        <li>Escaneie o QR Code ou cole o código</li>
+                        <li>Confirme o pagamento</li>
+                    </ol>
+                </div>
+                <button onclick="checkPaymentStatus('${paymentId}')" class="btn-check">Verificar Pagamento</button>
+            </div>
+        `;
+    }
+    
+    // Função para copiar código PIX (escopo global)
+    window.copyPixCode = function() {
+        const pixCode = document.getElementById('pixCode');
+        pixCode.select();
+        document.execCommand('copy');
+        alert('Código PIX copiado!');
+    }
+    
+    // Função para verificar status do pagamento (escopo global)
+    window.checkPaymentStatus = async function(paymentId) {
+        try {
+            const response = await fetch(`/mercado-pago/check-payment/${paymentId}/`, {
+                method: 'GET',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken')
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.status === 'approved') {
+                window.location.href = '/mercado-pago/success/?payment_id=' + paymentId;
+            } else if (result.status === 'pending') {
+                alert('Pagamento ainda pendente. Aguarde a confirmação.');
+            } else {
+                alert('Pagamento não encontrado ou rejeitado.');
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro ao verificar pagamento.');
+        }
+    }
+    
+    // Função para fechar modal
+    window.closeCheckoutModal = function() {
+        document.getElementById('checkoutModal').style.display = 'none';
+        // Limpar formulários ao fechar
+        const cardContainer = document.getElementById('cardFormContainer');
+        const pixContainer = document.getElementById('pixFormContainer');
+        if (cardContainer) cardContainer.innerHTML = '';
+        if (pixContainer) pixContainer.innerHTML = '';
+        // Limpar mensagens
+        clearMessages();
+    }
+    
+    // Adicionar event listeners para fechar modal
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('checkoutModal');
+        
+        // Fechar modal ao clicar fora da área de conteúdo
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeCheckoutModal();
+            }
+        });
+        
+        // Fechar modal com tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                closeCheckoutModal();
+            }
+        });
+    });
+    
+    // Função para obter CSRF token
+    window.getCookie = function(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 });
+
+// Função global para inicializar Mercado Pago
+window.initMercadoPago = function() {
+    // Verificar se já foi inicializado
+    if (window.mp) {
+        console.log('Mercado Pago já foi inicializado, reutilizando instância existente');
+        return;
+    }
+    
+    const publicKey = '{{ MERCADO_PAGO_PUBLIC_KEY }}';
+    console.log('Chave pública do Mercado Pago:', publicKey);
+    
+    if (!publicKey || publicKey === '') {
+        console.error('Chave pública do Mercado Pago não encontrada');
+        return;
+    }
+    
+    try {
+        window.mp = new MercadoPago(publicKey, {
+            locale: 'pt-BR'
+        });
+        console.log('Mercado Pago inicializado com sucesso');
+    } catch (error) {
+        console.error('Erro ao inicializar Mercado Pago:', error);
+    }
+};
+
+// Função para aguardar carregamento do SDK
+function waitForMercadoPago() {
+    let mercadoPagoAttempts = 0;
+    const maxAttempts = 100; // 10 segundos (100 * 100ms)
+    
+    function checkMercadoPago() {
+        mercadoPagoAttempts++;
+        console.log(`Verificando MercadoPago SDK... (tentativa ${mercadoPagoAttempts}/${maxAttempts})`);
+        
+        if (typeof MercadoPago !== 'undefined') {
+            console.log('MercadoPago SDK carregado com sucesso');
+            
+            window.initMercadoPago();
+        } else if (mercadoPagoAttempts >= maxAttempts) {
+            console.error('Timeout: MercadoPago SDK não pôde ser carregado após 10 segundos');
+        } else {
+            console.log(`Aguardando carregamento do MercadoPago SDK... (tentativa ${mercadoPagoAttempts}/${maxAttempts})`);
+            setTimeout(checkMercadoPago, 100);
+        }
+    }
+    checkMercadoPago();
+}
+
+// Inicializar quando a página carregar
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', waitForMercadoPago);
+} else {
+    // Página já carregada, executar imediatamente
+    waitForMercadoPago();
+}
 </script>
+
+<!-- Mercado Pago SDK -->
+<script src="https://sdk.mercadopago.com/js/v2" 
+        onload="console.log('SDK do Mercado Pago carregado com sucesso')" 
+        onerror="console.error('Erro ao carregar SDK do Mercado Pago')"></script>
+
+<!-- Modal de Checkout Transparente -->
+<div id="checkoutModal" class="checkout-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Finalizar Compra</h2>
+            <span class="close" onclick="closeCheckoutModal()">&times;</span>
+        </div>
+        
+        <div class="service-summary">
+            <h3 id="modalServiceTitle"></h3>
+            <div class="price-info">
+                <span class="price" id="modalServicePrice"></span>
+                <span class="installments" id="modalInstallmentInfo"></span>
+            </div>
+        </div>
+        
+        <div class="payment-tabs">
+            <button id="cardTab" class="tab-button active" onclick="showPaymentMethod('card')">
+                <i class="fas fa-credit-card"></i> Cartão
+            </button>
+            <button id="pixTab" class="tab-button" onclick="showPaymentMethod('pix')">
+                <i class="fas fa-qrcode"></i> PIX
+            </button>
+        </div>
+        
+        <!-- Área de mensagens de erro/sucesso -->
+        <div id="modalMessages" class="modal-messages"></div>
+        
+        <div id="cardFormContainer" class="payment-form"></div>
+        <div id="pixFormContainer" class="payment-form" style="display: none;"></div>
+    </div>
+</div>
+
+<style>
+.checkout-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    margin: 2% auto;
+    padding: 0;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--tech-purple) 0%, var(--tech-blue) 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.close {
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: var(--tech-red);
+}
+
+.service-summary {
+    padding: 20px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+}
+
+.service-summary h3 {
+    color: var(--tech-blue);
+    margin: 0 0 10px 0;
+}
+
+.price-info .price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--tech-light);
+    display: block;
+}
+
+.price-info .installments {
+    color: var(--tech-gray);
+    font-size: 0.9rem;
+}
+
+.payment-tabs {
+    display: flex;
+    background: #2d2d2d;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 15px;
+    background: transparent;
+    border: none;
+    color: var(--tech-gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-button.active {
+    color: var(--tech-blue);
+    border-bottom-color: var(--tech-blue);
+    background: rgba(106, 13, 173, 0.1);
+}
+
+.tab-button:hover {
+    background: rgba(106, 13, 173, 0.2);
+}
+
+.payment-form {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--tech-light);
+    font-weight: 500;
+}
+
+.form-control, .mp-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background: #1a1a1a;
+    color: var(--tech-light);
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    min-height: 48px;
+}
+
+.form-control:focus, .mp-input:focus {
+    outline: none;
+    border-color: var(--tech-blue);
+    box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.1);
+}
+
+/* Estilos específicos para campos do Mercado Pago */
+.mp-input input {
+    width: 100% !important;
+    padding: 12px !important;
+    border: none !important;
+    background: transparent !important;
+    color: var(--tech-light) !important;
+    font-size: 16px !important;
+    outline: none !important;
+}
+
+.mp-input input::placeholder {
+    color: var(--tech-gray) !important;
+}
+
+/* Garantir que os campos do MP sejam visíveis e interativos */
+#form-checkout__cardNumber,
+#form-checkout__expirationDate,
+#form-checkout__securityCode {
+    position: relative !important;
+    z-index: 1 !important;
+    pointer-events: auto !important;
+}
+
+#form-checkout__cardNumber input,
+#form-checkout__expirationDate input,
+#form-checkout__securityCode input {
+    pointer-events: auto !important;
+    user-select: text !important;
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    cursor: text !important;
+    background: #1a1a1a !important;
+    border: 2px solid #333 !important;
+    border-radius: 8px !important;
+}
+
+.btn-pay {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--tech-purple) 0%, var(--tech-red) 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.btn-pay:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(106, 13, 173, 0.3);
+}
+
+.pix-info {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.pix-icon {
+    font-size: 3rem;
+    color: var(--tech-blue);
+    margin-bottom: 15px;
+}
+
+.pix-info h3 {
+    color: var(--tech-light);
+    margin-bottom: 10px;
+}
+
+.pix-info p {
+    color: var(--tech-gray);
+}
+
+.pix-qr-container {
+    text-align: center;
+}
+
+.qr-code {
+    margin: 20px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.qr-code img {
+    max-width: 200px;
+    height: auto;
+}
+
+.code-container {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.code-container input {
+    flex: 1;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.btn-copy, .btn-check {
+    padding: 10px 20px;
+    background: var(--tech-blue);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-copy:hover, .btn-check:hover {
+    background: var(--tech-purple);
+}
+
+.pix-instructions {
+    text-align: left;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(106, 13, 173, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--tech-blue);
+}
+
+.pix-instructions p {
+    color: var(--tech-light);
+    margin-bottom: 10px;
+}
+
+.pix-instructions ol {
+    color: var(--tech-gray);
+    margin: 0;
+    padding-left: 20px;
+}
+
+.pix-instructions li {
+    margin-bottom: 5px;
+}
+
+.modal-messages {
+    margin: 0 20px;
+    padding: 0;
+}
+
+.message {
+    padding: 12px 16px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease;
+}
+
+.message.success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+}
+
+.message.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.message.warning {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: #f59e0b;
+}
+
+.message.info {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+}
+
+.message i {
+    font-size: 1.1rem;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--tech-blue);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn-pay:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-pay:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .code-container {
+        flex-direction: column;
+    }
+}
+</style>
+
 {% endblock %}
