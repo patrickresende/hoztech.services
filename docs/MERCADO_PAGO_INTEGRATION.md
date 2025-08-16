@@ -18,7 +18,7 @@ MERCADO_PAGO_PUBLIC_KEY=APP_USR-...
 
 # Configurações gerais
 MERCADO_PAGO_WEBHOOK_SECRET=your-webhook-secret
-MERCADO_PAGO_NOTIFICATION_URL=https://hoztech.com.br/webhook/mercadopago/
+MERCADO_PAGO_NOTIFICATION_URL=https://hoztech.com.br/webhook/mercado-pago/
 ```
 
 ### 2. Instalação da SDK
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', initMercadoPago);
 ### No Painel do Mercado Pago
 1. Acesse sua conta no Mercado Pago
 2. Vá para "Integrações" > "Webhooks"
-3. Adicione a URL: `https://hoztech.com.br/webhook/mercadopago/`
+3. Adicione a URL: `https://hoztech.com.br/webhook/mercado-pago/`
 4. Selecione os eventos:
    - `payment`
    - `merchant_order`
