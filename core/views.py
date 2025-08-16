@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import FileResponse, JsonResponse
+from django.urls import reverse
 from django.core.mail import send_mail, get_connection
 from django.conf import settings
 from django.views.decorators.http import require_http_methods, require_POST
@@ -1213,6 +1214,15 @@ def shop_index(request):
     return render(request, 'shop/index.html', context)
 
 @log_view_execution
+def products(request):
+    """Página de produtos da loja com integração Mercado Pago"""
+    context = {
+        'page_title': 'Produtos - HOZ TECH Shop',
+        'page_description': 'Explore nossa coleção completa de produtos digitais: templates, plugins, serviços e muito mais.',
+    }
+    return render(request, 'shop/products.html', context)
+
+@log_view_execution
 def shop_redirect(request):
     """View simples para redirecionamento dinâmico baseado no ambiente"""
     if settings.DEBUG:
@@ -1275,6 +1285,24 @@ def produto_teste(request):
         ]
     }
     return render(request, 'shop/produto_teste.html', context)
+
+@log_view_execution
+def produto_teste_mercadopago(request):
+    """Página do produto de teste Mercado Pago de R$ 0,01"""
+    context = {
+        'page_title': 'Produto Teste Mercado Pago - R$ 0,01 - HOZ TECH',
+        'page_description': 'Produto de teste para validação do sistema de pagamento Mercado Pago - Apenas R$ 0,01',
+        'product_price': 'R$ 0,01',
+        'product_features': [
+            'Integração completa com Mercado Pago',
+            'Ambiente de teste (sandbox)',
+            'Valor mínimo para testes',
+            'Processamento instantâneo',
+            'Suporte a cartões de teste',
+            'Redirecionamento automático'
+        ]
+    }
+    return render(request, 'shop/produto_teste_mercadopago.html', context)
 
 # === STRIPE PAYMENT VIEWS ===
 
@@ -1519,3 +1547,180 @@ def stripe_webhook(request):
         return HttpResponse(status=500)
     
     return HttpResponse(status=200)
+
+
+
+
+
+
+# IMPORTAÇÃO DA VIEW MERCADO PAGO
+
+import mercadopago
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+from django.shortcuts import render
+
+def services(request):
+    services_data = [
+        {"id": "portfolio", "title": "Portfólio Profissional", "price": 249.90},
+        {"id": "consultoria", "title": "Consultoria Estratégica", "price": 150.00},
+        {"id": "landing", "title": "Landing Page de Alta Conversão", "price": 379.90},
+        {"id": "institucional", "title": "Site Institucional Premium", "price": 649.90},
+        {"id": "empresarial", "title": "Site Empresarial Avançado", "price": 847.00},
+        {"id": "loja", "title": "Loja Virtual Própria", "price": 1297.00},
+    ]
+    return render(request, 'services.html', {"services": services_data, "mp_public_key": settings.MERCADOPAGO_PUBLIC_KEY})
+
+sdk = mercadopago.SDK(settings.MERCADOPAGO_ACCESS_TOKEN)
+
+@csrf_exempt
+def create_preference(request):
+    try:
+        title = request.GET.get("title", "Produto Exemplo")
+        price = float(request.GET.get("price", 100.0))
+
+        preference_data = {
+            "items":[
+                {
+                    "title": title,
+                    "quantity": 1,
+                    "currency_id": "BRL",
+                    "unit_price": price
+                }
+            ],
+            "back_urls":{
+                "success": request.build_absolute_uri(reverse('core:mercado_pago_success')),
+                "failure": request.build_absolute_uri(reverse('core:mercado_pago_failure')),
+                "pending": request.build_absolute_uri(reverse('core:mercado_pago_pending'))
+            }
+        }
+
+        preference_response = sdk.preference().create(preference_data)
+        
+        if "response" in preference_response:
+            preference = preference_response["response"]
+            # Usar sandbox_init_point em desenvolvimento, init_point em produção
+            from django.conf import settings
+            if hasattr(settings, 'ENVIRONMENT') and settings.ENVIRONMENT == 'development':
+                init_point = preference.get("sandbox_init_point", preference.get("init_point"))
+            else:
+                init_point = preference.get("init_point", preference.get("sandbox_init_point"))
+            
+            if init_point:
+                # Remover espaços extras e garantir URL limpa
+                clean_init_point = init_point.strip()
+                return JsonResponse({"init_point": clean_init_point})
+            else:
+                return JsonResponse({"error": "init_point não encontrado na resposta", "response": preference})
+        else:
+            return JsonResponse({"error": "Erro na resposta da API", "full_response": preference_response})
+            
+    except Exception as e:
+        return JsonResponse({"error": str(e), "type": type(e).__name__})
+
+@csrf_exempt
+def mercado_pago_redirect(request):
+    """View que cria preferência e redireciona automaticamente para o Mercado Pago"""
+    try:
+        title = request.GET.get("title", "Produto Exemplo")
+        price = float(request.GET.get("price", 100.0))
+
+        preference_data = {
+            "items":[
+                {
+                    "title": title,
+                    "quantity": 1,
+                    "currency_id": "BRL",
+                    "unit_price": price
+                }
+            ],
+            "back_urls":{
+                "success": request.build_absolute_uri(reverse('core:mercado_pago_success')),
+                "failure": request.build_absolute_uri(reverse('core:mercado_pago_failure')),
+                "pending": request.build_absolute_uri(reverse('core:mercado_pago_pending'))
+            }
+        }
+
+        preference_response = sdk.preference().create(preference_data)
+        
+        if "response" in preference_response:
+            preference = preference_response["response"]
+            # Usar sandbox_init_point em desenvolvimento, init_point em produção
+            from django.conf import settings
+            if hasattr(settings, 'ENVIRONMENT') and settings.ENVIRONMENT == 'development':
+                init_point = preference.get("sandbox_init_point", preference.get("init_point"))
+            else:
+                init_point = preference.get("init_point", preference.get("sandbox_init_point"))
+            
+            if init_point:
+                # Remover espaços extras e garantir URL limpa
+                clean_init_point = init_point.strip()
+                # Redirecionar automaticamente para o Mercado Pago
+                from django.shortcuts import redirect
+                return redirect(clean_init_point)
+            else:
+                from django.http import HttpResponse
+                return HttpResponse("Erro: init_point não encontrado na resposta do Mercado Pago", status=500)
+        else:
+            from django.http import HttpResponse
+            return HttpResponse("Erro na resposta da API do Mercado Pago", status=500)
+            
+    except Exception as e:
+        from django.http import HttpResponse
+        return HttpResponse(f"Erro ao processar pagamento: {str(e)}", status=500)
+
+# === MERCADO PAGO REDIRECT VIEWS ===
+
+@log_view_execution
+def mercado_pago_success(request):
+    """Página de sucesso após pagamento via Mercado Pago"""
+    payment_id = request.GET.get('payment_id')
+    status = request.GET.get('status')
+    merchant_order_id = request.GET.get('merchant_order_id')
+    
+    context = {
+        'page_title': 'Pagamento Aprovado - HOZ TECH',
+        'page_description': 'Seu pagamento foi aprovado com sucesso. Em breve você receberá mais informações sobre seu serviço.',
+        'payment_id': payment_id,
+        'status': status,
+        'merchant_order_id': merchant_order_id,
+        'success': True
+    }
+    return render(request, 'payments/mercado_pago_result.html', context)
+
+@log_view_execution
+def mercado_pago_failure(request):
+    """Página de falha após pagamento via Mercado Pago"""
+    payment_id = request.GET.get('payment_id')
+    status = request.GET.get('status')
+    merchant_order_id = request.GET.get('merchant_order_id')
+    
+    context = {
+        'page_title': 'Pagamento Rejeitado - HOZ TECH',
+        'page_description': 'Seu pagamento foi rejeitado. Verifique os dados do cartão e tente novamente.',
+        'payment_id': payment_id,
+        'status': status,
+        'merchant_order_id': merchant_order_id,
+        'success': False,
+        'failure': True
+    }
+    return render(request, 'payments/mercado_pago_result.html', context)
+
+@log_view_execution
+def mercado_pago_pending(request):
+    """Página de pendência após pagamento via Mercado Pago"""
+    payment_id = request.GET.get('payment_id')
+    status = request.GET.get('status')
+    merchant_order_id = request.GET.get('merchant_order_id')
+    
+    context = {
+        'page_title': 'Pagamento Pendente - HOZ TECH',
+        'page_description': 'Seu pagamento está sendo processado. Você receberá uma confirmação em breve.',
+        'payment_id': payment_id,
+        'status': status,
+        'merchant_order_id': merchant_order_id,
+        'success': False,
+        'pending': True
+    }
+    return render(request, 'payments/mercado_pago_result.html', context)

@@ -1,0 +1,270 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Produto Teste Mercado Pago - R$ 0,01 - HOZ TECH{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="Produto de teste para validação do sistema de pagamento Mercado Pago - Apenas R$ 0,01">
+<meta name="keywords" content="produto teste, pagamento, mercado pago, hoztech">
+<meta property="og:title" content="Produto Teste Mercado Pago - R$ 0,01 - HOZ TECH">
+<meta property="og:description" content="Produto de teste para validação do sistema de pagamento Mercado Pago - Apenas R$ 0,01">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:type" content="product">
+<meta property="og:image" content="{% static 'core/images/logo.png' %}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Produto Teste Mercado Pago - R$ 0,01">
+<meta name="twitter:description" content="Produto de teste para validação do sistema de pagamento Mercado Pago">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --primary-color: #00d4ff;
+        --secondary-color: #ff6b6b;
+        --success-color: #51cf66;
+        --warning-color: #ffd43b;
+        --danger-color: #ff6b6b;
+        --dark-bg: #0a0b1e;
+        --card-bg: rgba(255, 255, 255, 0.05);
+        --text-light: #ffffff;
+        --text-muted: rgba(255, 255, 255, 0.7);
+        --border-color: rgba(0, 212, 255, 0.2);
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 1.5rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 3rem;
+    }
+
+    body {
+        background: var(--dark-bg);
+        color: var(--text-light);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg, #0a0b1e 0%, #1a1a2e 50%, #16213e 100%);
+        padding: var(--spacing-xl) 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .product-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: var(--spacing-xl);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+    }
+
+    .product-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-lg);
+        font-size: 2rem;
+    }
+
+    .product-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: var(--spacing-md);
+        background: linear-gradient(135deg, var(--primary-color), #667eea);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .product-price {
+        font-size: 3rem;
+        font-weight: 800;
+        text-align: center;
+        color: var(--success-color);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .product-description {
+        text-align: center;
+        color: var(--text-muted);
+        margin-bottom: var(--spacing-xl);
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+
+    .btn-mercadopago {
+        background: linear-gradient(135deg, #009ee3 0%, #0066cc 100%);
+        color: white;
+        border: none;
+        padding: var(--spacing-md) var(--spacing-xl);
+        border-radius: 50px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 158, 227, 0.3);
+    }
+
+    .btn-mercadopago:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0, 158, 227, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+    .features-list {
+        list-style: none;
+        padding: 0;
+        margin: var(--spacing-lg) 0;
+    }
+
+    .features-list li {
+        padding: var(--spacing-xs) 0;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+    }
+
+    .features-list li::before {
+        content: '✓';
+        color: var(--success-color);
+        font-weight: bold;
+        margin-right: var(--spacing-sm);
+        font-size: 1.2rem;
+    }
+
+    .test-badge {
+        background: var(--warning-color);
+        color: #000;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: var(--spacing-md);
+    }
+
+    @media (max-width: 768px) {
+        .product-card {
+            margin: var(--spacing-md);
+            padding: var(--spacing-lg);
+        }
+        
+        .product-title {
+            font-size: 2rem;
+        }
+        
+        .product-price {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="product-card">
+                    <div class="text-center">
+                        <span class="test-badge">🧪 PRODUTO DE TESTE</span>
+                    </div>
+                    
+                    <div class="product-icon">
+                        💳
+                    </div>
+                    
+                    <h1 class="product-title">Teste Mercado Pago</h1>
+                    
+                    <div class="product-price">
+                        R$ 0,01
+                    </div>
+                    
+                    <p class="product-description">
+                        Produto especial para testar a integração com o Mercado Pago.
+                        Valor simbólico de apenas 1 centavo para validação do sistema de pagamento.
+                        Ideal para desenvolvedores e testes de funcionalidade.
+                    </p>
+                    
+                    <ul class="features-list">
+                        <li>Integração completa com Mercado Pago</li>
+                        <li>Ambiente de teste (sandbox)</li>
+                        <li>Valor mínimo para testes</li>
+                        <li>Processamento instantâneo</li>
+                        <li>Suporte a cartões de teste</li>
+                        <li>Redirecionamento automático</li>
+                    </ul>
+                    
+                    <div class="text-center mt-4">
+                        <a href="/payments/redirect/?title=Teste%20Mercado%20Pago&price=0.01" 
+                           class="btn-mercadopago">
+                            💳 Pagar com Mercado Pago
+                        </a>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <small class="text-muted">
+                            <i class="fas fa-shield-alt"></i>
+                            Pagamento seguro processado pelo Mercado Pago
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Adicionar efeitos visuais
+    document.addEventListener('DOMContentLoaded', function() {
+        const card = document.querySelector('.product-card');
+        const btn = document.querySelector('.btn-mercadopago');
+        
+        // Efeito de hover na card
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+        
+        // Efeito de clique no botão
+        btn.addEventListener('click', function(e) {
+            // Adicionar feedback visual
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+            
+            // Log para debug
+            console.log('Redirecionando para Mercado Pago - Produto Teste R$ 0,01');
+        });
+    });
+</script>
+{% endblock %}

@@ -73,6 +73,11 @@
         --transition-normal: 0.3s ease;
         --transition-slow: 0.5s ease;
 
+        /* Botões */
+        --btn-height: 3rem;
+        --btn-radius: 0.75rem;
+        --btn-padding: 0 1.5rem;
+
         /* Tipografia Responsiva Base */
         --font-size-micro: clamp(0.625rem, 0.5vw + 0.5rem, 0.75rem);    /* 10-12px */
         --font-size-tiny: clamp(0.75rem, 0.75vw + 0.5rem, 0.875rem);    /* 12-14px */
@@ -97,6 +102,94 @@
     }
 
     /* Reset e Base */
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Estilos dos Botões de Serviço */
+    .service-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        margin-top: var(--spacing-md);
+    }
+
+    .btn-buy {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        height: var(--btn-height);
+        padding: var(--btn-padding);
+        background: var(--gradient-tech);
+        color: white;
+        border: none;
+        border-radius: var(--btn-radius);
+        font-family: var(--font-orbitron);
+        font-weight: 600;
+        font-size: var(--font-size-small);
+        text-decoration: none;
+        cursor: pointer;
+        transition: all var(--transition-normal);
+        box-shadow: var(--glow-primary);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-buy:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-blue);
+        filter: brightness(1.1);
+    }
+
+    .btn-buy:active {
+        transform: translateY(0);
+    }
+
+    .btn-buy:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .btn-buy::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left var(--transition-slow);
+    }
+
+    .btn-buy:hover::before {
+        left: 100%;
+    }
+
+    @media (min-width: 768px) {
+        .service-buttons {
+            flex-direction: row;
+            gap: var(--spacing-sm);
+        }
+        
+        .btn-buy,
+        .btn-cta {
+            flex: 1;
+        }
+    }
+
+    /* Ajustes para o botão CTA existente */
+    .btn-cta {
+        height: var(--btn-height);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border-radius: var(--btn-radius);
+        transition: all var(--transition-normal);
+    }
+
     * {
         margin: 0;
         padding: 0;
@@ -825,9 +918,14 @@
                                         BÔNUS: Domínio + 1 Ano de Hospedagem
                                     </div>
                                 </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na Landing Page. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-whatsapp"></i> Solicitar Orçamento
-                                </a>
+                                <div class="service-buttons">
+                                    <button class="btn-buy" onclick="buyService('Landing Page', 247.90)">
+                                        <i class="bi bi-credit-card"></i> Comprar Serviço
+                                    </button>
+                                    <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na Landing Page. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
+                                        <i class="bi bi-whatsapp"></i> Solicitar Orçamento
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         </div>
@@ -869,9 +967,14 @@
                                     <div class="price-current">R$ 397,90</div>
                                     <span class="price-info">Melhor custo-benefício</span>
                                 </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Institucional. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-whatsapp"></i> Solicitar Orçamento
-                                </a>
+                                <div class="service-buttons">
+                                    <button class="btn-buy" onclick="buyService('Site Institucional', 397.90)">
+                                        <i class="bi bi-credit-card"></i> Comprar Serviço
+                                    </button>
+                                    <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Institucional. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
+                                        <i class="bi bi-whatsapp"></i> Solicitar Orçamento
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -911,9 +1014,14 @@
                                     <div class="price-current">R$ 697,90</div>
                                     <span class="price-info">em até 12x no cartão</span>
                                 </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Profissional. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-whatsapp"></i> Solicitar Orçamento
-                                </a>
+                                <div class="service-buttons">
+                                    <button class="btn-buy" onclick="buyService('Site Profissional', 697.90)">
+                                        <i class="bi bi-credit-card"></i> Comprar Serviço
+                                    </button>
+                                    <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Profissional. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
+                                        <i class="bi bi-whatsapp"></i> Solicitar Orçamento
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -953,9 +1061,14 @@
                                     <div class="price-current">R$ 1.197,90</div>
                                     <span class="price-info">em até 12x no cartão</span>
                                 </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Empresarial. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-whatsapp"></i> Solicitar Orçamento
-                                </a>
+                                <div class="service-buttons">
+                                    <button class="btn-buy" onclick="buyService('Site Empresarial', 1197.90)">
+                                        <i class="bi bi-credit-card"></i> Comprar Serviço
+                                    </button>
+                                    <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse no Site Empresarial. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
+                                        <i class="bi bi-whatsapp"></i> Solicitar Orçamento
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         </div>
@@ -998,10 +1111,15 @@
                                         *Custos de plataforma não inclusos
                                     </div>
                                 </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na Loja Virtual. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-shield-check text-xl"></i>
-                                    <span>Solicitar Proposta</span>
-                                </a>
+                                <div class="service-buttons">
+                                    <button class="btn-buy" onclick="buyService('Loja Virtual', 997.90)">
+                                        <i class="bi bi-credit-card"></i> Comprar Serviço
+                                    </button>
+                                    <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Tenho interesse na Loja Virtual. Poderia me enviar mais informações?" class="btn-cta" target="_blank" rel="noopener">
+                                        <i class="bi bi-shield-check text-xl"></i>
+                                        <span>Solicitar Proposta</span>
+                                    </a>
+                                </div>
                         </div>
                         </div>
                     </div>
@@ -1041,10 +1159,12 @@
                                     <div class="price-current">Consulte</div>
                                     <span class="price-info">Orçamento personalizado</span>
                                 </div>
-                                <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Gostaria de um orçamento para um projeto Premium personalizado." class="btn-cta" target="_blank" rel="noopener">
-                                    <i class="bi bi-shield-check text-xl"></i>
-                                    <span>Solicitar Proposta</span>
-                                </a>
+                                <div class="service-buttons">
+                                    <a href="https://api.whatsapp.com/send/?phone=5521973007575&text=Olá! Gostaria de um orçamento para um projeto Premium personalizado." class="btn-cta" target="_blank" rel="noopener">
+                                        <i class="bi bi-shield-check text-xl"></i>
+                                        <span>Solicitar Proposta</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1062,8 +1182,39 @@
 {% block extra_js %}
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- Mercado Pago SDK -->
+<script src="https://sdk.mercadopago.com/js/v2"></script>
 
 <script>
+// Função para comprar serviço via Mercado Pago
+function buyService(serviceName, price) {
+    // Desabilita o botão para evitar cliques múltiplos
+    const button = event.target.closest('.btn-buy');
+    button.disabled = true;
+    button.innerHTML = '<i class="bi bi-hourglass-split"></i> Processando...';
+    
+    // Faz a requisição para criar a preferência
+    fetch('/payments/create_preference/?title=' + encodeURIComponent(serviceName) + '&price=' + price)
+        .then(response => response.json())
+        .then(data => {
+            if (data.init_point) {
+                // Redireciona para o Mercado Pago
+                window.open(data.init_point, '_blank');
+            } else {
+                alert('Erro ao processar pagamento. Tente novamente.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao processar pagamento. Tente novamente.');
+        })
+        .finally(() => {
+            // Reabilita o botão
+            button.disabled = false;
+            button.innerHTML = '<i class="bi bi-credit-card"></i> Comprar Serviço';
+        });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
@@ -1400,3 +1551,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 {% endblock %}
+
+

@@ -352,9 +352,9 @@
                         <span class="product-tag">Responsivo</span>
                         <span class="product-tag">SEO</span>
                     </div>
-                    <a href="https://shop.hoztech.com.br/template-ecommerce-pro" class="product-btn" target="_blank">
-                        <i class="fas fa-external-link-alt"></i>
-                        Ver Produto
+                    <a href="/payments/create_preference/?title=Template%20E-commerce%20Pro&price=299.00" class="product-btn">
+                        <i class="fas fa-credit-card"></i>
+                        Comprar com Mercado Pago
                     </a>
                 </div>
             </div>
@@ -375,9 +375,9 @@
                         <span class="product-tag">API</span>
                         <span class="product-tag">Chatbot</span>
                     </div>
-                    <a href="https://shop.hoztech.com.br/plugin-whatsapp-business" class="product-btn" target="_blank">
-                        <i class="fas fa-external-link-alt"></i>
-                        Ver Produto
+                    <a href="/payments/create_preference/?title=Plugin%20WhatsApp%20Business&price=199.00" class="product-btn">
+                        <i class="fas fa-credit-card"></i>
+                        Comprar com Mercado Pago
                     </a>
                 </div>
             </div>
@@ -398,9 +398,9 @@
                         <span class="product-tag">Full-Stack</span>
                         <span class="product-tag">Suporte</span>
                     </div>
-                    <a href="https://shop.hoztech.com.br/desenvolvimento-personalizado" class="product-btn" target="_blank">
-                        <i class="fas fa-external-link-alt"></i>
-                        Ver Serviço
+                    <a href="/payments/create_preference/?title=Desenvolvimento%20Personalizado&price=2500.00" class="product-btn">
+                        <i class="fas fa-credit-card"></i>
+                        Contratar com Mercado Pago
                     </a>
                 </div>
             </div>
@@ -422,9 +422,9 @@
                         <span class="product-tag">Dashboard</span>
                         <span class="product-tag">Real-time</span>
                     </div>
-                    <a href="#" class="product-btn" style="opacity: 0.6; cursor: not-allowed;">
-                        <i class="fas fa-clock"></i>
-                        Em Desenvolvimento
+                    <a href="/payments/create_preference/?title=HOZ%20Analytics%20Pro&price=99.00" class="product-btn">
+                        <i class="fas fa-credit-card"></i>
+                        Comprar com Mercado Pago
                     </a>
                 </div>
             </div>
@@ -445,9 +445,9 @@
                         <span class="product-tag">iOS</span>
                         <span class="product-tag">Android</span>
                     </div>
-                    <a href="#" class="product-btn" style="opacity: 0.6; cursor: not-allowed;">
-                        <i class="fas fa-clock"></i>
-                        Em Desenvolvimento
+                    <a href="/payments/create_preference/?title=Template%20App%20Mobile&price=399.00" class="product-btn">
+                        <i class="fas fa-credit-card"></i>
+                        Comprar com Mercado Pago
                     </a>
                 </div>
             </div>
@@ -468,9 +468,9 @@
                         <span class="product-tag">1:1</span>
                         <span class="product-tag">Online</span>
                     </div>
-                    <a href="#" class="product-btn" style="opacity: 0.6; cursor: not-allowed;">
-                        <i class="fas fa-clock"></i>
-                        Em Breve
+                    <a href="/payments/create_preference/?title=Mentoria%20Técnica&price=150.00" class="product-btn">
+                        <i class="fas fa-credit-card"></i>
+                        Contratar com Mercado Pago
                     </a>
                 </div>
             </div>
@@ -553,6 +553,34 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.transform = 'translateY(30px)';
         card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
         observer.observe(card);
+    });
+    
+    // Função para processar pagamento com Mercado Pago
+    function processPayment(url) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.init_point) {
+                    window.location.href = data.init_point;
+                } else {
+                    alert('Erro ao processar pagamento. Tente novamente.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao processar pagamento. Tente novamente.');
+            });
+    }
+    
+    // Adicionar event listeners aos botões de pagamento
+    document.querySelectorAll('.product-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = this.getAttribute('href');
+            if (url.includes('/payments/create_preference/')) {
+                processPayment(url);
+            }
+        });
     });
 });
 </script>

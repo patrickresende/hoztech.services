@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+{% block description %}{{ page_description }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .payment-result-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 0;
+    }
+    
+    .payment-result-content {
+        text-align: center;
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 0 auto;
+        border: 1px solid #e0e0e0;
+    }
+    
+    .result-icon {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        animation: resultPulse 2s infinite;
+    }
+    
+    .result-icon.success {
+        color: #27ae60;
+    }
+    
+    .result-icon.failure {
+        color: #e74c3c;
+    }
+    
+    .result-icon.pending {
+        color: #f39c12;
+    }
+    
+    .result-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    
+    .result-title.success {
+        color: #27ae60;
+    }
+    
+    .result-title.failure {
+        color: #e74c3c;
+    }
+    
+    .result-title.pending {
+        color: #f39c12;
+    }
+    
+    .result-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        color: #666;
+    }
+    
+    .payment-details {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: left;
+    }
+    
+    .payment-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .payment-item:last-child {
+        border-bottom: none;
+    }
+    
+    .payment-item span:first-child {
+        font-weight: 500;
+        color: #333;
+    }
+    
+    .payment-item span:last-child {
+        color: #666;
+        font-family: 'Courier New', monospace;
+    }
+    
+    .action-buttons {
+        margin-top: 2rem;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        margin: 0 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-secondary {
+        background: #6c757d;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        margin: 0 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .next-steps {
+        background: #e8f5e8;
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: left;
+    }
+    
+    .next-steps.failure {
+        background: #fdeaea;
+    }
+    
+    .next-steps.pending {
+        background: #fef9e7;
+    }
+    
+    .next-steps h4 {
+        color: #27ae60;
+        margin-bottom: 1rem;
+    }
+    
+    .next-steps.failure h4 {
+        color: #e74c3c;
+    }
+    
+    .next-steps.pending h4 {
+        color: #f39c12;
+    }
+    
+    .next-steps ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .next-steps li {
+        padding: 0.5rem 0;
+        display: flex;
+        align-items: center;
+    }
+    
+    .next-steps li i {
+        margin-right: 10px;
+        width: 20px;
+    }
+    
+    @keyframes resultPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    @media (max-width: 768px) {
+        .payment-result-content {
+            margin: 1rem;
+            padding: 2rem 1rem;
+        }
+        
+        .result-title {
+            font-size: 2rem;
+        }
+        
+        .result-icon {
+            font-size: 3rem;
+        }
+        
+        .btn-primary, .btn-secondary {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="payment-result-container">
+    <div class="payment-result-content">
+        {% if success %}
+            <div class="result-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1 class="result-title success">Pagamento Aprovado!</h1>
+            <p class="result-subtitle">
+                Parabéns! Seu pagamento foi processado com sucesso.
+            </p>
+        {% elif failure %}
+            <div class="result-icon failure">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <h1 class="result-title failure">Pagamento Rejeitado</h1>
+            <p class="result-subtitle">
+                Seu pagamento não pôde ser processado. Verifique os dados e tente novamente.
+            </p>
+        {% elif pending %}
+            <div class="result-icon pending">
+                <i class="fas fa-clock"></i>
+            </div>
+            <h1 class="result-title pending">Pagamento Pendente</h1>
+            <p class="result-subtitle">
+                Seu pagamento está sendo processado. Aguarde a confirmação.
+            </p>
+        {% endif %}
+        
+        {% if payment_id or status or merchant_order_id %}
+        <div class="payment-details">
+            <h4><i class="fas fa-receipt"></i> Detalhes da Transação</h4>
+            {% if payment_id %}
+            <div class="payment-item">
+                <span>ID do Pagamento:</span>
+                <span>{{ payment_id }}</span>
+            </div>
+            {% endif %}
+            {% if status %}
+            <div class="payment-item">
+                <span>Status:</span>
+                <span>{{ status }}</span>
+            </div>
+            {% endif %}
+            {% if merchant_order_id %}
+            <div class="payment-item">
+                <span>ID do Pedido:</span>
+                <span>{{ merchant_order_id }}</span>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        
+        {% if success %}
+        <div class="next-steps">
+            <h4><i class="fas fa-list-check"></i> Próximos Passos</h4>
+            <ul>
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    Você receberá um e-mail de confirmação em até 5 minutos
+                </li>
+                <li>
+                    <i class="fas fa-phone"></i>
+                    Nossa equipe entrará em contato em até 24 horas
+                </li>
+                <li>
+                    <i class="fas fa-rocket"></i>
+                    O desenvolvimento do seu projeto será iniciado em breve
+                </li>
+            </ul>
+        </div>
+        {% elif failure %}
+        <div class="next-steps failure">
+            <h4><i class="fas fa-exclamation-triangle"></i> O que fazer agora?</h4>
+            <ul>
+                <li>
+                    <i class="fas fa-credit-card"></i>
+                    Verifique os dados do seu cartão de crédito
+                </li>
+                <li>
+                    <i class="fas fa-dollar-sign"></i>
+                    Confirme se há limite disponível
+                </li>
+                <li>
+                    <i class="fas fa-redo"></i>
+                    Tente novamente ou use outro método de pagamento
+                </li>
+            </ul>
+        </div>
+        {% elif pending %}
+        <div class="next-steps pending">
+            <h4><i class="fas fa-hourglass-half"></i> Aguarde a Confirmação</h4>
+            <ul>
+                <li>
+                    <i class="fas fa-clock"></i>
+                    O processamento pode levar até 2 dias úteis
+                </li>
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    Você será notificado por e-mail sobre o status
+                </li>
+                <li>
+                    <i class="fas fa-phone"></i>
+                    Em caso de dúvidas, entre em contato conosco
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+        
+        <div class="action-buttons">
+            {% if success %}
+                <a href="{% url 'core:services' %}" class="btn-primary">
+                    <i class="fas fa-shopping-cart"></i> Ver Outros Serviços
+                </a>
+                <a href="{% url 'core:home' %}" class="btn-secondary">
+                    <i class="fas fa-home"></i> Voltar ao Início
+                </a>
+            {% elif failure %}
+                <a href="{% url 'core:services' %}" class="btn-primary">
+                    <i class="fas fa-redo"></i> Tentar Novamente
+                </a>
+                <a href="{% url 'core:contact' %}" class="btn-secondary">
+                    <i class="fas fa-envelope"></i> Falar com Suporte
+                </a>
+            {% elif pending %}
+                <a href="{% url 'core:home' %}" class="btn-primary">
+                    <i class="fas fa-home"></i> Voltar ao Início
+                </a>
+                <a href="{% url 'core:contact' %}" class="btn-secondary">
+                    <i class="fas fa-envelope"></i> Entrar em Contato
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,7 @@
-from django.urls import path
+from django.urls import path, include
+from django.contrib import admin
 from . import views
+
 from .whatsapp_views import (
     WhatsAppWebhookView, WhatsAppDashboardView, WhatsAppContactsView,
     WhatsAppTemplatesView, WhatsAppConfigView, WhatsAppSendMessageView,
@@ -29,10 +31,12 @@ urlpatterns = [
     
     # Shop URLs
     path('shop/', views.shop_index, name='shop_index'),
+    path('shop/products/', views.products, name='products'),
     path('loja/', views.shop_redirect, name='shop_redirect'),
     path('coming-soon/', views.shop_coming_soon, name='shop_coming_soon'),
     path('shop/landing-page-otimizada/', views.landing_page_product, name='landing_page_product'),
     path('shop/produto-teste/', views.produto_teste, name='produto_teste'),
+    path('shop/produto_teste_mercadopago/', views.produto_teste_mercadopago, name='produto_teste_mercadopago'),
     
     # Stripe Payment URLs
     path('create-checkout-session/', views.create_checkout_session, name='create_checkout_session'),
@@ -50,4 +54,15 @@ urlpatterns = [
     path('chatbot/send/', WhatsAppSendMessagePageView.as_view(), name='whatsapp_send_page'),
     path('chatbot/cleanup/', whatsapp_cleanup, name='whatsapp_cleanup'),
     path('chatbot/health/', whatsapp_health, name='whatsapp_health'),
+
+    # Mercado Pago 
+    path('admin/', admin.site.urls),
+    path('payments/create_preference/', views.create_preference, name='create_preference'),
+    path('payments/redirect/', views.mercado_pago_redirect, name='mercado_pago_redirect'),
+    path('services/', views.services, name='services'),
+    
+    # Mercado Pago Redirect URLs
+    path('success/', views.mercado_pago_success, name='mercado_pago_success'),
+    path('failure/', views.mercado_pago_failure, name='mercado_pago_failure'),
+    path('pending/', views.mercado_pago_pending, name='mercado_pago_pending'),
 ]

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MercadoPago CardForm - Exemplo Completo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-form-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mp-field {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .mp-field:focus {
+            outline: none;
+            border-color: #009ee3;
+            box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.1);
+        }
+        
+        .mp-field.mp-form-control {
+            border: 2px solid #e9ecef;
+        }
+        
+        .mp-field.mp-form-control:focus {
+            border-color: #009ee3;
+        }
+        
+        .btn-pay {
+            background: linear-gradient(135deg, #009ee3, #0084c7);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-pay:hover {
+            background: linear-gradient(135deg, #0084c7, #006ba3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 158, 227, 0.3);
+        }
+        
+        .btn-pay:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .error-container {
+            display: none;
+            margin-bottom: 1rem;
+        }
+        
+        .success-container {
+            display: none;
+            margin-bottom: 1rem;
+        }
+        
+        .field-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .field-row .form-group {
+            flex: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .field-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .card-form-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+        
+        .status-indicator {
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 14px;
+        }
+        
+        .status-loading {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .status-success {
+            background-color: #d1edff;
+            color: #0c5460;
+            border: 1px solid #b8daff;
+        }
+        
+        .status-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card-form-container">
+            <h2 class="text-center mb-4">💳 Pagamento com Cartão</h2>
+            
+            <!-- Status Indicator -->
+            <div id="status-indicator" class="status-indicator status-loading">
+                🔄 Inicializando MercadoPago...
+            </div>
+            
+            <!-- Error Container -->
+            <div id="mp-error-container" class="error-container"></div>
+            
+            <!-- Success Container -->
+            <div id="success-container" class="success-container">
+                <div class="alert alert-success">
+                    <strong>✅ Sucesso!</strong> Pagamento processado com sucesso.
+                </div>
+            </div>
+            
+            <!-- Loading Spinner -->
+            <div id="mp-loading" class="loading-spinner">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Carregando...</span>
+                </div>
+                <p class="mt-2">Processando pagamento...</p>
+            </div>
+            
+            <!-- Payment Form -->
+            <form id="mercadopago-form">
+                <!-- Valor do Pagamento -->
+                <div class="form-group">
+                    <label for="amount" class="form-label">Valor do Pagamento</label>
+                    <div class="input-group">
+                        <span class="input-group-text">R$</span>
+                        <input type="number" id="amount" class="form-control" value="100.00" step="0.01" min="1">
+                    </div>
+                </div>
+                
+                <!-- Dados do Cartão -->
+                <div class="form-group">
+                    <label for="cardNumber" class="form-label">Número do Cartão</label>
+                    <div id="cardNumber" class="mp-field"></div>
+                </div>
+                
+                <div class="field-row">
+                    <div class="form-group">
+                        <label for="cardExpirationDate" class="form-label">Vencimento</label>
+                        <div id="cardExpirationDate" class="mp-field"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cardSecurityCode" class="form-label">CVV</label>
+                        <div id="cardSecurityCode" class="mp-field"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cardholderName" class="form-label">Nome do Portador</label>
+                    <input type="text" id="cardholderName" class="form-control mp-field" placeholder="Nome completo">
+                </div>
+                
+                <!-- Dados do Comprador -->
+                <div class="field-row">
+                    <div class="form-group">
+                        <label for="identificationType" class="form-label">Tipo de Documento</label>
+                        <select id="identificationType" class="form-select mp-field">
+                            <option value="">Selecione...</option>
+                            <option value="CPF">CPF</option>
+                            <option value="CNPJ">CNPJ</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="identificationNumber" class="form-label">Número do Documento</label>
+                        <input type="text" id="identificationNumber" class="form-control mp-field" placeholder="000.000.000-00">
+                    </div>
+                </div>
+                
+                <!-- Opções de Pagamento -->
+                <div class="field-row">
+                    <div class="form-group">
+                        <label for="issuer" class="form-label">Banco Emissor</label>
+                        <select id="issuer" class="form-select mp-field">
+                            <option value="">Carregando...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="installments" class="form-label">Parcelas</label>
+                        <select id="installments" class="form-select mp-field">
+                            <option value="">Carregando...</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Botão de Pagamento -->
+                <button type="submit" id="pay-button" class="btn-pay" disabled>
+                    💳 Pagar R$ <span id="pay-amount">100,00</span>
+                </button>
+            </form>
+            
+            <!-- Informações de Teste -->
+            <div class="mt-4 p-3 bg-light rounded">
+                <h6>🧪 Dados para Teste:</h6>
+                <p class="mb-1"><strong>Cartão Aprovado:</strong> 4509 9535 6623 3704</p>
+                <p class="mb-1"><strong>CVV:</strong> 123 | <strong>Vencimento:</strong> 11/25</p>
+                <p class="mb-0"><strong>Nome:</strong> APRO (aprovado) | CONT (contestado)</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Teste -->
+    <div class="modal fade" id="testModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">💳 Pagamento em Modal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Este é um exemplo de como o CardForm funciona dentro de modais.</p>
+                    
+                    <!-- Formulário duplicado para teste em modal -->
+                    <form id="modal-mercadopago-form">
+                        <div class="form-group">
+                            <label for="modal-cardNumber" class="form-label">Número do Cartão</label>
+                            <div id="modal-cardNumber" class="mp-field"></div>
+                        </div>
+                        
+                        <div class="field-row">
+                            <div class="form-group">
+                                <label for="modal-cardExpirationDate" class="form-label">Vencimento</label>
+                                <div id="modal-cardExpirationDate" class="mp-field"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="modal-cardSecurityCode" class="form-label">CVV</label>
+                                <div id="modal-cardSecurityCode" class="mp-field"></div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-pay">
+                            💳 Pagar no Modal
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Botão para abrir modal -->
+    <div class="text-center mt-3">
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#testModal">
+            🧪 Testar em Modal
+        </button>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script src="mercadopago_cardform.js"></script>
+    
+    <script>
+        // Configuração
+        const PUBLIC_KEY = 'TEST-c95b38f2-eba7-4cae-a5f0-cae6f24abf65'; // Substitua pela sua chave
+        let cardFormInstance = null;
+        let modalCardFormInstance = null;
+        
+        // Inicialização quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Inicializando página...');
+            
+            // Inicializa o CardForm principal
+            initMainCardForm();
+            
+            // Configura eventos
+            setupEventListeners();
+            
+            // Configura modal
+            setupModal();
+        });
+        
+        // Inicializa o CardForm principal
+        async function initMainCardForm() {
+            try {
+                updateStatus('loading', '🔄 Inicializando MercadoPago...');
+                
+                cardFormInstance = initMercadoPagoCardForm(PUBLIC_KEY, {
+                    processingMode: 'aggregator',
+                    locale: 'pt-BR'
+                });
+                
+                // Observa mudanças no DOM
+                observeMercadoPagoFields(cardFormInstance);
+                
+            } catch (error) {
+                console.error('Erro na inicialização:', error);
+                updateStatus('error', '❌ Erro ao inicializar MercadoPago');
+            }
+        }
+        
+        // Configura event listeners
+        function setupEventListeners() {
+            // Atualiza valor quando mudar
+            document.getElementById('amount').addEventListener('input', function() {
+                const amount = parseFloat(this.value) || 0;
+                updatePaymentAmount(amount);
+            });
+            
+            // Eventos do MercadoPago
+            document.addEventListener('mp:cardFormMounted', function(event) {
+                console.log('✅ Formulário montado!', event.detail);
+                updateStatus('success', '✅ MercadoPago carregado com sucesso!');
+                document.getElementById('pay-button').disabled = false;
+            });
+            
+            document.addEventListener('mp:cardFormError', function(event) {
+                console.error('❌ Erro no formulário:', event.detail);
+                updateStatus('error', `❌ Erro: ${event.detail.message}`);
+            });
+            
+            document.addEventListener('mp:cardTokenReceived', function(event) {
+                console.log('🎯 Token recebido:', event.detail.token);
+                handlePaymentSuccess(event.detail.token);
+            });
+            
+            document.addEventListener('mp:loadingStateChanged', function(event) {
+                const loading = event.detail.loading;
+                document.getElementById('pay-button').disabled = loading;
+                
+                if (loading) {
+                    updateStatus('loading', '⏳ Processando pagamento...');
+                } else {
+                    updateStatus('success', '✅ Pronto para pagamento');
+                }
+            });
+        }
+        
+        // Configura modal
+        function setupModal() {
+            const modal = document.getElementById('testModal');
+            
+            modal.addEventListener('shown.bs.modal', function() {
+                console.log('📱 Modal aberto, inicializando CardForm...');
+                
+                // Cria nova instância para o modal com IDs diferentes
+                modalCardFormInstance = new MercadoPagoCardForm(PUBLIC_KEY, {
+                    processingMode: 'aggregator',
+                    locale: 'pt-BR'
+                });
+                
+                // Atualiza os IDs dos campos para o modal
+                modalCardFormInstance.fieldIds = {
+                    cardNumber: 'modal-cardNumber',
+                    cardExpirationDate: 'modal-cardExpirationDate',
+                    cardSecurityCode: 'modal-cardSecurityCode',
+                    cardholderName: 'modal-cardholderName',
+                    issuer: 'modal-issuer',
+                    installments: 'modal-installments',
+                    identificationType: 'modal-identificationType',
+                    identificationNumber: 'modal-identificationNumber'
+                };
+                
+                // Força remontagem
+                setTimeout(() => {
+                    modalCardFormInstance.tryMountForm();
+                }, 500);
+            });
+            
+            modal.addEventListener('hidden.bs.modal', function() {
+                console.log('📱 Modal fechado, destruindo CardForm...');
+                if (modalCardFormInstance) {
+                    modalCardFormInstance.destroy();
+                    modalCardFormInstance = null;
+                }
+            });
+        }
+        
+        // Atualiza valor do pagamento
+        function updatePaymentAmount(amount) {
+            const formattedAmount = amount.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+            
+            document.getElementById('pay-amount').textContent = formattedAmount;
+            
+            if (cardFormInstance && cardFormInstance.cardForm) {
+                cardFormInstance.updateAmount(amount);
+            }
+        }
+        
+        // Atualiza status
+        function updateStatus(type, message) {
+            const indicator = document.getElementById('status-indicator');
+            indicator.className = `status-indicator status-${type}`;
+            indicator.textContent = message;
+        }
+        
+        // Trata sucesso do pagamento
+        function handlePaymentSuccess(token) {
+            console.log('🎉 Pagamento processado com sucesso!');
+            
+            // Mostra container de sucesso
+            document.getElementById('success-container').style.display = 'block';
+            
+            // Esconde formulário
+            document.getElementById('mercadopago-form').style.display = 'none';
+            
+            updateStatus('success', '🎉 Pagamento realizado com sucesso!');
+            
+            // Aqui você enviaria o token para seu backend
+            // sendTokenToBackend(token);
+        }
+        
+        // Função para enviar token para backend (exemplo)
+        async function sendTokenToBackend(token) {
+            try {
+                const response = await fetch('/process-payment/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCsrfToken()
+                    },
+                    body: JSON.stringify({
+                        token: token,
+                        amount: document.getElementById('amount').value,
+                        installments: document.getElementById('installments').value
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    console.log('✅ Pagamento confirmado no backend');
+                } else {
+                    console.error('❌ Erro no backend:', result.error);
+                }
+                
+            } catch (error) {
+                console.error('❌ Erro ao enviar para backend:', error);
+            }
+        }
+        
+        // Obtém CSRF token (Django)
+        function getCsrfToken() {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'csrftoken') {
+                    return value;
+                }
+            }
+            return '';
+        }
+        
+        // Debug: Função para testar manualmente
+        window.debugCardForm = function() {
+            console.log('🔍 Debug CardForm:');
+            console.log('- Instância principal:', cardFormInstance);
+            console.log('- Instância modal:', modalCardFormInstance);
+            console.log('- SDK carregado:', typeof MercadoPago !== 'undefined');
+            console.log('- Campos disponíveis:', {
+                cardNumber: !!document.getElementById('cardNumber'),
+                cardExpirationDate: !!document.getElementById('cardExpirationDate'),
+                cardSecurityCode: !!document.getElementById('cardSecurityCode')
+            });
+        };
+    </script>
+</body>
+</html>

@@ -430,6 +430,16 @@ STRIPE_CURRENCY = 'brl'  # Brazilian Real
 STRIPE_SUCCESS_URL = os.getenv('STRIPE_SUCCESS_URL', '/payment/success/')
 STRIPE_CANCEL_URL = os.getenv('STRIPE_CANCEL_URL', '/payment/cancel/')
 
+
+# Mercado Pago Configuration
+# Usar tokens de teste em desenvolvimento, produção em produção
+if ENVIRONMENT == 'development':
+    MERCADOPAGO_ACCESS_TOKEN = os.getenv('MERCADO_PAGO_ACCESS_TOKEN_TEST', '')
+    MERCADOPAGO_PUBLIC_KEY = os.getenv('MERCADO_PAGO_PUBLIC_KEY_TEST', '')
+else:
+    MERCADOPAGO_ACCESS_TOKEN = os.getenv('MERCADO_PAGO_ACCESS_TOKEN', '')
+    MERCADOPAGO_PUBLIC_KEY = os.getenv('MERCADO_PAGO_PUBLIC_KEY', '')
+
 # Logging Configuration
 class RailwayJSONFormatter(logging.Formatter):
     def format(self, record):
