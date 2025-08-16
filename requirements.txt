@@ -56,5 +56,8 @@ mercadopago>=2.2.0
 # Excel export
 XlsxWriter==3.1.9
 
+# QR Code generation
+qrcode[pil]>=7.4.2
+
 # Stripe
 stripe==11.6.0

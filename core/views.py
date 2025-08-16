@@ -28,6 +28,8 @@ import xlsxwriter
 from io import BytesIO
 import zipfile
 import redis
+import qrcode
+import base64
 from django.urls import reverse
 from django.db import connection
 
@@ -1620,10 +1622,6 @@ def check_mercado_pago_payment(request, payment_id):
 
 # Mercado Pago Integration
 import mercadopago
-from django.conf import settings
-import qrcode
-import base64
-from io import BytesIO
 
 @csrf_exempt
 @require_POST
